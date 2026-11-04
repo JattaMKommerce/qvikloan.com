@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShieldCheck, CheckCircle2, ArrowRight, Lock, AlertCircle, Building2, User, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { companyInfo } from '../data/companyInfo';
+import { submitLead } from '../lib/lead';
+
+// Plain-text copy of the consent wording below, stored with each lead as the consent record.
+const CONSENT_TEXT = `I authorize QvikLoan (operated by ${companyInfo.name}) to securely share my enquiry details with participating lenders to evaluate my eligibility for loan offers. I understand that submitting an enquiry does not guarantee a loan offer or approval, and that I will receive a Key Facts Statement (KFS) prior to accepting any agreement. I have reviewed and agree to the Privacy Policy and Terms & Conditions.`;
+
+// Employment options differ by loan type; switching type must not keep the other type's value.
+const DEFAULT_EMPLOYMENT = { personal: 'salaried', business: 'sole-proprietorship' };
 
 export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
-  const [loanType, setLoanType] = useState(initialType);
+  const location = useLocation();
+  const [loanType, setLoanType] = useState(location.state?.loanType || initialType);
   const [amount, setAmount] = useState(loanType === 'personal' ? 300000 : 1000000);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -12,7 +20,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
     email: '',
     city: '',
     purpose: '',
-    employmentType: 'salaried',
+    employmentType: DEFAULT_EMPLOYMENT[loanType] || 'salaried',
     pincode: '',
     incomeBand: '',
     existingLoans: '',
@@ -25,21 +33,43 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
   const [submitted, setSubmitted] = useState(false);
   const [enquiryRef, setEnquiryRef] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  // Hidden "website" field: people never see it, spam bots fill it in.
+  const [honeypot, setHoneypot] = useState('');
+
+  const switchLoanType = (type) => {
+    setLoanType(type);
+    setAmount(type === 'personal' ? 300000 : 1000000);
+    setFormData(prev => ({
+      ...prev,
+      employmentType: DEFAULT_EMPLOYMENT[type],
+      vintage: type === 'business' ? prev.vintage : '',
+    }));
+  };
+
+  // The hero buttons ("Explore personal / business loans") link here with a loan type;
+  // switch the form to that type each time one of them is clicked.
+  useEffect(() => {
+    const requested = location.state?.loanType;
+    if (requested === 'personal' || requested === 'business') {
+      switchLoanType(requested);
+    }
+  }, [location.key]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     setErrorMessage('');
 
-    if (!formData.fullName.trim()) {
+    if (formData.fullName.trim().length < 2) {
       setErrorMessage('Please enter your full legal name as per official records.');
       return;
     }
-    if (!/^\d{10}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+    if (!/^[6-9]\d{9}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
       return;
     }
@@ -51,7 +81,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
       setErrorMessage('Please enter your city.');
       return;
     }
-    if (!/^\d{6}$/.test(formData.pincode)) {
+    if (!/^[1-9]\d{5}$/.test(formData.pincode)) {
       setErrorMessage('Please enter a valid 6-digit PIN code.');
       return;
     }
@@ -61,13 +91,28 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
     }
 
     setSubmitting(true);
-
-    setTimeout(() => {
-      setSubmitting(false);
-      const generatedRef = `QVK-${Math.floor(100000 + Math.random() * 900000)}`;
-      setEnquiryRef(generatedRef);
+    try {
+      // Sent to /api/lead.php, which forwards the lead to iamkratu.ai.
+      const reference = await submitLead({
+        ...formData,
+        mobileNumber: formData.mobileNumber.replace(/\D/g, ''),
+        loanType,
+        amount,
+        consent: true,
+        consentText: CONSENT_TEXT,
+        website: honeypot,
+      });
+      setEnquiryRef(reference);
       setSubmitted(true);
-    }, 900);
+    } catch (err) {
+      setErrorMessage(
+        err.retryable
+          ? `${err.message} You can also call or WhatsApp us on ${companyInfo.phone}.`
+          : err.message
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -79,7 +124,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
       email: '',
       city: '',
       purpose: '',
-      employmentType: 'salaried',
+      employmentType: DEFAULT_EMPLOYMENT[loanType],
       pincode: '',
       incomeBand: '',
       existingLoans: '',
@@ -256,13 +301,21 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
           ) : (
             /* Loan Enquiry Form */
             <form onSubmit={handleSubmit} className="space-y-7">
-              
-              {errorMessage && (
-                <div className="p-4 rounded-xl bg-red-50/90 border border-red-200 text-red-700 text-xs sm:text-sm flex items-start gap-2.5 shadow-sm">
-                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-red-600" />
-                  <span>{errorMessage}</span>
-                </div>
-              )}
+
+              {/* Spam trap: hidden from people and screen readers, bots fill it in */}
+              <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                <label>
+                  Website
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </label>
+              </div>
 
               {/* Loan Category Selector Tabs */}
               <div>
@@ -272,10 +325,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
-                    onClick={() => {
-                      setLoanType('personal');
-                      setAmount(300000);
-                    }}
+                    onClick={() => switchLoanType('personal')}
                     className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${
                       loanType === 'personal'
                         ? 'bg-royal text-white border-royal shadow-subtle'
@@ -288,10 +338,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
 
                   <button
                     type="button"
-                    onClick={() => {
-                      setLoanType('business');
-                      setAmount(1000000);
-                    }}
+                    onClick={() => switchLoanType('business')}
                     className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${
                       loanType === 'business'
                         ? 'bg-royal text-white border-royal shadow-subtle'
@@ -592,15 +639,21 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 </label>
               </div>
 
-              {/* Submit Button */}
-              <div>
+              {/* Submit Button (errors show right above it, where the visitor is looking) */}
+              <div className="space-y-4">
+                {errorMessage && (
+                  <div role="alert" className="p-4 rounded-xl bg-red-50/90 border border-red-200 text-red-700 text-xs sm:text-sm flex items-start gap-2.5 shadow-sm">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-red-600" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
                 <button
                   type="submit"
                   disabled={submitting}
                   className="w-full py-4 px-6 rounded-xl bg-royal hover:bg-royal-hover text-white font-heading font-bold text-base shadow-subtle hover:shadow-premium transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60"
                 >
                   {submitting ? (
-                    <span>Transmitting Enquiry to Regulated Partners...</span>
+                    <span>Sending your enquiry...</span>
                   ) : (
                     <>
                       <span>Submit Loan Enquiry</span>

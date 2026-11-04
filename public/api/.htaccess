@@ -1,0 +1,6 @@
+# Keep the relay settings (which hold the iamkratu.ai key) off the web.
+<FilesMatch "^config(\.sample)?\.php$">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes

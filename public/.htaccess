@@ -1,0 +1,10 @@
+# The site is a single-page app: every page (e.g. /personal-loans) is served by
+# index.html. Real files such as images and /api/lead.php are served as they are.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+    RewriteRule ^ index.html [L]
+</IfModule>

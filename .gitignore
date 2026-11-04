@@ -8,3 +8,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
+# Lead relay settings hold the iamkratu.ai key: never commit them
+public/api/config.php

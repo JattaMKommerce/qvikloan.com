@@ -17,30 +17,39 @@ function TypewriterText() {
   const [reverse, setReverse] = React.useState(false);
 
   React.useEffect(() => {
+    // Hold the finished phrase so it can be read before it is erased.
     if (subIndex === words[index].length + 1 && !reverse) {
       const timeout = setTimeout(() => {
         setReverse(true);
-      }, 2500);
+      }, 3200);
       return () => clearTimeout(timeout);
     }
 
+    // Short pause on the empty line before typing the next phrase.
     if (subIndex === 0 && reverse) {
-      setReverse(false);
-      setIndex((prev) => (prev + 1) % words.length);
-      return;
+      const timeout = setTimeout(() => {
+        setReverse(false);
+        setIndex((prev) => (prev + 1) % words.length);
+      }, 500);
+      return () => clearTimeout(timeout);
     }
 
+    // Typing speed per letter (ms): slower when writing, a bit quicker when erasing.
     const timeout = setTimeout(() => {
       setSubIndex((prev) => prev + (reverse ? -1 : 1));
-    }, reverse ? 25 : 60);
+    }, reverse ? 55 : 120);
 
     return () => clearTimeout(timeout);
   }, [subIndex, index, reverse]);
 
   return (
     <span className="text-royal inline">
-      {words[index].substring(0, subIndex)}
-      <span className="inline-block w-[3px] h-[0.8em] bg-royal align-baseline ml-1 animate-pulse" />
+      {/* Screen readers and search engines get the full phrase, not the animation. */}
+      <span className="sr-only">{words[0]}</span>
+      <span aria-hidden="true">
+        {words[index].substring(0, subIndex)}
+        <span className="inline-block w-[3px] h-[0.8em] bg-royal align-baseline ml-1 animate-pulse" />
+      </span>
     </span>
   );
 }
@@ -82,7 +91,7 @@ export default function HomePage() {
             </div>
 
             {/* Dynamic Typewriter Headline: Constant 'Explore' + Autowriting Options */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[48px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.15] min-h-[2.4em]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[48px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.15] min-h-[2.4em] max-[349px]:min-h-[3.45em]">
               Explore <TypewriterText />
             </h1>
 
@@ -91,7 +100,28 @@ export default function HomePage() {
               Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
             </p>
 
-            {/* Important Disclosure - Clean & Spacious without redundant Start Enquiry button */}
+            {/* CTA Buttons: each opens the enquiry form below with its loan type already selected */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
+              <Link
+                to="/#enquiry-section"
+                state={{ loanType: 'personal' }}
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
+              >
+                <span>Explore personal loans</span>
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+
+              <Link
+                to="/#enquiry-section"
+                state={{ loanType: 'business' }}
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-neutral-50 text-[#1f2937] border border-[#e5e7eb] hover:border-royal text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
+              >
+                <span>Explore business loans</span>
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </div>
+
+            {/* Important Disclosure */}
             <div className="pt-5 border-t border-[#f3f4f6] max-w-lg">
               <p className="text-[11px] text-[#6b7280] leading-relaxed">
                 <strong>Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 
 import HomePage from './pages/HomePage';
 import PersonalLoansPage from './pages/PersonalLoansPage';
@@ -17,7 +18,8 @@ import GrievanceRedressalPage from './pages/GrievanceRedressalPage';
 // On route change: scroll to top, or to the section named in the URL hash
 // (e.g. /#enquiry-section from the navbar on any page).
 function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  // `key` changes on every link click, so clicking a form link again still scrolls.
+  const { pathname, hash, key } = useLocation();
   useEffect(() => {
     // Wait one frame so the new page has rendered before we look for the section.
     const t = setTimeout(() => {
@@ -32,7 +34,7 @@ function ScrollManager() {
       window.scrollTo(0, 0);
     }, 50);
     return () => clearTimeout(t);
-  }, [pathname, hash]);
+  }, [pathname, hash, key]);
   return null;
 }
 
@@ -60,6 +62,9 @@ export default function App() {
       </main>
 
       <Footer />
+
+      {/* iamkratu.ai chatbot, on every page */}
+      <ChatWidget />
     </div>
   );
 }
