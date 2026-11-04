@@ -43,7 +43,7 @@ export default function ChatWidget() {
         </span>
       </a>
 
-      {/* 2. Floating AI Assistant (Bottom-Right, waving hand, +4% scale) */}
+      {/* 2. Floating AI Assistant (Bottom-Right, waving video/avatar, +4% scale) */}
       <div className="fixed bottom-0 right-2 sm:right-6 z-50 pointer-events-none">
         
         {/* Speech Bubble / Callout Prompt - Positioned to the left of her head */}
@@ -86,14 +86,17 @@ export default function ChatWidget() {
             className="pointer-events-auto relative group focus:outline-none block cursor-pointer transition-transform duration-200 transform hover:-translate-y-1 scale-[1.04] origin-bottom-right"
             aria-label="Open AI Loan Assistant Chat"
           >
-            {/* Assistant Cutout Image */}
+            {/* Assistant Cutout Image / Waving Animation */}
             <div className="relative w-[115px] h-[92px] sm:w-[152px] sm:h-[122px]">
-              <img
-                src="/images/assistant.png"
-                alt="QvikLoan AI Assistant waving hi"
-                className="w-full h-full object-contain object-bottom filter drop-shadow-[0_8px_16px_rgba(11,31,69,0.22)]"
-                loading="eager"
-              />
+              <picture>
+                <source srcSet="/images/assistant-waving.webp" type="image/webp" />
+                <img
+                  src="/images/assistant.png"
+                  alt="QvikLoan AI Assistant waving hi"
+                  className="w-full h-full object-contain object-bottom filter drop-shadow-[0_8px_16px_rgba(11,31,69,0.22)]"
+                  loading="eager"
+                />
+              </picture>
 
               {/* Cyan/Blue Chat Icon Badge on Her Shoulder */}
               <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#06A3DA] text-white border-2 border-white shadow-md flex items-center justify-center transform group-hover:scale-110 transition-transform">
@@ -103,7 +106,7 @@ export default function ChatWidget() {
           </button>
         )}
 
-        {/* 3. Open Chat Window (Embedded Kratu AI Chatbot) */}
+        {/* 3. Open Chat Window (Embedded Kratu AI Chatbot with new key: b37315e4a118f16484c57c6c2871ba8c) */}
         {isOpen && (
           <div className="pointer-events-auto fixed sm:absolute bottom-0 sm:bottom-2 right-0 sm:right-0 w-full sm:w-[390px] h-[85vh] sm:h-[min(590px,calc(100vh-100px))] bg-white rounded-t-2xl sm:rounded-2xl shadow-premium border border-neutral-border flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
             
@@ -138,11 +141,11 @@ export default function ChatWidget() {
               </button>
             </div>
 
-            {/* Chat Body (iframe) */}
+            {/* Chat Body (iframe converted from script data-key="b37315e4a118f16484c57c6c2871ba8c") */}
             <div className="flex-1 w-full bg-[#0F172A] relative">
               {hasOpened && (
                 <iframe
-                  src="https://iamkratu.ai/customer-chat/?key=2e7b577ed59a3cdc5e80a98d4783b391"
+                  src="https://iamkratu.ai/customer-chat/?key=b37315e4a118f16484c57c6c2871ba8c"
                   title="QvikLoan AI Chat Assistant"
                   className="w-full h-full border-0"
                   allow="clipboard-write; microphone"
