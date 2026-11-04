@@ -205,7 +205,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   <img
                     src="/images/step-01-enquiry.png"
                     alt="Tell us what you're looking for"
-                    className="w-full h-36 sm:h-40 object-cover"
+                    className="w-full h-36 sm:h-40 object-cover object-top"
                     loading="lazy"
                   />
                 </div>
@@ -228,7 +228,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   <img
                     src="/images/step-02-consent.png"
                     alt="Submit your enquiry"
-                    className="w-full h-36 sm:h-40 object-cover"
+                    className="w-full h-36 sm:h-40 object-cover object-top"
                     loading="lazy"
                   />
                 </div>
@@ -251,7 +251,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   <img
                     src="/images/step-03-evaluation.png"
                     alt="Complete the lender's checks"
-                    className="w-full h-36 sm:h-40 object-cover"
+                    className="w-full h-36 sm:h-40 object-cover object-top"
                     loading="lazy"
                   />
                 </div>
@@ -274,7 +274,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   <img
                     src="/images/step-04-offer-kfs.png"
                     alt="Review the offer and decide"
-                    className="w-full h-36 sm:h-40 object-cover"
+                    className="w-full h-36 sm:h-40 object-cover object-top"
                     loading="lazy"
                   />
                 </div>

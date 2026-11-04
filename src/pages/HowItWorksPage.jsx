@@ -121,7 +121,7 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
                   <img
                     src={step.image}
                     alt={step.title}
-                    className="w-full h-32 sm:h-36 object-cover"
+                    className="w-full h-36 sm:h-40 object-cover object-top"
                     loading="lazy"
                   />
                 </div>
