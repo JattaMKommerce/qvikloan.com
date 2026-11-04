@@ -1,54 +1,33 @@
-export const participatingLenders = [
-  {
-    id: "lender-1",
-    name: "Northern Arc Capital Limited",
-    type: "Participating lender",
-    website: "https://www.northernarc.com",
-    products: ["Personal Loans", "Business Working Capital"],
-    grievanceEmail: "grievance@northernarc.com",
-    description: "Evaluates personal and commercial loan applications based on comprehensive digital underwriting, credit score parameters, and verifiable income records."
-  },
-  {
-    id: "lender-2",
-    name: "InCred Financial Services Limited",
-    type: "Participating lender",
-    website: "https://www.incred.com",
-    products: ["Personal Loans", "MSME Business Loans"],
-    grievanceEmail: "care@incred.com",
-    description: "Provides technology-led lending solutions for salaried professionals and enterprise borrowers."
-  },
-  {
-    id: "lender-3",
-    name: "Lendingkart Finance Limited",
-    type: "Participating lender",
-    website: "https://www.lendingkart.com",
-    products: ["Business Working Capital", "Equipment Financing"],
-    grievanceEmail: "grievance@lendingkart.com",
-    description: "Specializes in working capital and expansion finance for registered MSMEs, assessing GST return metrics and business banking flows."
-  },
-  {
-    id: "lender-4",
-    name: "Protium Finance Limited",
-    type: "Participating lender",
-    website: "https://www.protium.co.in",
-    products: ["Personal Loans", "Commercial Loans"],
-    grievanceEmail: "customerservice@protium.co.in",
-    description: "Offers structured lending facilities across retail and commercial domains."
-  }
-];
-
-export const complianceDisclosures = {
-  aprDisclaimer: "Annual Percentage Rate (APR) represents the annual cost of borrowing, including interest rates and mandatory lender processing fees. Your actual APR, fees and terms are set by the lender and shown in its offer and Key Facts Statement (KFS) before you accept.",
-  representativeExample: {
-    amount: "₹1,00,000",
-    tenure: "12 Months",
-    interestRate: "12.0% p.a. on reducing balance",
-    processingFee: "₹2,000 (2% + applicable GST)",
-    monthlyInstalment: "₹8,885",
-    totalInterest: "₹6,620",
-    totalPayable: "₹1,06,620",
-    effectiveApr: "15.85% p.a. (approx.)",
-    note: "This is a representative illustration only. Actual loan amounts, interest rates, charges, and tenures are determined by the participating lender upon complete evaluation."
-  }
-};
-
+/**
+ * Lending institutions that receive enquiries through QvikLoan.
+ * Shown on the Lending Partners page (/participating-lenders), and the enquiry consent refers to
+ * "the lenders listed on our Lending Partners page", so this list must always match reality.
+ *
+ * Add a lender ONLY when all of these are true:
+ *   1. A signed agreement (LSP / DSA / referral) between Jatta M Kommerce and the lender exists.
+ *   2. The lender confirms the arrangement: RBI requires lenders to publish the Lending Service
+ *      Providers they work with, so link that page in `lspListingUrl`, or keep the lender's
+ *      written confirmation on file.
+ *   3. Every value is copied from the lender's certificate, website or agreement. Use null for
+ *      anything not confirmed; the page then shows "to be confirmed".
+ *
+ * Shape of one entry:
+ *   {
+ *     id: 'abc-finance',
+ *     legalName: 'ABC Finance Limited',          // exactly as on the RBI certificate
+ *     brandName: 'ABC Finance',
+ *     classification: 'NBFC',                    // 'Bank' or 'NBFC' (add the NBFC layer if known)
+ *     rbiRegistration: 'N-00.00000',             // RBI Certificate of Registration no. (NBFCs)
+ *     website: 'https://www.abcfinance.example',
+ *     role: 'Assesses, approves and disburses loans for enquiries shared by QvikLoan',
+ *     products: ['Personal loans'],
+ *     loanTermsUrl: 'https://...',               // lender's published rates & charges page
+ *     grievance: { name: 'Officer name', email: 'grievance@...', phone: '...' },
+ *     lspListingUrl: 'https://...',              // lender page listing QvikLoan as its LSP
+ *   }
+ *
+ * The four lenders previously shown (Northern Arc Capital, InCred Financial Services,
+ * Lendingkart Finance, Protium Finance) were removed on 4 Nov 2026: no agreement or lender-side
+ * listing for them was found. Add any of them back only after the checks above.
+ */
+export const participatingLenders = [];

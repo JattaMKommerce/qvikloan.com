@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { ArrowRight, ShieldCheck, CheckCircle2, Building2, Package, Layers, FileCheck, Info, Briefcase, TrendingUp } from 'lucide-react';
+import { ArrowRight, Building2, Package, Layers, Info, Briefcase } from 'lucide-react';
+import FinancialCalculator from '../components/FinancialCalculator';
+import LoanTermsTable from '../components/LoanTermsTable';
 import { companyInfo } from '../data/companyInfo';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function BusinessLoansPage() {
+  usePageMeta('Business Loans', 'Explore business loan options for working capital, inventory or equipment through QvikLoan. Loan terms, eligibility and an EMI calculator. QvikLoan is not a lender.');
   const facilities = [
     {
       title: 'Working capital',
@@ -35,7 +39,7 @@ export default function BusinessLoansPage() {
             
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
                 <Building2 className="w-3.5 h-3.5" />
                 <span>Commercial &amp; MSME Solutions</span>
               </div>
@@ -43,7 +47,7 @@ export default function BusinessLoansPage() {
                 Business Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Explore financing for inventory, equipment or working capital through participating regulated lenders.
+                Explore financing for inventory, equipment or working capital. The lending institution decides eligibility, approval, rates and disbursement.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link to="/#enquiry-section"
@@ -59,8 +63,8 @@ export default function BusinessLoansPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md">
                 <img
-                  src="/images/business-loans-hero.png"
-                  alt="Business Loans Capital Facilities"
+                  src="/images/qvikloan-business-loan-illustration.png"
+                  alt=""
                   className="w-full h-auto object-cover"
                   loading="eager"
                 />
@@ -84,7 +88,7 @@ export default function BusinessLoansPage() {
             Financing Structured for Business Needs
           </h2>
           <p className="text-sm text-slate-blue mt-2">
-            Participating lenders assess your business profile, operating turnover, and financial health to structure suitable commercial credit.
+            Lenders look at your business profile, turnover and financial health before deciding whether to offer credit.
           </p>
         </div>
 
@@ -125,19 +129,19 @@ export default function BusinessLoansPage() {
             
             {/* Eligibility */}
             <div className="backdrop-blur-md bg-white/95 p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
                 Evaluation Guidelines
               </div>
               <h3 className="text-xl font-heading font-bold text-navy">
                 General Business Eligibility
               </h3>
               <p className="text-xs text-slate-blue leading-relaxed">
-                Underwriting requirements differ by lender, but participating institutions commonly review the following fundamentals:
+                Requirements differ by lender. These are the things lenders commonly look at:
               </p>
               <ul className="space-y-3.5 text-xs sm:text-sm text-slate-blue">
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Business Vintage:</span>
-                  <span>Minimum 12 to 24 months of continuous, verified business operations.</span>
+                  <span>A minimum period of continuous operation, set by each lender.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Registration Status:</span>
@@ -149,21 +153,21 @@ export default function BusinessLoansPage() {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Commercial Credit Health:</span>
-                  <span>Satisfactory commercial credit score (e.g. CIBIL Commercial or CMR score).</span>
+                  <span>The business’s and promoters’ credit reports and repayment record.</span>
                 </li>
               </ul>
             </div>
 
             {/* Documentation Checklist */}
             <div className="backdrop-blur-md bg-white/95 p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
                 Verification Documents
               </div>
               <h3 className="text-xl font-heading font-bold text-navy">
-                Documents Lenders Typically Require
+                Documents Lenders May Ask For
               </h3>
               <p className="text-xs text-slate-blue leading-relaxed">
-                Preparing these records beforehand speeds up the evaluation process with participating lenders:
+                The lender collects these directly; QvikLoan does not ask for them on this website.
               </p>
               <ul className="space-y-3.5 text-xs sm:text-sm text-slate-blue">
                 <li className="flex items-start gap-2.5">
@@ -176,11 +180,11 @@ export default function BusinessLoansPage() {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Bank Statements:</span>
-                  <span>Last 6 to 12 months' official operative business bank accounts (in PDF format).</span>
+                  <span>Recent statements of the business’s main bank accounts.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Financial Statements:</span>
-                  <span>Last 2 financial years' audited balance sheets, profit & loss statements, and ITR filings.</span>
+                  <span>Recent financial statements and income tax returns.</span>
                 </li>
               </ul>
             </div>
@@ -212,14 +216,26 @@ export default function BusinessLoansPage() {
             </div>
           </div>
 
-          <div className="bg-neutral-bg p-4 rounded-xl border border-neutral-border text-xs text-neutral-muted">
-            <strong>Statutory Disclosure:</strong> Available products and documentation requirements depend on the lender and your business profile. Submitting an enquiry does not commit you to borrowing or guarantee a commercial loan offer.
+          <div className="bg-neutral-bg p-4 rounded-xl border border-neutral-border text-sm text-slate-blue">
+            <strong>Please note:</strong> Available products and documentation requirements depend on the lender and your business profile. Submitting an enquiry does not commit you to borrowing or guarantee a commercial loan offer.
           </div>
         </div>
       </section>
 
-      
-
+      {/* Loan terms and EMI calculator */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10" aria-labelledby="business-terms">
+        <div className="text-center max-w-3xl mx-auto">
+          <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">Loan terms</span>
+          <h2 id="business-terms" className="text-2xl sm:text-3xl font-heading font-bold text-navy">
+            Business loan terms and costs
+          </h2>
+          <p className="text-sm sm:text-base text-slate-blue mt-2">
+            The lender sets every term below and shows it in its offer and Key Facts Statement before you sign.
+          </p>
+        </div>
+        <LoanTermsTable product="business" />
+        <FinancialCalculator product="business" />
+      </section>
     </div>
   );
 }

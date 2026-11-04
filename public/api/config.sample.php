@@ -30,6 +30,11 @@ return [
     // host's mail server may refuse to send it.
     'mail_from' => 'no-reply@qvikloan.com',
 
+    // Inboxes for the Contact Us form and the Grievance form (api/contact.php).
+    // Grievances should reach the appointed Grievance Redressal Officer.
+    'support_email' => 'help@qvikloan.com',
+    'grievance_email' => 'help@qvikloan.com',
+
     // Websites allowed to submit enquiries to this script.
     'allowed_origins' => [
         'https://qvikloan.com',

@@ -28,14 +28,14 @@ export default {
         },
         teal: {
           accent: '#36B49B',
-          dark: '#278A76',
+          dark: '#1F7262', // darkened from #278A76 for 4.5:1 text contrast
           soft: '#E6F7F4',
         },
         neutral: {
           bg: '#F7F8FA',
           card: '#FFFFFF',
           text: '#202B3C',
-          muted: '#738096',
+          muted: '#5B6577', // darkened from #738096 for 4.5:1 text contrast
           border: '#E5EAF1',
         },
       },

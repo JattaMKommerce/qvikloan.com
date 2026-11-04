@@ -1,112 +1,112 @@
 import React from 'react';
-import { AlertTriangle, ShieldCheck, Info, CheckCircle2, Building2 } from 'lucide-react';
+import { Info } from 'lucide-react';
+import LegalPage, { LegalSection, Callout } from '../components/LegalPage';
 import { companyInfo } from '../data/companyInfo';
+import { usePageMeta } from '../lib/usePageMeta';
+
+const LAST_UPDATED = '4 November 2026';
+
+const SECTIONS = [
+  { id: 'platform', title: 'What QvikLoan is' },
+  { id: 'no-guarantee', title: 'No guarantee of approval or credit' },
+  { id: 'lender-terms', title: 'Rates, charges and terms' },
+  { id: 'illustrations', title: 'Calculators and examples' },
+  { id: 'no-advice', title: 'Not financial advice' },
+  { id: 'fees', title: 'Fees and fraud warning' },
+  { id: 'company', title: 'Company details' },
+];
 
 export default function DisclaimerPage() {
+  usePageMeta('Financial Disclaimer', 'QvikLoan does not guarantee loan approval or disbursement. Lending institutions decide eligibility, interest rates, charges and repayment terms.');
+
   return (
-    <div className="space-y-12 sm:space-y-16 pb-16">
-      
-      {/* Header */}
-      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-14 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-            <Info className="w-3.5 h-3.5" />
-            Statutory Transparency
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-            Platform Disclaimers
-          </h1>
-          <p className="text-xs sm:text-sm text-neutral-muted">
-            Important regulatory disclosures regarding QvikLoan and Jatta M Kommerce Private Limited
+    <LegalPage
+      icon={Info}
+      badge="Disclosures"
+      title="Financial Disclaimer"
+      lastUpdated={LAST_UPDATED}
+      sections={SECTIONS}
+    >
+      <Callout title="Please read before you enquire">
+        <p className="text-sm">
+          QvikLoan provides a digital platform for exploring loan-related information and facilitating connections
+          with participating financial institutions. QvikLoan does not independently guarantee loan approval or
+          disbursement.
+        </p>
+      </Callout>
+
+      <LegalSection id="platform" number={1} title="What QvikLoan is">
+        <p>
+          QvikLoan is operated by <strong>{companyInfo.name}</strong>. QvikLoan is not a bank or a Non-Banking Financial
+          Company (NBFC) registered with the Reserve Bank of India. It does not lend money, accept deposits, assess
+          credit risk, or hold or disburse loan funds.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="no-guarantee" number={2} title="No guarantee of approval or credit">
+        <p>
+          All loan applications are subject to the respective lending institution’s eligibility requirements,
+          verification, underwriting and approval procedures.
+        </p>
+        <p>
+          Submitting an application through QvikLoan does not guarantee approval or the availability of credit. It also
+          does not guarantee any particular loan amount, interest rate or disbursement time.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="lender-terms" number={3} title="Rates, charges and terms">
+        <p>
+          Interest rates, applicable charges, repayment terms and loan disbursement are determined by the respective
+          lending institution. The lender must give you a Key Facts Statement (KFS) showing the Annual Percentage Rate
+          (APR) and all charges before you sign. Read it, and the loan agreement, before you accept any offer. You are
+          free to decline.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="illustrations" number={4} title="Calculators and examples">
+        <p>
+          EMI calculations and worked examples on this website are illustrative estimates and do not constitute a loan
+          offer or guarantee of approval. They use the standard reducing-balance formula, do not include fees or taxes,
+          and are not based on any particular lender’s pricing. Your actual EMI depends on the amount, rate and tenure
+          the lender approves.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="no-advice" number={5} title="Not financial advice">
+        <p>
+          Information on this website is general and is not financial, legal or tax advice. Consider whether a loan is
+          right for you and whether you can afford the repayments. Borrowing more than you can repay can harm your credit
+          record.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="fees" number={6} title="Fees and fraud warning">
+        <Callout tone="warning" title="Never pay an upfront fee to get a loan">
+          <p className="text-sm">
+            QvikLoan does not charge borrowers any fee for submitting an enquiry. QvikLoan, {companyInfo.name} and
+            anyone acting for us will never ask you to pay a registration fee, processing fee, deposit or “insurance”
+            into a personal bank account or UPI ID to approve or release a loan, and will never ask for your OTP, PIN or
+            banking password.
           </p>
-        </div>
-      </section>
+          <p className="text-sm">
+            Any lender fees are shown in the lender’s KFS and paid only to the lender through its official channels. If
+            someone asks you for money in QvikLoan’s name, do not pay. Report it to{' '}
+            <a href={`mailto:${companyInfo.email}`} className="font-semibold underline">{companyInfo.email}</a>, at
+            cybercrime.gov.in or on helpline 1930, and on the RBI’s Sachet portal (sachet.rbi.org.in).
+          </p>
+        </Callout>
+      </LegalSection>
 
-      {/* Main Content */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass rounded-card-lg p-8 sm:p-12 space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
-          
-          {/* Main Non-Lender Status */}
-          <div className="bg-neutral-bg p-6 rounded-card border border-neutral-border space-y-3">
-            <div className="flex items-center gap-2 font-heading font-bold text-navy text-base">
-              <ShieldCheck className="w-5 h-5 text-royal" />
-              <span>1. Regulatory Status & Non-Lender Clarification</span>
-            </div>
-            <p>
-              <strong>QvikLoan</strong> (accessible at <a href="https://qvikloan.com" className="text-royal font-semibold hover:underline">https://qvikloan.com</a>) is an online loan enquiry, discovery, and digital facilitation platform operated by <strong>{companyInfo.name}</strong> (CIN: {companyInfo.cin}).
-            </p>
-            <p className="font-semibold text-navy">
-              QvikLoan is NOT a bank, Non-Banking Financial Company (NBFC), or financial institution registered with the Reserve Bank of India (RBI).
-            </p>
-            <p>
-              QvikLoan does not directly extend loans, provide credit, take deposits from the public, underwrite credit risk, or disburse funds. We act strictly as an intermediary technology bridge connecting prospective borrowers with participating, regulated lending partners.
-            </p>
-          </div>
-
-          {/* Underwriting & Discretion */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              2. Lender Evaluation & Approval Discretion
-            </h2>
-            <p>
-              Submitting an enquiry through QvikLoan does not guarantee that you will receive a loan offer, nor does it guarantee loan approval or disbursement.
-            </p>
-            <p>
-              All loan approvals, sanctioned amounts, interest rates, annual percentage rates (APR), processing fees, repayment tenures, and disbursement timings are determined at the sole and independent discretion of the participating lending institution. Each lender conducts its own eligibility verification, credit bureau inquiries, KYC authentication, and risk evaluations in accordance with its internal underwriting policies and applicable regulatory guidelines.
-            </p>
-          </div>
-
-          {/* Key Facts Statement (KFS) */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              3. Key Facts Statement (KFS) & Borrower Decision
-            </h2>
-            <p>
-              In accordance with the Reserve Bank of India’s Digital Lending Framework, any lender extending an offer is required to provide the prospective borrower with an official Key Facts Statement (KFS) prior to the execution of any loan contract.
-            </p>
-            <p>
-              Borrowers are strongly encouraged to carefully examine the KFS, which contains the all-inclusive Annual Percentage Rate (APR), recovery mechanisms, processing charges, and monthly instalment breakdown. Submitting an enquiry does not create any contractual obligation to borrow. Borrowers may freely decline any loan offer at their sole discretion.
-            </p>
-          </div>
-
-          {/* Financial Illustrations */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              4. Illustrative Nature of Website Figures
-            </h2>
-            <p>
-              Any financial calculators, representative cost illustrations, interest rate estimates, or EMI computations displayed on this website are for general illustrative and educational purposes only. They do not constitute financial advice, formal quotations, or binding promises. Actual terms extended by participating lenders may differ based on individual credit profiles and prevailing market parameters.
-            </p>
-          </div>
-
-          {/* Fraud Warning */}
-          <div className="bg-amber-50/70 border border-amber-200 p-6 rounded-card space-y-3">
-            <div className="flex items-center gap-2 font-heading font-bold text-amber-900 text-base">
-              <AlertTriangle className="w-5 h-5 text-amber-700" />
-              <span>5. Fraud Advisory – Never Pay Upfront Fees</span>
-            </div>
-            <p className="text-amber-950">
-              QvikLoan, Jatta M Kommerce Private Limited, and their authorised representatives will <strong>NEVER</strong> demand advance processing charges, registration fees, security deposits, or refundable cash transfers into personal bank accounts or UPI IDs to approve or disburse a loan.
-            </p>
-            <p className="text-amber-950">
-              Any legitimate lender processing fee is deducted directly from the sanctioned loan amount upon disbursement and clearly documented in the Key Facts Statement. If you receive suspicious communications demanding upfront payment, report it immediately to <a href={`mailto:${companyInfo.complianceEmail}`} className="font-bold underline">{companyInfo.complianceEmail}</a> and local law enforcement authorities.
-            </p>
-          </div>
-
-          {/* Corporate Entity Details */}
-          <div className="pt-4 border-t border-neutral-border text-xs text-neutral-muted space-y-1">
-            <div><strong>Platform Name:</strong> QvikLoan (https://qvikloan.com)</div>
-            <div><strong>Legal Entity:</strong> {companyInfo.name}</div>
-            <div><strong>Corporate Identity Number (CIN):</strong> {companyInfo.cin}</div>
-            <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
-            <div><strong>Corporate Office:</strong> {companyInfo.address.corporateOffice}</div>
-            <div><strong>Email:</strong> {companyInfo.email} | <strong>Helpline:</strong> {companyInfo.phone}</div>
-          </div>
-
-        </div>
-      </section>
-
-    </div>
+      <LegalSection id="company" number={7} title="Company details">
+        <dl className="grid grid-cols-1 sm:grid-cols-[30%_1fr] gap-x-4 gap-y-2 text-sm">
+          <dt className="font-semibold text-navy">Platform</dt><dd>QvikLoan (qvikloan.com)</dd>
+          <dt className="font-semibold text-navy">Operated by</dt><dd>{companyInfo.name}</dd>
+          {companyInfo.cin && (<><dt className="font-semibold text-navy">CIN</dt><dd>{companyInfo.cin}</dd></>)}
+          <dt className="font-semibold text-navy">Registered office</dt><dd>{companyInfo.address.registeredOffice}</dd>
+          <dt className="font-semibold text-navy">Operating office</dt><dd>{companyInfo.address.corporateOffice}</dd>
+          <dt className="font-semibold text-navy">Contact</dt><dd>{companyInfo.email} · {companyInfo.phone}</dd>
+        </dl>
+      </LegalSection>
+    </LegalPage>
   );
 }
-

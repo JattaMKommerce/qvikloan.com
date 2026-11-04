@@ -1,284 +1,114 @@
-import React, { useState } from 'react';
-import { ShieldCheck, Mail, Phone, MapPin, Clock, CheckCircle2, AlertCircle, Send, ExternalLink } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ShieldCheck, ExternalLink, Building2, Landmark } from 'lucide-react';
+import SupportForm from '../components/SupportForm';
 import { companyInfo } from '../data/companyInfo';
+import { usePageMeta } from '../lib/usePageMeta';
+
+function ExternalA({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-royal font-semibold hover:underline inline-flex items-center gap-1">
+      {children}
+      <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+    </a>
+  );
+}
 
 export default function GrievanceRedressalPage() {
-  const [ticketData, setTicketData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    enquiryRef: '',
-    category: 'enquiry-status',
-    details: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [ticketId, setTicketId] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const id = `GRV-${Math.floor(100000 + Math.random() * 900000)}`;
-    setTicketId(id);
-    setSubmitted(true);
-  };
+  usePageMeta('Grievance Redressal', 'How to raise a complaint about QvikLoan or about a loan from a lender, our Grievance Redressal Officer, response times and how to escalate to the RBI.');
+  const officer = companyInfo.grievanceOfficer;
+  const { acknowledgement, resolution } = companyInfo.grievanceTimelines;
 
   return (
-    <div className="space-y-12 sm:space-y-16 pb-16">
-      
-      {/* Header */}
-      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-14 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Customer Protection & Fair Practices
+    <div className="pb-16">
+      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+            Complaints
           </div>
-          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-            Grievance Redressal Mechanism
-          </h1>
-          <p className="text-sm text-slate-blue leading-relaxed">
-            QvikLoan and Jatta M Kommerce Private Limited are dedicated to prompt and transparent dispute resolution. We maintain a structured, multi-tier escalation framework in accordance with regulatory best practices.
+          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">Grievance Redressal</h1>
+          <p className="text-base text-slate-blue leading-relaxed max-w-3xl">
+            If something has gone wrong, tell us. This page explains who to contact, how long it takes, and how to
+            escalate if you are not satisfied.
           </p>
         </div>
       </section>
 
-      {/* Escalation Matrix */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8">
-          
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl font-heading font-bold text-navy">
-              Three-Tier Escalation Matrix
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 space-y-10">
+
+        {/* Which route */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label="Where to send your complaint">
+          <div className="rounded-2xl border border-neutral-border bg-white p-6 space-y-3">
+            <h2 className="text-lg font-heading font-bold text-navy flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-royal" aria-hidden="true" />
+              Complaint about QvikLoan
             </h2>
-            <p className="text-xs sm:text-sm text-slate-blue mt-1">
-              Please follow the structured sequence below to ensure your query is tracked and resolved systematically.
+            <p className="text-sm text-slate-blue">
+              For example: how your enquiry was handled, unwanted calls or messages, your personal data or consent, or
+              someone pretending to be QvikLoan. Contact our Grievance Redressal Officer below.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Level 1 */}
-            <div className="glass rounded-card p-6 space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-royal-soft text-royal font-bold flex items-center justify-center font-heading">
-                01
-              </div>
-              <h3 className="text-lg font-heading font-bold text-navy">
-                Level 1: Support Desk
-              </h3>
-              <p className="text-xs text-slate-blue leading-relaxed">
-                For standard queries regarding enquiry submissions, platform usage, or participating lenders.
-              </p>
-              <div className="pt-2 border-t border-neutral-border text-xs space-y-1.5 text-neutral-text">
-                <div><strong>Email:</strong> {companyInfo.email}</div>
-                <div><strong>Phone:</strong> {companyInfo.phone}</div>
-                <div className="text-teal-dark font-semibold">Turnaround: Within 48 hours</div>
-              </div>
-            </div>
-
-            {/* Level 2 */}
-            <div className="glass rounded-card border-2 border-royal p-6 space-y-4 relative">
-              <span className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-royal text-white text-xs font-bold tracking-wider uppercase">
-                Designated Officer
-              </span>
-              <div className="w-10 h-10 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-heading">
-                02
-              </div>
-              <h3 className="text-lg font-heading font-bold text-navy">
-                Level 2: Nodal Officer
-              </h3>
-              <p className="text-xs text-slate-blue leading-relaxed">
-                If your issue remains unresolved after 7 business days, escalate to our Principal Grievance Officer.
-              </p>
-              <div className="pt-2 border-t border-neutral-border text-xs space-y-1.5 text-neutral-text">
-                <div><strong>Officer:</strong> {companyInfo.grievanceOfficer.name}</div>
-                <div><strong>Email:</strong> {companyInfo.grievanceOfficer.email}</div>
-                <div><strong>Phone:</strong> {companyInfo.grievanceOfficer.directPhone}</div>
-                <div className="text-royal font-semibold">Resolution: Within 14 working days</div>
-              </div>
-            </div>
-
-            {/* Level 3 */}
-            <div className="glass rounded-card p-6 space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-teal-soft text-teal-dark font-bold flex items-center justify-center font-heading">
-                03
-              </div>
-              <h3 className="text-lg font-heading font-bold text-navy">
-                Level 3: Regulatory Body
-              </h3>
-              <p className="text-xs text-slate-blue leading-relaxed">
-                If the dispute relates directly to a regulated lender and is not settled within 30 days, file with RBI.
-              </p>
-              <div className="pt-2 border-t border-neutral-border text-xs space-y-1.5 text-neutral-text">
-                <div><strong>Portal:</strong> RBI CMS Portal</div>
-                <a
-                  href="https://cms.rbi.org.in"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-royal font-semibold hover:underline flex items-center gap-1"
-                >
-                  <span>cms.rbi.org.in</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-                <div className="text-neutral-muted">RBI Banking Ombudsman</div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Detailed Nodal Officer Particulars Box */}
-          <div className="glass rounded-card-lg p-8 space-y-5">
-            <h3 className="text-xl font-heading font-bold text-navy flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-royal" />
-              <span>Nodal Grievance Redressal Officer Particulars</span>
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-              In accordance with the regulatory stipulations for digital lending platforms, the complete contact coordinates of our designated Grievance Officer are published below:
+          <div className="rounded-2xl border border-neutral-border bg-white p-6 space-y-3">
+            <h2 className="text-lg font-heading font-bold text-navy flex items-center gap-2">
+              <Landmark className="w-5 h-5 text-teal-dark" aria-hidden="true" />
+              Complaint about a loan or a lender
+            </h2>
+            <p className="text-sm text-slate-blue">
+              For example: interest, charges, the KFS, disbursement, repayment or recovery. Contact the lender’s
+              grievance officer, whose details are in your KFS, loan agreement and on our{' '}
+              <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
+              You can also tell us, and we will pass it to the lender.
             </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm bg-neutral-bg p-5 rounded-xl border border-neutral-border">
-              <div>
-                <span className="text-neutral-muted block mb-0.5">Full Name</span>
-                <span className="font-bold text-navy">{companyInfo.grievanceOfficer.name}</span>
-              </div>
-              <div>
-                <span className="text-neutral-muted block mb-0.5">Designation</span>
-                <span className="font-bold text-navy">{companyInfo.grievanceOfficer.designation}</span>
-              </div>
-              <div>
-                <span className="text-neutral-muted block mb-0.5">Dedicated Grievance Email</span>
-                <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold hover:underline">
-                  {companyInfo.grievanceOfficer.email}
-                </a>
-              </div>
-              <div>
-                <span className="text-neutral-muted block mb-0.5">Direct Grievance Contact Phone</span>
-                <span className="font-bold text-navy">{companyInfo.grievanceOfficer.directPhone}</span>
-              </div>
-              <div className="sm:col-span-2">
-                <span className="text-neutral-muted block mb-0.5">Postal Communication Address</span>
-                <span className="text-navy font-medium">{companyInfo.address.registeredOffice}</span>
-              </div>
-              <div className="sm:col-span-2">
-                <span className="text-neutral-muted block mb-0.5">Working Hours & Availability</span>
-                <span className="text-navy">{companyInfo.operatingHours} (Excluding Public & Bank Holidays)</span>
-              </div>
-            </div>
           </div>
+        </section>
 
-          {/* Interactive Grievance Filing Form */}
-          <div className="glass rounded-card-lg p-8 space-y-6">
-            <h3 className="text-xl font-heading font-bold text-navy">
-              Submit a Grievance or Dispute Online
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-blue">
-              Fill out the form below to register a formal ticket directly with our compliance desk. You will receive an acknowledgment with a tracking reference.
-            </p>
-
-            {submitted ? (
-              <div className="bg-teal-soft border border-teal-accent/30 rounded-xl p-6 text-center space-y-3">
-                <CheckCircle2 className="w-10 h-10 text-teal-dark mx-auto" />
-                <h4 className="text-lg font-heading font-bold text-navy">
-                  Grievance Registered Successfully
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-blue">
-                  Your ticket reference number is <strong className="font-mono text-navy">{ticketId}</strong>.
-                  Our Grievance Redressal team will acknowledge receipt within 48 hours and provide a detailed update.
-                </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="px-4 py-2 bg-royal text-white rounded-xl text-xs font-semibold hover:bg-royal-hover transition-colors"
-                >
-                  Submit Another Ticket
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <label className="block font-semibold text-neutral-text mb-1">Your Full Name *</label>
-                    <input
-                      type="text"
-                      required
-                      value={ticketData.name}
-                      onChange={(e) => setTicketData({ ...ticketData, name: e.target.value })}
-                      placeholder="e.g. Amit Patel"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-semibold text-neutral-text mb-1">Your Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      value={ticketData.email}
-                      onChange={(e) => setTicketData({ ...ticketData, email: e.target.value })}
-                      placeholder="name@example.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-semibold text-neutral-text mb-1">Mobile Number *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={ticketData.phone}
-                      onChange={(e) => setTicketData({ ...ticketData, phone: e.target.value })}
-                      placeholder="9876543210"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-semibold text-neutral-text mb-1">Enquiry Reference ID (if available)</label>
-                    <input
-                      type="text"
-                      value={ticketData.enquiryRef}
-                      onChange={(e) => setTicketData({ ...ticketData, enquiryRef: e.target.value })}
-                      placeholder="e.g. QVK-123456"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div className="text-xs">
-                  <label className="block font-semibold text-neutral-text mb-1">Nature of Grievance *</label>
-                  <select
-                    value={ticketData.category}
-                    onChange={(e) => setTicketData({ ...ticketData, category: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none bg-white"
-                  >
-                    <option value="enquiry-status">Enquiry Routing & Status Issue</option>
-                    <option value="data-privacy">Data Privacy & Consent Inquiry</option>
-                    <option value="unsolicited-calls">Unsolicited Contact or Reporting</option>
-                    <option value="partner-lender">Participating Lender Conduct Concern</option>
-                    <option value="other">Other Dispute or Clarification</option>
-                  </select>
-                </div>
-
-                <div className="text-xs">
-                  <label className="block font-semibold text-neutral-text mb-1">Detailed Description *</label>
-                  <textarea
-                    rows={4}
-                    required
-                    value={ticketData.details}
-                    onChange={(e) => setTicketData({ ...ticketData, details: e.target.value })}
-                    placeholder="Please explain your grievance clearly with relevant dates and specifics..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-navy hover:bg-slate-blue text-white rounded-xl font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-2"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>Register Formal Grievance</span>
-                </button>
-              </form>
+        {/* Grievance officer */}
+        <section className="rounded-2xl border-2 border-royal/30 bg-white p-6 sm:p-8 space-y-5" aria-labelledby="gro">
+          <h2 id="gro" className="text-xl font-heading font-bold text-navy">QvikLoan Grievance Redressal Officer</h2>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            {officer.name && (
+              <div><dt className="text-neutral-muted">Name</dt><dd className="font-bold text-navy">{officer.name}</dd></div>
             )}
+            <div><dt className="text-neutral-muted">Designation</dt><dd className="font-bold text-navy">{officer.designation}, {companyInfo.name}</dd></div>
+            <div><dt className="text-neutral-muted">Email</dt><dd><a href={`mailto:${officer.email}`} className="text-royal font-semibold hover:underline">{officer.email}</a></dd></div>
+            <div><dt className="text-neutral-muted">Phone</dt><dd className="font-bold text-navy">{officer.phone}</dd></div>
+            <div className="sm:col-span-2"><dt className="text-neutral-muted">Postal address</dt><dd className="text-navy">{companyInfo.address.registeredOffice}</dd></div>
+            <div className="sm:col-span-2"><dt className="text-neutral-muted">Hours</dt><dd className="text-navy">{companyInfo.operatingHours}</dd></div>
+          </dl>
+        </section>
+
+        {/* Process and escalation */}
+        <section className="space-y-5" aria-labelledby="process">
+          <h2 id="process" className="text-2xl font-heading font-bold text-navy">How it works and how to escalate</h2>
+          <ol className="space-y-4">
+            {[
+              ['Tell us', <>Use the form below, email <a href={`mailto:${officer.email}`} className="text-royal font-semibold underline">{officer.email}</a>, call {officer.phone}, or write to the address above. Include your enquiry reference if you have one. You will get a complaint reference number.</>],
+              ['We respond', <>We aim to acknowledge your complaint {acknowledgement} and send you a resolution {resolution}. If we need more time, we will tell you why.</>],
+              ['If it is about a loan', <>Contact the lender’s grievance officer. Lenders are also responsible for the platforms they work with, so you can raise a complaint about how QvikLoan handled an enquiry for a lender with that lender too.</>],
+              ['Escalate to the RBI', <>If the lender rejects your complaint, does not reply within 30 days, or you are not satisfied with its reply, you can complain under the RBI’s Integrated Ombudsman Scheme at <ExternalA href="https://cms.rbi.org.in">cms.rbi.org.in</ExternalA>, or by post to the RBI’s Centralised Receipt and Processing Centre in Chandigarh.</>],
+              ['Other options', <>For complaints about our own service you can also contact the National Consumer Helpline (<ExternalA href="https://consumerhelpline.gov.in">consumerhelpline.gov.in</ExternalA>, 1915). Report fraud at <ExternalA href="https://cybercrime.gov.in">cybercrime.gov.in</ExternalA> or 1930, and unauthorised lenders on the RBI’s <ExternalA href="https://sachet.rbi.org.in">Sachet portal</ExternalA>.</>],
+            ].map(([title, body], i) => (
+              <li key={title} className="flex gap-4 rounded-2xl border border-neutral-border bg-white p-5">
+                <span className="w-9 h-9 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-heading shrink-0">{i + 1}</span>
+                <div className="text-sm text-slate-blue space-y-1">
+                  <h3 className="font-heading font-bold text-navy text-base">{title}</h3>
+                  <p>{body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Form */}
+        <section className="rounded-2xl border border-neutral-border bg-white p-6 sm:p-8 space-y-5" aria-labelledby="file-complaint">
+          <div>
+            <h2 id="file-complaint" className="text-xl font-heading font-bold text-navy">File a complaint online</h2>
+            <p className="text-sm text-slate-blue mt-1">It goes straight to the Grievance Redressal Officer’s inbox.</p>
           </div>
-
-        </div>
-      </section>
-
+          <SupportForm kind="grievance" />
+        </section>
+      </div>
     </div>
   );
 }
-

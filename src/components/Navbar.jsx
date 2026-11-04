@@ -27,6 +27,14 @@ export default function Navbar() {
     { name: 'Business Loans', path: '/business-loans' },
     { name: 'How It Works', path: '/how-it-works' },
     { name: 'About Us', path: '/about-us' },
+    { name: 'Contact Us', path: '/contact-us' },
+  ];
+
+  // Shown in the top strip on desktop and at the bottom of the mobile menu.
+  const disclosureLinks = [
+    { name: 'Lending Partners', path: '/participating-lenders' },
+    { name: 'Grievance Redressal', path: '/grievance-redressal' },
+    { name: 'Privacy Policy', path: '/privacy-policy' },
   ];
 
   const isActive = (path) => {
@@ -37,7 +45,7 @@ export default function Navbar() {
   return (
     <>
       {/* Compliance Micro-Header */}
-      <div className="bg-navy text-white text-[12px] font-medium py-1.5 px-4 hidden md:block border-b border-navy-light/40">
+      <aside aria-label="Operator and disclosures" className="bg-navy text-white text-[12px] font-medium py-1.5 px-4 hidden md:block border-b border-navy-light/40">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-3.5 h-3.5 text-teal-accent" />
@@ -45,17 +53,16 @@ export default function Navbar() {
               Operated by Jatta M Kommerce Private Limited • Connecting borrowers with participating lenders
             </span>
           </div>
-          <div className="flex items-center gap-4 text-xs opacity-80">
-            <Link to="/participating-lenders" className="hover:text-teal-accent transition-colors">
-              Participating Lenders
-            </Link>
-            <span className="opacity-40">|</span>
-            <Link to="/grievance-redressal" className="hover:text-teal-accent transition-colors">
-              Grievance Desk
-            </Link>
+          <div className="flex items-center gap-4 text-xs opacity-90">
+            {disclosureLinks.map((link, i) => (
+              <React.Fragment key={link.path}>
+                {i > 0 && <span className="opacity-40" aria-hidden="true">|</span>}
+                <Link to={link.path} className="hover:text-teal-accent transition-colors">{link.name}</Link>
+              </React.Fragment>
+            ))}
           </div>
         </div>
-      </div>
+      </aside>
 
       {/* Main Sticky Navbar */}
       <header
@@ -78,7 +85,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-7">
+            <nav aria-label="Main" className="hidden lg:flex items-center gap-5 xl:gap-7">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -105,11 +112,14 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center sm:hidden">
+            {/* Menu button: phones and tablets (the link bar only fits from lg up) */}
+            <div className="flex items-center lg:hidden">
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle navigation menu"
+                aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
                 className="p-2 rounded-xl text-neutral-text hover:bg-neutral-bg focus:outline-none focus:ring-2 focus:ring-royal"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -120,7 +130,8 @@ export default function Navbar() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-x-0 top-full bg-white border-b border-neutral-border shadow-premium px-4 pt-3 pb-6 animate-fadeIn">
+          // absolute (not fixed): positioned under the sticky header, scrolled or not.
+          <div id="mobile-menu" className="lg:hidden absolute inset-x-0 top-full bg-white border-b border-neutral-border shadow-premium px-4 pt-3 pb-6 max-h-[calc(100vh-80px)] overflow-y-auto">
             <div className="flex flex-col space-y-1 divide-y divide-neutral-border/50">
               {navLinks.map((link) => (
                 <Link
@@ -145,7 +156,12 @@ export default function Navbar() {
                   <span>Start an enquiry</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Link>
-              <div className="text-center text-[12px] text-neutral-muted pt-2">
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-slate-blue pt-1">
+                {disclosureLinks.map((link) => (
+                  <Link key={link.path} to={link.path} className="hover:text-royal underline-offset-2 hover:underline">{link.name}</Link>
+                ))}
+              </div>
+              <div className="text-center text-xs text-neutral-muted">
                 Operated by Jatta M Kommerce Private Limited
               </div>
             </div>

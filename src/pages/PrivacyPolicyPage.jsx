@@ -1,155 +1,266 @@
 import React from 'react';
-import { ShieldCheck, Lock, Eye, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShieldCheck } from 'lucide-react';
+import LegalPage, { LegalSection, Callout } from '../components/LegalPage';
 import { companyInfo } from '../data/companyInfo';
+import { usePageMeta } from '../lib/usePageMeta';
 
-export default function PrivacyPolicyPage() {
-  const lastUpdated = "November 4, 2026";
+const LAST_UPDATED = '4 November 2026';
 
+const SECTIONS = [
+  { id: 'who-we-are', title: 'Who we are' },
+  { id: 'what-we-collect', title: 'Information we collect' },
+  { id: 'what-we-dont-collect', title: 'PAN, Aadhaar, bank and other sensitive information' },
+  { id: 'why', title: 'Why we use your information' },
+  { id: 'sharing', title: 'Who we share it with' },
+  { id: 'consent', title: 'Consent and withdrawing consent' },
+  { id: 'retention', title: 'How long we keep it' },
+  { id: 'security', title: 'How we protect it' },
+  { id: 'cookies', title: 'Cookies, browser storage and third-party content' },
+  { id: 'rights', title: 'Your rights' },
+  { id: 'children', title: 'Children' },
+  { id: 'law', title: 'Laws that apply' },
+  { id: 'changes', title: 'Changes to this policy' },
+  { id: 'contact', title: 'Grievance Officer and contact' },
+];
+
+// What the website collects. Keep in sync with the enquiry form, api/lead.php and api/contact.php.
+const COLLECTED = [
+  ['Identity and contact', 'Full name, mobile number, email address', 'Enquiry, contact and grievance forms', 'Required'],
+  ['Location', 'City or state, PIN code', 'Enquiry form', 'Required'],
+  ['Loan requirement', 'Personal or business loan, amount, purpose, preferred repayment period', 'Enquiry form', 'Type and amount required; purpose and period optional'],
+  ['Broad employment and financial profile', 'Employment or business type; monthly income or annual turnover band; whether you have existing EMIs (in bands); business age', 'Enquiry form', 'Employment or business type required; the rest optional'],
+  ['Preferences and consent', 'Best time to call, your marketing choice, the consent wording you agreed to, its version and the time you agreed', 'Enquiry form', 'Recorded automatically'],
+  ['Messages', 'Your message, its category and any enquiry reference you give', 'Contact and grievance forms', 'Required for those forms'],
+  ['Chat conversations', 'What you type into the AI chat assistant', 'Chat assistant (only if you open it)', 'Optional'],
+  ['Calls and messages with our team', 'What you tell us by phone, WhatsApp or email', 'You', 'Optional'],
+  ['Technical and campaign information', 'IP address, browser type, time of submission, the page you arrived on, the website that referred you, and advertising campaign tags in the link you used (utm_*, fbclid, gclid)', 'Your browser, sent with a form', 'Recorded automatically'],
+];
+
+const PURPOSES = [
+  ['Assess your enquiry and contact you about it by phone, SMS, WhatsApp or email', 'Your consent on the enquiry form'],
+  ['Share your enquiry with a lender listed on our Lending Partners page so it can assess your eligibility', 'Your consent on the enquiry form'],
+  ['Send you information about other loan products', 'Your separate, optional marketing consent'],
+  ['Answer your questions and investigate complaints, and keep a grievance register', 'Your request, and our legal obligations'],
+  ['Keep the website secure and block spam and fraud (for example, limiting repeated submissions from one IP address)', 'Reasonable security practices required by law'],
+  ['Understand which of our advertisements and links bring enquiries, using the campaign tags in the link you used', 'Your consent on the enquiry form'],
+  ['Meet legal and regulatory requirements and respond to lawful requests', 'Legal obligation'],
+];
+
+function Table({ caption, head, rows }) {
   return (
-    <div className="space-y-12 sm:space-y-16 pb-16">
-      
-      {/* Header */}
-      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-14 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Legal & Data Protection
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-            Privacy Policy
-          </h1>
-          <p className="text-xs sm:text-sm text-neutral-muted">
-            Last Updated: {lastUpdated} • Applicable to QvikLoan, operated by {companyInfo.name}
-          </p>
-        </div>
-      </section>
-
-      {/* Main Legal Content */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass rounded-card-lg p-8 sm:p-12 space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
-          
-          {/* Section 1 */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              1. Introduction & Operating Entity
-            </h2>
-            <p>
-              This Privacy Policy describes how <strong>{companyInfo.name}</strong> ("Company", "we", "us", or "our"), operating the digital platform <strong>QvikLoan</strong> (available at <a href="https://qvikloan.com" className="text-royal font-semibold hover:underline">https://qvikloan.com</a>), collects, handles, stores, and protects personal information provided by individuals and businesses ("Users", "you", or "Borrowers") when submitting an online loan enquiry.
-            </p>
-            <p>
-              We are committed to maintaining the highest standards of financial privacy and strictly comply with the Information Technology Act, 2000, the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 (SPDI Rules), and the Reserve Bank of India’s (RBI) Guidelines on Digital Lending.
-            </p>
-          </div>
-
-          {/* Section 2 */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              2. Information We Collect
-            </h2>
-            <p>
-              We practice data minimisation. We only collect information that is strictly required to facilitate your loan enquiry with participating institutional lenders:
-            </p>
-            <ul className="list-disc pl-5 space-y-1.5">
-              <li><strong>Contact Information:</strong> Full legal name, verified mobile phone number, email address, and residential / commercial city.</li>
-              <li><strong>Enquiry Preferences:</strong> Loan type sought (Personal or Business), desired loan amount, and broad loan purpose.</li>
-              <li><strong>Broad Employment Profile:</strong> Category of employment (salaried, self-employed professional, business owner) to determine eligible lender categories.</li>
-              <li><strong>Technical Data:</strong> IP address, device type, browser metadata, and access timestamps strictly for fraud prevention and security verification.</li>
-            </ul>
-          </div>
-
-          {/* Section 3 */}
-          <div className="space-y-3 bg-neutral-bg p-5 rounded-xl border border-neutral-border">
-            <h2 className="text-base font-heading font-bold text-navy flex items-center gap-2">
-              <Lock className="w-4 h-4 text-royal" />
-              <span>3. Information We Do NOT Collect</span>
-            </h2>
-            <p className="text-xs">
-              In accordance with RBI Digital Lending Guidelines and responsible privacy standards:
-            </p>
-            <ul className="list-disc pl-5 space-y-1 text-xs text-slate-blue">
-              <li>We do <strong>NOT</strong> request or access your mobile phone contacts, call logs, SMS logs, or device photo galleries.</li>
-              <li>We do <strong>NOT</strong> collect or store your net banking passwords, debit/credit card PINs, or CVVs.</li>
-              <li>We do <strong>NOT</strong> collect biometric identifiers.</li>
-              <li>We do <strong>NOT</strong> ask for upfront processing payments to personal UPI IDs or bank accounts.</li>
-            </ul>
-          </div>
-
-          {/* Section 4 */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              4. Purpose of Data Processing & Legal Basis
-            </h2>
-            <p>
-              We process your personal information strictly based on your explicit consent for the following defined purposes:
-            </p>
-            <ul className="list-disc pl-5 space-y-1.5">
-              <li>To match your requirements with participating lenders.</li>
-              <li>To transmit your enquiry details to chosen lending partners for eligibility evaluation.</li>
-              <li>To provide customer support and service updates regarding your enquiry status.</li>
-              <li>To prevent cyber fraud, unauthorised automated submissions, and malicious activity.</li>
-            </ul>
-          </div>
-
-          {/* Section 5 */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              5. How Your Information is Shared with Participating Lenders
-            </h2>
-            <p>
-              QvikLoan is not a lender. When you submit an enquiry and select the explicit consent checkbox, you authorize QvikLoan (Jatta M Kommerce Private Limited) to transmit your basic profile to participating lenders.
-            </p>
-            <p>
-              These lenders evaluate your preliminary eligibility and may contact you directly with offers. We require all partner lenders to treat your data in strict compliance with RBI regulations and confidentiality laws. We do not sell your data to unaffiliated third-party marketing brokers.
-            </p>
-          </div>
-
-          {/* Section 6 */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              6. Data Security & Storage
-            </h2>
-            <p>
-              All data transmitted through QvikLoan is secured using industry-standard 256-bit Secure Sockets Layer (SSL) encryption. Servers are housed in secure data centers with multi-tier access controls. We retain your enquiry information only for as long as necessary to fulfill the facilitation purpose or satisfy regulatory compliance requirements.
-            </p>
-          </div>
-
-          {/* Section 7 */}
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              7. Your Rights Regarding Your Data
-            </h2>
-            <p>You have full autonomy over your personal information:</p>
-            <ul className="list-disc pl-5 space-y-1.5">
-              <li><strong>Right to Review:</strong> You may request a copy of the personal information we hold about you.</li>
-              <li><strong>Right to Rectify:</strong> You may request correction of inaccurate contact or profile details.</li>
-              <li><strong>Right to Withdraw Consent / Erase:</strong> You may withdraw your consent for future data processing or request deletion of your records by writing to our Privacy Desk at <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold hover:underline">{companyInfo.email}</a>.</li>
-            </ul>
-          </div>
-
-          {/* Section 8 */}
-          <div className="space-y-3 pt-4 border-t border-neutral-border">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              8. Grievance Officer & Contact Information
-            </h2>
-            <p>
-              In accordance with Information Technology Act, 2000 and SPDI Rules, the designated Grievance Officer for data protection concerns is:
-            </p>
-            <div className="bg-neutral-bg p-4 rounded-xl border border-neutral-border text-xs space-y-1.5">
-              <div><strong>Name:</strong> {companyInfo.grievanceOfficer.name}</div>
-              <div><strong>Designation:</strong> {companyInfo.grievanceOfficer.designation}</div>
-              <div><strong>Company:</strong> {companyInfo.name}</div>
-              <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
-              <div><strong>Corporate Office:</strong> {companyInfo.address.corporateOffice}</div>
-              <div><strong>Email:</strong> <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold">{companyInfo.email}</a></div>
-              <div><strong>Helpline Phone:</strong> {companyInfo.phone}</div>
-              <div><strong>Resolution Timeline:</strong> Acknowledgment within 48 hours; resolution within 14 working days.</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
+    <div className="overflow-x-auto rounded-xl border border-neutral-border">
+      <table className="w-full min-w-[560px] text-left text-sm border-collapse">
+        <caption className="sr-only">{caption}</caption>
+        <thead className="bg-neutral-bg">
+          <tr>{head.map((h) => <th key={h} scope="col" className="py-2.5 px-3 font-bold text-navy">{h}</th>)}</tr>
+        </thead>
+        <tbody className="divide-y divide-neutral-border">
+          {rows.map((row) => (
+            <tr key={row[0]}>
+              {row.map((cell, i) => (
+                i === 0
+                  ? <th key={i} scope="row" className="py-2.5 px-3 font-semibold text-navy align-top">{cell}</th>
+                  : <td key={i} className="py-2.5 px-3 align-top">{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
+const mail = <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold underline">{companyInfo.grievanceOfficer.email}</a>;
+
+export default function PrivacyPolicyPage() {
+  usePageMeta('Privacy Policy', 'How QvikLoan collects, uses, shares, protects and deletes personal information, and how to withdraw consent or contact our Grievance Officer.');
+
+  return (
+    <LegalPage
+      icon={ShieldCheck}
+      badge="Privacy"
+      title="Privacy Policy"
+      intro="This policy explains what personal information QvikLoan collects, why, who receives it, how long it is kept, and how you can control it."
+      lastUpdated={LAST_UPDATED}
+      sections={SECTIONS}
+    >
+      <Callout title="In short">
+        <ul className="list-disc pl-5 space-y-1 text-sm">
+          <li>We collect only what we need to handle your loan enquiry, and we explain why on the form.</li>
+          <li>We share your enquiry with a lender only with your consent, and only with lenders named on our Lending Partners page.</li>
+          <li>We do not collect PAN, Aadhaar, bank details or documents on this website.</li>
+          <li>We do not sell your information or send your enquiry details to advertising platforms.</li>
+          <li>You can withdraw consent or ask us to delete your details at any time by emailing {mail}.</li>
+        </ul>
+      </Callout>
+
+      <LegalSection id="who-we-are" number={1} title="Who we are">
+        <p>
+          QvikLoan (<a href={companyInfo.website} className="text-royal underline">qvikloan.com</a>) is operated by{' '}
+          <strong>{companyInfo.name}</strong> (“we”, “us”), {companyInfo.address.registeredOffice}. We decide why and how
+          your personal information is processed on this website, so we are responsible for it.
+        </p>
+        <p>
+          This policy covers this website, its enquiry, contact and grievance forms, the chat assistant on it, and your
+          calls and messages with our team. Once a lender receives your enquiry, that lender’s own privacy policy also
+          applies to what it does with your information.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="what-we-collect" number={2} title="Information we collect">
+        <Table caption="Information we collect" head={['Category', 'What', 'Where from', 'Required?']} rows={COLLECTED} />
+        <p>
+          We ask for income, turnover and existing EMIs only in broad bands, and you can leave them blank. Please do
+          not type sensitive details (such as PAN, Aadhaar or account numbers) into free-text fields or the chat.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="what-we-dont-collect" number={3} title="PAN, Aadhaar, bank and other sensitive information">
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>PAN:</strong> not collected on this website. If a lender needs your PAN for KYC or a credit check, the lender collects it directly.</li>
+          <li><strong>Aadhaar:</strong> not collected on this website. Any Aadhaar-based verification is done by the lender, with your consent and under the Aadhaar Act.</li>
+          <li><strong>Bank account details and statements:</strong> not collected on this website. The lender collects them to assess your loan and to disburse it.</li>
+          <li><strong>Employment and income:</strong> we collect only your employment or business type and, if you choose, an income or turnover band. Salary slips, tax returns and financial statements are collected by the lender, not by us.</li>
+          <li>We never ask for card numbers, PINs, CVVs, banking passwords or OTPs, and we do not collect biometrics.</li>
+          <li>This website does not access your phone contacts, call logs, SMS, photos or location.</li>
+        </ul>
+      </LegalSection>
+
+      <LegalSection id="why" number={4} title="Why we use your information">
+        <Table caption="Purposes and basis" head={['Purpose', 'Basis']} rows={PURPOSES} />
+        <p>We do not use your information for any purpose that is not listed here without telling you and, where needed, asking for your consent.</p>
+      </LegalSection>
+
+      <LegalSection id="sharing" number={5} title="Who we share it with">
+        <ul className="list-disc pl-5 space-y-2">
+          <li>
+            <strong>Lending institutions:</strong> only with your consent, and only lenders listed on our{' '}
+            <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page. We share
+            your enquiry details so the lender can assess your eligibility. The lender then handles your information as a
+            separate data fiduciary under its own privacy policy.
+          </li>
+          <li>
+            <strong>Service providers that work for us:</strong>
+            <ul className="list-[circle] pl-5 mt-1 space-y-1">
+              {companyInfo.serviceProviders.map((p) => (
+                <li key={p.name}><strong>{p.name}</strong>: {p.role}</li>
+              ))}
+            </ul>
+            They may use your information only to provide these services to us.
+          </li>
+          <li><strong>Authorities:</strong> when the law requires it, for example in response to a court order or a lawful request from a regulator or law enforcement agency.</li>
+          <li><strong>Advertising and analytics platforms:</strong> this website does not currently use advertising pixels or analytics cookies. If we add them, we will update this policy first, ask for consent where the law requires it, and never send them the contents of your enquiry (such as income, loan amount or existing loans).</li>
+        </ul>
+        <p>We do not sell or rent your personal information.</p>
+      </LegalSection>
+
+      <LegalSection id="consent" number={6} title="Consent and withdrawing consent">
+        <p>
+          The enquiry form has two separate checkboxes, and neither is ticked in advance. The first is needed to process
+          your enquiry and share it with a listed lender. The second, for marketing, is optional and does not affect your
+          enquiry. We keep a record of the exact wording you agreed to and when.
+        </p>
+        <p>
+          You can withdraw consent at any time by emailing {mail} or using our{' '}
+          <Link to="/grievance-redressal" className="text-royal font-semibold underline">grievance form</Link>. We will then
+          stop using your information for that purpose, and tell any listed lender we shared it with that you have
+          withdrawn consent. Withdrawal does not affect processing that already happened, and we may keep a record of
+          your consent and its withdrawal where the law requires. A lender may also need to keep some records under its
+          own legal obligations, for example if you took a loan.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="retention" number={7} title="How long we keep it">
+        <p>
+          We keep enquiry records {companyInfo.dataRetention}, unless the law requires us to keep them longer. Records of
+          complaints are kept for as long as needed to resolve them and as required by law. After that, we delete your
+          information or make it anonymous.
+        </p>
+        <p>
+          To have your details deleted sooner, email {mail}. We will confirm once they have been deleted, or explain what
+          we must keep by law and why.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="security" number={8} title="How we protect it">
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Everything you send through this website is encrypted in transit (HTTPS).</li>
+          <li>Personal information is never put in website addresses (URLs) and is not written to our server error logs.</li>
+          <li>Forms are checked on our server, and repeated or automated submissions are blocked.</li>
+          <li>Secret API keys for our service providers are stored on the server and never sent to your browser.</li>
+          <li>Only staff who handle enquiries and complaints can see your details.</li>
+        </ul>
+        <p>
+          No system is completely secure. If a breach affects your personal information, we will inform you and the
+          authorities as the law requires.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="cookies" number={9} title="Cookies, browser storage and third-party content">
+        <ul className="list-disc pl-5 space-y-2">
+          <li>This website does not set its own cookies. It uses your browser’s session storage to remember the link you arrived from (including any campaign tags) until you close the tab, so it can be attached to your enquiry.</li>
+          <li>Fonts are loaded from Google Fonts, so Google receives your IP address when the page loads.</li>
+          <li>The chat assistant is provided by iamkratu.ai and loads only when you open it. It may set its own cookies.</li>
+          <li>The WhatsApp button opens WhatsApp, which is operated by Meta under its own privacy policy.</li>
+        </ul>
+      </LegalSection>
+
+      <LegalSection id="rights" number={10} title="Your rights">
+        <p>You can ask us, free of charge, to:</p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>tell you what personal information we hold about you, how we used it and who we shared it with;</li>
+          <li>correct, complete or update it;</li>
+          <li>delete it, unless we must keep it by law;</li>
+          <li>withdraw your consent;</li>
+          <li>resolve a complaint about how we handled your information; and</li>
+          <li>nominate someone to exercise these rights for you if you die or become incapacitated.</li>
+        </ul>
+        <p>
+          Email {mail}. We may need to confirm your identity first, usually by contacting you on the mobile number or
+          email address in your enquiry. If you are not satisfied with our response, you may take the matter further
+          under applicable law, including to the Data Protection Board of India for matters under the Digital Personal
+          Data Protection Act, 2023 once the relevant provisions are in force.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="children" number={11} title="Children">
+        <p>QvikLoan is only for people aged 18 or over. We do not knowingly collect information about children. If you believe a child has sent us their details, email {mail} and we will delete them.</p>
+      </LegalSection>
+
+      <LegalSection id="law" number={12} title="Laws that apply">
+        <p>
+          We handle personal information under Indian law, including the Information Technology Act, 2000 and the
+          Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or
+          Information) Rules, 2011. The Digital Personal Data Protection Act, 2023 and the Digital Personal Data
+          Protection Rules, 2025 are coming into force in phases, and we are aligning our practices with them as they do.
+          Where we work with banks and NBFCs, the Reserve Bank of India’s digital lending rules also govern how
+          borrower information is collected and shared.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="changes" number={13} title="Changes to this policy">
+        <p>
+          We will update this page when our practices or the law change, and show the date of the latest version at the
+          top. If a change affects how we use information you have already given us, we will tell you and, where needed,
+          ask for your consent again.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="contact" number={14} title="Grievance Officer and contact">
+        <dl className="rounded-xl border border-neutral-border bg-neutral-bg p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-[34%_1fr] gap-x-4 gap-y-2 text-sm">
+          {companyInfo.grievanceOfficer.name && (<><dt className="font-semibold text-navy">Name</dt><dd>{companyInfo.grievanceOfficer.name}</dd></>)}
+          <dt className="font-semibold text-navy">Role</dt><dd>{companyInfo.grievanceOfficer.designation}, {companyInfo.name}</dd>
+          <dt className="font-semibold text-navy">Email</dt><dd>{mail}</dd>
+          <dt className="font-semibold text-navy">Phone</dt><dd>{companyInfo.grievanceOfficer.phone} ({companyInfo.operatingHours})</dd>
+          <dt className="font-semibold text-navy">Address</dt><dd>{companyInfo.address.registeredOffice}</dd>
+          <dt className="font-semibold text-navy">Response times</dt>
+          <dd>We aim to acknowledge requests {companyInfo.grievanceTimelines.acknowledgement} and resolve them {companyInfo.grievanceTimelines.resolution}.</dd>
+        </dl>
+        <p>
+          You can also use the form on our <Link to="/grievance-redressal" className="text-royal font-semibold underline">Grievance Redressal</Link> page.
+        </p>
+      </LegalSection>
+    </LegalPage>
+  );
+}

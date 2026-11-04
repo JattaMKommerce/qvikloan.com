@@ -2,6 +2,7 @@
 // them to iamkratu.ai. The iamkratu.ai key stays on the server, never in this file.
 
 const LEAD_ENDPOINT = import.meta.env.VITE_LEAD_ENDPOINT || '/api/lead.php';
+const SUPPORT_ENDPOINT = import.meta.env.VITE_SUPPORT_ENDPOINT || '/api/contact.php';
 
 // Ad-campaign details from the landing URL (e.g. Meta ads add utm_* and fbclid),
 // so the team can see which campaign each lead came from.
@@ -41,16 +42,28 @@ export class LeadError extends Error {
 }
 
 /** Submits the enquiry. Resolves with the reference number, or throws a LeadError. */
-export async function submitLead(fields) {
+export function submitLead(fields) {
+  return postForm(LEAD_ENDPOINT, { ...readAttribution(), ...fields });
+}
+
+/**
+ * Sends a Contact Us message or a grievance (public/api/contact.php emails it to the team).
+ * Resolves with the reference number, or throws a LeadError.
+ */
+export function submitSupportMessage(fields) {
+  return postForm(SUPPORT_ENDPOINT, fields);
+}
+
+async function postForm(endpoint, payload) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 20000);
 
   let response;
   try {
-    response = await fetch(LEAD_ENDPOINT, {
+    response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...readAttribution(), ...fields }),
+      body: JSON.stringify(payload),
       signal: controller.signal,
     });
   } catch {
@@ -70,7 +83,7 @@ export async function submitLead(fields) {
     return data.reference;
   }
   throw new LeadError(
-    data?.error || "We couldn't send your enquiry right now. Please try again in a few minutes.",
+    data?.error || "We couldn't send this right now. Please try again in a few minutes.",
     response.status !== 422,
   );
 }

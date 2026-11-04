@@ -1,138 +1,165 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
-import { ExternalLink, ShieldCheck, Building2, Mail, Phone, Info, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ExternalLink, ShieldCheck, Landmark, Info, Search } from 'lucide-react';
+import RoleTable from '../components/RoleTable';
 import { participatingLenders } from '../data/lendersData';
 import { companyInfo } from '../data/companyInfo';
+import { usePageMeta } from '../lib/usePageMeta';
+
+const TBC = <span className="text-neutral-muted font-normal">To be confirmed</span>;
+
+function ExternalA({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-royal font-semibold hover:underline inline-flex items-center gap-1 break-all">
+      {children}
+      <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+    </a>
+  );
+}
+
+function LenderCard({ lender }) {
+  const rows = [
+    ['Registered name', lender.legalName],
+    ['Brand name', lender.brandName],
+    ['Type of institution', lender.classification],
+    ['RBI registration', lender.rbiRegistration],
+    ['Official website', lender.website && <ExternalA href={lender.website}>{lender.website.replace(/^https?:\/\//, '')}</ExternalA>],
+    ['Role in your loan', lender.role],
+    ['Loan products', lender.products?.length ? lender.products.join(', ') : null],
+    ['Rates and charges', lender.loanTermsUrl && <ExternalA href={lender.loanTermsUrl}>Lender’s published terms</ExternalA>],
+    ['Grievance officer', lender.grievance?.email && (
+      <span>
+        {lender.grievance.name && <span className="block">{lender.grievance.name}</span>}
+        <a href={`mailto:${lender.grievance.email}`} className="text-royal hover:underline">{lender.grievance.email}</a>
+        {lender.grievance.phone && <span className="block">{lender.grievance.phone}</span>}
+      </span>
+    )],
+    ['Lists QvikLoan as its partner', lender.lspListingUrl && <ExternalA href={lender.lspListingUrl}>View on lender’s website</ExternalA>],
+  ];
+  return (
+    <article className="rounded-2xl border border-neutral-border bg-white p-6 sm:p-8 space-y-4">
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-xl bg-teal-soft text-teal-dark flex items-center justify-center shrink-0">
+          <Landmark className="w-5 h-5" aria-hidden="true" />
+        </div>
+        <div>
+          <h3 className="text-xl font-heading font-bold text-navy">{lender.brandName || lender.legalName}</h3>
+          {lender.classification && <p className="text-sm text-teal-dark font-semibold">{lender.classification}</p>}
+        </div>
+      </div>
+      <dl className="divide-y divide-neutral-border text-sm">
+        {rows.map(([label, value]) => (
+          <div key={label} className="grid grid-cols-1 sm:grid-cols-[40%_1fr] gap-1 sm:gap-4 py-2.5">
+            <dt className="text-neutral-muted">{label}</dt>
+            <dd className="text-navy font-medium">{value || TBC}</dd>
+          </div>
+        ))}
+      </dl>
+    </article>
+  );
+}
 
 export default function ParticipatingLendersPage() {
+  usePageMeta('Lending Partners', 'The banks and NBFCs that may review loan enquiries made through QvikLoan, their RBI registration and grievance contacts, and what each party does.');
+
   return (
-    <div className="space-y-16 sm:space-y-24 pb-16">
-      
-      {/* Hero Header with Rich Graphic */}
-      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Institutional Lending Network</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
-                Participating Lenders & Partners
-              </h1>
-              <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                The regulated lenders that may review your enquiry, with their registration and grievance details.
+    <div className="space-y-14 sm:space-y-20 pb-16">
+
+      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>Lender disclosure</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
+            Lending Partners
+          </h1>
+          <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-3xl">
+            The lending institutions that may review enquiries made through QvikLoan, and exactly what each party does.
+            QvikLoan, operated by {companyInfo.name}, is not a bank or NBFC and does not lend.
+          </p>
+        </div>
+      </section>
+
+      {/* Lender directory */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6" aria-labelledby="lender-list">
+        <div className="max-w-3xl space-y-2">
+          <h2 id="lender-list" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Our lending partners</h2>
+          <p className="text-sm sm:text-base text-slate-blue">
+            Your enquiry is shared only with lenders listed on this page, and only after you give consent on the enquiry
+            form. Each lender sets its own eligibility rules, rates and charges.
+          </p>
+        </div>
+
+        {participatingLenders.length === 0 ? (
+          <div className="flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:p-6 text-sm sm:text-base text-amber-950">
+            <Info className="w-5 h-5 shrink-0 mt-0.5 text-amber-700" aria-hidden="true" />
+            <div className="space-y-2">
+              <p className="font-semibold">Our lender list is being updated.</p>
+              <p>
+                We publish each lending partner here, with its full registered name, RBI registration, website and
+                grievance contact, once its partnership details are confirmed. We do not share your enquiry with any
+                lender that is not listed on this page.
+              </p>
+              <p>
+                Questions? Email <a href={`mailto:${companyInfo.email}`} className="font-semibold underline">{companyInfo.email}</a>.
               </p>
             </div>
-
-            {/* Right Visual Graphic */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="glass rounded-2xl overflow-hidden w-full max-w-md">
-                <img
-                  src="/images/participating-lenders-hero.png"
-                  alt="Participating Lenders Network Disclosures"
-                  className="w-full h-auto object-cover"
-                  loading="eager"
-                />
-              </div>
-            </div>
-
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {participatingLenders.map((lender) => <LenderCard key={lender.id} lender={lender} />)}
+          </div>
+        )}
       </section>
 
-      {/* Role of Platform Advisory */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass p-7 sm:p-9 rounded-2xl space-y-4">
-          <div className="flex items-center gap-2.5 text-navy font-heading font-bold text-lg">
-            <Info className="w-5 h-5 text-royal" />
-            <span>Role of QvikLoan & Participating Lenders</span>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-            QvikLoan, operated by <strong>{companyInfo.name}</strong>, is not a bank or NBFC. The lender assesses your application, sets the rate and fees, issues the Key Facts Statement (KFS) and disburses the loan.
+      {/* Who does what */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6" aria-labelledby="roles">
+        <div className="max-w-3xl space-y-2">
+          <h2 id="roles" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Who evaluates, approves and disburses your loan</h2>
+          <p className="text-sm sm:text-base text-slate-blue">
+            The lender evaluates your application, carries out credit underwriting, approves or rejects the loan,
+            disburses the money and manages repayment. QvikLoan does none of these.
           </p>
         </div>
+        <RoleTable />
       </section>
 
-      {/* Participating Lenders Directory */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
-            Regulated Entities
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy">
-            Institutional Lending Partners
+      {/* Verify a lender + borrower rights */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="rounded-2xl border border-neutral-border bg-white p-6 sm:p-8 space-y-3">
+          <h2 className="text-lg font-heading font-bold text-navy flex items-center gap-2">
+            <Search className="w-5 h-5 text-royal" aria-hidden="true" />
+            <span>Check a lender yourself</span>
           </h2>
-          <p className="text-xs sm:text-sm text-slate-blue mt-2">
-            Participating lenders that may review loan enquiries submitted through QvikLoan. Lender-specific terms are set by each lender.
-          </p>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-slate-blue">
+            <li>
+              NBFCs must hold an RBI Certificate of Registration. Search the RBI’s{' '}
+              <ExternalA href="https://www.rbi.org.in/Scripts/BS_NBFCList.aspx">list of registered NBFCs</ExternalA>.
+            </li>
+            <li>Lenders must publish the names of the platforms (Lending Service Providers) they work with on their own websites.</li>
+            <li>
+              Report anyone lending or taking deposits without authorisation on the RBI’s{' '}
+              <ExternalA href="https://sachet.rbi.org.in">Sachet portal</ExternalA>.
+            </li>
+          </ul>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {participatingLenders.map((lender) => (
-            <div
-              key={lender.id}
-              className="glass rounded-2xl p-7 sm:p-8 hover-lift flex flex-col justify-between space-y-6"
-            >
-              <div className="space-y-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <span className="text-[11px] font-bold text-teal-dark uppercase tracking-wider block mb-1">
-                      {lender.type}
-                    </span>
-                    <h3 className="text-xl font-heading font-bold text-navy">
-                      {lender.name}
-                    </h3>
-                  </div>
-                  <a
-                    href={lender.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-neutral-bg hover:bg-royal-soft text-slate-blue hover:text-royal transition-colors shadow-xs"
-                    title={`Visit official website of ${lender.name}`}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-                  {lender.description}
-                </p>
-
-                <div className="space-y-2.5 pt-3 border-t border-neutral-border/70 text-xs">
-                  <div className="flex justify-between py-1">
-                    <span className="text-neutral-muted">Products Offered:</span>
-                    <span className="font-semibold text-navy">{lender.products.join(", ")}</span>
-                  </div>
-                  <div className="flex justify-between py-1">
-                    <span className="text-neutral-muted">Lender Grievance Desk:</span>
-                    <a href={`mailto:${lender.grievanceEmail}`} className="text-royal font-semibold hover:underline">
-                      {lender.grievanceEmail}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Regulatory Consumer Guidance */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="backdrop-blur-md bg-neutral-bg/80 p-8 rounded-2xl border border-neutral-border space-y-4">
-          <h3 className="text-lg font-heading font-bold text-navy flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-royal" />
+        <div className="rounded-2xl border border-neutral-border bg-white p-6 sm:p-8 space-y-3">
+          <h2 className="text-lg font-heading font-bold text-navy flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-royal" aria-hidden="true" />
             <span>Your rights as a borrower</span>
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-            You should receive a KFS from the lender before signing, and you can decline any offer. For unresolved complaints, contact the lender’s grievance officer or escalate to the RBI Ombudsman.
-          </p>
+          </h2>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-slate-blue">
+            <li>The lender must give you a Key Facts Statement (KFS), including the APR and all charges, before you sign.</li>
+            <li>Digital loans have a cooling-off period, stated in the KFS, during which you can exit by repaying the principal and the proportionate APR, without a penalty.</li>
+            <li>The loan is paid directly into your bank account by the lender, and repayments go directly to the lender.</li>
+            <li>
+              Complaints about a loan go to the lender’s grievance officer first. If unresolved after 30 days, you can
+              complain to the RBI. See <Link to="/grievance-redressal" className="text-royal font-semibold underline">Grievance Redressal</Link>.
+            </li>
+          </ul>
         </div>
       </section>
-
     </div>
   );
 }

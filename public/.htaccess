@@ -3,8 +3,32 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
+
+    # One address for the site: www.qvikloan.com -> qvikloan.com (the API is left alone so
+    # form submissions are never redirected).
+    RewriteCond %{HTTP_HOST} ^www\.qvikloan\.com$ [NC]
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteRule ^(.*)$ https://qvikloan.com/$1 [R=301,L]
+
+    # Pages of the old website that search engines still link to.
+    RewriteRule ^contact(-us)?\.html$ /contact-us [R=301,L,NC]
+    RewriteRule ^about(-us)?\.html$ /about-us [R=301,L,NC]
+    RewriteRule ^privacy(-policy)?\.html$ /privacy-policy [R=301,L,NC]
+    RewriteRule ^terms(-and-conditions|-conditions)?\.html$ /terms-and-conditions [R=301,L,NC]
+    RewriteRule ^personal-loans?\.html$ /personal-loans [R=301,L,NC]
+    RewriteRule ^business-loans?\.html$ /business-loans [R=301,L,NC]
+
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
     RewriteRule ^ index.html [L]
+</IfModule>
+
+# Basic browser security headers.
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "camera=(), geolocation=(), payment=(), usb=()"
+    Header always set Strict-Transport-Security "max-age=31536000"
 </IfModule>

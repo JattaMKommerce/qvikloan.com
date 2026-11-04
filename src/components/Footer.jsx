@@ -1,198 +1,143 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Shield, Building2, MessageCircle } from 'lucide-react';
-import { companyInfo } from '../data/companyInfo';
+import { Mail, Phone, MapPin, Shield, Building2, MessageCircle, Clock } from 'lucide-react';
+import { companyInfo, phoneDigits } from '../data/companyInfo';
+
+const COLUMNS = [
+  {
+    title: 'Loans',
+    links: [
+      ['Personal Loans', '/personal-loans'],
+      ['Business Loans', '/business-loans'],
+      ['How It Works', '/how-it-works'],
+      ['Start an Enquiry', '/#enquiry-section'],
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      ['About Us', '/about-us'],
+      ['Lending Partners', '/participating-lenders'],
+      ['Contact Us', '/contact-us'],
+      ['Grievance Redressal', '/grievance-redressal'],
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      ['Privacy Policy', '/privacy-policy'],
+      ['Terms and Conditions', '/terms-and-conditions'],
+      ['Financial Disclaimer', '/disclaimer'],
+    ],
+  },
+];
 
 export default function Footer() {
   return (
     <footer className="bg-navy text-white pt-10 pb-8 sm:pt-12 sm:pb-10 border-t border-slate-blue/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b border-white/10">
-          
-          {/* Brand & Corporate Identity (Cols 1 & 2) */}
+
+          {/* Company identity */}
           <div className="lg:col-span-2 space-y-3">
             <Link to="/" className="inline-block bg-white p-2 rounded-xl shadow-xs">
-              <img
-                src="/logos/QvikLoan_Web.webp"
-                alt="QvikLoan"
-                className="h-7 w-auto object-contain"
-              />
+              <img src="/logos/QvikLoan_Web.webp" alt="QvikLoan home" className="h-7 w-auto object-contain" />
             </Link>
-            
-            <p className="text-xs sm:text-[13px] text-slate-200/80 leading-relaxed max-w-md">
-              A transparent digital loan enquiry and facilitation platform operated by{' '}
-              <strong className="text-white font-semibold">{companyInfo.name}</strong>. Connecting individuals and businesses with participating lenders.
+
+            <p className="text-sm text-slate-200/90 leading-relaxed max-w-md">
+              A digital loan facilitation platform operated by{' '}
+              <strong className="text-white font-semibold">{companyInfo.name}</strong>. QvikLoan is not a lender.
             </p>
 
-            <div className="space-y-1.5 pt-1 text-xs text-slate-300">
-              <div className="flex items-start gap-2">
-                <Building2 className="w-3.5 h-3.5 text-teal-accent shrink-0 mt-0.5" />
-                <span>
-                  <strong>Operating Entity:</strong> {companyInfo.name}
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 text-teal-accent shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">Registered Office:</strong> {companyInfo.address.registeredOffice}
-                </div>
-              </div>
-              <div className="flex items-start gap-2">
-                <Building2 className="w-3.5 h-3.5 text-teal-accent shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">Corporate Office:</strong> {companyInfo.address.corporateOffice}
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
-                <div className="flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-teal-accent shrink-0" />
-                  <a href={`mailto:${companyInfo.email}`} className="hover:text-white transition-colors underline-offset-2 hover:underline">
-                    {companyInfo.email}
-                  </a>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-teal-accent shrink-0" />
-                  <a href={`tel:${companyInfo.phone}`} className="hover:text-white transition-colors">
-                    {companyInfo.phone}
-                  </a>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <MessageCircle className="w-3.5 h-3.5 text-teal-accent shrink-0" />
-                  <a
-                    href={`https://wa.me/${companyInfo.whatsapp.replace(/\D/g, '')}?text=Hi`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white transition-colors text-teal-accent font-semibold"
-                  >
-                    WhatsApp Helpline
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Navigation Links */}
-          <div>
-            <h4 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">
-              Explore Products
-            </h4>
-            <ul className="space-y-2 text-xs sm:text-[13px] text-slate-300">
-              <li>
-                <Link to="/" className="hover:text-teal-accent transition-colors">
-                  Home
-                </Link>
+            <ul className="space-y-2 pt-1 text-sm text-slate-300">
+              {companyInfo.cin && (
+                <li className="flex items-start gap-2">
+                  <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>CIN: {companyInfo.cin}</span>
+                </li>
+              )}
+              <li className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
+                <span><strong className="text-white">Registered office:</strong> {companyInfo.address.registeredOffice}</span>
               </li>
-              <li>
-                <Link to="/personal-loans" className="hover:text-teal-accent transition-colors">
-                  Personal Loans
-                </Link>
+              <li className="flex items-start gap-2">
+                <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
+                <span><strong className="text-white">Operating office:</strong> {companyInfo.address.corporateOffice}</span>
               </li>
-              <li>
-                <Link to="/business-loans" className="hover:text-teal-accent transition-colors">
-                  Business Loans
-                </Link>
+              <li className="flex items-start gap-2">
+                <Clock className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{companyInfo.operatingHours}</span>
               </li>
-              <li>
-                <Link to="/how-it-works" className="hover:text-teal-accent transition-colors">
-                  How It Works
-                </Link>
-              </li>
-              <li>
-                <Link to="/participating-lenders" className="hover:text-teal-accent transition-colors">
-                  Participating Lenders
-                </Link>
+              <li className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                <a href={`mailto:${companyInfo.email}`} className="inline-flex items-center gap-1.5 hover:text-white hover:underline">
+                  <Mail className="w-4 h-4 text-teal-accent" aria-hidden="true" />
+                  {companyInfo.email}
+                </a>
+                <a href={`tel:+${phoneDigits(companyInfo.phone)}`} className="inline-flex items-center gap-1.5 hover:text-white">
+                  <Phone className="w-4 h-4 text-teal-accent" aria-hidden="true" />
+                  {companyInfo.phone}
+                </a>
+                <a
+                  href={`https://wa.me/${phoneDigits(companyInfo.whatsapp)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-teal-accent font-semibold hover:text-white"
+                >
+                  <MessageCircle className="w-4 h-4" aria-hidden="true" />
+                  WhatsApp
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Company & Support */}
-          <div>
-            <h4 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">
-              Company
-            </h4>
-            <ul className="space-y-2 text-xs sm:text-[13px] text-slate-300">
-              <li>
-                <Link to="/about-us" className="hover:text-teal-accent transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/participating-lenders" className="hover:text-teal-accent transition-colors">
-                  Lender Disclosure
-                </Link>
-              </li>
-              <li>
-                <Link to="/grievance-redressal" className="hover:text-teal-accent transition-colors">
-                  Grievance Desk
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal & Compliance Links */}
-          <div>
-            <h4 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">
-              Legal & Disclosures
-            </h4>
-            <ul className="space-y-2 text-xs sm:text-[13px] text-slate-300">
-              <li>
-                <Link to="/privacy-policy" className="hover:text-teal-accent transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms-and-conditions" className="hover:text-teal-accent transition-colors">
-                  Terms and Conditions
-                </Link>
-              </li>
-              <li>
-                <Link to="/disclaimer" className="hover:text-teal-accent transition-colors">
-                  Disclaimer
-                </Link>
-              </li>
-              <li>
-                <Link to="/grievance-redressal" className="hover:text-teal-accent transition-colors">
-                  Grievance Redressal
-                </Link>
-              </li>
-            </ul>
-          </div>
-
+          {COLUMNS.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <h2 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">{col.title}</h2>
+              <ul className="space-y-2 text-sm text-slate-300">
+                {col.links.map(([text, to]) => (
+                  <li key={to}>
+                    <Link to={to} className="hover:text-teal-accent transition-colors">{text}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
 
-        {/* Streamlined Compliance Disclosures Box */}
-        <div className="py-4 my-6 px-5 rounded-xl bg-white/[0.04] border border-white/10 text-[11px] text-slate-300 space-y-2 leading-relaxed">
-          <div className="flex items-center gap-2 text-white font-semibold text-xs">
-            <Shield className="w-3.5 h-3.5 text-teal-accent" />
-            <span>Important Regulatory Disclosures</span>
-          </div>
-          <p>
-            <strong>Role of Platform:</strong> QvikLoan is an online loan enquiry and facilitation platform operated by <strong>{companyInfo.name}</strong>. QvikLoan is neither a bank nor a Non-Banking Financial Company (NBFC) and does not directly provide loans, disburse funds, or make credit decisions. All credit evaluations, loan approvals, interest rates, processing fees, repayment tenures, and disbursements are governed solely by our participating NBFCs and banks under applicable lending agreements.
+        {/* Disclosures: kept at a readable size, not fine print */}
+        <div className="py-5 my-6 px-5 rounded-xl bg-white/[0.04] border border-white/10 text-[13px] text-slate-300 space-y-2.5 leading-relaxed">
+          <p className="flex items-center gap-2 text-white font-semibold text-sm">
+            <Shield className="w-4 h-4 text-teal-accent" aria-hidden="true" />
+            Important disclosures
           </p>
           <p>
-            <strong>Borrower Decision & KFS:</strong> Submitting an online enquiry does not guarantee a loan offer or commit the applicant to borrow. If a participating lender issues a loan offer, applicants are advised to review the Key Facts Statement (KFS), Annual Percentage Rate (APR), repayment schedule, and all associated charges before acceptance. Borrowers retain the unconditional right to decline any loan offer.
+            <strong className="text-white">Role of QvikLoan:</strong> {companyInfo.roleDisclosure}
           </p>
           <p>
-            <strong>Fraud Advisory:</strong> QvikLoan and its representatives will never ask applicants for advance processing fees, security deposits, or personal OTPs to approve loans. All official fees (if any) are deducted by the underwriting lender directly from the sanctioned loan amount as disclosed in the KFS.
+            <strong className="text-white">No guarantee:</strong> Submitting an enquiry does not guarantee a loan offer,
+            approval or disbursement, and does not commit you to borrow. Before accepting any offer, review the lender’s
+            Key Facts Statement (KFS), including the Annual Percentage Rate (APR), repayment schedule and all charges.
+          </p>
+          <p>
+            <strong className="text-white">Fraud warning:</strong> QvikLoan does not charge borrowers for enquiries and
+            will never ask for an upfront fee, OTP or banking password. Pay loan-related amounts only to the lender
+            through its official channels.
           </p>
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} {companyInfo.name}. All rights reserved. QvikLoan™ is an official brand of {companyInfo.name}.
+            © {new Date().getFullYear()} {companyInfo.name}. QvikLoan is a brand operated by {companyInfo.name}.
           </div>
-          <div className="flex items-center gap-3 text-slate-400">
+          <div className="flex items-center gap-3">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
-            <span>•</span>
+            <span aria-hidden="true">•</span>
             <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms</Link>
-            <span>•</span>
+            <span aria-hidden="true">•</span>
             <Link to="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>
           </div>
         </div>
-
       </div>
     </footer>
   );

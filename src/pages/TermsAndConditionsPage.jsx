@@ -1,127 +1,208 @@
 import React from 'react';
-import { ShieldCheck, FileText, AlertCircle, Scale } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FileText } from 'lucide-react';
+import LegalPage, { LegalSection, Callout } from '../components/LegalPage';
 import { companyInfo } from '../data/companyInfo';
+import { usePageMeta } from '../lib/usePageMeta';
+
+const LAST_UPDATED = '4 November 2026';
+
+const SECTIONS = [
+  { id: 'acceptance', title: 'About these terms' },
+  { id: 'platform', title: 'What QvikLoan is' },
+  { id: 'role', title: 'Our role and what we do not do' },
+  { id: 'lenders', title: 'Relationship with lending partners' },
+  { id: 'process', title: 'How the enquiry and application process works' },
+  { id: 'eligibility', title: 'Eligibility' },
+  { id: 'approval', title: 'The lender’s approval authority' },
+  { id: 'pricing', title: 'Interest rates and charges' },
+  { id: 'responsibilities', title: 'Your responsibilities' },
+  { id: 'third-party', title: 'Third-party services and links' },
+  { id: 'data', title: 'Your data' },
+  { id: 'information', title: 'Information and calculators on this website' },
+  { id: 'ip', title: 'Intellectual property' },
+  { id: 'liability', title: 'Limitation of liability' },
+  { id: 'termination', title: 'Suspending or ending access' },
+  { id: 'grievances', title: 'Grievance redressal' },
+  { id: 'disputes', title: 'Disputes and governing law' },
+  { id: 'changes', title: 'Changes to these terms' },
+  { id: 'contact', title: 'Contact' },
+];
+
+const link = (to, text) => <Link to={to} className="text-royal font-semibold underline">{text}</Link>;
 
 export default function TermsAndConditionsPage() {
-  const lastUpdated = "November 4, 2026";
+  usePageMeta('Terms and Conditions', 'The terms for using QvikLoan, a digital loan facilitation platform operated by Jatta M Kommerce Private Limited, including its role, the lender’s role, charges and grievance redressal.');
 
   return (
-    <div className="space-y-12 sm:space-y-16 pb-16">
-      
-      {/* Header */}
-      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-14 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-            <FileText className="w-3.5 h-3.5" />
-            Platform Agreement
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-            Terms and Conditions
-          </h1>
-          <p className="text-xs sm:text-sm text-neutral-muted">
-            Last Updated: {lastUpdated} • Operated by {companyInfo.name}
-          </p>
-        </div>
-      </section>
+    <LegalPage
+      icon={FileText}
+      badge="Terms of use"
+      title="Terms and Conditions"
+      intro="These terms explain what QvikLoan does, what the lender does, and the rules for using this website."
+      lastUpdated={LAST_UPDATED}
+      sections={SECTIONS}
+    >
+      <Callout title="Key points">
+        <ul className="list-disc pl-5 space-y-1 text-sm">
+          <li>QvikLoan is not a bank or NBFC. It does not lend money or decide on loans.</li>
+          <li>Submitting an enquiry does not guarantee a loan offer, approval or disbursement.</li>
+          <li>The lender sets the interest rate, charges and repayment terms and shows them in its Key Facts Statement (KFS).</li>
+          <li>QvikLoan does not charge you a fee for submitting an enquiry.</li>
+        </ul>
+      </Callout>
 
-      {/* Terms Body */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass rounded-card-lg p-8 sm:p-12 space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
-          
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              1. Acceptance of Terms
-            </h2>
-            <p>
-              Welcome to <strong>QvikLoan</strong> (accessible at <a href="https://qvikloan.com" className="text-royal font-semibold hover:underline">https://qvikloan.com</a>), an online loan enquiry and digital facilitation platform owned and managed by <strong>{companyInfo.name}</strong> ("Company", "we", "us", or "our").
-            </p>
-            <p>
-              By accessing our website, browsing our financial informational content, or submitting a loan enquiry, you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree with any part of these Terms, you must refrain from using the platform.
-            </p>
-          </div>
+      <LegalSection id="acceptance" number={1} title="About these terms">
+        <p>
+          These terms apply when you use qvikloan.com (“QvikLoan”), which is operated by <strong>{companyInfo.name}</strong>{' '}
+          (“we”, “us”), {companyInfo.address.registeredOffice}. By using the website or submitting a form, you agree to
+          these terms. If you do not agree, please do not use the website.
+        </p>
+      </LegalSection>
 
-          <div className="space-y-3 bg-neutral-bg p-5 rounded-xl border border-neutral-border">
-            <h2 className="text-base font-heading font-bold text-navy flex items-center gap-2">
-              <Scale className="w-4 h-4 text-royal" />
-              <span>2. Intermediary Status & Nature of Services</span>
-            </h2>
-            <p className="text-xs">
-              <strong>CRITICAL REGULATORY NOTICE:</strong> QvikLoan is an intermediary digital facilitation platform as defined under Section 2(1)(w) of the Information Technology Act, 2000. QvikLoan is <strong>NOT</strong> a bank, Non-Banking Financial Company (NBFC), or financial institution registered under Section 45-IA of the Reserve Bank of India Act, 1934.
-            </p>
-            <p className="text-xs">
-              QvikLoan does not lend money, issue credit, manage escrow funds, underwrite risk, guarantee approval, or execute disbursements. Our role is strictly limited to capturing prospective borrower enquiries and routing them to participating lending partners for independent credit evaluation.
-            </p>
-          </div>
+      <LegalSection id="platform" number={2} title="What QvikLoan is">
+        <p>
+          QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable loan
+          options through participating financial institutions. QvikLoan facilitates the loan discovery and
+          application process. Final loan eligibility, approval, applicable interest rates, repayment terms and
+          disbursement are determined by the respective lending institution.
+        </p>
+      </LegalSection>
 
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              3. No Loan Approval Guarantee or Commitment
-            </h2>
-            <p>
-              Submitting an online enquiry through QvikLoan does <strong>NOT</strong> constitute a loan sanction, loan agreement, or commitment to lend. All loan evaluations, interest rates, annual percentage rates (APR), tenures, charges, and disbursements are decided exclusively by the participating lender in accordance with their independent credit policies and regulatory compliance guidelines.
-            </p>
-            <p>
-              The user retains the complete, unconstrained right to review any Key Facts Statement (KFS) received from a lender and decide whether to accept or decline the loan offer.
-            </p>
-          </div>
+      <LegalSection id="role" number={3} title="Our role and what we do not do">
+        <p>We provide information about loan options, take your enquiry, contact you about it and, with your consent, share it with a lender listed on our {link('/participating-lenders', 'Lending Partners')} page.</p>
+        <p>We are not a bank or a Non-Banking Financial Company (NBFC). We do not:</p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>lend money, accept deposits, or hold, receive or pay out loan funds;</li>
+          <li>assess creditworthiness, approve or reject loan applications, or set loan terms;</li>
+          <li>collect loan repayments; or</li>
+          <li>give financial, legal or tax advice.</li>
+        </ul>
+      </LegalSection>
 
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              4. User Representations & Eligibility
-            </h2>
-            <p>By using QvikLoan and submitting an enquiry, you warrant and represent that:</p>
-            <ul className="list-disc pl-5 space-y-1.5">
-              <li>You are a natural person at least 18 years of age possessing legal capacity to contract under the Indian Contract Act, 1872, or an authorized representative of a legally registered business entity.</li>
-              <li>All information provided by you (including your legal name, mobile number, employment or business status, and desired loan parameters) is true, accurate, current, and complete.</li>
-              <li>You are submitting an enquiry for legitimate personal or business financial requirements and not for any fraudulent, speculative, or unlawful activity.</li>
-            </ul>
-          </div>
+      <LegalSection id="lenders" number={4} title="Relationship with lending partners">
+        <p>
+          Lending partners are independent banks and NBFCs, named on our {link('/participating-lenders', 'Lending Partners')} page.
+          Any loan is a contract between you and the lender only; we are not a party to it. The lender’s own loan
+          agreement, KFS, terms and privacy policy govern the loan.
+        </p>
+      </LegalSection>
 
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              5. Intellectual Property
-            </h2>
-            <p>
-              All trademarks, service marks, logos, brand names (including "QvikLoan"), graphics, user interfaces, website architecture, and software code are the intellectual property of Jatta M Kommerce Private Limited or its respective licensors. You may not reproduce, copy, distribute, or create derivative works without prior written consent.
-            </p>
-          </div>
+      <LegalSection id="process" number={5} title="How the enquiry and application process works">
+        <ol className="list-decimal pl-5 space-y-1">
+          <li>You submit an enquiry on our website and give consent.</li>
+          <li>Our team contacts you about your requirement.</li>
+          <li>With your consent, we share your enquiry with a listed lender.</li>
+          <li>If the lender can consider it, the lender asks you for the information and documents it needs and carries out its checks.</li>
+          <li>If the lender decides to make an offer, it gives you its KFS and loan agreement. You choose whether to accept.</li>
+        </ol>
+        <p>An enquiry is not a loan application or a commitment to borrow. You can stop at any point.</p>
+      </LegalSection>
 
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              6. Limitation of Liability
-            </h2>
-            <p>
-              To the fullest extent permitted by applicable law, Jatta M Kommerce Private Limited and its directors, employees, or affiliates shall not be liable for any direct, indirect, incidental, punitive, or consequential damages arising out of your relationship with any participating lender, loan approval decisions, interest rate determinations, or lender customer service interactions.
-            </p>
-          </div>
+      <LegalSection id="eligibility" number={6} title="Eligibility">
+        <p>
+          To use QvikLoan you must be at least 18 years old, resident in India and able to enter into a contract, or be
+          authorised to act for the business you are enquiring for. Each lender sets its own eligibility criteria, such
+          as age, income, credit history and location, and may apply stricter requirements.
+        </p>
+      </LegalSection>
 
-          <div className="space-y-3">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              7. Governing Law & Jurisdiction
-            </h2>
-            <p>
-              These Terms shall be governed by and construed in accordance with the laws of India. Any disputes or claims arising out of or in connection with these Terms shall be subject to the exclusive jurisdiction of the competent courts in Gurugram, Haryana or New Delhi, India.
-            </p>
-          </div>
+      <LegalSection id="approval" number={7} title="The lender’s approval authority">
+        <p>
+          Whether to make an offer, the amount, interest rate, charges, tenure and timing of disbursement are decided by
+          the lender alone, after its own verification and credit assessment. We cannot influence, guarantee or speed up a
+          lender’s decision, and we do not promise that you will receive an offer or a loan.
+        </p>
+      </LegalSection>
 
-          <div className="space-y-3 pt-4 border-t border-neutral-border">
-            <h2 className="text-lg font-heading font-bold text-navy">
-              8. Contact & Notice
-            </h2>
-            <p>
-              If you have any questions or require legal clarification regarding these Terms, please contact our Legal & Compliance Team:
-            </p>
-            <div className="bg-neutral-bg p-4 rounded-xl border border-neutral-border text-xs space-y-1">
-              <div><strong>Company:</strong> {companyInfo.name} (CIN: {companyInfo.cin})</div>
-              <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
-              <div><strong>Email:</strong> <a href={`mailto:${companyInfo.complianceEmail}`} className="text-royal font-semibold">{companyInfo.complianceEmail}</a> | <strong>Helpline:</strong> {companyInfo.phone}</div>
-            </div>
-          </div>
+      <LegalSection id="pricing" number={8} title="Interest rates and charges">
+        <p>
+          The lender sets the interest rate, Annual Percentage Rate (APR), processing fee and any other charges, and must
+          show them in its KFS before you sign. Check the KFS carefully, including the APR, penal charges and the
+          cooling-off period.
+        </p>
+        <p>
+          QvikLoan does not charge you any fee for submitting an enquiry. Never pay anyone, including someone claiming
+          to be from QvikLoan, an upfront fee to get a loan approved. Pay loan-related amounts only to the lender,
+          through its official channels.
+        </p>
+      </LegalSection>
 
-        </div>
-      </section>
+      <LegalSection id="responsibilities" number={9} title="Your responsibilities">
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Give true, accurate and complete information, and only about yourself or a business you are authorised to represent.</li>
+          <li>Read the lender’s KFS and loan agreement before you accept an offer, and borrow only what you can repay.</li>
+          <li>Keep OTPs, PINs and passwords private. We will never ask for them.</li>
+          <li>Do not misuse the website: no false or automated submissions, attempts to break its security, or unlawful use.</li>
+        </ul>
+      </LegalSection>
 
-    </div>
+      <LegalSection id="third-party" number={10} title="Third-party services and links">
+        <p>
+          The website uses third-party services, including the AI chat assistant (iamkratu.ai) and WhatsApp, and links to
+          lenders’ and regulators’ websites. Those services are governed by their own terms. Replies from the chat
+          assistant are automated and are general information, not a loan offer or a lending decision.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="data" number={11} title="Your data">
+        <p>How we collect, use, share and protect your personal information is explained in our {link('/privacy-policy', 'Privacy Policy')}, which forms part of these terms.</p>
+      </LegalSection>
+
+      <LegalSection id="information" number={12} title="Information and calculators on this website">
+        <p>
+          The information on this website is general and may change. EMI calculations and examples are illustrative
+          estimates only; they are not loan offers, quotes or advice. See our {link('/disclaimer', 'Financial Disclaimer')}.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="ip" number={13} title="Intellectual property">
+        <p>The QvikLoan name, logo, website design and content belong to {companyInfo.name} or its licensors. You may not copy or reuse them without our written permission.</p>
+      </LegalSection>
+
+      <LegalSection id="liability" number={14} title="Limitation of liability">
+        <p>
+          To the extent permitted by law, we are not liable for a lender’s decisions, terms, actions or omissions, or for
+          any loss arising from a loan you take from a lender. Nothing in these terms limits any liability that cannot be
+          limited under Indian law, including under the Consumer Protection Act, 2019.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="termination" number={15} title="Suspending or ending access">
+        <p>
+          QvikLoan does not require you to create an account. We may decline to process an enquiry, or restrict access to
+          the website, if we reasonably believe it is being misused, involves false information or fraud, or if the law
+          requires it. You can stop using QvikLoan and withdraw your consent at any time.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="grievances" number={16} title="Grievance redressal">
+        <p>
+          If you have a complaint about QvikLoan, contact our Grievance Redressal Officer. Complaints about a loan go to
+          the lender, and can be escalated to the Reserve Bank of India if not resolved. Full details are on our{' '}
+          {link('/grievance-redressal', 'Grievance Redressal')} page.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="disputes" number={17} title="Disputes and governing law">
+        <p>
+          These terms are governed by the laws of India. Please raise any dispute with us first through our grievance
+          process so we can try to resolve it. Subject to your rights under consumer protection law, the courts at{' '}
+          {companyInfo.jurisdiction} have jurisdiction over disputes about these terms.
+        </p>
+      </LegalSection>
+
+      <LegalSection id="changes" number={18} title="Changes to these terms">
+        <p>We may update these terms. The date at the top shows the latest version. Changes do not affect enquiries you submitted before the change, unless the law requires otherwise.</p>
+      </LegalSection>
+
+      <LegalSection id="contact" number={19} title="Contact">
+        <p>
+          {companyInfo.name}{companyInfo.cin ? ` (CIN: ${companyInfo.cin})` : ''}, {companyInfo.address.registeredOffice}.
+          Email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>,
+          phone {companyInfo.phone}, {companyInfo.operatingHours}.
+        </p>
+      </LegalSection>
+    </LegalPage>
   );
 }
-

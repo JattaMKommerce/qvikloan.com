@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
@@ -14,6 +14,8 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import GrievanceRedressalPage from './pages/GrievanceRedressalPage';
+import ContactUsPage from './pages/ContactUsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // On route change: scroll to top, or to the section named in the URL hash
 // (e.g. /#enquiry-section from the navbar on any page).
@@ -57,7 +59,12 @@ export default function App() {
           <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/grievance-redressal" element={<GrievanceRedressalPage />} />
-          <Route path="*" element={<HomePage />} />
+          <Route path="/contact-us" element={<ContactUsPage />} />
+          {/* Alternative and old-site addresses */}
+          <Route path="/lending-partners" element={<Navigate to="/participating-lenders" replace />} />
+          <Route path="/financial-disclaimer" element={<Navigate to="/disclaimer" replace />} />
+          <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
 

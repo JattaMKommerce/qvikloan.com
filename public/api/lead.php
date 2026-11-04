@@ -198,7 +198,10 @@ $lead = [
     'purpose' => text($in, 'purpose', 600),
     'consent_given' => true,
     'consent_text' => text($in, 'consentText', 3000),
+    'consent_version' => text($in, 'consentVersion', 40),
     'consent_at' => date('c'),
+    // Optional, separate from the service consent: may we send offers about other products?
+    'marketing_consent' => ($in['marketingConsent'] ?? false) === true,
     'utm_source' => text($in, 'utm_source', 300),
     'utm_medium' => text($in, 'utm_medium', 300),
     'utm_campaign' => text($in, 'utm_campaign', 300),

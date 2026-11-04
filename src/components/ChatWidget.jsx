@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { X, MessageCircle } from 'lucide-react';
-import { companyInfo } from '../data/companyInfo';
+import { companyInfo, phoneDigits } from '../data/companyInfo';
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,18 +17,17 @@ export default function ChatWidget() {
     setIsOpen(false);
   };
 
-  const cleanPhone = companyInfo.whatsapp.replace(/\D/g, '');
-  const waUrl = `https://wa.me/${cleanPhone}?text=Hi%20QvikLoan%2C%20I%20would%20like%20to%20know%20more%20about%20your%20loans.`;
+  const waUrl = `https://wa.me/${phoneDigits(companyInfo.whatsapp)}?text=Hi%20QvikLoan%2C%20I%20would%20like%20to%20know%20more%20about%20your%20loans.`;
 
   return (
-    <>
+    <div role="region" aria-label="Chat and WhatsApp support">
       {/* 1. Floating WhatsApp Button on the LEFT Side */}
       <a
         href={waUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with QvikLoan on WhatsApp"
-        className="fixed left-4 sm:left-6 bottom-5 sm:bottom-6 z-50 inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1EBE5A] text-white shadow-premium hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-1 group border-2 border-white"
+        className="fixed left-4 sm:left-6 bottom-5 sm:bottom-6 z-50 inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 rounded-full bg-[#0F7A40] hover:bg-[#0C6634] text-white shadow-premium hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-1 group border-2 border-white"
       >
         {/* Official WhatsApp SVG Icon */}
         <svg
@@ -48,7 +48,7 @@ export default function ChatWidget() {
         
         {/* Speech Bubble / Callout Prompt - Positioned to the left of her head */}
         {!isOpen && !bubbleDismissed && (
-          <aside
+          <div
             aria-label="Loan enquiry prompt"
             className="pointer-events-auto absolute right-[125px] sm:right-[165px] bottom-[34px] sm:bottom-[44px] w-[220px] sm:w-[260px] bg-white rounded-2xl rounded-tr-sm p-3.5 pr-7 shadow-premium border border-neutral-border animate-in fade-in slide-in-from-right-2 duration-300"
           >
@@ -76,7 +76,7 @@ export default function ChatWidget() {
             >
               <X className="w-3.5 h-3.5" />
             </button>
-          </aside>
+          </div>
         )}
 
         {/* Assistant Avatar Button (Waving hi 👋, +4% size) */}
@@ -127,7 +127,7 @@ export default function ChatWidget() {
                   </h4>
                   <p className="text-[10px] text-slate-300 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Online • Instant Help</span>
+                    <span>Automated AI assistant</span>
                   </p>
                 </div>
               </div>
@@ -153,17 +153,18 @@ export default function ChatWidget() {
               )}
             </div>
 
-            {/* Compliance Footer Note */}
-            <div className="py-1 px-3 bg-[#0B132B] border-t border-slate-800 text-center">
-              <span className="text-[10px] text-slate-400">
-                Operated by Jatta M Kommerce Private Limited
-              </span>
+            {/* Notice: automated replies, and what not to type into the chat */}
+            <div className="py-2 px-3 bg-[#0B132B] border-t border-slate-800 text-center text-[11px] leading-snug text-slate-300">
+              Automated replies are general information, not a lending decision. Don’t share PAN, Aadhaar, bank details
+              or OTPs here.{' '}
+              <Link to="/privacy-policy" onClick={handleCloseChat} className="underline hover:text-white">Privacy</Link>
+              <span className="block text-slate-400">Operated by {companyInfo.name}</span>
             </div>
 
           </div>
         )}
 
       </div>
-    </>
+    </div>
   );
 }

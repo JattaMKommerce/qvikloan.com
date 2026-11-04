@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Percent, Calendar, CreditCard, DollarSign, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ShieldCheck, ChevronRight, Monitor, Landmark, Cpu } from 'lucide-react';
 import FinancialCalculator from '../components/FinancialCalculator';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
+import RoleTable from '../components/RoleTable';
 import { companyInfo } from '../data/companyInfo';
-import { participatingLenders } from '../data/lendersData';
+import { usePageMeta } from '../lib/usePageMeta';
 
 function TypewriterText() {
   const words = [
@@ -55,17 +56,7 @@ function TypewriterText() {
 }
 
 export default function HomePage() {
-  const navigate = useNavigate();
-  const [heroAmount, setHeroAmount] = React.useState(300000);
-  const [heroCategory, setHeroCategory] = React.useState('personal');
-
-  const formatINR = (val) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      maximumFractionDigits: 0
-    }).format(val);
-  };
+  usePageMeta(null, 'QvikLoan is a digital loan facilitation platform operated by Jatta M Kommerce Private Limited. Explore personal and business loan options; the lending institution decides eligibility, approval, rates and disbursement.');
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
@@ -123,14 +114,62 @@ export default function HomePage() {
 
             {/* Important Disclosure */}
             <div className="pt-5 border-t border-[#f3f4f6] max-w-lg">
-              <p className="text-[11px] text-[#6b7280] leading-relaxed">
-                <strong>Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
+              <p className="text-sm text-[#4b5563] leading-relaxed">
+                <strong className="text-[#1f2937]">Important:</strong> QvikLoan is not a lender. Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
               </p>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* What QvikLoan does: platform vs lender vs technology providers */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-labelledby="what-we-do">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">About the platform</span>
+          <h2 id="what-we-do" className="text-3xl sm:text-4xl font-heading font-extrabold text-navy mb-4">
+            What QvikLoan does
+          </h2>
+          <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
+            QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable
+            loan options through participating financial institutions.
+          </p>
+          <p className="text-base text-slate-blue leading-relaxed mt-3">
+            QvikLoan facilitates the loan discovery and application process. Final loan eligibility, approval,
+            applicable interest rates, repayment terms and disbursement are determined by the respective lending
+            institution.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: Monitor,
+              title: 'QvikLoan, the platform',
+              body: `Operated by ${companyInfo.name}. Takes your enquiry, explains your options and, with your consent, passes your enquiry to a listed lender. QvikLoan is not a bank or NBFC and does not lend.`,
+            },
+            {
+              icon: Landmark,
+              title: 'The lending institution',
+              body: 'A bank or RBI-registered NBFC. It checks your eligibility, decides whether to lend, sets the interest rate and charges, gives you the Key Facts Statement, disburses the loan and collects repayments.',
+            },
+            {
+              icon: Cpu,
+              title: 'Technology providers',
+              body: 'Companies that run parts of this website for us, such as hosting and the AI chat assistant. They do not make lending decisions. They are named in our Privacy Policy.',
+            },
+          ].map(({ icon: Icon, title, body }) => (
+            <div key={title} className="rounded-2xl border border-neutral-border bg-white p-6 space-y-3 shadow-subtle">
+              <div className="w-10 h-10 rounded-xl bg-royal-soft text-royal-dark flex items-center justify-center">
+                <Icon className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <h3 className="text-lg font-heading font-bold text-navy">{title}</h3>
+              <p className="text-sm text-slate-blue leading-relaxed">{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
@@ -235,80 +274,36 @@ export default function HomePage() {
         <FinancialCalculator />
 
       </section>
-      <section className="py-16 sm:py-20 bg-white/30 backdrop-blur-sm border-y border-white/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-                Platform Transparency & Lending Governance
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-                Who provides the loan?
-              </h2>
-              <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                QvikLoan is a loan enquiry and facilitation platform operated by Jatta M Kommerce Private Limited. The lender evaluates the application, issues any loan offer and handles disbursement under the applicable loan agreement.
-              </p>
-              <div className="flex flex-wrap items-center gap-6 pt-2">
-                <Link
-                  to="/participating-lenders"
-                  className="inline-flex items-center text-royal font-bold text-base hover:underline"
-                >
-                  <span>View participating lenders</span>
-                  <ArrowRight className="w-4 h-4 ml-1.5" />
-                </Link>
+      <section className="py-16 sm:py-20 bg-white/30 backdrop-blur-sm border-y border-white/70" aria-labelledby="who-provides">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="max-w-3xl space-y-4">
+            <span className="text-xs font-bold text-royal uppercase tracking-wider block">Who does what</span>
+            <h2 id="who-provides" className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
+              Who provides the loan?
+            </h2>
+            <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
+              The lending institution, not QvikLoan. Here is how responsibilities are split.
+            </p>
+          </div>
 
-                <span className="text-neutral-border font-bold">·</span>
+          <RoleTable />
 
-                <a
-                  href={`mailto:${companyInfo.email}`}
-                  className="inline-flex items-center text-slate-blue font-bold text-base hover:underline"
-                >
-                  <span>Contact support</span>
-                  <ArrowRight className="w-4 h-4 ml-1.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Participating Lenders Snapshot */}
-            <div className="lg:col-span-5 glass rounded-card-lg p-6 sm:p-7 space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-neutral-border">
-                <span className="text-xs font-bold text-navy uppercase tracking-wider">
-                  Partner Institutional Lenders
-                </span>
-                <span className="text-xs text-teal-dark font-semibold">Participating lenders</span>
-              </div>
-
-              <div className="space-y-3">
-                {participatingLenders.slice(0, 3).map((lender) => (
-                  <div
-                    key={lender.id}
-                    className="p-3.5 bg-white/60 rounded-xl border border-white/80 text-xs space-y-1"
-                  >
-                    <div className="flex justify-between font-bold text-navy">
-                      <span>{lender.name}</span>
-                      <span className="text-royal text-[11px] font-medium">{lender.products[0]}</span>
-                    </div>
-                    <div className="text-neutral-muted text-[11px]">
-                      Loan terms are set by the lender
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <Link
-                to="/participating-lenders"
-                className="block text-center text-xs font-bold text-royal hover:underline pt-2"
-              >
-                See all participating lenders & grievance contacts →
-              </Link>
-            </div>
-
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link to="/participating-lenders" className="inline-flex items-center text-royal font-bold text-base hover:underline">
+              <span>Lending partners</span>
+              <ArrowRight className="w-4 h-4 ml-1.5" aria-hidden="true" />
+            </Link>
+            <Link to="/grievance-redressal" className="inline-flex items-center text-royal font-bold text-base hover:underline">
+              <span>Raise a complaint</span>
+              <ArrowRight className="w-4 h-4 ml-1.5" aria-hidden="true" />
+            </Link>
+            <Link to="/contact-us" className="inline-flex items-center text-slate-blue font-bold text-base hover:underline">
+              <span>Contact us</span>
+              <ArrowRight className="w-4 h-4 ml-1.5" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
-      
-
     </div>
   );
 }
