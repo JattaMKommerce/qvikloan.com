@@ -9,6 +9,8 @@ import { participatingLenders } from '../data/lendersData';
 
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
+  const [heroAmount, setHeroAmount] = React.useState(300000);
+  const [heroCategory, setHeroCategory] = React.useState('personal');
 
   const scrollToEnquiry = (type = 'personal') => {
     const el = document.getElementById('enquiry-section');
@@ -19,142 +21,228 @@ export default function HomePage({ onOpenEnquiry }) {
     }
   };
 
+  const formatINR = (val) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    }).format(val);
+  };
+
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
       
       {/* ==================================================
-          SECTION 1: HERO - LUXURY FINTECH GLASS REDESIGN
+          SECTION 1: HERO - LOANBUDDY REFERENCE FULL BACKGROUND
           ================================================== */}
-      <section className="relative overflow-hidden pt-4 sm:pt-8 lg:pt-10 pb-14 sm:pb-20 bg-white border-b border-neutral-border/80">
+      <section className="relative overflow-hidden pt-6 sm:pt-10 lg:pt-12 pb-14 sm:pb-20 bg-white border-b border-neutral-border/80">
         
-        {/* Ambient Top Glow Blending seamlessly from Navbar */}
-        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-royal-soft/30 via-white/50 to-transparent pointer-events-none" />
+        {/* Full-Scale 3D Glass Ribbon Graphic in Background - Blending Seamlessly from Navbar */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <img
+            src="/images/qvikloan-hero-glass-ribbon.png"
+            alt=""
+            className="absolute right-0 top-0 h-full w-full sm:w-[90%] lg:w-[70%] object-cover lg:object-contain object-right-top opacity-95 transition-all duration-700"
+            loading="eager"
+          />
+
+          {/* Seamless Top Blend directly from Navbar */}
+          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none" />
+
+          {/* Left Text Readability Blend */}
+          <div className="absolute inset-y-0 left-0 w-full lg:w-1/2 bg-gradient-to-r from-white via-white/90 to-transparent pointer-events-none" />
+
+          {/* Bottom Soft Transition */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/60 to-transparent pointer-events-none" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          
+          {/* Top Headline & Description Area */}
+          <div className="max-w-3xl space-y-5 mb-10 sm:mb-12">
             
-            {/* Left Column: Content & Buttons */}
-            <div className="lg:col-span-7 xl:col-span-7 space-y-6">
-              
-              {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft/60 border border-royal/20 text-royal text-xs font-semibold tracking-wide shadow-sm">
-                <ShieldCheck className="w-4 h-4 text-royal" />
-                <span>Transparent Loan Facilitation Platform</span>
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft/70 border border-royal/20 text-royal text-xs font-semibold tracking-wide shadow-sm">
+              <ShieldCheck className="w-4 h-4 text-royal" />
+              <span>Transparent Loan Facilitation Platform</span>
+            </div>
+
+            {/* Exact CEO Approved Headline with Blue Font of the Exact Same Size */}
+            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-heading font-extrabold text-navy tracking-tight leading-[1.14]">
+              Explore <span className="text-royal">personal and business</span> loan options
+            </h1>
+
+            {/* Exact CEO Approved Description */}
+            <p className="text-base sm:text-lg text-slate-blue font-normal leading-relaxed max-w-2xl">
+              Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
+            </p>
+
+          </div>
+
+          {/* Two Overlapping Floating Cards (Matching Reference Layout in Image 3) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch max-w-5xl">
+            
+            {/* Card 1: Frosted Categories Overview (Dark/Glass Luxury Style) */}
+            <div className="lg:col-span-6 backdrop-blur-xl bg-navy/90 text-white rounded-3xl p-6 sm:p-7 shadow-premium border border-white/10 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-bold text-teal-accent uppercase tracking-wider block mb-3">
+                  Loan Products &amp; Terms
+                </span>
+                <div className="grid grid-cols-2 gap-4">
+                  
+                  {/* Category 1: Personal Loan */}
+                  <div
+                    onClick={() => {
+                      setHeroCategory('personal');
+                      scrollToEnquiry('personal');
+                    }}
+                    className="p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer transition-all group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-royal/30 text-royal-soft flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                      <CreditCard className="w-4 h-4" />
+                    </div>
+                    <h4 className="text-sm font-bold font-heading text-white mb-1">
+                      Personal Loan
+                    </h4>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      Borrowing options for planned personal expenses.
+                    </p>
+                  </div>
+
+                  {/* Category 2: Business Loan */}
+                  <div
+                    onClick={() => {
+                      setHeroCategory('business');
+                      scrollToEnquiry('business');
+                    }}
+                    className="p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer transition-all group"
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-teal-accent/20 text-teal-accent flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                      <Sparkles className="w-4 h-4" />
+                    </div>
+                    <h4 className="text-sm font-bold font-heading text-white mb-1">
+                      Business Loan
+                    </h4>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      Financing for inventory, equipment &amp; working capital.
+                    </p>
+                  </div>
+
+                  {/* Feature 3: Indicative APR */}
+                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center mb-2">
+                      <Percent className="w-4 h-4" />
+                    </div>
+                    <h4 className="text-sm font-bold font-heading text-white mb-1">
+                      Indicative APR
+                    </h4>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      11.99% – 36% p.a. Check KFS before accepting.
+                    </p>
+                  </div>
+
+                  {/* Feature 4: Repayment Period */}
+                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center mb-2">
+                      <Calendar className="w-4 h-4" />
+                    </div>
+                    <h4 className="text-sm font-bold font-heading text-white mb-1">
+                      Flexible Tenure
+                    </h4>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      3 to 60 months repayment. No loans under 61 days.
+                    </p>
+                  </div>
+
+                </div>
               </div>
 
-              {/* Exact CEO Approved Headline with Blue Font of the Exact Same Size */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[48px] font-heading font-extrabold text-navy tracking-tight leading-[1.16] max-w-xl">
-                Explore <span className="text-royal">personal and business</span> <span className="inline-block">loan options</span>
-              </h1>
-
-              {/* Exact CEO Approved Description */}
-              <p className="text-base sm:text-lg text-slate-blue font-normal leading-relaxed">
-                Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
-              </p>
-
-              {/* Fast Trust Indicators */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
-                <div className="flex items-center gap-2 p-2 sm:p-2.5 rounded-xl bg-neutral-bg/80 border border-neutral-border text-xs font-semibold text-slate-blue shadow-sm">
-                  <div className="w-2 h-2 rounded-full bg-teal-accent shrink-0" />
-                  <span className="truncate">Zero Upfront Fees</span>
-                </div>
-                <div className="flex items-center gap-2 p-2 sm:p-2.5 rounded-xl bg-neutral-bg/80 border border-neutral-border text-xs font-semibold text-slate-blue shadow-sm">
-                  <div className="w-2 h-2 rounded-full bg-royal shrink-0" />
-                  <span className="truncate">Transparent KFS</span>
-                </div>
-                <div className="col-span-2 sm:col-span-1 flex items-center gap-2 p-2 sm:p-2.5 rounded-xl bg-neutral-bg/80 border border-neutral-border text-xs font-semibold text-slate-blue shadow-sm">
-                  <div className="w-2 h-2 rounded-full bg-navy shrink-0" />
-                  <span className="truncate">Regulated Lenders</span>
-                </div>
+              <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/80">
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-teal-accent" />
+                  <span>RBI-Registered Lenders</span>
+                </span>
+                <span className="text-[11px] text-white/60">Zero Facilitation Fees</span>
               </div>
+            </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
-                <button
-                  onClick={() => scrollToEnquiry('personal')}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-bold shadow-subtle hover:shadow-premium transition-all duration-200"
-                >
-                  <span>Explore personal loans</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
+            {/* Card 2: Interactive Loan Amount Slider Card (Matching Reference in Image 3) */}
+            <div className="lg:col-span-6 backdrop-blur-xl bg-white/95 rounded-3xl p-6 sm:p-7 shadow-premium border border-neutral-border flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-semibold text-slate-blue block mb-1">
+                  Select Loan amount
+                </span>
+                
+                {/* Large Amount Display */}
+                <div className="text-3xl sm:text-4xl font-heading font-extrabold text-navy tracking-tight mb-4">
+                  {formatINR(heroAmount)}
+                </div>
 
-                <button
-                  onClick={() => scrollToEnquiry('business')}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-royal-soft/30 text-navy border border-neutral-border hover:border-royal text-sm sm:text-base font-bold shadow-subtle transition-all duration-200"
-                >
-                  <span>Explore business loans</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
+                {/* Range Slider */}
+                <div className="space-y-2 mb-6">
+                  <input
+                    type="range"
+                    min="50000"
+                    max="2500000"
+                    step="25000"
+                    value={heroAmount}
+                    onChange={(e) => setHeroAmount(Number(e.target.value))}
+                    aria-label="Select loan amount"
+                    className="w-full h-2.5 bg-neutral-border rounded-lg appearance-none cursor-pointer accent-royal"
+                  />
+                  <div className="flex justify-between text-xs font-bold text-slate-blue">
+                    <span>Min: ₹50,000</span>
+                    <span>Max: ₹25,00,000</span>
+                  </div>
+                </div>
+
+                {/* Loan Category Selection Buttons */}
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHeroCategory('personal');
+                      scrollToEnquiry('personal');
+                    }}
+                    className={`py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ${
+                      heroCategory === 'personal'
+                        ? 'bg-royal text-white shadow-subtle'
+                        : 'bg-neutral-bg text-navy border border-neutral-border hover:border-royal'
+                    }`}
+                  >
+                    <span>Explore personal loans</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHeroCategory('business');
+                      scrollToEnquiry('business');
+                    }}
+                    className={`py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 ${
+                      heroCategory === 'business'
+                        ? 'bg-royal text-white shadow-subtle'
+                        : 'bg-neutral-bg text-navy border border-neutral-border hover:border-royal'
+                    }`}
+                  >
+                    <span>Explore business loans</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
 
               {/* Exact CEO Approved Disclosure */}
-              <div className="pt-3 border-t border-neutral-border/80">
-                <p className="text-xs text-neutral-muted leading-relaxed">
+              <div className="pt-3 border-t border-neutral-border">
+                <p className="text-[11px] text-neutral-muted leading-relaxed">
                   <strong>Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
                 </p>
               </div>
 
             </div>
 
-            {/* Right Column: Hero 3D Glass Graphic with Seamless Navbar Blend & Floating Glass Cards */}
-            <div className="lg:col-span-5 xl:col-span-5 relative flex items-center justify-center">
-              
-              {/* Glass Graphic Container */}
-              <div className="relative w-full max-w-lg lg:max-w-none flex items-center justify-center">
-                
-                {/* 3D Glass Ribbon Image with Feathered Blending Overlays */}
-                <div className="relative w-full overflow-hidden rounded-3xl">
-                  <img
-                    src="/images/qvikloan-glass-ribbons-focused.png"
-                    alt="QvikLoan Financial Technology"
-                    className="w-full h-auto max-h-[460px] object-contain object-center transition-transform duration-700 hover:scale-[1.02]"
-                    loading="eager"
-                  />
-
-                  {/* Top Feathering to blend seamlessly from Navbar */}
-                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white via-white/60 to-transparent pointer-events-none" />
-                  
-                  {/* Left Feathering */}
-                  <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none" />
-
-                  {/* Right Feathering */}
-                  <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none" />
-
-                  {/* Bottom Feathering */}
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/60 to-transparent pointer-events-none" />
-                </div>
-
-                {/* Floating Glassmorphism Badge 1 - Top Left */}
-                <div className="absolute -top-2 left-0 sm:left-4 z-20 backdrop-blur-xl bg-white/90 border border-white/95 shadow-premium rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 animate-fadeIn">
-                  <div className="w-9 h-9 rounded-xl bg-royal/10 border border-royal/20 flex items-center justify-center text-royal shrink-0">
-                    <Sparkles className="w-5 h-5 text-royal" />
-                  </div>
-                  <div>
-                    <div className="text-[11px] font-bold text-royal uppercase tracking-wider">
-                      Loan Amount Range
-                    </div>
-                    <div className="text-sm font-heading font-extrabold text-navy">
-                      ₹50,000 – ₹25,00,000
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating Glassmorphism Badge 2 - Bottom Right */}
-                <div className="absolute -bottom-2 right-0 sm:right-2 z-20 backdrop-blur-xl bg-white/90 border border-white/95 shadow-premium rounded-2xl p-3.5 sm:p-4 max-w-[270px] shadow-lg animate-fadeIn">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <ShieldCheck className="w-4 h-4 text-teal-accent" />
-                    <span className="text-xs font-bold text-navy">Regulated Facilitation</span>
-                  </div>
-                  <p className="text-[11px] text-slate-blue leading-relaxed">
-                    Direct Key Facts Statement (KFS) provided prior to loan agreement acceptance.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
           </div>
+
         </div>
       </section>
 
