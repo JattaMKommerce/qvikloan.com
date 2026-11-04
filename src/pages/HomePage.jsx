@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Percent, Calendar, CreditCard, DollarSign, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
 import FinancialCalculator from '../components/FinancialCalculator';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
+import BranchHeroMockup from '../components/BranchHeroMockup';
 import { companyInfo } from '../data/companyInfo';
 import { participatingLenders } from '../data/lendersData';
 
@@ -75,18 +76,9 @@ export default function HomePage({ onOpenEnquiry }) {
 
             </div>
 
-            {/* Right Column: Hero Visual Graphic */}
+            {/* Right Column: Hero Visual Graphic (Branch.co Style Loan Discovery) */}
             <div className="lg:col-span-6 flex justify-center">
-              <div className="relative w-full max-w-lg lg:max-w-none">
-                <div className="overflow-hidden rounded-card-lg border border-neutral-border shadow-premium backdrop-blur-md bg-white/80">
-                  <img
-                    src="/images/qvikloan-hero-illustration.png"
-                    alt="QvikLoan Loan Enquiry Assessment and Participating Lenders"
-                    className="w-full h-auto object-cover"
-                    loading="eager"
-                  />
-                </div>
-              </div>
+              <BranchHeroMockup onSelectAmount={(type) => scrollToEnquiry(type)} />
             </div>
 
           </div>

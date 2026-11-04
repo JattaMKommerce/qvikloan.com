@@ -66,15 +66,18 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
               </div>
             </div>
 
-            {/* Right Visual Graphic */}
+            {/* Right Visual Graphic with Side Blending */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-md rounded-2xl overflow-hidden border border-neutral-border shadow-premium bg-white">
+              <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-premium bg-white">
                 <img
                   src="/images/personal-loans-hero.png"
                   alt="Personal Loans Evaluation Summary"
                   className="w-full h-auto object-cover"
                   loading="eager"
                 />
+                {/* Side blending feather overlays */}
+                <div className="absolute inset-y-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none" />
               </div>
             </div>
 

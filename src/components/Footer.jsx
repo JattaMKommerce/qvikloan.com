@@ -5,79 +5,80 @@ import { companyInfo } from '../data/companyInfo';
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-white pt-16 pb-12 border-t border-slate-blue/30">
+    <footer className="bg-navy text-white pt-10 pb-8 sm:pt-12 sm:pb-10 border-t border-slate-blue/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b border-white/10">
           
           {/* Brand & Corporate Identity (Cols 1 & 2) */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block bg-white p-2.5 rounded-xl shadow-sm">
+          <div className="lg:col-span-2 space-y-3">
+            <Link to="/" className="inline-block bg-white p-2 rounded-xl shadow-xs">
               <img
                 src="/logos/QvikLoan_Web.webp"
                 alt="QvikLoan"
-                className="h-8 w-auto object-contain"
+                className="h-7 w-auto object-contain"
               />
             </Link>
             
-            <p className="text-[14px] text-slate-200/80 leading-relaxed max-w-md">
+            <p className="text-xs sm:text-[13px] text-slate-200/80 leading-relaxed max-w-md">
               A transparent digital loan enquiry and facilitation platform operated by{' '}
               <strong className="text-white font-semibold">{companyInfo.name}</strong>. Connecting individuals and businesses with participating RBI-registered lenders.
             </p>
 
-            <div className="space-y-2.5 pt-2 text-[13px] text-slate-300">
-              <div className="flex items-start gap-2.5">
-                <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
+            <div className="space-y-1.5 pt-1 text-xs text-slate-300">
+              <div className="flex items-start gap-2">
+                <Building2 className="w-3.5 h-3.5 text-teal-accent shrink-0 mt-0.5" />
                 <span>
                   <strong>Operating Entity:</strong> {companyInfo.name}
                 </span>
               </div>
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-teal-accent shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-white">Registered Office:</strong><br />
-                  {companyInfo.address.registeredOffice}
+                  <strong className="text-white">Registered Office:</strong> {companyInfo.address.registeredOffice}
                 </div>
               </div>
-              <div className="flex items-start gap-2.5">
-                <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2">
+                <Building2 className="w-3.5 h-3.5 text-teal-accent shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-white">Corporate Office:</strong><br />
-                  {companyInfo.address.corporateOffice}
+                  <strong className="text-white">Corporate Office:</strong> {companyInfo.address.corporateOffice}
                 </div>
               </div>
-              <div className="flex items-center gap-2.5 pt-1">
-                <Mail className="w-4 h-4 text-teal-accent shrink-0" />
-                <a href={`mailto:${companyInfo.email}`} className="hover:text-white transition-colors underline-offset-2 hover:underline">
-                  {companyInfo.email}
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-teal-accent shrink-0" />
-                <a href={`tel:${companyInfo.phone}`} className="hover:text-white transition-colors">
-                  {companyInfo.phone} ({companyInfo.operatingHours})
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 text-teal-accent shrink-0" />
-                <a
-                  href={`https://wa.me/${companyInfo.whatsapp.replace(/\D/g, '')}?text=Hi`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors text-teal-accent font-semibold"
-                >
-                  WhatsApp Us ({companyInfo.whatsapp})
-                </a>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
+                <div className="flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-teal-accent shrink-0" />
+                  <a href={`mailto:${companyInfo.email}`} className="hover:text-white transition-colors underline-offset-2 hover:underline">
+                    {companyInfo.email}
+                  </a>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-teal-accent shrink-0" />
+                  <a href={`tel:${companyInfo.phone}`} className="hover:text-white transition-colors">
+                    {companyInfo.phone}
+                  </a>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <MessageCircle className="w-3.5 h-3.5 text-teal-accent shrink-0" />
+                  <a
+                    href={`https://wa.me/${companyInfo.whatsapp.replace(/\D/g, '')}?text=Hi`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors text-teal-accent font-semibold"
+                  >
+                    WhatsApp Helpline
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Quick Navigation Links */}
           <div>
-            <h4 className="text-[15px] font-heading font-bold text-white uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">
               Explore Products
             </h4>
-            <ul className="space-y-2.5 text-[14px] text-slate-300">
+            <ul className="space-y-2 text-xs sm:text-[13px] text-slate-300">
               <li>
                 <Link to="/" className="hover:text-teal-accent transition-colors">
                   Home
@@ -108,10 +109,10 @@ export default function Footer() {
 
           {/* Company & Support */}
           <div>
-            <h4 className="text-[15px] font-heading font-bold text-white uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">
               Company
             </h4>
-            <ul className="space-y-2.5 text-[14px] text-slate-300">
+            <ul className="space-y-2 text-xs sm:text-[13px] text-slate-300">
               <li>
                 <Link to="/about-us" className="hover:text-teal-accent transition-colors">
                   About Us
@@ -137,10 +138,10 @@ export default function Footer() {
 
           {/* Legal & Compliance Links */}
           <div>
-            <h4 className="text-[15px] font-heading font-bold text-white uppercase tracking-wider mb-4">
+            <h4 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">
               Legal & Disclosures
             </h4>
-            <ul className="space-y-2.5 text-[14px] text-slate-300">
+            <ul className="space-y-2 text-xs sm:text-[13px] text-slate-300">
               <li>
                 <Link to="/privacy-policy" className="hover:text-teal-accent transition-colors">
                   Privacy Policy
@@ -166,10 +167,10 @@ export default function Footer() {
 
         </div>
 
-        {/* Detailed Compliance Disclosures */}
-        <div className="py-8 text-[12px] text-slate-400 space-y-3 leading-relaxed border-b border-white/10">
-          <div className="flex items-center gap-2 text-white font-semibold text-[13px]">
-            <Shield className="w-4 h-4 text-teal-accent" />
+        {/* Streamlined Compliance Disclosures Box */}
+        <div className="py-4 my-6 px-5 rounded-xl bg-white/[0.04] border border-white/10 text-[11px] text-slate-300 space-y-2 leading-relaxed">
+          <div className="flex items-center gap-2 text-white font-semibold text-xs">
+            <Shield className="w-3.5 h-3.5 text-teal-accent" />
             <span>Important Regulatory Disclosures</span>
           </div>
           <p>
@@ -184,11 +185,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-slate-400">
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
           <div>
             © {new Date().getFullYear()} {companyInfo.name}. All rights reserved. QvikLoan™ is an official brand of {companyInfo.name}.
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-3 text-slate-400">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
             <span>•</span>
             <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms</Link>
