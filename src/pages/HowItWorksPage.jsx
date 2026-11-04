@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowRight, ShieldCheck, CheckCircle2, FileSearch, Scale, FileText, Check, HelpCircle, UserCheck, Layers, FileSignature } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
 
-export default function HowItWorksPage({ onOpenEnquiry }) {
+export default function HowItWorksPage() {
   const steps = [
     {
       num: '01',
@@ -67,22 +68,13 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
                 How QvikLoan Works
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Four simple steps from enquiry to decision — and you stay in control the whole way.
+                A simple, transparent digital pathway from your loan enquiry to review and decision — with zero pressure and full control.
               </p>
-              <div className="pt-2">
-                <button
-                  onClick={() => onOpenEnquiry('personal')}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white font-bold text-sm shadow-subtle hover:shadow-premium transition-all"
-                >
-                  <span>Start Your Enquiry</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
-              </div>
             </div>
 
             {/* Right Visual Graphic with Side Blending */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-premium bg-white">
+              <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md">
                 <img
                   src="/images/how-it-works-hero.png"
                   alt="How QvikLoan Facilitation Works"
@@ -99,52 +91,9 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
         </div>
       </section>
 
-      {/* Connected 4-Step Process Cards - Compact 1-Line Desktop Layout */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-1">
-            The Journey
-          </span>
-          <h2 className="text-xl sm:text-2xl font-heading font-bold text-navy">
-            Four Steps to Informed Borrowing
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {steps.map((step) => (
-            <div
-              key={step.num}
-              className="bg-white rounded-2xl border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between transition-all p-3.5 sm:p-4"
-            >
-              <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-36 sm:h-40 object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-royal-soft text-royal text-xs font-bold">
-                    Step {step.num}
-                  </span>
-                </div>
-                <h3 className="text-sm sm:text-base font-heading font-bold text-navy leading-snug">
-                  {step.title}
-                </h3>
-                <p className="text-xs text-slate-blue leading-relaxed">
-                  {step.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Lender Role vs QvikLoan Role Table */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl border border-neutral-border p-8 sm:p-10 shadow-subtle space-y-6">
+        <div className="glass rounded-2xl p-8 sm:p-10 space-y-6">
           <div className="text-center max-w-2xl mx-auto mb-6">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy">
               Clear Division of Responsibilities
@@ -211,7 +160,7 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl border border-neutral-border p-6 shadow-subtle space-y-2"
+                className="glass rounded-2xl p-6 space-y-2"
               >
                 <h4 className="text-base font-heading font-bold text-navy flex items-center gap-2">
                   <HelpCircle className="w-4 h-4 text-royal shrink-0" />
@@ -226,25 +175,7 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="bg-navy rounded-3xl text-white p-8 sm:p-12 space-y-4 shadow-premium">
-          <h3 className="text-2xl sm:text-3xl font-heading font-bold">
-            Ready to Start Your Loan Enquiry?
-          </h3>
-          <p className="text-slate-300 text-sm max-w-xl mx-auto">
-            Submitting an enquiry does not commit you to borrowing.
-          </p>
-          <div className="pt-2">
-            <button
-              onClick={() => onOpenEnquiry('personal')}
-              className="px-8 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white font-bold text-sm transition-colors shadow-subtle"
-            >
-              Start Online Enquiry
-            </button>
-          </div>
-        </div>
-      </section>
+      
 
     </div>
   );

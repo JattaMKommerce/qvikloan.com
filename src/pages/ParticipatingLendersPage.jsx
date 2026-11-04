@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { ExternalLink, ShieldCheck, Building2, Mail, Phone, Info, CheckCircle2, ArrowRight } from 'lucide-react';
 import { participatingLenders } from '../data/lendersData';
 import { companyInfo } from '../data/companyInfo';
 
-export default function ParticipatingLendersPage({ onOpenEnquiry }) {
+export default function ParticipatingLendersPage() {
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
       
@@ -28,7 +29,7 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
 
             {/* Right Visual Graphic */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-md rounded-2xl overflow-hidden border border-neutral-border shadow-premium bg-white">
+              <div className="glass rounded-2xl overflow-hidden w-full max-w-md">
                 <img
                   src="/images/participating-lenders-hero.png"
                   alt="Participating Lenders Network Disclosures"
@@ -44,7 +45,7 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
 
       {/* Role of Platform Advisory */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-7 sm:p-9 rounded-2xl border border-neutral-border shadow-subtle space-y-4">
+        <div className="glass p-7 sm:p-9 rounded-2xl space-y-4">
           <div className="flex items-center gap-2.5 text-navy font-heading font-bold text-lg">
             <Info className="w-5 h-5 text-royal" />
             <span>Role of QvikLoan & Participating Lenders</span>
@@ -65,7 +66,7 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
             Institutional Lending Partners
           </h2>
           <p className="text-xs sm:text-sm text-slate-blue mt-2">
-            Details of RBI-registered financial institutions reviewing loan enquiries submitted through QvikLoan.
+            Participating lenders that may review loan enquiries submitted through QvikLoan. Lender-specific terms are set by each lender.
           </p>
         </div>
 
@@ -73,7 +74,7 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
           {participatingLenders.map((lender) => (
             <div
               key={lender.id}
-              className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border p-7 sm:p-8 shadow-subtle hover-lift flex flex-col justify-between space-y-6"
+              className="glass rounded-2xl p-7 sm:p-8 hover-lift flex flex-col justify-between space-y-6"
             >
               <div className="space-y-4">
                 <div className="flex items-start justify-between gap-4">
@@ -102,20 +103,8 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
 
                 <div className="space-y-2.5 pt-3 border-t border-neutral-border/70 text-xs">
                   <div className="flex justify-between py-1">
-                    <span className="text-neutral-muted">RBI Registration Number:</span>
-                    <span className="font-mono font-bold text-navy">{lender.rbiRegNo}</span>
-                  </div>
-                  <div className="flex justify-between py-1">
                     <span className="text-neutral-muted">Products Offered:</span>
-                    <span className="font-semibold text-navy">{lender.products.join(', ')}</span>
-                  </div>
-                  <div className="flex justify-between py-1">
-                    <span className="text-neutral-muted">Indicative APR Range:</span>
-                    <span className="font-semibold text-royal">{lender.aprRange}</span>
-                  </div>
-                  <div className="flex justify-between py-1">
-                    <span className="text-neutral-muted">Repayment Tenures:</span>
-                    <span className="font-semibold text-navy">{lender.tenureRange}</span>
+                    <span className="font-semibold text-navy">{lender.products.join(", ")}</span>
                   </div>
                   <div className="flex justify-between py-1">
                     <span className="text-neutral-muted">Lender Grievance Desk:</span>
@@ -126,18 +115,6 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-neutral-border flex items-center justify-between">
-                <span className="text-[11px] text-teal-dark font-semibold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>RBI Fair Practices Compliant</span>
-                </span>
-                <button
-                  onClick={() => onOpenEnquiry('personal')}
-                  className="text-xs font-bold text-royal hover:underline"
-                >
-                  Enquire for Loan →
-                </button>
-              </div>
             </div>
           ))}
         </div>

@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
 
       {/* Main Legal Content */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-card-lg border border-neutral-border p-8 sm:p-12 shadow-subtle space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
+        <div className="glass rounded-card-lg p-8 sm:p-12 space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
           
           {/* Section 1 */}
           <div className="space-y-3">
@@ -83,7 +83,7 @@ export default function PrivacyPolicyPage() {
               We process your personal information strictly based on your explicit consent for the following defined purposes:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
-              <li>To match your requirements with participating RBI-registered NBFCs and banks.</li>
+              <li>To match your requirements with participating lenders.</li>
               <li>To transmit your enquiry details to chosen lending partners for eligibility evaluation.</li>
               <li>To provide customer support and service updates regarding your enquiry status.</li>
               <li>To prevent cyber fraud, unauthorised automated submissions, and malicious activity.</li>
@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
               5. How Your Information is Shared with Participating Lenders
             </h2>
             <p>
-              QvikLoan is not a lender. When you submit an enquiry and select the explicit consent checkbox, you authorize QvikLoan (Jatta M Kommerce Private Limited) to transmit your basic profile to participating RBI-registered lenders.
+              QvikLoan is not a lender. When you submit an enquiry and select the explicit consent checkbox, you authorize QvikLoan (Jatta M Kommerce Private Limited) to transmit your basic profile to participating lenders.
             </p>
             <p>
               These lenders evaluate your preliminary eligibility and may contact you directly with offers. We require all partner lenders to treat your data in strict compliance with RBI regulations and confidentiality laws. We do not sell your data to unaffiliated third-party marketing brokers.

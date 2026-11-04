@@ -1,6 +1,7 @@
 export const companyInfo = {
   name: "Jatta M Kommerce Private Limited",
   brandName: "QvikLoan",
+  companyWebsite: "https://jattamkommerce.com/",
   tagline: "Explore personal and business loan options with transparency",
   cin: "U72900DL2021PTC384912",
   email: "help@qvikloan.com",

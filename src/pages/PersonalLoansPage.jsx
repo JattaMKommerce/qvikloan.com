@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowRight, ShieldCheck, CheckCircle2, FileText, Info, HelpCircle, AlertCircle, Clock, Home, Stethoscope, GraduationCap, RefreshCw } from 'lucide-react';
 import FinancialCalculator from '../components/FinancialCalculator';
 import { complianceDisclosures } from '../data/lendersData';
 import { companyInfo } from '../data/companyInfo';
 
-export default function PersonalLoansPage({ onOpenEnquiry }) {
+export default function PersonalLoansPage() {
   const purposes = [
     {
       title: 'Home improvement',
@@ -53,13 +54,12 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
                 Enquire online and review any offer from a participating lender — including its Key Facts Statement (KFS) — before you decide.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  onClick={() => onOpenEnquiry('personal')}
+                <Link to="/#enquiry-section"
                   className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white font-bold text-sm shadow-subtle hover:shadow-premium transition-all"
                 >
                   <span>Enquire for Personal Loan</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
+                </Link>
                 <div className="text-xs text-neutral-muted">
                   No upfront charges • Non-committal
                 </div>
@@ -68,7 +68,7 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
 
             {/* Right Visual Graphic with Side Blending */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-premium bg-white">
+              <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md">
                 <img
                   src="/images/personal-loans-hero.png"
                   alt="Personal Loans Evaluation Summary"
@@ -105,10 +105,10 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
             return (
               <div
                 key={idx}
-                className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border p-5 shadow-subtle hover-lift flex flex-col justify-between transition-all"
+                className="glass rounded-2xl p-5 hover-lift flex flex-col justify-between transition-all"
               >
                 <div className="space-y-3">
-                  <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 p-2 flex items-center justify-center">
+                  <div className="rounded-xl overflow-hidden bg-white/50 border border-white/70 p-2 flex items-center justify-center">
                     <img
                       src={p.image}
                       alt={p.title}
@@ -130,7 +130,7 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
       </section>
 
       {/* Eligibility & Documents with Status Visuals */}
-      <section className="bg-white py-14 sm:py-20 border-y border-neutral-border">
+      <section className="py-14 sm:py-20 bg-white/30 backdrop-blur-sm border-y border-white/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
@@ -222,7 +222,7 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
           </div>
 
           {/* Representative Example Card */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle">
+          <div className="glass p-6 sm:p-8 rounded-2xl">
             <div className="flex items-center gap-2 text-navy font-heading font-bold text-base mb-4 pb-3 border-b border-neutral-border">
               <Info className="w-4 h-4 text-royal" />
               <span>Representative Loan Cost Example (For Illustration Only)</span>
@@ -273,30 +273,12 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
           </div>
 
           {/* Interactive Calculator */}
-          <FinancialCalculator onEnquireClick={() => onOpenEnquiry('personal')} />
+          <FinancialCalculator />
 
         </div>
       </section>
 
-      {/* Bottom CTA Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-navy rounded-3xl text-white p-8 sm:p-12 text-center space-y-4 shadow-premium">
-          <h3 className="text-2xl sm:text-3xl font-heading font-bold">
-            Ready to Explore Personal Loan Options?
-          </h3>
-          <p className="text-slate-300 text-sm max-w-xl mx-auto">
-            Submitting an enquiry does not commit you to borrowing or guarantee a loan offer.
-          </p>
-          <div className="pt-2">
-            <button
-              onClick={() => onOpenEnquiry('personal')}
-              className="px-8 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white font-bold text-sm transition-colors shadow-subtle"
-            >
-              Start Personal Loan Enquiry
-            </button>
-          </div>
-        </div>
-      </section>
+      
 
     </div>
   );

@@ -26,7 +26,7 @@ export default function TermsAndConditionsPage() {
 
       {/* Terms Body */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-card-lg border border-neutral-border p-8 sm:p-12 shadow-subtle space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
+        <div className="glass rounded-card-lg p-8 sm:p-12 space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
           
           <div className="space-y-3">
             <h2 className="text-lg font-heading font-bold text-navy">
@@ -49,7 +49,7 @@ export default function TermsAndConditionsPage() {
               <strong>CRITICAL REGULATORY NOTICE:</strong> QvikLoan is an intermediary digital facilitation platform as defined under Section 2(1)(w) of the Information Technology Act, 2000. QvikLoan is <strong>NOT</strong> a bank, Non-Banking Financial Company (NBFC), or financial institution registered under Section 45-IA of the Reserve Bank of India Act, 1934.
             </p>
             <p className="text-xs">
-              QvikLoan does not lend money, issue credit, manage escrow funds, underwrite risk, guarantee approval, or execute disbursements. Our role is strictly limited to capturing prospective borrower enquiries and routing them to participating RBI-registered lending partners for independent credit evaluation.
+              QvikLoan does not lend money, issue credit, manage escrow funds, underwrite risk, guarantee approval, or execute disbursements. Our role is strictly limited to capturing prospective borrower enquiries and routing them to participating lending partners for independent credit evaluation.
             </p>
           </div>
 

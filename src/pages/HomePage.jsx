@@ -3,23 +3,52 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Percent, Calendar, CreditCard, DollarSign, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
 import FinancialCalculator from '../components/FinancialCalculator';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
-import BranchHeroMockup from '../components/BranchHeroMockup';
 import { companyInfo } from '../data/companyInfo';
 import { participatingLenders } from '../data/lendersData';
 
-export default function HomePage({ onOpenEnquiry }) {
+function TypewriterText() {
+  const words = [
+    'personal and business loan options',
+    'personal loan options',
+    'business loan options',
+  ];
+  const [index, setIndex] = React.useState(0);
+  const [subIndex, setSubIndex] = React.useState(words[0].length);
+  const [reverse, setReverse] = React.useState(false);
+
+  React.useEffect(() => {
+    if (subIndex === words[index].length + 1 && !reverse) {
+      const timeout = setTimeout(() => {
+        setReverse(true);
+      }, 2500);
+      return () => clearTimeout(timeout);
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (reverse ? -1 : 1));
+    }, reverse ? 25 : 60);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse]);
+
+  return (
+    <span className="text-royal inline">
+      {words[index].substring(0, subIndex)}
+      <span className="inline-block w-[3px] h-[0.8em] bg-royal align-baseline ml-1 animate-pulse" />
+    </span>
+  );
+}
+
+export default function HomePage() {
   const navigate = useNavigate();
   const [heroAmount, setHeroAmount] = React.useState(300000);
   const [heroCategory, setHeroCategory] = React.useState('personal');
-
-  const scrollToEnquiry = (type = 'personal') => {
-    const el = document.getElementById('enquiry-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      onOpenEnquiry(type);
-    }
-  };
 
   const formatINR = (val) => {
     return new Intl.NumberFormat('en-IN', {
@@ -31,18 +60,14 @@ export default function HomePage({ onOpenEnquiry }) {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
-      
-      {/* ==================================================
-          SECTION 1: HERO - EXACT MATCH TO BEFORE WITH PERFECT TAPE SIZE
-          ================================================== */}
       <section className="relative overflow-hidden bg-white">
         
         {/* Full 3D Glass Ribbon in Background - Exactly Like Before */}
-        <div className="absolute inset-y-0 right-0 w-full sm:w-[85%] lg:w-[65%] xl:w-[60%] pointer-events-none select-none overflow-hidden flex items-center justify-end">
+        <div className="absolute inset-y-0 right-0 w-full sm:w-[85%] lg:w-[65%] xl:w-[60%] pointer-events-none select-none overflow-hidden flex items-center justify-end opacity-40 sm:opacity-100 [mask-image:linear-gradient(to_right,transparent_0%,black_30%,black_85%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_30%,black_85%,transparent_100%)]">
           <img
             src="/images/qvikloan-hero-glass-ribbon.png"
             alt=""
-            className="h-full w-auto max-w-none object-contain object-right"
+            className="h-full w-auto max-w-none object-contain object-right mix-blend-multiply"
             loading="eager"
           />
         </div>
@@ -56,9 +81,9 @@ export default function HomePage({ onOpenEnquiry }) {
               <span>Transparent Loan Facilitation Platform</span>
             </div>
 
-            {/* Exact Headline with Blue Accent in Header */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[48px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.14]">
-              Explore <span className="text-royal">personal and business</span><br />loan options
+            {/* Dynamic Typewriter Headline: Constant 'Explore' + Autowriting Options */}
+            <h1 className="text-3xl sm:text-4xl lg:text-[48px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.15] min-h-[2.4em]">
+              Explore <TypewriterText />
             </h1>
 
             {/* Exact CEO Approved Description */}
@@ -66,26 +91,7 @@ export default function HomePage({ onOpenEnquiry }) {
               Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
-              <button
-                onClick={() => scrollToEnquiry('personal')}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
-              >
-                <span>Explore personal loans</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-
-              <button
-                onClick={() => scrollToEnquiry('business')}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-neutral-50 text-[#1f2937] border border-[#e5e7eb] hover:border-royal text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
-              >
-                <span>Explore business loans</span>
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </button>
-            </div>
-
-            {/* Exact CEO Approved Disclosure */}
+            {/* Important Disclosure - Clean & Spacious without redundant Start Enquiry button */}
             <div className="pt-5 border-t border-[#f3f4f6] max-w-lg">
               <p className="text-[11px] text-[#6b7280] leading-relaxed">
                 <strong>Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
@@ -95,15 +101,11 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
         </div>
       </section>
-
-      {/* ================================================== (Screenshot Matching)
-          ================================================== */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
             Tailored Options
           </span>
-          {/* Exact CEO Approved Heading */}
           <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
             Find the right place to start
           </h2>
@@ -113,10 +115,10 @@ export default function HomePage({ onOpenEnquiry }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           
           {/* CARD 1: Personal loans */}
-          <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between transition-all">
+          <div className="glass rounded-2xl hover-lift overflow-hidden flex flex-col justify-between transition-all">
             {/* Top Illustration Container */}
             <div className="p-4 sm:p-5 pb-0">
-              <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center">
+              <div className="rounded-xl overflow-hidden bg-white/50 border border-white/70 flex items-center justify-center">
                 <img
                   src="/images/qvikloan-personal-loan-illustration.png"
                   alt="Personal Loans"
@@ -148,10 +150,10 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* CARD 2: Business loans */}
-          <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between transition-all">
+          <div className="glass rounded-2xl hover-lift overflow-hidden flex flex-col justify-between transition-all">
             {/* Top Illustration Container */}
             <div className="p-4 sm:p-5 pb-0">
-              <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center">
+              <div className="rounded-xl overflow-hidden bg-white/50 border border-white/70 flex items-center justify-center">
                 <img
                   src="/images/qvikloan-business-loan-illustration.png"
                   alt="Business Loans"
@@ -184,165 +186,26 @@ export default function HomePage({ onOpenEnquiry }) {
 
         </div>
       </section>
-
-      {/* ==================================================
-          ON-PAGE GLASSMORPHIC ENQUIRY SECTION (User Request)
-          ================================================== */}
       <GlassLoanEnquirySection />
-
-      {/* ==================================================
-          SECTION 3: HOW QVIKLOAN WORKS
-          ================================================== */}
-      <section className="bg-neutral-bg/80 py-16 sm:py-20 border-y border-neutral-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
-              Step-by-Step Transparency
-            </span>
-            {/* Exact CEO Approved Heading */}
-            <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-              How QvikLoan works
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            {/* CARD 01 */}
-            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
-              <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
-                  <img
-                    src="/images/step-01-enquiry.png"
-                    alt="Tell us what you're looking for"
-                    className="w-full h-36 sm:h-40 object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-royal-soft text-royal text-xs font-bold">Step 01</span>
-                </div>
-                <h3 className="text-base font-heading font-bold text-navy leading-snug">
-                  Tell us what you’re looking for.
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-                  Select the type of loan and enter the amount you wish to enquire about.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 02 */}
-            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
-              <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
-                  <img
-                    src="/images/step-02-consent.png"
-                    alt="Submit your enquiry"
-                    className="w-full h-36 sm:h-40 object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-teal-soft text-teal-dark text-xs font-bold">Step 02</span>
-                </div>
-                <h3 className="text-base font-heading font-bold text-navy leading-snug">
-                  Submit your enquiry.
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-                  Provide your contact details and review how your information will be used before you submit.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 03 */}
-            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
-              <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
-                  <img
-                    src="/images/step-03-evaluation.png"
-                    alt="Complete the lender's checks"
-                    className="w-full h-36 sm:h-40 object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold">Step 03</span>
-                </div>
-                <h3 className="text-base font-heading font-bold text-navy leading-snug">
-                  Complete the lender’s checks.
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-                  If a lender can consider your application, it may ask for identity, income, credit or business documents.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 04 */}
-            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
-              <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
-                  <img
-                    src="/images/step-04-offer-kfs.png"
-                    alt="Review the offer and decide"
-                    className="w-full h-36 sm:h-40 object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-navy text-white text-xs font-bold">Step 04</span>
-                </div>
-                <h3 className="text-base font-heading font-bold text-navy leading-snug">
-                  Review the offer and decide.
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-                  If a lender makes an offer, read the Key Facts Statement (KFS), where applicable, and the loan agreement before accepting. You can decline an offer.
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link
-              to="/how-it-works"
-              className="inline-flex items-center text-sm font-bold text-royal hover:underline"
-            >
-              <span>Learn more about how our digital facilitation works</span>
-              <ArrowRight className="w-4 h-4 ml-1.5" />
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ==================================================
-          SECTION 4: FINANCIAL TRANSPARENCY
-          ================================================== */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
             Informed Decisions
           </span>
-          {/* Exact CEO Approved Heading */}
           <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy mb-4">
             Know what to compare
           </h2>
-          {/* Exact CEO Approved Content */}
           <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
             Look at the APR, monthly instalment, repayment period and total amount payable together. A lower monthly instalment can come with a longer repayment period. Check the lender’s fees and the terms for late payments and early repayment.
           </p>
         </div>
 
         {/* Interactive Comparison Calculator */}
-        <FinancialCalculator onEnquireClick={() => scrollToEnquiry('personal')} />
+        <FinancialCalculator />
 
       </section>
-
-      {/* ==================================================
-          SECTION 5: LENDER INFORMATION
-          ================================================== */}
-      <section className="bg-white py-16 sm:py-20 border-y border-neutral-border">
+      <section className="py-16 sm:py-20 bg-white/30 backdrop-blur-sm border-y border-white/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
@@ -350,18 +213,12 @@ export default function HomePage({ onOpenEnquiry }) {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
                 Platform Transparency & Lending Governance
               </div>
-              
-              {/* Exact CEO Approved Heading */}
               <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
                 Who provides the loan?
               </h2>
-
-              {/* Exact CEO Approved Content */}
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
                 QvikLoan is a loan enquiry and facilitation platform operated by Jatta M Kommerce Private Limited. The lender evaluates the application, issues any loan offer and handles disbursement under the applicable loan agreement.
               </p>
-
-              {/* Exact CEO Approved Links */}
               <div className="flex flex-wrap items-center gap-6 pt-2">
                 <Link
                   to="/participating-lenders"
@@ -373,37 +230,37 @@ export default function HomePage({ onOpenEnquiry }) {
 
                 <span className="text-neutral-border font-bold">·</span>
 
-                <Link
-                  to="/contact-us"
+                <a
+                  href={`mailto:${companyInfo.email}`}
                   className="inline-flex items-center text-slate-blue font-bold text-base hover:underline"
                 >
                   <span>Contact support</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
-                </Link>
+                </a>
               </div>
             </div>
 
             {/* Participating Lenders Snapshot */}
-            <div className="lg:col-span-5 backdrop-blur-md bg-neutral-bg/90 p-6 sm:p-7 rounded-card-lg border border-neutral-border space-y-4 shadow-subtle">
+            <div className="lg:col-span-5 glass rounded-card-lg p-6 sm:p-7 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-neutral-border">
                 <span className="text-xs font-bold text-navy uppercase tracking-wider">
                   Partner Institutional Lenders
                 </span>
-                <span className="text-xs text-teal-dark font-semibold">RBI Regulated NBFCs</span>
+                <span className="text-xs text-teal-dark font-semibold">Participating lenders</span>
               </div>
 
               <div className="space-y-3">
                 {participatingLenders.slice(0, 3).map((lender) => (
                   <div
                     key={lender.id}
-                    className="p-3.5 bg-white rounded-xl border border-neutral-border text-xs space-y-1 shadow-xs"
+                    className="p-3.5 bg-white/60 rounded-xl border border-white/80 text-xs space-y-1"
                   >
                     <div className="flex justify-between font-bold text-navy">
                       <span>{lender.name}</span>
                       <span className="text-royal text-[11px] font-medium">{lender.products[0]}</span>
                     </div>
                     <div className="text-neutral-muted text-[11px]">
-                      Registration: {lender.rbiRegNo} • Direct Disbursement
+                      Loan terms are set by the lender
                     </div>
                   </div>
                 ))}
@@ -420,48 +277,7 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
         </div>
       </section>
-
-      {/* ==================================================
-          SECTION 6: FINAL CTA
-          ================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-navy rounded-card-lg text-white p-8 sm:p-14 lg:p-16 relative overflow-hidden shadow-premium text-center">
-          
-          <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-teal-accent text-xs font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              Transparent & Free Online Enquiry
-            </span>
-
-            {/* Exact CEO Approved Heading */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight">
-              Ready to explore your options?
-            </h2>
-
-            {/* Exact CEO Approved Button */}
-            <div className="pt-2">
-              <button
-                onClick={() => scrollToEnquiry('personal')}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-royal hover:bg-royal-hover text-white text-base font-bold shadow-lg transition-all duration-200"
-              >
-                <span>Start an enquiry</span>
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </button>
-            </div>
-
-            {/* Exact CEO Approved Disclosure */}
-            <div className="pt-4">
-              <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed max-w-xl mx-auto">
-                Submitting an enquiry does not commit you to borrowing or guarantee a loan offer.
-              </p>
-            </div>
-          </div>
-
-          {/* Subtle Background Elements */}
-          <div className="absolute -top-24 -left-24 w-80 h-80 bg-royal/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-teal-accent/10 rounded-full blur-3xl pointer-events-none" />
-        </div>
-      </section>
+      
 
     </div>
   );

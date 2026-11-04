@@ -56,7 +56,7 @@ export default function GrievanceRedressalPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             {/* Level 1 */}
-            <div className="bg-white rounded-card border border-neutral-border p-6 shadow-subtle space-y-4">
+            <div className="glass rounded-card p-6 space-y-4">
               <div className="w-10 h-10 rounded-xl bg-royal-soft text-royal font-bold flex items-center justify-center font-heading">
                 01
               </div>
@@ -74,8 +74,8 @@ export default function GrievanceRedressalPage() {
             </div>
 
             {/* Level 2 */}
-            <div className="bg-white rounded-card border-2 border-royal p-6 shadow-subtle space-y-4 relative">
-              <span className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-royal text-white text-[10px] font-bold tracking-wider uppercase">
+            <div className="glass rounded-card border-2 border-royal p-6 space-y-4 relative">
+              <span className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-royal text-white text-xs font-bold tracking-wider uppercase">
                 Designated Officer
               </span>
               <div className="w-10 h-10 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-heading">
@@ -96,7 +96,7 @@ export default function GrievanceRedressalPage() {
             </div>
 
             {/* Level 3 */}
-            <div className="bg-white rounded-card border border-neutral-border p-6 shadow-subtle space-y-4">
+            <div className="glass rounded-card p-6 space-y-4">
               <div className="w-10 h-10 rounded-xl bg-teal-soft text-teal-dark font-bold flex items-center justify-center font-heading">
                 03
               </div>
@@ -124,7 +124,7 @@ export default function GrievanceRedressalPage() {
           </div>
 
           {/* Detailed Nodal Officer Particulars Box */}
-          <div className="bg-white rounded-card-lg border border-neutral-border p-8 shadow-subtle space-y-5">
+          <div className="glass rounded-card-lg p-8 space-y-5">
             <h3 className="text-xl font-heading font-bold text-navy flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-royal" />
               <span>Nodal Grievance Redressal Officer Particulars</span>
@@ -164,7 +164,7 @@ export default function GrievanceRedressalPage() {
           </div>
 
           {/* Interactive Grievance Filing Form */}
-          <div className="bg-white rounded-card-lg border border-neutral-border p-8 shadow-subtle space-y-6">
+          <div className="glass rounded-card-lg p-8 space-y-6">
             <h3 className="text-xl font-heading font-bold text-navy">
               Submit a Grievance or Dispute Online
             </h3>

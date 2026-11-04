@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import LoanEnquiryModal from './components/LoanEnquiryModal';
 
 import HomePage from './pages/HomePage';
 import PersonalLoansPage from './pages/PersonalLoansPage';
@@ -14,64 +13,53 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import GrievanceRedressalPage from './pages/GrievanceRedressalPage';
-import ContactUsPage from './pages/ContactUsPage';
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+// On route change: scroll to top, or to the section named in the URL hash
+// (e.g. /#enquiry-section from the navbar on any page).
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Wait one frame so the new page has rendered before we look for the section.
+    const t = setTimeout(() => {
+      if (hash) {
+        const el = document.getElementById(hash.slice(1));
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 90; // clear the sticky navbar
+          window.scrollTo({ top, behavior: 'smooth' });
+          return;
+        }
+      }
+      window.scrollTo(0, 0);
+    }, 50);
+    return () => clearTimeout(t);
+  }, [pathname, hash]);
   return null;
 }
 
 export default function App() {
-  const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
-  const [enquiryType, setEnquiryType] = useState('personal');
-
-  const handleOpenEnquiry = (type = 'personal') => {
-    setEnquiryType(type);
-    setEnquiryModalOpen(true);
-  };
-
-  const handleCloseEnquiry = () => {
-    setEnquiryModalOpen(false);
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-neutral-bg text-neutral-text antialiased">
-      <ScrollToTop />
-      
-      {/* Sticky Navbar */}
-      <Navbar onOpenEnquiry={() => handleOpenEnquiry('personal')} />
+    <div className="min-h-screen flex flex-col text-neutral-text antialiased">
+      <ScrollManager />
 
-      {/* Main Content View */}
+      <Navbar />
+
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<HomePage onOpenEnquiry={handleOpenEnquiry} />} />
-          <Route path="/personal-loans" element={<PersonalLoansPage onOpenEnquiry={handleOpenEnquiry} />} />
-          <Route path="/business-loans" element={<BusinessLoansPage onOpenEnquiry={handleOpenEnquiry} />} />
-          <Route path="/how-it-works" element={<HowItWorksPage onOpenEnquiry={handleOpenEnquiry} />} />
-          <Route path="/about-us" element={<AboutUsPage onOpenEnquiry={handleOpenEnquiry} />} />
-          <Route path="/participating-lenders" element={<ParticipatingLendersPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/personal-loans" element={<PersonalLoansPage />} />
+          <Route path="/business-loans" element={<BusinessLoansPage />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="/participating-lenders" element={<ParticipatingLendersPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/grievance-redressal" element={<GrievanceRedressalPage />} />
-          <Route path="/contact-us" element={<ContactUsPage />} />
-          <Route path="*" element={<HomePage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
 
-      {/* Global Interactive Enquiry Modal */}
-      <LoanEnquiryModal
-        isOpen={enquiryModalOpen}
-        onClose={handleCloseEnquiry}
-        initialType={enquiryType}
-      />
-
-      {/* Corporate Compliance Footer */}
       <Footer />
     </div>
   );
 }
-

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, ShieldCheck, ChevronRight } from 'lucide-react';
 
-export default function Navbar({ onOpenEnquiry }) {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -27,7 +27,6 @@ export default function Navbar({ onOpenEnquiry }) {
     { name: 'Business Loans', path: '/business-loans' },
     { name: 'How It Works', path: '/how-it-works' },
     { name: 'About Us', path: '/about-us' },
-    { name: 'Contact Us', path: '/contact-us' },
   ];
 
   const isActive = (path) => {
@@ -97,21 +96,13 @@ export default function Navbar({ onOpenEnquiry }) {
 
             {/* CTA Button */}
             <div className="hidden sm:flex items-center gap-4">
-              <button
-                onClick={() => {
-                  if (location.pathname === '/') {
-                    const el = document.getElementById('enquiry-section');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    else onOpenEnquiry();
-                  } else {
-                    onOpenEnquiry();
-                  }
-                }}
-                className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-[14px] font-bold shadow-subtle hover:shadow-premium transition-all duration-200 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-royal focus:ring-offset-2"
+              <Link
+                to="/#enquiry-section"
+                className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-[14px] font-bold shadow-subtle transition-all duration-200"
               >
-                <span>Explore Loan Options</span>
+                <span>Start an enquiry</span>
                 <ArrowRight className="w-4 h-4 ml-1.5" />
-              </button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -146,16 +137,14 @@ export default function Navbar({ onOpenEnquiry }) {
             </div>
 
             <div className="mt-5 pt-4 border-t border-neutral-border flex flex-col gap-3">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenEnquiry();
-                }}
-                className="w-full flex items-center justify-center py-3 px-4 rounded-xl bg-royal text-white text-[15px] font-bold shadow-subtle"
-              >
-                <span>Explore Loan Options</span>
-                <ArrowRight className="w-4 h-4 ml-1.5" />
-              </button>
+              <Link
+                  to="/#enquiry-section"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center py-3 px-4 rounded-xl bg-royal text-white text-[15px] font-bold shadow-subtle"
+                >
+                  <span>Start an enquiry</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Link>
               <div className="text-center text-[12px] text-neutral-muted pt-2">
                 Operated by Jatta M Kommerce Private Limited
               </div>

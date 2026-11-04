@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowRight, ShieldCheck, CheckCircle2, Building2, Package, Layers, FileCheck, Info, Briefcase, TrendingUp } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
 
-export default function BusinessLoansPage({ onOpenEnquiry }) {
+export default function BusinessLoansPage() {
   const facilities = [
     {
       title: 'Working capital',
@@ -27,43 +28,45 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
       
-      {/* Hero Header with Rich Graphic */}
-      <section className="bg-gradient-to-b from-white via-teal-soft/20 to-neutral-bg border-b border-neutral-border py-12 sm:py-20">
+      {/* Hero Header with Matching Visual Graphic & Feathering */}
+      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-soft text-teal-dark text-xs font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Commercial & MSME Solutions</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal text-xs font-semibold">
+                <Building2 className="w-3.5 h-3.5" />
+                <span>Commercial &amp; MSME Solutions</span>
               </div>
               <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
                 Business Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Explore financing for inventory, equipment or working capital through participating lenders.
+                Explore financing for inventory, equipment or working capital through participating regulated lenders.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  onClick={() => onOpenEnquiry('business')}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-navy hover:bg-slate-blue text-white font-bold text-sm shadow-subtle hover:shadow-premium transition-all"
+                <Link to="/#enquiry-section"
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white font-bold text-sm shadow-subtle hover:shadow-premium transition-all"
                 >
                   <span>Enquire for Business Loan</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
+                </Link>
               </div>
             </div>
 
-            {/* Right Visual Graphic */}
+            {/* Right Visual Graphic with Side Blending */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-md rounded-2xl overflow-hidden border border-neutral-border shadow-premium bg-white">
+              <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md">
                 <img
                   src="/images/business-loans-hero.png"
                   alt="Business Loans Capital Facilities"
                   className="w-full h-auto object-cover"
                   loading="eager"
                 />
+                {/* Side blending feather overlays */}
+                <div className="absolute inset-y-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -74,7 +77,7 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
       {/* Facilities: Working Capital, Inventory & Equipment */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-bold text-teal-dark uppercase tracking-wider block mb-2">
+          <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
             Commercial Financing Types
           </span>
           <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy">
@@ -91,10 +94,10 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
             return (
               <div
                 key={i}
-                className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border p-6 shadow-subtle hover-lift flex flex-col justify-between transition-all"
+                className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border shadow-subtle hover-lift p-6 flex flex-col justify-between transition-all"
               >
                 <div className="space-y-4">
-                  <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 p-2 flex items-center justify-center">
+                  <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 p-3 flex items-center justify-center">
                     <img
                       src={f.image}
                       alt={f.title}
@@ -121,7 +124,7 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             
             {/* Eligibility */}
-            <div className="bg-white p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
+            <div className="backdrop-blur-md bg-white/95 p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
                 Evaluation Guidelines
               </div>
@@ -152,8 +155,8 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
             </div>
 
             {/* Documentation Checklist */}
-            <div className="bg-white p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-soft text-teal-dark text-xs font-semibold">
+            <div className="backdrop-blur-md bg-white/95 p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
                 Verification Documents
               </div>
               <h3 className="text-xl font-heading font-bold text-navy">
@@ -188,7 +191,7 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
 
       {/* Lender Responsibility & Loan Costs */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-10 rounded-2xl border border-neutral-border shadow-subtle space-y-6">
+        <div className="glass p-8 sm:p-10 rounded-2xl space-y-6">
           <div className="flex items-center gap-2.5 text-navy font-heading font-bold text-lg border-b border-neutral-border pb-3">
             <Info className="w-5 h-5 text-royal" />
             <span>Pricing and responsibilities</span>
@@ -215,25 +218,7 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-navy rounded-3xl text-white p-8 sm:p-12 text-center space-y-4 shadow-premium">
-          <h3 className="text-2xl sm:text-3xl font-heading font-bold">
-            Explore Business Financing Options
-          </h3>
-          <p className="text-slate-300 text-sm max-w-xl mx-auto">
-            Submitting an enquiry does not commit you to borrowing.
-          </p>
-          <div className="pt-2">
-            <button
-              onClick={() => onOpenEnquiry('business')}
-              className="px-8 py-3.5 rounded-xl bg-teal-accent hover:bg-teal-dark text-navy font-bold text-sm transition-colors shadow-subtle"
-            >
-              Start Business Loan Enquiry
-            </button>
-          </div>
-        </div>
-      </section>
+      
 
     </div>
   );

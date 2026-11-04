@@ -22,6 +22,10 @@ export default {
           soft: '#EAF1FF',
           dark: '#1E42A8',
         },
+        orange: {
+          DEFAULT: '#FD6C00',
+          soft: '#FFF1E6',
+        },
         teal: {
           accent: '#36B49B',
           dark: '#278A76',

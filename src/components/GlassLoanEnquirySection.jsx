@@ -13,6 +13,12 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
     city: '',
     purpose: '',
     employmentType: 'salaried',
+    pincode: '',
+    incomeBand: '',
+    existingLoans: '',
+    vintage: '',
+    tenure: '',
+    contactTime: '',
   });
   const [consentGiven, setConsentGiven] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -45,6 +51,10 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
       setErrorMessage('Please enter your city.');
       return;
     }
+    if (!/^\d{6}$/.test(formData.pincode)) {
+      setErrorMessage('Please enter a valid 6-digit PIN code.');
+      return;
+    }
     if (!consentGiven) {
       setErrorMessage('Please provide explicit consent to submit your enquiry.');
       return;
@@ -70,12 +80,18 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
       city: '',
       purpose: '',
       employmentType: 'salaried',
+      pincode: '',
+      incomeBand: '',
+      existingLoans: '',
+      vintage: '',
+      tenure: '',
+      contactTime: '',
     });
     setConsentGiven(false);
   };
 
   return (
-    <section id="enquiry-section" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#F4F5F7] border-y border-neutral-border">
+    <section id="enquiry-section" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white/20 backdrop-blur-sm border-y border-white/70">
       
       {/* ==================================================
           END-TO-END SEAMLESS GEOMETRIC ART LAYER
@@ -194,7 +210,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
             Start Your Loan Enquiry
           </h2>
           <p className="text-sm sm:text-base text-slate-blue leading-relaxed">
-            Submit your requirements directly below. QvikLoan connects you with participating RBI-registered lenders to evaluate options with a complete Key Facts Statement (KFS).
+            Submit your requirements directly below. QvikLoan connects you with participating lenders to evaluate options with a complete Key Facts Statement (KFS).
           </p>
         </div>
 
@@ -212,7 +228,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
               </h3>
               <p className="text-sm text-slate-blue max-w-md mx-auto">
                 Your enquiry reference is <strong className="text-navy font-semibold">{enquiryRef}</strong>.
-                Participating RBI-regulated lenders will assess your criteria and share eligible offers.
+                Participating lenders will assess your application and may share offers.
               </p>
 
               <div className="backdrop-blur-md bg-white/80 rounded-2xl p-5 text-left border border-white text-xs text-neutral-text space-y-2 max-w-lg mx-auto shadow-sm">
@@ -223,7 +239,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 <ul className="list-disc pl-5 space-y-1 text-slate-blue">
                   <li>Lenders independently evaluate your request and eligibility.</li>
                   <li>Eligible offers will include a Key Facts Statement (KFS) detailing APR and EMI.</li>
-                  <li>You maintain full autonomy to accept or decline any offer with zero obligation.</li>
+                  <li>You can accept or decline any offer.</li>
                 </ul>
               </div>
 
@@ -430,6 +446,128 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                   />
                 </div>
 
+
+                {/* PIN Code (lenders check serviceability by PIN) */}
+                <div>
+                  <label className="block text-xs font-bold text-navy mb-1.5">
+                    PIN Code *
+                  </label>
+                  <input
+                    type="text"
+                    name="pincode"
+                    inputMode="numeric"
+                    required
+                    maxLength="6"
+                    value={formData.pincode}
+                    onChange={handleInputChange}
+                    placeholder="400053"
+                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition"
+                  />
+                </div>
+
+                {/* Monthly income for personal loans, annual turnover for business loans */}
+                <div>
+                  <label className="block text-xs font-bold text-navy mb-1.5">
+                    {loanType === 'personal' ? 'Monthly Net Income' : 'Annual Business Turnover'}
+                  </label>
+                  <select
+                    name="incomeBand"
+                    value={formData.incomeBand}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition"
+                  >
+                    <option value="">Select</option>
+                    {loanType === 'personal' ? (
+                      <>
+                        <option value="below-25k">Below ₹25,000</option>
+                        <option value="25k-50k">₹25,000 – ₹50,000</option>
+                        <option value="50k-1l">₹50,000 – ₹1,00,000</option>
+                        <option value="above-1l">Above ₹1,00,000</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="below-10l">Below ₹10 lakh</option>
+                        <option value="10l-50l">₹10 – ₹50 lakh</option>
+                        <option value="50l-2cr">₹50 lakh – ₹2 crore</option>
+                        <option value="above-2cr">Above ₹2 crore</option>
+                      </>
+                    )}
+                  </select>
+                </div>
+
+                {/* Existing EMIs (personal) or existing business loans (business) */}
+                <div>
+                  <label className="block text-xs font-bold text-navy mb-1.5">
+                    {loanType === 'personal' ? 'Existing Loan EMIs?' : 'Existing Business Loans?'}
+                  </label>
+                  <select
+                    name="existingLoans"
+                    value={formData.existingLoans}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition"
+                  >
+                    <option value="">Select</option>
+                    <option value="none">No</option>
+                    <option value="yes-under-5k">Yes, total EMI below ₹5,000</option>
+                    <option value="yes-5k-plus">Yes, total EMI ₹5,000 or more</option>
+                  </select>
+                </div>
+
+                {loanType === 'business' && (
+                  <div>
+                    <label className="block text-xs font-bold text-navy mb-1.5">
+                      Business Vintage
+                    </label>
+                    <select
+                      name="vintage"
+                      value={formData.vintage}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition"
+                    >
+                      <option value="">Select</option>
+                      <option value="under-1y">Less than 1 year</option>
+                      <option value="1-3y">1 – 3 years</option>
+                      <option value="3y-plus">More than 3 years</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Preferred repayment period */}
+                <div>
+                  <label className="block text-xs font-bold text-navy mb-1.5">
+                    Preferred Repayment Period
+                  </label>
+                  <select
+                    name="tenure"
+                    value={formData.tenure}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition"
+                  >
+                    <option value="">Not sure</option>
+                    <option value="6-12m">6 – 12 months</option>
+                    <option value="12-24m">12 – 24 months</option>
+                    <option value="24-36m">24 – 36 months</option>
+                    <option value="36m-plus">More than 36 months</option>
+                  </select>
+                </div>
+
+                {/* Best time to call, matches support hours */}
+                <div>
+                  <label className="block text-xs font-bold text-navy mb-1.5">
+                    Best Time to Call
+                  </label>
+                  <select
+                    name="contactTime"
+                    value={formData.contactTime}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition"
+                  >
+                    <option value="">Any time (Mon–Sat, 9:30 AM – 6:30 PM)</option>
+                    <option value="morning">Morning (9:30 AM – 12:00 PM)</option>
+                    <option value="afternoon">Afternoon (12:00 PM – 3:00 PM)</option>
+                    <option value="evening">Evening (3:00 PM – 6:30 PM)</option>
+                  </select>
+                </div>
               </div>
 
               {/* Explicit Consent & Meta Compliance Disclosures */}
@@ -442,12 +580,12 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                     className="mt-1 h-4 w-4 rounded border-neutral-border text-royal focus:ring-royal cursor-pointer flex-shrink-0"
                   />
                   <span className="text-xs text-slate-blue leading-relaxed">
-                    I authorize QvikLoan (operated by <strong>{companyInfo.name}</strong>) to securely share my enquiry details with participating RBI-registered lenders to evaluate my eligibility for loan offers. I understand that submitting an enquiry does not guarantee a loan offer or approval, and that I will receive a Key Facts Statement (KFS) prior to accepting any agreement. I have reviewed and agree to the{' '}
+                    I authorize QvikLoan (operated by <strong>{companyInfo.name}</strong>) to securely share my enquiry details with participating lenders to evaluate my eligibility for loan offers. I understand that submitting an enquiry does not guarantee a loan offer or approval, and that I will receive a Key Facts Statement (KFS) prior to accepting any agreement. I have reviewed and agree to the{' '}
                     <Link to="/privacy-policy" className="text-royal font-medium underline">
                       Privacy Policy
                     </Link>{' '}
                     and{' '}
-                    <Link to="/terms" className="text-royal font-medium underline">
+                    <Link to="/terms-and-conditions" className="text-royal font-medium underline">
                       Terms &amp; Conditions
                     </Link>.
                   </span>
@@ -476,7 +614,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
               <div className="pt-4 border-t border-neutral-border/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-neutral-muted">
                 <div className="flex items-center gap-2">
                   <Lock className="w-3.5 h-3.5 text-teal-dark flex-shrink-0" />
-                  <span>256-Bit SSL Encrypted • Zero Upfront Fees Charged</span>
+                  <span>Secure form • Submission requires your consent</span>
                 </div>
                 <div>
                   <span>No obligation to accept offers • Freedom to decline</span>
@@ -491,7 +629,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
         {/* Regulatory Intermediary Disclosure Footer Box */}
         <div className="mt-8 p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-neutral-border text-xs text-slate-blue leading-relaxed">
           <p>
-            <strong>Important Facilitation Disclosures:</strong> QvikLoan is an online loan facilitation and discovery platform owned and operated by {companyInfo.name}. QvikLoan does not directly lend money, issue credit sanctions, or collect upfront facilitation fees from borrowers. Loan offers, APR (indicative range 11.99% – 36% p.a.), repayment tenure (3 to 60 months; no loans under 61 days), processing fees, and sanction decisions are determined exclusively by participating RBI-registered NBFCs and banking partners based on their underwriting policies.
+            <strong>Important Facilitation Disclosures:</strong> QvikLoan is an online loan facilitation and discovery platform owned and operated by {companyInfo.name}. QvikLoan does not directly lend money, issue credit sanctions, or charge borrowers for enquiries. Loan offers, APR, repayment tenure, processing fees and sanction decisions are set by the participating lender based on its own underwriting policies. Check the lender’s Key Facts Statement before accepting any offer.
           </p>
         </div>
 

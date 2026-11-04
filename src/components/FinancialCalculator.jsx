@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Calculator, Info, ShieldCheck, ArrowRight } from 'lucide-react';
 
-export default function FinancialCalculator({ onEnquireClick }) {
+export default function FinancialCalculator() {
   const [loanAmount, setLoanAmount] = useState(200000);
   const [interestRate, setInterestRate] = useState(13.5);
   const [tenureMonths, setTenureMonths] = useState(36);
@@ -21,7 +21,7 @@ export default function FinancialCalculator({ onEnquireClick }) {
   const effectiveTotalCost = totalAmountPayable + estimatedProcessingFee;
 
   return (
-    <div className="bg-white rounded-card-lg border border-neutral-border p-6 sm:p-8 shadow-subtle">
+    <div className="glass rounded-card-lg p-6 sm:p-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-neutral-border gap-4">
         <div>
           <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-1">
@@ -148,14 +148,6 @@ export default function FinancialCalculator({ onEnquireClick }) {
               </span>
             </div>
           </div>
-
-          <button
-            onClick={onEnquireClick}
-            className="w-full mt-4 py-3 px-4 rounded-xl bg-navy hover:bg-slate-blue text-white font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-          >
-            <span>Enquire for this Amount</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
       </div>
 

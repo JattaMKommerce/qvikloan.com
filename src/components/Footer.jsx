@@ -23,7 +23,7 @@ export default function Footer() {
             
             <p className="text-xs sm:text-[13px] text-slate-200/80 leading-relaxed max-w-md">
               A transparent digital loan enquiry and facilitation platform operated by{' '}
-              <strong className="text-white font-semibold">{companyInfo.name}</strong>. Connecting individuals and businesses with participating RBI-registered lenders.
+              <strong className="text-white font-semibold">{companyInfo.name}</strong>. Connecting individuals and businesses with participating lenders.
             </p>
 
             <div className="space-y-1.5 pt-1 text-xs text-slate-300">
@@ -119,11 +119,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/contact-us" className="hover:text-teal-accent transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
                 <Link to="/participating-lenders" className="hover:text-teal-accent transition-colors">
                   Lender Disclosure
                 </Link>
@@ -174,7 +169,7 @@ export default function Footer() {
             <span>Important Regulatory Disclosures</span>
           </div>
           <p>
-            <strong>Role of Platform:</strong> QvikLoan is an online loan enquiry and facilitation platform operated by <strong>{companyInfo.name}</strong>. QvikLoan is neither a bank nor a Non-Banking Financial Company (NBFC) and does not directly provide loans, disburse funds, or make credit decisions. All credit evaluations, loan approvals, interest rates, processing fees, repayment tenures, and disbursements are governed solely by our participating RBI-registered NBFCs and banks under applicable lending agreements.
+            <strong>Role of Platform:</strong> QvikLoan is an online loan enquiry and facilitation platform operated by <strong>{companyInfo.name}</strong>. QvikLoan is neither a bank nor a Non-Banking Financial Company (NBFC) and does not directly provide loans, disburse funds, or make credit decisions. All credit evaluations, loan approvals, interest rates, processing fees, repayment tenures, and disbursements are governed solely by our participating NBFCs and banks under applicable lending agreements.
           </p>
           <p>
             <strong>Borrower Decision & KFS:</strong> Submitting an online enquiry does not guarantee a loan offer or commit the applicant to borrow. If a participating lender issues a loan offer, applicants are advised to review the Key Facts Statement (KFS), Annual Percentage Rate (APR), repayment schedule, and all associated charges before acceptance. Borrowers retain the unconditional right to decline any loan offer.

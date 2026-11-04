@@ -24,7 +24,7 @@ export default function DisclaimerPage() {
 
       {/* Main Content */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-card-lg border border-neutral-border p-8 sm:p-12 shadow-subtle space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
+        <div className="glass rounded-card-lg p-8 sm:p-12 space-y-8 text-xs sm:text-sm text-slate-blue leading-relaxed">
           
           {/* Main Non-Lender Status */}
           <div className="bg-neutral-bg p-6 rounded-card border border-neutral-border space-y-3">
