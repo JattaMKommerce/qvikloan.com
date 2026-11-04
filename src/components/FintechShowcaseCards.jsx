@@ -164,3 +164,4 @@ export default function FintechShowcaseCards({ onEnquireClick }) {
     </div>
   );
 }
+

@@ -20,19 +20,47 @@ export default function ContactUsPage() {
   return (
     <div className="space-y-12 sm:space-y-16 pb-16">
       
-      {/* Header */}
-      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-14 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-            <MessageSquare className="w-3.5 h-3.5" />
-            Direct Support
+      {/* Header with Visual Card Graphic */}
+      <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal text-xs font-semibold">
+                <MessageSquare className="w-3.5 h-3.5" />
+                <span>Dedicated Facilitation &amp; Support</span>
+              </div>
+              <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
+                Contact QvikLoan Support
+              </h1>
+              <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
+                Have questions about loan enquiries, participating lenders, or platform disclosures? Our corporate assistance team at {companyInfo.name} is ready to help you with transparent guidance.
+              </p>
+              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-neutral-muted">
+                <span className="inline-flex items-center gap-1.5 text-teal-dark font-semibold">
+                  <CheckCircle2 className="w-4 h-4" /> 24–48 Hr Response
+                </span>
+                <span>•</span>
+                <span>Direct WhatsApp Helpline</span>
+                <span>•</span>
+                <span>Official Grievance Officer Available</span>
+              </div>
+            </div>
+
+            {/* Right Visual Graphic */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-md rounded-2xl overflow-hidden border border-neutral-border shadow-premium bg-white">
+                <img
+                  src="/images/contact-us-hero.png"
+                  alt="QvikLoan Customer Support &amp; Coordination Desk"
+                  className="w-full h-auto object-cover"
+                  loading="eager"
+                />
+              </div>
+            </div>
+
           </div>
-          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-navy">
-            Contact QvikLoan Support
-          </h1>
-          <p className="text-sm text-slate-blue leading-relaxed">
-            Have questions about loan enquiries, participating lenders, or platform disclosures? Our corporate team at {companyInfo.name} is here to assist you.
-          </p>
         </div>
       </section>
 

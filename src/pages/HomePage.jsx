@@ -215,74 +215,106 @@ export default function HomePage({ onOpenEnquiry }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* CARD 01 */}
-            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal font-heading font-extrabold text-lg flex items-center justify-center border border-royal/20">
-                  01
+            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+              <div className="space-y-3">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                  <img
+                    src="/images/step-01-enquiry.png"
+                    alt="Tell us what you're looking for"
+                    className="w-full h-32 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="text-lg font-heading font-bold text-navy leading-snug">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-royal-soft text-royal text-xs font-bold">Step 01</span>
+                </div>
+                <h3 className="text-base font-heading font-bold text-navy leading-snug">
                   Tell us what you’re looking for.
                 </h3>
-                <p className="text-sm text-slate-blue leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                   Select the type of loan and enter the amount you wish to enquire about.
                 </p>
               </div>
-              <div className="pt-6 border-t border-neutral-border/60 text-xs font-semibold text-royal">
+              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-royal">
                 Step 1: Preference Input
               </div>
             </div>
 
             {/* CARD 02 */}
-            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal font-heading font-extrabold text-lg flex items-center justify-center border border-royal/20">
-                  02
+            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+              <div className="space-y-3">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                  <img
+                    src="/images/step-02-consent.png"
+                    alt="Submit your enquiry"
+                    className="w-full h-32 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="text-lg font-heading font-bold text-navy leading-snug">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-teal-soft text-teal-dark text-xs font-bold">Step 02</span>
+                </div>
+                <h3 className="text-base font-heading font-bold text-navy leading-snug">
                   Submit your enquiry.
                 </h3>
-                <p className="text-sm text-slate-blue leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                   Provide your contact details and review how your information will be used before you submit.
                 </p>
               </div>
-              <div className="pt-6 border-t border-neutral-border/60 text-xs font-semibold text-royal">
-                Step 2: Consent & Details
+              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-teal-dark">
+                Step 2: Consent &amp; Details
               </div>
             </div>
 
             {/* CARD 03 */}
-            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-teal-soft text-teal-dark font-heading font-extrabold text-lg flex items-center justify-center border border-teal-accent/20">
-                  03
+            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+              <div className="space-y-3">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                  <img
+                    src="/images/step-03-evaluation.png"
+                    alt="Complete the lender's checks"
+                    className="w-full h-32 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="text-lg font-heading font-bold text-navy leading-snug">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold">Step 03</span>
+                </div>
+                <h3 className="text-base font-heading font-bold text-navy leading-snug">
                   Complete the lender’s checks.
                 </h3>
-                <p className="text-sm text-slate-blue leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                   If a lender can consider your application, it may ask for identity, income, credit or business documents.
                 </p>
               </div>
-              <div className="pt-6 border-t border-neutral-border/60 text-xs font-semibold text-teal-dark">
+              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-amber-700">
                 Step 3: Verification
               </div>
             </div>
 
             {/* CARD 04 */}
-            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-navy text-white font-heading font-extrabold text-lg flex items-center justify-center">
-                  04
+            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+              <div className="space-y-3">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                  <img
+                    src="/images/step-04-offer-kfs.png"
+                    alt="Review the offer and decide"
+                    className="w-full h-32 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="text-lg font-heading font-bold text-navy leading-snug">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-navy text-white text-xs font-bold">Step 04</span>
+                </div>
+                <h3 className="text-base font-heading font-bold text-navy leading-snug">
                   Review the offer and decide.
                 </h3>
-                <p className="text-sm text-slate-blue leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                   If a lender makes an offer, read the Key Facts Statement (KFS), where applicable, and the loan agreement before accepting. You can decline an offer.
                 </p>
               </div>
-              <div className="pt-6 border-t border-neutral-border/60 text-xs font-semibold text-navy">
-                Step 4: Decision & Agreement
+              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-navy">
+                Step 4: Decision &amp; Agreement
               </div>
             </div>
 
