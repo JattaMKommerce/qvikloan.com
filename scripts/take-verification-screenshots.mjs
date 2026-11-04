@@ -24,3 +24,4 @@ for (const p of pages) {
     console.error(`Failed ${p.file}:`, err.message);
   }
 }
+

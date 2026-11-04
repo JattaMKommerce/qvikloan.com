@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Percent, Calendar, CreditCard, DollarSign, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
 import FinancialCalculator from '../components/FinancialCalculator';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
-import FintechShowcaseCards from '../components/FintechShowcaseCards';
 import { companyInfo } from '../data/companyInfo';
 import { participatingLenders } from '../data/lendersData';
 
@@ -92,13 +91,6 @@ export default function HomePage({ onOpenEnquiry }) {
 
           </div>
         </div>
-      </section>
-
-      {/* ==================================================
-          FINTECH SHOWCASE CARDS (Paritetbank Style Aesthetic)
-          ================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FintechShowcaseCards onEnquireClick={() => scrollToEnquiry('personal')} />
       </section>
 
       {/* ==================================================
@@ -215,13 +207,13 @@ export default function HomePage({ onOpenEnquiry }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* CARD 01 */}
-            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
               <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
                   <img
                     src="/images/step-01-enquiry.png"
                     alt="Tell us what you're looking for"
-                    className="w-full h-32 object-contain"
+                    className="w-full h-36 sm:h-40 object-cover"
                     loading="lazy"
                   />
                 </div>
@@ -235,19 +227,16 @@ export default function HomePage({ onOpenEnquiry }) {
                   Select the type of loan and enter the amount you wish to enquire about.
                 </p>
               </div>
-              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-royal">
-                Step 1: Preference Input
-              </div>
             </div>
 
             {/* CARD 02 */}
-            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
               <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
                   <img
                     src="/images/step-02-consent.png"
                     alt="Submit your enquiry"
-                    className="w-full h-32 object-contain"
+                    className="w-full h-36 sm:h-40 object-cover"
                     loading="lazy"
                   />
                 </div>
@@ -261,19 +250,16 @@ export default function HomePage({ onOpenEnquiry }) {
                   Provide your contact details and review how your information will be used before you submit.
                 </p>
               </div>
-              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-teal-dark">
-                Step 2: Consent &amp; Details
-              </div>
             </div>
 
             {/* CARD 03 */}
-            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
               <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
                   <img
                     src="/images/step-03-evaluation.png"
                     alt="Complete the lender's checks"
-                    className="w-full h-32 object-contain"
+                    className="w-full h-36 sm:h-40 object-cover"
                     loading="lazy"
                   />
                 </div>
@@ -287,19 +273,16 @@ export default function HomePage({ onOpenEnquiry }) {
                   If a lender can consider your application, it may ask for identity, income, credit or business documents.
                 </p>
               </div>
-              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-amber-700">
-                Step 3: Verification
-              </div>
             </div>
 
             {/* CARD 04 */}
-            <div className="backdrop-blur-md bg-white/95 rounded-2xl p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
+            <div className="backdrop-blur-md bg-white rounded-2xl p-4 sm:p-5 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between transition-all">
               <div className="space-y-3">
-                <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center p-2">
+                <div className="rounded-xl overflow-hidden bg-neutral-bg/60">
                   <img
                     src="/images/step-04-offer-kfs.png"
                     alt="Review the offer and decide"
-                    className="w-full h-32 object-contain"
+                    className="w-full h-36 sm:h-40 object-cover"
                     loading="lazy"
                   />
                 </div>
@@ -312,9 +295,6 @@ export default function HomePage({ onOpenEnquiry }) {
                 <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                   If a lender makes an offer, read the Key Facts Statement (KFS), where applicable, and the loan agreement before accepting. You can decline an offer.
                 </p>
-              </div>
-              <div className="pt-4 mt-4 border-t border-neutral-border/60 text-xs font-semibold text-navy">
-                Step 4: Decision &amp; Agreement
               </div>
             </div>
 
@@ -350,63 +330,6 @@ export default function HomePage({ onOpenEnquiry }) {
           <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
             Look at the APR, monthly instalment, repayment period and total amount payable together. A lower monthly instalment can come with a longer repayment period. Check the lender’s fees and the terms for late payments and early repayment.
           </p>
-        </div>
-
-        {/* Four Visual Information Blocks */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          
-          {/* Block 1: Annual Percentage Rate */}
-          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
-            <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal flex items-center justify-center mb-4">
-              <Percent className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-heading font-bold text-navy mb-2">
-              Annual Percentage Rate
-            </h3>
-            <p className="text-xs text-neutral-muted leading-relaxed">
-              APR reflects the total annual cost of borrowing, including the nominal interest rate and mandatory lender processing fees.
-            </p>
-          </div>
-
-          {/* Block 2: Monthly Instalment */}
-          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
-            <div className="w-12 h-12 rounded-xl bg-teal-soft text-teal-dark flex items-center justify-center mb-4">
-              <CreditCard className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-heading font-bold text-navy mb-2">
-              Monthly Instalment
-            </h3>
-            <p className="text-xs text-neutral-muted leading-relaxed">
-              The fixed amount you agree to pay each month to service the loan, encompassing both principal repayment and interest components.
-            </p>
-          </div>
-
-          {/* Block 3: Repayment Period */}
-          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
-            <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal flex items-center justify-center mb-4">
-              <Calendar className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-heading font-bold text-navy mb-2">
-              Repayment Period
-            </h3>
-            <p className="text-xs text-neutral-muted leading-relaxed">
-              The duration across which the loan is repaid. Longer tenures reduce monthly payments but increase total cumulative interest.
-            </p>
-          </div>
-
-          {/* Block 4: Total Amount Payable */}
-          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
-            <div className="w-12 h-12 rounded-xl bg-navy text-white flex items-center justify-center mb-4">
-              <DollarSign className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-heading font-bold text-navy mb-2">
-              Total Amount Payable
-            </h3>
-            <p className="text-xs text-neutral-muted leading-relaxed">
-              The exact aggregate sum of all principal repayments, cumulative interest, and upfront processing fees over the loan tenure.
-            </p>
-          </div>
-
         </div>
 
         {/* Interactive Comparison Calculator */}
@@ -455,12 +378,6 @@ export default function HomePage({ onOpenEnquiry }) {
                   <span>Contact support</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Link>
-              </div>
-
-              <div className="pt-4 border-t border-neutral-border text-xs text-neutral-muted space-y-1">
-                <div><strong>Operating Corporate Entity:</strong> {companyInfo.name}</div>
-                <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
-                <div><strong>Helpline:</strong> {companyInfo.phone} ({companyInfo.email})</div>
               </div>
             </div>
 

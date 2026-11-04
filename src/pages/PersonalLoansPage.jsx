@@ -7,31 +7,27 @@ import { companyInfo } from '../data/companyInfo';
 export default function PersonalLoansPage({ onOpenEnquiry }) {
   const purposes = [
     {
-      title: 'Planned Home Improvement',
-      desc: 'Renovate interiors, upgrade living spaces, or manage urgent home maintenance with predictable monthly instalments.',
+      title: 'Home improvement',
+      desc: 'Renovations, repairs and upgrades at home.',
       icon: Home,
-      tag: 'Tenures 12 to 60 Months',
       image: '/images/personal-purpose-home.png'
     },
     {
-      title: 'Medical & Healthcare Needs',
-      desc: 'Address unexpected hospitalisation, treatments, or healthcare expenses without liquidating long-term investments.',
+      title: 'Medical expenses',
+      desc: 'Treatments and healthcare costs for you or your family.',
       icon: Stethoscope,
-      tag: 'Direct Lender Processing',
       image: '/images/personal-purpose-medical.png'
     },
     {
-      title: 'Higher Education & Upskilling',
-      desc: 'Fund certification courses, vocational diplomas, or academic terms for yourself or family members.',
+      title: 'Education',
+      desc: 'Courses, certifications and academic fees.',
       icon: GraduationCap,
-      tag: 'Transparent KFS',
       image: '/images/personal-purpose-education.png'
     },
     {
-      title: 'Structured Debt Consolidation',
-      desc: 'Consolidate multiple high-interest retail obligations into a single structured, manageable repayment schedule.',
+      title: 'Debt consolidation',
+      desc: 'Bring several existing repayments into one.',
       icon: RefreshCw,
-      tag: 'Clear APR Breakdown',
       image: '/images/personal-purpose-consolidation.png'
     }
   ];
@@ -54,7 +50,7 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
                 Personal Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Explore personal borrowing options through participating lenders. QvikLoan helps you enquire online, compare loan parameters, and review transparent offers with Key Facts Statements (KFS) before you decide.
+                Enquire online and review any offer from a participating lender — including its Key Facts Statement (KFS) — before you decide.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
@@ -96,7 +92,7 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
             Purpose of Personal Borrowing
           </h2>
           <p className="text-sm text-slate-blue mt-2">
-            Participating lenders evaluate personal credit for planned expenditures with transparent interest structures.
+            Common reasons people explore a personal loan.
           </p>
         </div>
 
@@ -117,21 +113,12 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
                       loading="lazy"
                     />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-royal-soft text-royal flex items-center justify-center">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <span className="text-xs font-semibold text-royal">{p.tag}</span>
-                  </div>
                   <h3 className="text-base font-heading font-bold text-navy">
                     {p.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                     {p.desc}
                   </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-neutral-border/60 text-[11px] font-semibold text-neutral-muted">
-                  Regulated Underwriting Applicable
                 </div>
               </div>
             );
@@ -295,7 +282,7 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
             Ready to Explore Personal Loan Options?
           </h3>
           <p className="text-slate-300 text-sm max-w-xl mx-auto">
-            Submit your enquiry online. Submitting an enquiry does not commit you to borrowing or guarantee a loan offer.
+            Submitting an enquiry does not commit you to borrowing or guarantee a loan offer.
           </p>
           <div className="pt-2">
             <button

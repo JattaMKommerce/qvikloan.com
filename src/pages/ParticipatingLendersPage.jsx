@@ -22,7 +22,7 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
                 Participating Lenders & Partners
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                In full compliance with Reserve Bank of India (RBI) Digital Lending Guidelines and Meta financial advertising standards, QvikLoan provides complete disclosures regarding our participating lending institutions.
+                The regulated lenders that may review your enquiry, with their registration and grievance details.
               </p>
             </div>
 
@@ -50,7 +50,7 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
             <span>Role of QvikLoan & Participating Lenders</span>
           </div>
           <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-            QvikLoan is a technology and loan facilitation platform operated by <strong>{companyInfo.name}</strong>. QvikLoan is not a bank or Non-Banking Financial Company (NBFC). The evaluation of your loan application, interest rate calculations, processing fees, credit decisioning, Key Facts Statement (KFS) issuance, and disbursement of loan proceeds are handled exclusively by the respective participating regulated lender.
+            QvikLoan, operated by <strong>{companyInfo.name}</strong>, is not a bank or NBFC. The lender assesses your application, sets the rate and fees, issues the Key Facts Statement (KFS) and disburses the loan.
           </p>
         </div>
       </section>
@@ -148,10 +148,10 @@ export default function ParticipatingLendersPage({ onOpenEnquiry }) {
         <div className="backdrop-blur-md bg-neutral-bg/80 p-8 rounded-2xl border border-neutral-border space-y-4">
           <h3 className="text-lg font-heading font-bold text-navy flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-royal" />
-            <span>Borrower Rights & Fair Lending Verification</span>
+            <span>Your rights as a borrower</span>
           </h3>
           <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-            Borrowers have the right to receive an official Key Facts Statement (KFS) directly from the lending entity before signing any agreement. If an offer does not meet your personal or commercial requirements, you may decline the offer without any penalty or obligation. If you experience any unaddressed grievance with a lending partner, you may contact their respective grievance officer or escalate to the Reserve Bank of India’s Ombudsman mechanism.
+            You should receive a KFS from the lender before signing, and you can decline any offer. For unresolved complaints, contact the lender’s grievance officer or escalate to the RBI Ombudsman.
           </p>
         </div>
       </section>

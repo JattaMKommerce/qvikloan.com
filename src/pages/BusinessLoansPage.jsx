@@ -5,27 +5,21 @@ import { companyInfo } from '../data/companyInfo';
 export default function BusinessLoansPage({ onOpenEnquiry }) {
   const facilities = [
     {
-      title: 'Working Capital Lines',
-      desc: 'Optimise cash-flow liquidity to bridge receivables cycles, supplier payment terms, and day-to-day operational requirements.',
+      title: 'Working capital',
+      desc: 'Manage day-to-day expenses and gaps between payments.',
       icon: Layers,
-      tenure: 'Tenures 6 to 36 Months',
-      badge: 'Cash-Flow Management',
       image: '/images/business-facility-working-capital.png'
     },
     {
-      title: 'Inventory & Stock Financing',
-      desc: 'Purchase inventory and raw materials in volume ahead of peak demand periods without locking up existing operating funds.',
+      title: 'Inventory & stock',
+      desc: 'Buy stock and raw materials ahead of busy seasons.',
       icon: Package,
-      tenure: 'Revolving & Term Options',
-      badge: 'Procurement Growth',
       image: '/images/business-facility-inventory.png'
     },
     {
-      title: 'Equipment & Machinery',
-      desc: 'Invest in revenue-generating commercial equipment, industrial machinery, or technology hardware to increase operational capacity.',
+      title: 'Equipment & machinery',
+      desc: 'Purchase or upgrade machinery, tools and technology.',
       icon: Briefcase,
-      tenure: 'Up to 60 Months',
-      badge: 'Capital Asset Investment',
       image: '/images/business-facility-equipment.png'
     }
   ];
@@ -48,7 +42,7 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
                 Business Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Explore financing options for business expenses such as inventory, equipment, or working capital. QvikLoan connects registered enterprises with participating institutional lenders for objective evaluation.
+                Explore financing for inventory, equipment or working capital through participating lenders.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
@@ -58,9 +52,6 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
                   <span>Enquire for Business Loan</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </button>
-                <div className="text-xs text-neutral-muted">
-                  Direct evaluation by partner NBFCs
-                </div>
               </div>
             </div>
 
@@ -111,26 +102,12 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
                       loading="lazy"
                     />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-teal-soft text-teal-dark flex items-center justify-center">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <span className="text-xs font-semibold text-slate-blue">{f.tenure}</span>
-                    </div>
-                    <span className="text-[11px] font-bold text-royal bg-royal-soft px-2.5 py-0.5 rounded-full">
-                      {f.badge}
-                    </span>
-                  </div>
                   <h3 className="text-xl font-heading font-bold text-navy">
                     {f.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
                     {f.desc}
                   </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-neutral-border/60 text-xs font-semibold text-teal-dark">
-                  Direct Lender Sanction
                 </div>
               </div>
             );
@@ -214,20 +191,20 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
         <div className="bg-white p-8 sm:p-10 rounded-2xl border border-neutral-border shadow-subtle space-y-6">
           <div className="flex items-center gap-2.5 text-navy font-heading font-bold text-lg border-b border-neutral-border pb-3">
             <Info className="w-5 h-5 text-royal" />
-            <span>Commercial Loan Pricing, Lender Responsibility & Disclosures</span>
+            <span>Pricing and responsibilities</span>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-blue leading-relaxed">
             <div>
               <h4 className="font-heading font-bold text-navy mb-2">How Commercial Rates are Determined</h4>
               <p>
-                Business loan interest rates, processing fees, and collateral requirements are decided entirely by the assessing lender. Rates depend on your business vintage, cash flow predictability, balance sheet ratios, and the presence of any collateral or government credit guarantee schemes (such as CGTMSE).
+                The lender sets the interest rate, fees and any collateral requirement, based on factors such as business age, cash flow and financials.
               </p>
             </div>
             <div>
               <h4 className="font-heading font-bold text-navy mb-2">Role of QvikLoan & {companyInfo.name}</h4>
               <p>
-                QvikLoan operates strictly as a loan facilitation and technology platform. We do not act as an underwriter or lender. All loan sanctions, Key Facts Statements, legal loan agreements, and disbursements are executed exclusively by the participating lending institution.
+                QvikLoan is a facilitation platform, not a lender. Offers, the KFS, loan agreements and disbursement come from the lender.
               </p>
             </div>
           </div>
@@ -245,7 +222,7 @@ export default function BusinessLoansPage({ onOpenEnquiry }) {
             Explore Business Financing Options
           </h3>
           <p className="text-slate-300 text-sm max-w-xl mx-auto">
-            Connect with participating lenders to review customized working capital and term facilities.
+            Submitting an enquiry does not commit you to borrowing.
           </p>
           <div className="pt-2">
             <button

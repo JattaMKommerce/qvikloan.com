@@ -15,13 +15,16 @@ export default function AboutUsPage({ onOpenEnquiry }) {
             <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal text-xs font-semibold">
                 <Building2 className="w-3.5 h-3.5" />
-                <span>Corporate Identity & Purpose</span>
+                <span>Corporate Identity &amp; Purpose</span>
               </div>
-              <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
-                About QvikLoan & {companyInfo.name}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
+                About QvikLoan
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-semibold text-royal mt-2">
+                  &amp; {companyInfo.name}
+                </span>
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                QvikLoan is a technology-driven loan enquiry and facilitation platform owned and operated by <strong>{companyInfo.name}</strong>. We empower individuals and business owners to discover, compare, and connect with reputable, regulated financial institutions.
+                QvikLoan is a technology-driven loan enquiry and facilitation platform owned and operated by <strong>{companyInfo.name}</strong>. We help individuals and business owners connect with regulated lenders.
               </p>
             </div>
 
@@ -49,23 +52,20 @@ export default function AboutUsPage({ onOpenEnquiry }) {
               Our Vision
             </span>
             <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy">
-              Democratising Lending Through Absolute Transparency
+              Clear, honest and pressure-free
             </h2>
             <p className="text-slate-blue text-sm sm:text-base leading-relaxed">
-              In an era crowded with opaque financial terms and misleading promises, QvikLoan was founded on a singular principle: <strong>financial advertising and lending facilitation must be completely honest, transparent, and respectful of the borrower</strong>.
-            </p>
-            <p className="text-slate-blue text-sm sm:text-base leading-relaxed">
-              We never promote unrealistic approval guarantees, artificial urgency, or hidden charges. Instead, we offer a clean, reliable digital interface where prospective borrowers can assess their requirements, review Key Facts Statements, understand APR metrics, and make unpressured decisions.
+              No approval guarantees, no artificial urgency, no hidden charges. You review the lender’s terms and decide in your own time.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="p-5 bg-white rounded-2xl border border-neutral-border shadow-subtle space-y-1.5">
                 <span className="font-heading font-bold text-navy text-sm block">Integrity First</span>
-                <span className="text-xs text-neutral-muted">Zero artificial claims, misleading statistics, or deceptive promotional tactics.</span>
+                <span className="text-xs text-neutral-muted">Plain language and honest information.</span>
               </div>
               <div className="p-5 bg-white rounded-2xl border border-neutral-border shadow-subtle space-y-1.5">
                 <span className="font-heading font-bold text-navy text-sm block">Borrower Autonomy</span>
-                <span className="text-xs text-neutral-muted">Full right to review, compare, and decline any offer without penalty or pressure.</span>
+                <span className="text-xs text-neutral-muted">You can decline any offer, with no obligation.</span>
               </div>
             </div>
           </div>
@@ -85,10 +85,6 @@ export default function AboutUsPage({ onOpenEnquiry }) {
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
-                <span>Meta Financial Services Advertising Policies.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
                 <span>Information Technology Act, 2000 & SPDI Rules.</span>
               </li>
               <li className="flex items-start gap-2.5">
@@ -96,46 +92,6 @@ export default function AboutUsPage({ onOpenEnquiry }) {
                 <span>Consumer Protection (E-Commerce) Rules, 2020.</span>
               </li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Dual Presence Showcase: Mumbai & Hubli */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
-            Physical Infrastructure
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-navy">
-            Our Corporate Presence
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="backdrop-blur-md bg-white/95 p-7 rounded-2xl border border-neutral-border shadow-subtle space-y-3">
-            <div className="flex items-center gap-2 text-royal font-bold text-xs uppercase tracking-wider">
-              <MapPin className="w-4 h-4" />
-              <span>Registered Office (Mumbai)</span>
-            </div>
-            <h3 className="text-lg font-heading font-bold text-navy">
-              Citi Mall, Andheri West
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-              {companyInfo.address.registeredOffice}
-            </p>
-          </div>
-
-          <div className="backdrop-blur-md bg-white/95 p-7 rounded-2xl border border-neutral-border shadow-subtle space-y-3">
-            <div className="flex items-center gap-2 text-teal-dark font-bold text-xs uppercase tracking-wider">
-              <Building2 className="w-4 h-4" />
-              <span>Corporate Office (Hubli)</span>
-            </div>
-            <h3 className="text-lg font-heading font-bold text-navy">
-              Park E Block, Hubli
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-blue leading-relaxed">
-              {companyInfo.address.corporateOffice}
-            </p>
           </div>
         </div>
       </section>

@@ -571,3 +571,4 @@ renderToPng('about-us-hero.png', aboutUsHeroSvg);
 renderToPng('participating-lenders-hero.png', lendersHeroSvg);
 
 console.log('All bespoke fintech illustrations successfully generated.');
+

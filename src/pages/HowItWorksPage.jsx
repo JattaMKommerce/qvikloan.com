@@ -7,37 +7,25 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
     {
       num: '01',
       title: 'Tell us what you’re looking for',
-      desc: 'Select whether you need a personal loan or business loan, and specify the amount you wish to enquire about using our intuitive selectors.',
-      details: 'Explore amounts ranging from ₹50,000 for planned personal expenses up to ₹50,00,000 for enterprise growth.',
-      badge: 'Preference Discovery',
-      icon: Layers,
+      desc: 'Choose a personal or business loan and the amount you’d like to enquire about.',
       image: '/images/step-01-enquiry.png'
     },
     {
       num: '02',
-      title: 'Submit your enquiry with explicit consent',
-      desc: 'Provide your basic contact details (full name, phone number, email, and city). You will review clear disclosures about how your data is used before clicking submit.',
-      details: 'We believe in absolute data transparency: your details are shared strictly with participating RBI-registered lenders to evaluate eligibility.',
-      badge: 'Data Protection & Consent',
-      icon: ShieldCheck,
+      title: 'Submit your enquiry',
+      desc: 'Share your basic contact details. You’ll see how your information is used before you submit.',
       image: '/images/step-02-consent.png'
     },
     {
       num: '03',
       title: 'Complete the lender’s checks',
-      desc: 'If a participating lender identifies that your profile matches their criteria, they will request relevant documentation to verify identity, income, or business turnover.',
-      details: 'KYC checks, bank statement analysis, and credit bureau reviews are conducted directly by the regulated underwriting entity.',
-      badge: 'Institutional Underwriting',
-      icon: UserCheck,
+      desc: 'If a lender can consider your application, it may ask for identity, income, credit or business documents.',
       image: '/images/step-03-evaluation.png'
     },
     {
       num: '04',
-      title: 'Review the offer and Key Facts Statement (KFS)',
-      desc: 'If an offer is sanctioned, the lender provides a formal Key Facts Statement (KFS) detailing the sanctioned amount, APR, monthly instalment, processing fee, and total amount repayable.',
-      details: 'You have complete freedom to examine the terms and decide whether to accept or decline. You are under no obligation to proceed.',
-      badge: 'Informed Choice',
-      icon: FileSignature,
+      title: 'Review the offer and decide',
+      desc: 'If a lender makes an offer, read the Key Facts Statement (KFS) and loan agreement. You can accept or decline.',
       image: '/images/step-04-offer-kfs.png'
     }
   ];
@@ -45,23 +33,19 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
   const faqs = [
     {
       q: 'Does submitting an enquiry guarantee a loan?',
-      a: 'No. Submitting an enquiry does not guarantee a loan offer or approval. Approval is solely determined by participating lenders based on their independent underwriting criteria, verification checks, and regulatory risk guidelines.'
+      a: 'No. Any offer and approval is decided by the lender, based on its own eligibility criteria and checks.'
     },
     {
       q: 'Does QvikLoan charge any fees from borrowers?',
-      a: 'No. QvikLoan does not charge any upfront application or facilitation fees to borrowers. If a participating lender sanctions a loan, any applicable processing fee is disclosed in the Key Facts Statement (KFS) and deducted directly from the sanctioned disbursement amount.'
+      a: 'QvikLoan does not charge borrowers for submitting an enquiry. Any lender fees are shown in the Key Facts Statement (KFS) before you accept an offer.'
     },
     {
       q: 'What is a Key Facts Statement (KFS)?',
-      a: 'A Key Facts Statement (KFS) is a standardised disclosure sheet mandated by the Reserve Bank of India (RBI). It provides a concise summary of the loan terms, including the annual percentage rate (APR), monthly instalment (EMI), tenure, all applicable fees, and penal charges.'
-    },
-    {
-      q: 'Who actually lends the money?',
-      a: `All loans facilitated through QvikLoan are provided directly by participating RBI-registered Non-Banking Financial Companies (NBFCs) and scheduled commercial banks. QvikLoan, operated by ${companyInfo.name}, functions as a loan facilitation and technology platform.`
+      a: 'A standard summary of the loan terms — APR, monthly instalment, tenure, fees and penal charges — that the lender gives you before you accept.'
     },
     {
       q: 'How is my personal information protected?',
-      a: 'Your data is encrypted using 256-bit SSL protocols. We only collect the minimal information necessary to match your requirements with lenders. We never sell your information or collect sensitive banking passwords or biometric credentials.'
+      a: 'We collect only what is needed for your enquiry and share it with participating lenders with your consent. We never ask for banking passwords or OTPs.'
     }
   ];
 
@@ -83,7 +67,7 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
                 How QvikLoan Works
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                We believe financial decisions should be transparent, straightforward, and free from hidden terms. Learn how our digital loan facilitation platform connects you with participating institutional lenders.
+                Four simple steps from enquiry to decision — and you stay in control the whole way.
               </p>
               <div className="pt-2">
                 <button
@@ -123,54 +107,31 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
           </h2>
         </div>
 
-        <div className="space-y-6">
-          {steps.map((step, idx) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.num}
-                className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border p-6 sm:p-8 shadow-subtle hover-lift grid grid-cols-1 lg:grid-cols-12 gap-6 items-center transition-all"
-              >
-                {/* Step Illustration Graphic */}
-                <div className="lg:col-span-4 rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 p-2 flex items-center justify-center">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-44 object-contain"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Step Content */}
-                <div className="lg:col-span-8 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-0.5 rounded-full bg-navy text-white text-[11px] font-extrabold font-mono">
-                      Step {step.num}
-                    </span>
-                    <span className="text-xs font-bold text-royal uppercase tracking-wider">
-                      {step.badge}
-                    </span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-navy">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-slate-blue leading-relaxed">
-                    {step.desc}
-                  </p>
-                  <p className="text-xs text-neutral-muted leading-relaxed pt-1">
-                    {step.details}
-                  </p>
-                  <div className="pt-2">
-                    <div className="inline-flex items-center gap-2 text-xs font-semibold text-teal-dark bg-teal-soft px-3 py-1.5 rounded-lg">
-                      <Check className="w-3.5 h-3.5" />
-                      <span>Fair Practice Verified</span>
-                    </div>
-                  </div>
-                </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {steps.map((step) => (
+            <div
+              key={step.num}
+              className="bg-white rounded-2xl border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col transition-all"
+            >
+              <img
+                src={step.image}
+                alt={step.title}
+                className="w-full h-48 sm:h-56 object-contain bg-neutral-bg/60 p-2"
+                loading="lazy"
+              />
+              <div className="p-6 sm:p-8 space-y-3">
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-royal-soft text-royal text-xs font-bold">
+                  Step {step.num}
+                </span>
+                <h3 className="text-xl font-heading font-bold text-navy">
+                  {step.title}
+                </h3>
+                <p className="text-sm sm:text-base text-slate-blue leading-relaxed">
+                  {step.desc}
+                </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -182,7 +143,7 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
               Clear Division of Responsibilities
             </h2>
             <p className="text-xs sm:text-sm text-slate-blue mt-2">
-              For complete compliance and trust, understand what QvikLoan does and what the participating lender handles.
+              What QvikLoan does, and what the lender does.
             </p>
           </div>
 
@@ -265,7 +226,7 @@ export default function HowItWorksPage({ onOpenEnquiry }) {
             Ready to Start Your Loan Enquiry?
           </h3>
           <p className="text-slate-300 text-sm max-w-xl mx-auto">
-            Experience a transparent, streamlined loan facilitation process.
+            Submitting an enquiry does not commit you to borrowing.
           </p>
           <div className="pt-2">
             <button

@@ -35,7 +35,7 @@ export default function ContactUsPage() {
                 Contact QvikLoan Support
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Have questions about loan enquiries, participating lenders, or platform disclosures? Our corporate assistance team at {companyInfo.name} is ready to help you with transparent guidance.
+                Questions about an enquiry or a lender? We’re happy to help.
               </p>
               <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-neutral-muted">
                 <span className="inline-flex items-center gap-1.5 text-teal-dark font-semibold">

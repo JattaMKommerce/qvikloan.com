@@ -330,3 +330,4 @@ const contactHeroSvg = `
 renderSvg('contact-us-hero.png', contactHeroSvg, 800, 500);
 
 console.log('All card & contact illustrations generated successfully.');
+

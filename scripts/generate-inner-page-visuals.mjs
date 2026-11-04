@@ -306,3 +306,4 @@ for (const v of visuals) {
 
 fs.rmSync(tempDir, { recursive: true, force: true });
 console.log('All inner page visual graphics successfully created!');
+
