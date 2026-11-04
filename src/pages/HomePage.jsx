@@ -33,44 +33,44 @@ export default function HomePage({ onOpenEnquiry }) {
     <div className="space-y-16 sm:space-y-24 pb-16">
       
       {/* ==================================================
-          SECTION 1: HERO - EXACT MATCH TO USER SPEC
+          SECTION 1: HERO - SEAMLESS BLEND & CRISP HD RIBBON
           ================================================== */}
-      <section className="relative overflow-hidden bg-white border-b border-neutral-border/80">
+      <section className="relative overflow-hidden bg-white">
         
-        {/* Full 3D Glass Ribbon in Background - Crystal Clear without Fog or Gradient Smudge */}
+        {/* Full 2048x1024 Ultra-HD 3D Glass Ribbon - Crystal Clear & Uncompressed */}
         <div className="absolute inset-y-0 right-0 w-full sm:w-[85%] lg:w-[70%] xl:w-[65%] pointer-events-none select-none overflow-hidden flex items-center justify-end">
           <img
             src="/images/qvikloan-hero-glass-ribbon.png"
             alt=""
-            className="h-full w-auto max-w-none object-contain object-right"
+            className="h-full w-auto max-w-none object-contain object-right transform translate-x-4 sm:translate-x-0"
             loading="eager"
           />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
-          <div className="max-w-xl lg:max-w-xl space-y-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-20 sm:pb-28 lg:pb-32 relative z-10">
+          <div className="max-w-xl lg:max-w-2xl space-y-7 sm:space-y-8">
             
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-royal/30 text-royal text-xs font-semibold tracking-wide shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-royal/30 text-royal text-xs font-semibold tracking-wide shadow-sm">
               <ShieldCheck className="w-3.5 h-3.5 text-royal" />
               <span>Transparent Loan Facilitation Platform</span>
             </div>
 
-            {/* Exact Headline matching image */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[50px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.12]">
-              Explore personal and<br />business loan options
+            {/* Exact Headline with Royal Blue Accent on Loan Categories (Only Header) */}
+            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.14]">
+              Explore <span className="text-royal">personal and business</span><br />loan options
             </h1>
 
-            {/* Exact CEO Approved Description */}
+            {/* Exact CEO Approved Description with Relaxed Spacing */}
             <p className="text-base sm:text-[17px] text-[#4b5563] font-normal leading-relaxed max-w-lg">
               Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
+            {/* CTA Buttons with Spacious Gap */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <button
                 onClick={() => scrollToEnquiry('personal')}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
+                className="inline-flex items-center justify-center px-7 py-4 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-semibold shadow-subtle hover:shadow-premium transition-all duration-200"
               >
                 <span>Explore personal loans</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -78,17 +78,17 @@ export default function HomePage({ onOpenEnquiry }) {
 
               <button
                 onClick={() => scrollToEnquiry('business')}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-neutral-50 text-[#1f2937] border border-[#e5e7eb] hover:border-royal text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
+                className="inline-flex items-center justify-center px-7 py-4 rounded-xl bg-white hover:bg-neutral-bg text-[#1f2937] border border-[#d1d5db] hover:border-royal text-sm sm:text-base font-semibold shadow-subtle transition-all duration-200"
               >
                 <span>Explore business loans</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
             </div>
 
-            {/* Exact CEO Approved Disclosure */}
-            <div className="pt-4 border-t border-[#f3f4f6] max-w-lg">
-              <p className="text-[11px] text-[#6b7280] leading-relaxed">
-                <strong>Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
+            {/* Exact CEO Approved Disclosure - Spacious & Uncongested */}
+            <div className="pt-6 max-w-xl border-t border-neutral-border/60">
+              <p className="text-[12px] sm:text-[12.5px] text-[#6b7280] leading-relaxed">
+                <strong className="text-[#374151]">Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
               </p>
             </div>
 
