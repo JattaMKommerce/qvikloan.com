@@ -377,3 +377,4 @@ export default function LoanEnquiryModal({ isOpen, onClose, initialType = 'perso
     </div>
   );
 }
+

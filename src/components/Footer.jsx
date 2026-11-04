@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Shield, Building2, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, Shield, Building2, MessageCircle } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
           
           {/* Brand & Corporate Identity (Cols 1 & 2) */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block bg-white p-2.5 rounded-xl">
+            <Link to="/" className="inline-block bg-white p-2.5 rounded-xl shadow-sm">
               <img
                 src="/logos/QvikLoan_Web.webp"
                 alt="QvikLoan"
@@ -22,23 +22,31 @@ export default function Footer() {
             
             <p className="text-[14px] text-slate-200/80 leading-relaxed max-w-md">
               A transparent digital loan enquiry and facilitation platform operated by{' '}
-              <strong className="text-white font-semibold">Jatta M Kommerce Private Limited</strong>. Connecting individuals and businesses with participating RBI-registered lenders.
+              <strong className="text-white font-semibold">{companyInfo.name}</strong>. Connecting individuals and businesses with participating RBI-registered lenders.
             </p>
 
-            <div className="space-y-2 pt-2 text-[13px] text-slate-300">
+            <div className="space-y-2.5 pt-2 text-[13px] text-slate-300">
               <div className="flex items-start gap-2.5">
                 <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Operating Entity:</strong> {companyInfo.name} (CIN: {companyInfo.cin})
+                  <strong>Operating Entity:</strong> {companyInfo.name}
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
-                <span>
-                  {companyInfo.address.line1}, {companyInfo.address.city}, {companyInfo.address.state} - {companyInfo.address.postalCode}
-                </span>
+                <div>
+                  <strong className="text-white">Registered Office:</strong><br />
+                  {companyInfo.address.registeredOffice}
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-start gap-2.5">
+                <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-white">Corporate Office:</strong><br />
+                  {companyInfo.address.corporateOffice}
+                </div>
+              </div>
+              <div className="flex items-center gap-2.5 pt-1">
                 <Mail className="w-4 h-4 text-teal-accent shrink-0" />
                 <a href={`mailto:${companyInfo.email}`} className="hover:text-white transition-colors underline-offset-2 hover:underline">
                   {companyInfo.email}
@@ -46,7 +54,20 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-teal-accent shrink-0" />
-                <span>{companyInfo.phone} ({companyInfo.operatingHours})</span>
+                <a href={`tel:${companyInfo.phone}`} className="hover:text-white transition-colors">
+                  {companyInfo.phone} ({companyInfo.operatingHours})
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <MessageCircle className="w-4 h-4 text-teal-accent shrink-0" />
+                <a
+                  href={`https://wa.me/${companyInfo.whatsapp.replace(/\D/g, '')}?text=Hi`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors text-teal-accent font-semibold"
+                >
+                  WhatsApp Us ({companyInfo.whatsapp})
+                </a>
               </div>
             </div>
           </div>
@@ -145,14 +166,14 @@ export default function Footer() {
 
         </div>
 
-        {/* Detailed Compliance & Meta Policy Disclosures */}
+        {/* Detailed Compliance Disclosures */}
         <div className="py-8 text-[12px] text-slate-400 space-y-3 leading-relaxed border-b border-white/10">
           <div className="flex items-center gap-2 text-white font-semibold text-[13px]">
             <Shield className="w-4 h-4 text-teal-accent" />
             <span>Important Regulatory Disclosures</span>
           </div>
           <p>
-            <strong>Role of Platform:</strong> QvikLoan is an online loan enquiry and facilitation platform operated by <strong>Jatta M Kommerce Private Limited</strong>. QvikLoan is neither a bank nor a Non-Banking Financial Company (NBFC) and does not directly provide loans, disburse funds, or make credit decisions. All credit evaluations, loan approvals, interest rates, processing fees, repayment tenures, and disbursements are governed solely by our participating RBI-registered NBFCs and banks under applicable lending agreements.
+            <strong>Role of Platform:</strong> QvikLoan is an online loan enquiry and facilitation platform operated by <strong>{companyInfo.name}</strong>. QvikLoan is neither a bank nor a Non-Banking Financial Company (NBFC) and does not directly provide loans, disburse funds, or make credit decisions. All credit evaluations, loan approvals, interest rates, processing fees, repayment tenures, and disbursements are governed solely by our participating RBI-registered NBFCs and banks under applicable lending agreements.
           </p>
           <p>
             <strong>Borrower Decision & KFS:</strong> Submitting an online enquiry does not guarantee a loan offer or commit the applicant to borrow. If a participating lender issues a loan offer, applicants are advised to review the Key Facts Statement (KFS), Annual Percentage Rate (APR), repayment schedule, and all associated charges before acceptance. Borrowers retain the unconditional right to decline any loan offer.
@@ -162,14 +183,12 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Bottom Copyright & CIN */}
+        {/* Bottom Copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-slate-400">
           <div>
-            © {new Date().getFullYear()} Jatta M Kommerce Private Limited. All rights reserved. QvikLoan™ is an official brand of Jatta M Kommerce Private Limited.
+            © {new Date().getFullYear()} {companyInfo.name}. All rights reserved. QvikLoan™ is an official brand of {companyInfo.name}.
           </div>
           <div className="flex items-center gap-4 text-slate-400">
-            <span>CIN: {companyInfo.cin}</span>
-            <span>•</span>
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
             <span>•</span>
             <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms</Link>

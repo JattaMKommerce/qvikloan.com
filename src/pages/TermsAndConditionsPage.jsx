@@ -113,8 +113,8 @@ export default function TermsAndConditionsPage() {
             </p>
             <div className="bg-neutral-bg p-4 rounded-xl border border-neutral-border text-xs space-y-1">
               <div><strong>Company:</strong> {companyInfo.name} (CIN: {companyInfo.cin})</div>
-              <div><strong>Address:</strong> {companyInfo.address.line1}, {companyInfo.address.city}, {companyInfo.address.state} - {companyInfo.address.postalCode}</div>
-              <div><strong>Email:</strong> <a href={`mailto:${companyInfo.complianceEmail}`} className="text-royal font-semibold">{companyInfo.complianceEmail}</a></div>
+              <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
+              <div><strong>Email:</strong> <a href={`mailto:${companyInfo.complianceEmail}`} className="text-royal font-semibold">{companyInfo.complianceEmail}</a> | <strong>Helpline:</strong> {companyInfo.phone}</div>
             </div>
           </div>
 
@@ -124,3 +124,4 @@ export default function TermsAndConditionsPage() {
     </div>
   );
 }
+

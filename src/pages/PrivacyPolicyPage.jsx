@@ -138,9 +138,10 @@ export default function PrivacyPolicyPage() {
               <div><strong>Name:</strong> {companyInfo.grievanceOfficer.name}</div>
               <div><strong>Designation:</strong> {companyInfo.grievanceOfficer.designation}</div>
               <div><strong>Company:</strong> {companyInfo.name}</div>
-              <div><strong>Address:</strong> {companyInfo.grievanceOfficer.address}</div>
-              <div><strong>Email:</strong> <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold">{companyInfo.grievanceOfficer.email}</a></div>
-              <div><strong>Direct Telephone:</strong> {companyInfo.grievanceOfficer.directPhone}</div>
+              <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
+              <div><strong>Corporate Office:</strong> {companyInfo.address.corporateOffice}</div>
+              <div><strong>Email:</strong> <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold">{companyInfo.email}</a></div>
+              <div><strong>Helpline Phone:</strong> {companyInfo.phone}</div>
               <div><strong>Resolution Timeline:</strong> Acknowledgment within 48 hours; resolution within 14 working days.</div>
             </div>
           </div>
@@ -151,3 +152,4 @@ export default function PrivacyPolicyPage() {
     </div>
   );
 }
+

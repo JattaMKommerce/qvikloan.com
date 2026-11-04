@@ -154,7 +154,7 @@ export default function GrievanceRedressalPage() {
               </div>
               <div className="sm:col-span-2">
                 <span className="text-neutral-muted block mb-0.5">Postal Communication Address</span>
-                <span className="text-navy font-medium">{companyInfo.grievanceOfficer.address}</span>
+                <span className="text-navy font-medium">{companyInfo.address.registeredOffice}</span>
               </div>
               <div className="sm:col-span-2">
                 <span className="text-neutral-muted block mb-0.5">Working Hours & Availability</span>
@@ -281,3 +281,4 @@ export default function GrievanceRedressalPage() {
     </div>
   );
 }
+

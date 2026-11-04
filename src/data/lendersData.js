@@ -63,3 +63,4 @@ export const complianceDisclosures = {
     note: "This is a representative illustration only. Actual loan amounts, interest rates, charges, and tenures are determined by the participating lender upon complete evaluation."
   }
 };
+

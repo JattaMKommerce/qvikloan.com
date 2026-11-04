@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Percent, Calendar, CreditCard, DollarSign, ChevronRight, CheckCircle2, Building2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Percent, Calendar, CreditCard, DollarSign, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
 import FinancialCalculator from '../components/FinancialCalculator';
+import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
+import FintechShowcaseCards from '../components/FintechShowcaseCards';
 import { companyInfo } from '../data/companyInfo';
 import { participatingLenders } from '../data/lendersData';
 
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
 
+  const scrollToEnquiry = (type = 'personal') => {
+    const el = document.getElementById('enquiry-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      onOpenEnquiry(type);
+    }
+  };
+
   return (
-    <div className="space-y-20 sm:space-y-28 pb-16">
+    <div className="space-y-16 sm:space-y-24 pb-16">
       
       {/* ==================================================
           SECTION 1: HERO
@@ -22,7 +33,7 @@ export default function HomePage({ onOpenEnquiry }) {
             <div className="lg:col-span-6 space-y-6">
               
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft border border-royal/20 text-royal text-xs font-semibold tracking-wide">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-royal/20 text-royal text-xs font-semibold tracking-wide shadow-sm">
                 <ShieldCheck className="w-4 h-4 text-royal" />
                 <span>Transparent Loan Facilitation Platform</span>
               </div>
@@ -40,7 +51,7 @@ export default function HomePage({ onOpenEnquiry }) {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                 <button
-                  onClick={() => onOpenEnquiry('personal')}
+                  onClick={() => scrollToEnquiry('personal')}
                   className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-bold shadow-subtle hover:shadow-premium transition-all duration-200"
                 >
                   <span>Explore personal loans</span>
@@ -48,8 +59,8 @@ export default function HomePage({ onOpenEnquiry }) {
                 </button>
 
                 <button
-                  onClick={() => onOpenEnquiry('business')}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-neutral-bg text-navy border border-neutral-border text-sm sm:text-base font-bold shadow-subtle hover:border-slate-blue transition-all duration-200"
+                  onClick={() => scrollToEnquiry('business')}
+                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl backdrop-blur-md bg-white/80 hover:bg-white text-navy border border-neutral-border text-sm sm:text-base font-bold shadow-subtle hover:border-slate-blue transition-all duration-200"
                 >
                   <span>Explore business loans</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -65,13 +76,13 @@ export default function HomePage({ onOpenEnquiry }) {
 
             </div>
 
-            {/* Right Column: Uploaded Hero Illustration */}
+            {/* Right Column: Hero Visual Graphic */}
             <div className="lg:col-span-6 flex justify-center">
               <div className="relative w-full max-w-lg lg:max-w-none">
-                <div className="overflow-hidden rounded-card-lg border border-neutral-border shadow-premium bg-white">
+                <div className="overflow-hidden rounded-card-lg border border-neutral-border shadow-premium backdrop-blur-md bg-white/80">
                   <img
                     src="/images/qvikloan-hero-illustration.png"
-                    alt="QvikLoan Loan Enquiry Assessment and Participating Lenders Illustration"
+                    alt="QvikLoan Loan Enquiry Assessment and Participating Lenders"
                     className="w-full h-auto object-cover"
                     loading="eager"
                   />
@@ -84,10 +95,17 @@ export default function HomePage({ onOpenEnquiry }) {
       </section>
 
       {/* ==================================================
-          SECTION 2: LOAN CATEGORIES
+          FINTECH SHOWCASE CARDS (Paritetbank Style Aesthetic)
           ================================================== */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <FintechShowcaseCards onEnquireClick={() => scrollToEnquiry('personal')} />
+      </section>
+
+      {/* ==================================================
+          SECTION 2: LOAN CATEGORIES (Screenshot Matching)
+          ================================================== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <span className="text-xs font-bold text-royal uppercase tracking-wider block mb-2">
             Tailored Options
           </span>
@@ -97,76 +115,75 @@ export default function HomePage({ onOpenEnquiry }) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Clean, normal-sized cards matching user's screenshot */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           
           {/* CARD 1: Personal loans */}
-          <div className="bg-white rounded-card-lg border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between">
-            <div className="p-8 sm:p-10 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal text-xs font-semibold">
-                Personal Borrowing
+          <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between transition-all">
+            {/* Top Illustration Container */}
+            <div className="p-4 sm:p-5 pb-0">
+              <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center">
+                <img
+                  src="/images/qvikloan-personal-loan-illustration.png"
+                  alt="Personal Loans"
+                  className="w-full h-44 sm:h-48 object-contain object-center"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="text-2xl font-heading font-bold text-navy">
+            </div>
+
+            {/* Content matching CEO copy & user screenshot format */}
+            <div className="p-6 sm:p-7 space-y-3">
+              <h3 className="text-xl sm:text-2xl font-heading font-bold text-navy">
                 Personal loans
               </h3>
-              <p className="text-slate-blue text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-blue text-xs sm:text-sm leading-relaxed">
                 Explore borrowing options for planned personal expenses. Before accepting an offer, check the monthly instalment, annual percentage rate (APR), fees and total amount repayable.
               </p>
               
               <div className="pt-2">
-                <button
-                  onClick={() => navigate('/personal-loans')}
-                  className="inline-flex items-center text-royal font-bold text-sm hover:text-royal-hover group"
+                <Link
+                  to="/personal-loans"
+                  className="inline-flex items-center text-royal font-bold text-sm hover:underline group"
                 >
                   <span>View personal loan options</span>
                   <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 pt-0">
-              <div className="rounded-xl overflow-hidden border border-neutral-border">
-                <img
-                  src="/images/qvikloan-personal-loan-illustration.png"
-                  alt="Personal Loans Evaluation Illustration"
-                  className="w-full h-52 sm:h-60 object-cover"
-                  loading="lazy"
-                />
+                </Link>
               </div>
             </div>
           </div>
 
           {/* CARD 2: Business loans */}
-          <div className="bg-white rounded-card-lg border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between">
-            <div className="p-8 sm:p-10 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-soft text-teal-dark text-xs font-semibold">
-                Commercial & Enterprise
+          <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border shadow-subtle hover-lift overflow-hidden flex flex-col justify-between transition-all">
+            {/* Top Illustration Container */}
+            <div className="p-4 sm:p-5 pb-0">
+              <div className="rounded-xl overflow-hidden bg-neutral-bg/60 border border-neutral-border/60 flex items-center justify-center">
+                <img
+                  src="/images/qvikloan-business-loan-illustration.png"
+                  alt="Business Loans"
+                  className="w-full h-44 sm:h-48 object-contain object-center"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="text-2xl font-heading font-bold text-navy">
+            </div>
+
+            {/* Content matching CEO copy & user screenshot format */}
+            <div className="p-6 sm:p-7 space-y-3">
+              <h3 className="text-xl sm:text-2xl font-heading font-bold text-navy">
                 Business loans
               </h3>
-              <p className="text-slate-blue text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-blue text-xs sm:text-sm leading-relaxed">
                 Explore financing options for business expenses such as inventory, equipment or working capital. Available products and documentation requirements depend on the lender and your business profile.
               </p>
 
               <div className="pt-2">
-                <button
-                  onClick={() => navigate('/business-loans')}
-                  className="inline-flex items-center text-teal-dark font-bold text-sm hover:text-teal-accent group"
+                <Link
+                  to="/business-loans"
+                  className="inline-flex items-center text-teal-dark font-bold text-sm hover:underline group"
                 >
                   <span>View business loan options</span>
                   <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 pt-0">
-              <div className="rounded-xl overflow-hidden border border-neutral-border">
-                <img
-                  src="/images/qvikloan-business-loan-illustration.png"
-                  alt="Business Loans and Financing Illustration"
-                  className="w-full h-52 sm:h-60 object-cover"
-                  loading="lazy"
-                />
+                </Link>
               </div>
             </div>
           </div>
@@ -175,9 +192,14 @@ export default function HomePage({ onOpenEnquiry }) {
       </section>
 
       {/* ==================================================
+          ON-PAGE GLASSMORPHIC ENQUIRY SECTION (User Request)
+          ================================================== */}
+      <GlassLoanEnquirySection />
+
+      {/* ==================================================
           SECTION 3: HOW QVIKLOAN WORKS
           ================================================== */}
-      <section className="bg-neutral-bg py-16 sm:py-20 border-y border-neutral-border">
+      <section className="bg-neutral-bg/80 py-16 sm:py-20 border-y border-neutral-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -193,7 +215,7 @@ export default function HomePage({ onOpenEnquiry }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* CARD 01 */}
-            <div className="bg-white rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
+            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal font-heading font-extrabold text-lg flex items-center justify-center border border-royal/20">
                   01
@@ -211,7 +233,7 @@ export default function HomePage({ onOpenEnquiry }) {
             </div>
 
             {/* CARD 02 */}
-            <div className="bg-white rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
+            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal font-heading font-extrabold text-lg flex items-center justify-center border border-royal/20">
                   02
@@ -229,7 +251,7 @@ export default function HomePage({ onOpenEnquiry }) {
             </div>
 
             {/* CARD 03 */}
-            <div className="bg-white rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
+            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-teal-soft text-teal-dark font-heading font-extrabold text-lg flex items-center justify-center border border-teal-accent/20">
                   03
@@ -247,7 +269,7 @@ export default function HomePage({ onOpenEnquiry }) {
             </div>
 
             {/* CARD 04 */}
-            <div className="bg-white rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
+            <div className="backdrop-blur-md bg-white/90 rounded-card p-6 sm:p-7 border border-neutral-border shadow-subtle hover-lift flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-navy text-white font-heading font-extrabold text-lg flex items-center justify-center">
                   04
@@ -302,7 +324,7 @@ export default function HomePage({ onOpenEnquiry }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           
           {/* Block 1: Annual Percentage Rate */}
-          <div className="bg-white rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
+          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
             <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal flex items-center justify-center mb-4">
               <Percent className="w-6 h-6" />
             </div>
@@ -315,7 +337,7 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* Block 2: Monthly Instalment */}
-          <div className="bg-white rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
+          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
             <div className="w-12 h-12 rounded-xl bg-teal-soft text-teal-dark flex items-center justify-center mb-4">
               <CreditCard className="w-6 h-6" />
             </div>
@@ -328,7 +350,7 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* Block 3: Repayment Period */}
-          <div className="bg-white rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
+          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
             <div className="w-12 h-12 rounded-xl bg-royal-soft text-royal flex items-center justify-center mb-4">
               <Calendar className="w-6 h-6" />
             </div>
@@ -341,7 +363,7 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* Block 4: Total Amount Payable */}
-          <div className="bg-white rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
+          <div className="backdrop-blur-md bg-white/90 rounded-card p-6 border border-neutral-border shadow-subtle hover-lift">
             <div className="w-12 h-12 rounded-xl bg-navy text-white flex items-center justify-center mb-4">
               <DollarSign className="w-6 h-6" />
             </div>
@@ -356,7 +378,7 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
 
         {/* Interactive Comparison Calculator */}
-        <FinancialCalculator onEnquireClick={() => onOpenEnquiry('personal')} />
+        <FinancialCalculator onEnquireClick={() => scrollToEnquiry('personal')} />
 
       </section>
 
@@ -405,12 +427,13 @@ export default function HomePage({ onOpenEnquiry }) {
 
               <div className="pt-4 border-t border-neutral-border text-xs text-neutral-muted space-y-1">
                 <div><strong>Operating Corporate Entity:</strong> {companyInfo.name}</div>
-                <div><strong>Registered CIN:</strong> {companyInfo.cin}</div>
+                <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
+                <div><strong>Helpline:</strong> {companyInfo.phone} ({companyInfo.email})</div>
               </div>
             </div>
 
             {/* Participating Lenders Snapshot */}
-            <div className="lg:col-span-5 bg-neutral-bg p-6 sm:p-7 rounded-card-lg border border-neutral-border space-y-4">
+            <div className="lg:col-span-5 backdrop-blur-md bg-neutral-bg/90 p-6 sm:p-7 rounded-card-lg border border-neutral-border space-y-4 shadow-subtle">
               <div className="flex items-center justify-between pb-3 border-b border-neutral-border">
                 <span className="text-xs font-bold text-navy uppercase tracking-wider">
                   Partner Institutional Lenders
@@ -422,7 +445,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 {participatingLenders.slice(0, 3).map((lender) => (
                   <div
                     key={lender.id}
-                    className="p-3.5 bg-white rounded-xl border border-neutral-border text-xs space-y-1"
+                    className="p-3.5 bg-white rounded-xl border border-neutral-border text-xs space-y-1 shadow-xs"
                   >
                     <div className="flex justify-between font-bold text-navy">
                       <span>{lender.name}</span>
@@ -467,7 +490,7 @@ export default function HomePage({ onOpenEnquiry }) {
             {/* Exact CEO Approved Button */}
             <div className="pt-2">
               <button
-                onClick={() => onOpenEnquiry('personal')}
+                onClick={() => scrollToEnquiry('personal')}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-royal hover:bg-royal-hover text-white text-base font-bold shadow-lg transition-all duration-200"
               >
                 <span>Start an enquiry</span>

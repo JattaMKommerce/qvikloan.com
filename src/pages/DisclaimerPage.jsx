@@ -98,7 +98,9 @@ export default function DisclaimerPage() {
             <div><strong>Platform Name:</strong> QvikLoan (https://qvikloan.com)</div>
             <div><strong>Legal Entity:</strong> {companyInfo.name}</div>
             <div><strong>Corporate Identity Number (CIN):</strong> {companyInfo.cin}</div>
-            <div><strong>Registered Office:</strong> {companyInfo.address.line1}, {companyInfo.address.city}, {companyInfo.address.state} - {companyInfo.address.postalCode}</div>
+            <div><strong>Registered Office:</strong> {companyInfo.address.registeredOffice}</div>
+            <div><strong>Corporate Office:</strong> {companyInfo.address.corporateOffice}</div>
+            <div><strong>Email:</strong> {companyInfo.email} | <strong>Helpline:</strong> {companyInfo.phone}</div>
           </div>
 
         </div>
@@ -107,3 +109,4 @@ export default function DisclaimerPage() {
     </div>
   );
 }
+

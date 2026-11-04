@@ -98,7 +98,15 @@ export default function Navbar({ onOpenEnquiry }) {
             {/* CTA Button */}
             <div className="hidden sm:flex items-center gap-4">
               <button
-                onClick={onOpenEnquiry}
+                onClick={() => {
+                  if (location.pathname === '/') {
+                    const el = document.getElementById('enquiry-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    else onOpenEnquiry();
+                  } else {
+                    onOpenEnquiry();
+                  }
+                }}
                 className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-[14px] font-bold shadow-subtle hover:shadow-premium transition-all duration-200 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-royal focus:ring-offset-2"
               >
                 <span>Explore Loan Options</span>
@@ -158,3 +166,4 @@ export default function Navbar({ onOpenEnquiry }) {
     </>
   );
 }
+

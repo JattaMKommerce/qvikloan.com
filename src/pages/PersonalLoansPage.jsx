@@ -272,3 +272,4 @@ export default function PersonalLoansPage({ onOpenEnquiry }) {
     </div>
   );
 }
+

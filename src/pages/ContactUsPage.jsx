@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Building2, Send, CheckCircle2, ShieldCheck, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Building2, Send, CheckCircle2, MessageSquare, MessageCircle } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
 
 export default function ContactUsPage() {
@@ -31,7 +31,7 @@ export default function ContactUsPage() {
             Contact QvikLoan Support
           </h1>
           <p className="text-sm text-slate-blue leading-relaxed">
-            Have questions about loan enquiries, participating lenders, or platform disclosures? Our corporate team at Jatta M Kommerce Private Limited is here to assist you.
+            Have questions about loan enquiries, participating lenders, or platform disclosures? Our corporate team at {companyInfo.name} is here to assist you.
           </p>
         </div>
       </section>
@@ -42,7 +42,7 @@ export default function ContactUsPage() {
           
           {/* Left Column: Direct Coordinates */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white rounded-card-lg border border-neutral-border p-7 sm:p-8 shadow-subtle space-y-6">
+            <div className="backdrop-blur-md bg-white/95 rounded-card-lg border border-neutral-border p-7 sm:p-8 shadow-subtle space-y-6">
               <h2 className="text-xl font-heading font-bold text-navy">
                 Corporate Coordinates
               </h2>
@@ -60,17 +60,23 @@ export default function ContactUsPage() {
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-teal-dark shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-navy block">Institutional Office</span>
-                    <span>
-                      {companyInfo.address.line1}, {companyInfo.address.city}, {companyInfo.address.state} - {companyInfo.address.postalCode}, India
-                    </span>
+                    <span className="font-bold text-navy block">Registered Office</span>
+                    <span>{companyInfo.address.registeredOffice}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-slate-blue shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-navy block">Corporate Office</span>
+                    <span>{companyInfo.address.corporateOffice}</span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-royal shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-navy block">General Enquiries</span>
+                    <span className="font-bold text-navy block">General & Support Enquiries</span>
                     <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold hover:underline">
                       {companyInfo.email}
                     </a>
@@ -81,7 +87,24 @@ export default function ContactUsPage() {
                   <Phone className="w-5 h-5 text-teal-dark shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-navy block">Helpline Number</span>
-                    <span>{companyInfo.phone}</span>
+                    <a href={`tel:${companyInfo.phone}`} className="hover:underline">
+                      {companyInfo.phone}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <MessageCircle className="w-5 h-5 text-teal-dark shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-navy block">WhatsApp Support</span>
+                    <a
+                      href={`https://wa.me/${companyInfo.whatsapp.replace(/\D/g, '')}?text=Hi`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-teal-accent font-semibold hover:underline"
+                    >
+                      {companyInfo.whatsapp} (Click to Chat)
+                    </a>
                   </div>
                 </div>
 
@@ -90,7 +113,7 @@ export default function ContactUsPage() {
                   <div>
                     <span className="font-bold text-navy block">Business Hours</span>
                     <span>{companyInfo.operatingHours}</span>
-                    <span className="block text-neutral-muted text-xs">Closed on National & Bank Holidays</span>
+                    <span className="block text-neutral-muted text-xs">Closed on Sundays & National Holidays</span>
                   </div>
                 </div>
               </div>
@@ -103,7 +126,7 @@ export default function ContactUsPage() {
 
           {/* Right Column: Interactive Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-card-lg border border-neutral-border p-7 sm:p-10 shadow-subtle space-y-6">
+            <div className="backdrop-blur-md bg-white/95 rounded-card-lg border border-neutral-border p-7 sm:p-10 shadow-subtle space-y-6">
               <h2 className="text-xl font-heading font-bold text-navy">
                 Send Us a Message
               </h2>
@@ -161,7 +184,7 @@ export default function ContactUsPage() {
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="9876543210"
+                        placeholder="9403891692"
                         className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-border focus:border-royal outline-none"
                       />
                     </div>

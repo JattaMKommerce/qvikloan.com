@@ -117,9 +117,15 @@ export default function AboutUsPage({ onOpenEnquiry }) {
                 <span className="font-bold text-navy text-base">Loan Enquiry & Financial Technology Facilitation</span>
               </div>
               <div className="sm:col-span-2">
-                <span className="text-neutral-muted block mb-1">Registered Institutional Office</span>
+                <span className="text-neutral-muted block mb-1">Registered Office</span>
                 <span className="font-medium text-navy text-sm">
-                  {companyInfo.address.line1}, {companyInfo.address.city}, {companyInfo.address.state} - {companyInfo.address.postalCode}, India
+                  {companyInfo.address.registeredOffice}
+                </span>
+              </div>
+              <div className="sm:col-span-2">
+                <span className="text-neutral-muted block mb-1">Corporate Office</span>
+                <span className="font-medium text-navy text-sm">
+                  {companyInfo.address.corporateOffice}
                 </span>
               </div>
               <div>
@@ -129,9 +135,9 @@ export default function AboutUsPage({ onOpenEnquiry }) {
                 </a>
               </div>
               <div>
-                <span className="text-neutral-muted block mb-1">Grievance Desk</span>
-                <a href={`mailto:${companyInfo.grievanceEmail}`} className="text-royal font-semibold hover:underline">
-                  {companyInfo.grievanceEmail}
+                <span className="text-neutral-muted block mb-1">Helpline Phone</span>
+                <a href={`tel:${companyInfo.phone}`} className="text-royal font-semibold hover:underline">
+                  {companyInfo.phone}
                 </a>
               </div>
             </div>

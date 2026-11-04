@@ -354,3 +354,4 @@ for (const item of items) {
 // Clean temp
 fs.rmSync(tempDir, { recursive: true, force: true });
 console.log('Done generating all 3 illustrations!');
+
