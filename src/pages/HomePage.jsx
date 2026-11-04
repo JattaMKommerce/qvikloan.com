@@ -35,51 +35,42 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* ==================================================
           SECTION 1: HERO - EXACT MATCH TO USER SPEC
           ================================================== */}
-      <section className="relative overflow-hidden pt-8 sm:pt-14 lg:pt-16 pb-16 sm:pb-24 lg:pb-28 bg-white border-b border-neutral-border/80">
+      <section className="relative overflow-hidden bg-white border-b border-neutral-border/80">
         
-        {/* Full 3D Glass Ribbon in Background - Unobstructed and Blending from Top */}
-        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        {/* Full 3D Glass Ribbon in Background - Crystal Clear without Fog or Gradient Smudge */}
+        <div className="absolute inset-y-0 right-0 w-full sm:w-[85%] lg:w-[70%] xl:w-[65%] pointer-events-none select-none overflow-hidden flex items-center justify-end">
           <img
             src="/images/qvikloan-hero-glass-ribbon.png"
             alt=""
-            className="absolute right-0 top-0 h-full w-full sm:w-[85%] lg:w-[65%] object-cover lg:object-contain object-right-top opacity-95"
+            className="h-full w-auto max-w-none object-contain object-right"
             loading="eager"
           />
-
-          {/* Top seamless blend from Navbar */}
-          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white via-white/70 to-transparent pointer-events-none" />
-
-          {/* Left blend for text contrast */}
-          <div className="absolute inset-y-0 left-0 w-full lg:w-1/2 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none" />
-
-          {/* Bottom blend */}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-xl lg:max-w-2xl space-y-6 sm:space-y-7">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
+          <div className="max-w-xl lg:max-w-xl space-y-6">
             
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-royal/20 text-royal text-xs font-semibold tracking-wide shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-royal" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-royal/30 text-royal text-xs font-semibold tracking-wide shadow-sm">
+              <ShieldCheck className="w-3.5 h-3.5 text-royal" />
               <span>Transparent Loan Facilitation Platform</span>
             </div>
 
-            {/* Exact CEO Approved Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-heading font-extrabold text-navy tracking-tight leading-[1.12]">
+            {/* Exact Headline matching image */}
+            <h1 className="text-3xl sm:text-4xl lg:text-[50px] font-heading font-extrabold text-[#111827] tracking-tight leading-[1.12]">
               Explore personal and<br />business loan options
             </h1>
 
             {/* Exact CEO Approved Description */}
-            <p className="text-base sm:text-lg text-slate-blue font-normal leading-relaxed max-w-xl">
+            <p className="text-base sm:text-[17px] text-[#4b5563] font-normal leading-relaxed max-w-lg">
               Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
               <button
                 onClick={() => scrollToEnquiry('personal')}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-bold shadow-subtle hover:shadow-premium transition-all duration-200"
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
               >
                 <span>Explore personal loans</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -87,7 +78,7 @@ export default function HomePage({ onOpenEnquiry }) {
 
               <button
                 onClick={() => scrollToEnquiry('business')}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-neutral-bg text-navy border border-neutral-border hover:border-royal text-sm sm:text-base font-bold shadow-subtle transition-all duration-200"
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white hover:bg-neutral-50 text-[#1f2937] border border-[#e5e7eb] hover:border-royal text-sm sm:text-base font-semibold shadow-sm transition-all duration-200"
               >
                 <span>Explore business loans</span>
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -95,8 +86,8 @@ export default function HomePage({ onOpenEnquiry }) {
             </div>
 
             {/* Exact CEO Approved Disclosure */}
-            <div className="pt-4 border-t border-neutral-border/80 max-w-xl">
-              <p className="text-xs text-neutral-muted leading-relaxed">
+            <div className="pt-4 border-t border-[#f3f4f6] max-w-lg">
+              <p className="text-[11px] text-[#6b7280] leading-relaxed">
                 <strong>Important Disclosure:</strong> Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
               </p>
             </div>
