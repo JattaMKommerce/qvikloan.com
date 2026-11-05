@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, CheckCircle2, XCircle, Scale, ExternalLink, Globe } from 'lucide-react';
+import { Building2, CheckCircle2, XCircle, ExternalLink, Globe } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
 import { usePageMeta } from '../lib/usePageMeta';
 
@@ -17,15 +17,6 @@ const WE_DO_NOT = [
   'Set interest rates, fees or repayment terms',
   'Charge borrowers a fee for submitting an enquiry',
   'Ask for OTPs, banking passwords or upfront payments',
-];
-
-// Laws and guidelines relevant to a loan facilitation platform. Listed for information only:
-// this is not a statement that the company has been audited or certified against them.
-const REGULATORY_CONTEXT = [
-  ['Reserve Bank of India (Digital Lending) Directions, 2025', 'Apply to banks and NBFCs that lend digitally and to the Lending Service Providers they work with.'],
-  ['Digital Personal Data Protection Act, 2023 and DPDP Rules, 2025', 'Govern how personal data is collected and used. The Rules are coming into force in phases.'],
-  ['Information Technology Act, 2000 and the SPDI Rules, 2011', 'Cover reasonable security practices for personal information.'],
-  ['Consumer Protection Act, 2019 and E-Commerce Rules, 2020', 'Cover fair dealing with consumers and grievance redressal.'],
 ];
 
 function Detail({ label, children, wide }) {
@@ -59,14 +50,8 @@ export default function AboutUsPage() {
                 </span>
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-2xl">
-                QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable
-                loan options through a loan enquiry facilitation process. QvikLoan currently has no active lending
-                partner. It is owned and operated by{' '}
-                <strong>{companyInfo.name}</strong>.
-              </p>
-              <p className="text-base text-slate-blue leading-relaxed max-w-2xl">
-                QvikLoan is not a lender. Final loan eligibility, approval, applicable interest rates, repayment terms
-                and disbursement are always determined by the lending institution.
+                QvikLoan helps people and businesses explore loan options. We take your enquiry and explain your options
+                in simple words. We are not a lender, and we currently have no active lending partner.
               </p>
               <a
                 href={companyInfo.companyWebsite}
@@ -86,7 +71,7 @@ export default function AboutUsPage() {
                 <img
                   src="/images/about.jpg"
                   alt="Corporate Identity and Governance"
-                  className="w-full h-72 sm:h-80 object-cover object-center"
+                  className="w-full aspect-[3/2] object-cover object-center"
                   loading="eager"
                 />
               </div>
@@ -101,7 +86,7 @@ export default function AboutUsPage() {
           <span className="text-xs font-bold text-royal uppercase tracking-wider block">Our role</span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-navy">Clear about what we do</h2>
           <p className="text-slate-blue text-base leading-relaxed">
-            No approval guarantees and no artificial urgency. You review the lender’s terms and decide in your own time.
+            No approval promises and no pressure. You decide in your own time.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -175,27 +160,6 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* Regulatory context (information, not a certification claim) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-neutral-border bg-white p-6 sm:p-10 space-y-5">
-          <h2 className="text-xl sm:text-2xl font-heading font-bold text-navy flex items-center gap-2.5">
-            <Scale className="w-5 h-5 text-teal-dark" aria-hidden="true" />
-            <span>Laws and guidelines relevant to our work</span>
-          </h2>
-          <p className="text-sm text-slate-blue leading-relaxed">
-            These are the main Indian rules that shape how a loan platform and lenders must
-            work. We list them so you know your rights; the list is not a claim of certification by any regulator.
-          </p>
-          <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {REGULATORY_CONTEXT.map(([law, scope]) => (
-              <div key={law} className="rounded-xl bg-neutral-bg/60 border border-neutral-border/60 p-4">
-                <dt className="font-semibold text-navy text-sm">{law}</dt>
-                <dd className="text-sm text-slate-blue mt-1">{scope}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
     </div>
   );
 }

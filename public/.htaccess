@@ -18,6 +18,9 @@
     RewriteRule ^personal-loans?\.html$ /personal-loans [R=301,L,NC]
     RewriteRule ^business-loans?\.html$ /business-loans [R=301,L,NC]
 
+    # How It Works is now a section of the home page.
+    RewriteRule ^how-it-works/?$ /#how-it-works [R=301,L,NE]
+
     # Real files and folders are served as they are.
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
@@ -25,7 +28,7 @@
 
     # The site's pages and short addresses. KEEP IN SYNC with the routes in src/App.jsx:
     # a page missing from this list answers with HTTP 404.
-    RewriteRule ^(personal-loans|business-loans|how-it-works|about-us|participating-lenders|contact-us|grievance-redressal|privacy-policy|terms-and-conditions|disclaimer|refund-policy|meta-personal-loan|lending-partners|financial-disclaimer|contact|personal-loan|business-loan|terms|grievance|partners)/?$ index.html [L]
+    RewriteRule ^(personal-loans|business-loans|about-us|participating-lenders|contact-us|grievance-redressal|privacy-policy|terms-and-conditions|disclaimer|refund-policy|meta-personal-loan|lending-partners|financial-disclaimer|contact|personal-loan|business-loan|terms|grievance|partners)/?$ index.html [L]
 
     # Anything else really is not found: answer 404, showing the site's own "page not found" screen.
     RewriteRule ^ - [R=404,L]

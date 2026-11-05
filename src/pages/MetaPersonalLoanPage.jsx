@@ -59,9 +59,8 @@ export default function MetaPersonalLoanPage() {
           Personal Loan Enquiry — Learn Your Options
         </h1>
         <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-          QvikLoan is not a lender. We collect your enquiry and explain loan options. We do not promise any offer, rate or
-          approval. If a lender partnership becomes active, the lender will set the rate, tenure and charges and show them
-          in its Key Facts Statement before you decide.
+          Tell us what you need and our team will explain your options. QvikLoan is not a lender, and we do not promise
+          any offer, rate or approval.
         </p>
         <div>
           <Link

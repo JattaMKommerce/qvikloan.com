@@ -54,12 +54,17 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
     setAmount(loanProducts[type].enquiryRange.default);
   };
 
-  // The hero buttons ("Explore personal / business loans") link here with a loan type;
-  // switch the form to that type each time one of them is clicked.
+  // The hero buttons ("Explore personal / business loans") and the hero enquiry card link here
+  // with a loan type (and, from the card, an amount); switch the form to match each time.
   useEffect(() => {
     const requested = location.state?.loanType;
     if (requested === 'personal' || requested === 'business') {
       switchLoanType(requested);
+      const r = loanProducts[requested].enquiryRange;
+      const requestedAmount = Number(location.state?.amount);
+      if (requestedAmount >= r.min && requestedAmount <= r.max) {
+        setAmount(Math.round(requestedAmount / r.step) * r.step);
+      }
     }
   }, [location.key]);
 
@@ -260,8 +265,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
             Start Your Loan Enquiry
           </h2>
           <p className="text-sm sm:text-base text-slate-blue leading-relaxed">
-            Tell us what you need. Our team will contact you. We do not currently share your enquiry with any lender.
-            The lender, when listed, decides whether to make an offer.
+            Tell us what you need and our team will call you. We do not share your enquiry with any lender today.
           </p>
         </div>
 

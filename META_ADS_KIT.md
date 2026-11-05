@@ -44,14 +44,14 @@ There is no business-loan ad landing page yet, so this ad links to the regular B
 | 4 | A repayment example | Hypothetical: ₹50,000 at 18% p.a. for 12 months is ₹4,584 a month and ₹55,008 in total, before fees. Your terms depend on the lender. |
 
 - **Primary text:** Understand how personal loans work before you enquire. QvikLoan is not a lender. Loans subject to credit approval.
-- **CTA:** Learn More, linking to `https://qvikloan.com/how-it-works`
+- **CTA:** Learn More, linking to `https://qvikloan.com/personal-loans`
 
 ## Ad set 4: Read before you borrow (education)
 
 - **Primary text:** Before you accept any loan, read the Key Facts Statement. It shows the APR, EMI, all charges and the cooling-off period. Compare the total amount you will repay, not just the EMI.
 - **Headline:** What to Check Before You Borrow
 - **Description:** A plain guide from QvikLoan
-- **CTA:** Learn More, linking to `https://qvikloan.com/how-it-works`
+- **CTA:** Learn More, linking to `https://qvikloan.com/personal-loans`
 
 ## Ad set 5: Who we are and staying safe (brand)
 

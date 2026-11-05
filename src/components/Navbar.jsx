@@ -25,7 +25,6 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     { name: 'Personal Loans', path: '/personal-loans' },
     { name: 'Business Loans', path: '/business-loans' },
-    { name: 'How It Works', path: '/how-it-works' },
     { name: 'About Us', path: '/about-us' },
     { name: 'Contact Us', path: '/contact-us' },
   ];

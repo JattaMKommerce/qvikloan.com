@@ -21,6 +21,9 @@
  *     classification: 'NBFC',                    // 'Bank' or 'NBFC' (add the NBFC layer if known)
  *     rbiRegistration: 'N-00.00000',             // RBI Certificate of Registration no. (NBFCs)
  *     website: 'https://www.abcfinance.example',
+ *     logo: '/logos/lenders/abc-finance.svg',   // optional; supplied by the lender, with written
+ *                                               // permission to use it. Shown in the home page
+ *                                               // logo strip (components/LenderLogoLoop.jsx)
  *     role: 'Assesses, approves and disburses loans for enquiries shared by QvikLoan',
  *     products: ['Personal loans'],
  *     interestRange: '00% to 00% p.a.',          // only as confirmed by the lender in writing

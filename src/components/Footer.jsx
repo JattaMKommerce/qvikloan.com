@@ -1,19 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Shield, Building2, MessageCircle, Clock } from 'lucide-react';
+import { Mail, Phone, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
 import { companyInfo, phoneDigits } from '../data/companyInfo';
 import { participatingLenders } from '../data/lendersData';
 
 const COLUMNS = [
   {
-    title: 'Quick Links',
+    title: 'Loans',
     links: [
       ['Personal Loan', '/personal-loans'],
       ['Business Loan', '/business-loans'],
-      ['How It Works', '/how-it-works'],
+      ['How It Works', '/#how-it-works'],
+      ['Start an Enquiry', '/#enquiry-section'],
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
       ['About Us', '/about-us'],
       ['Contact Us', '/contact-us'],
-      ['Start an Enquiry', '/#enquiry-section'],
+      ['Lending Partners', '/participating-lenders'],
+      ['Grievance Redressal', '/grievance-redressal'],
     ],
   },
   {
@@ -21,10 +28,8 @@ const COLUMNS = [
     links: [
       ['Privacy Policy', '/privacy-policy'],
       ['Terms & Conditions', '/terms-and-conditions'],
-      ['Refund & Cancellation Policy', '/refund-policy'],
+      ['Refund Policy', '/refund-policy'],
       ['Financial Disclaimer', '/disclaimer'],
-      ['Grievance Redressal Policy', '/grievance-redressal'],
-      ['Lending Partners', '/participating-lenders'],
     ],
   },
 ];
@@ -33,45 +38,27 @@ export default function Footer() {
   const officer = companyInfo.grievanceOfficer;
 
   return (
-    <footer className="bg-navy text-white pt-10 pb-8 sm:pt-12 sm:pb-10 border-t border-slate-blue/30">
+    <footer className="bg-navy text-white pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-8 pb-8 border-b border-white/10">
-
-          {/* Column 1: company */}
-          <div className="space-y-3">
-            <Link to="/" className="inline-block bg-white p-2 rounded-xl shadow-xs">
+        <div className="grid grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-x-6 gap-y-8 pb-8 border-b border-white/10">
+          {/* Brand and contact */}
+          <div className="col-span-2 md:col-span-1 space-y-4">
+            <Link to="/" className="inline-block bg-white px-3 py-2 rounded-xl">
               <img src="/logos/QvikLoan_Web.webp" alt="QvikLoan home" className="h-7 w-auto object-contain" />
             </Link>
-
-            <h2 className="text-xs font-heading font-bold text-white uppercase tracking-wider">Company</h2>
-
+            <p className="text-sm text-slate-300 leading-relaxed max-w-xs">
+              A loan enquiry platform by {companyInfo.name}. We are not a lender.
+            </p>
             <ul className="space-y-2 text-sm text-slate-300">
-              <li className="flex items-start gap-2">
-                <Building2 className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
-                <span>
-                  <strong className="text-white">Legal name:</strong> {companyInfo.name}
-                  {companyInfo.cin && <span className="block">CIN: {companyInfo.cin}</span>}
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
-                <span><strong className="text-white">Registered address:</strong> {companyInfo.address.registeredOffice}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
-                <span><strong className="text-white">Operating office:</strong> {companyInfo.address.corporateOffice}</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Clock className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
-                <span>{companyInfo.operatingHours}</span>
-              </li>
-              <li className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <a href={`mailto:${companyInfo.email}`} className="inline-flex items-center gap-1.5 hover:text-white hover:underline">
+              <li>
+                <a href={`mailto:${companyInfo.email}`} className="inline-flex items-center gap-2 hover:text-white">
                   <Mail className="w-4 h-4 text-teal-accent" aria-hidden="true" />
                   {companyInfo.email}
                 </a>
-                <a href={`tel:+${phoneDigits(companyInfo.phone)}`} className="inline-flex items-center gap-1.5 hover:text-white">
+              </li>
+              <li className="flex flex-wrap gap-x-4 gap-y-2">
+                <a href={`tel:+${phoneDigits(companyInfo.phone)}`} className="inline-flex items-center gap-2 hover:text-white">
                   <Phone className="w-4 h-4 text-teal-accent" aria-hidden="true" />
                   {companyInfo.phone}
                 </a>
@@ -79,16 +66,19 @@ export default function Footer() {
                   href={`https://wa.me/${phoneDigits(companyInfo.whatsapp)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-teal-accent font-semibold hover:text-white"
+                  className="inline-flex items-center gap-2 text-teal-accent font-semibold hover:text-white"
                 >
                   <MessageCircle className="w-4 h-4" aria-hidden="true" />
                   WhatsApp
                 </a>
               </li>
+              <li className="inline-flex items-start gap-2">
+                <Clock className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
+                Mon to Sat, 9:30 AM – 6:30 PM IST
+              </li>
             </ul>
           </div>
 
-          {/* Columns 2 and 3: quick links and legal */}
           {COLUMNS.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <h2 className="text-xs font-heading font-bold text-white uppercase tracking-wider mb-3">{col.title}</h2>
@@ -103,38 +93,28 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Disclosures: kept at a readable size, not fine print */}
-        <div className="py-5 my-6 px-5 rounded-xl bg-white/[0.04] border border-white/10 text-[13px] text-slate-300 space-y-2.5 leading-relaxed">
-          <p className="flex items-center gap-2 text-white font-semibold text-sm">
-            <Shield className="w-4 h-4 text-teal-accent" aria-hidden="true" />
-            Important disclosures
-          </p>
-          <p>
-            <strong className="text-white">Role of QvikLoan:</strong> {companyInfo.roleDisclosure}
-          </p>
-          <p>
-            <strong className="text-white">No guarantee:</strong> Submitting an enquiry does not guarantee a loan offer,
-            approval or disbursement, and does not commit you to borrow. Before accepting any offer, review the lender’s
-            Key Facts Statement (KFS), including the Annual Percentage Rate (APR), repayment schedule and all charges.
-          </p>
-          <p>
-            <strong className="text-white">Fraud warning:</strong> QvikLoan does not charge borrowers for enquiries and
-            will never ask for an upfront fee, OTP or banking password. Pay loan-related amounts only to the lender
-            through its official channels.
-          </p>
-        </div>
+        {/* One short disclosure, in plain words */}
+        <p className="my-6 flex items-start gap-2.5 text-[13px] text-slate-300 leading-relaxed">
+          <ShieldCheck className="w-4 h-4 text-teal-accent shrink-0 mt-0.5" aria-hidden="true" />
+          <span>
+            <strong className="text-white">Please note:</strong> QvikLoan is not a bank or NBFC. We do not lend money or
+            make credit decisions; the lender decides eligibility, approval, rates and charges. An enquiry does not
+            guarantee a loan. We never ask for an upfront fee, OTP or banking password.
+          </span>
+        </p>
 
-        {/* Bottom bar */}
-        <div className="pt-2 space-y-1.5 text-xs text-slate-300 leading-relaxed">
-          <p>© {new Date().getFullYear()} QvikLoan, a brand operated by {companyInfo.name}. All Rights Reserved.</p>
+        {/* Company and grievance details (kept for legal and regulatory reasons) */}
+        <div className="pt-5 border-t border-white/10 space-y-1.5 text-xs text-slate-400 leading-relaxed">
           <p>
-            QvikLoan is {companyInfo.platformRole}, not a lender. Loans are provided by lending institutions (banks and
-            RBI-registered NBFCs).
+            © {new Date().getFullYear()} QvikLoan, a brand of {companyInfo.name}
+            {companyInfo.cin && <> · CIN: {companyInfo.cin}</>}
           </p>
+          <p>Registered office: {companyInfo.address.registeredOffice}</p>
+          <p>Operating office: {companyInfo.address.corporateOffice}</p>
           <p>
-            Grievance Officer: {officer.name} | Email:{' '}
+            Grievance Officer: {officer.name} ·{' '}
             <a href={`mailto:${officer.email}`} className="hover:text-white underline-offset-2 hover:underline">{officer.email}</a>{' '}
-            | Phone: {officer.phone} | Address: {officer.address} | Working Hours: Monday to Saturday, 9:30 AM – 6:30 PM IST
+            · {officer.phone}
           </p>
           {/* Filled from data/lendersData.js: only verified lenders ever appear here */}
           {participatingLenders.length > 0 ? (
@@ -145,10 +125,7 @@ export default function Footer() {
                 .join(' | ')}
             </p>
           ) : (
-            <p>
-              QvikLoan currently has no active lending partner. No enquiry is shared with any lender until a lender is
-              listed on our Lending Partners page and you give fresh consent.
-            </p>
+            <p>QvikLoan currently has no active lending partner and does not share enquiries with any lender.</p>
           )}
         </div>
       </div>

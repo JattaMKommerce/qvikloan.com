@@ -7,7 +7,6 @@ import ChatWidget from './components/ChatWidget';
 import HomePage from './pages/HomePage';
 import PersonalLoansPage from './pages/PersonalLoansPage';
 import BusinessLoansPage from './pages/BusinessLoansPage';
-import HowItWorksPage from './pages/HowItWorksPage';
 import AboutUsPage from './pages/AboutUsPage';
 import ParticipatingLendersPage from './pages/ParticipatingLendersPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
@@ -59,7 +58,6 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/personal-loans" element={<PersonalLoansPage />} />
           <Route path="/business-loans" element={<BusinessLoansPage />} />
-          <Route path="/how-it-works" element={<HowItWorksPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/participating-lenders" element={<ParticipatingLendersPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
@@ -70,6 +68,8 @@ export default function App() {
           <Route path="/refund-policy" element={<RefundPolicyPage />} />
           <Route path={AD_LANDING_PATH} element={<MetaPersonalLoanPage />} />
           {/* Alternative and old-site addresses */}
+          {/* How It Works is now a section of the home page */}
+          <Route path="/how-it-works" element={<Navigate to={{ pathname: '/', hash: '#how-it-works' }} replace />} />
           <Route path="/lending-partners" element={<Navigate to="/participating-lenders" replace />} />
           <Route path="/financial-disclaimer" element={<Navigate to="/disclaimer" replace />} />
           <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
