@@ -60,7 +60,14 @@ export const TERM_LABELS = [
  * lender's pricing; they only illustrate the calculation.
  */
 export const workedExample = {
-  amount: 100000,
-  annualRate: 12,
+  amount: 50000,
+  annualRate: 18,
   tenureMonths: 12,
+};
+
+/** QvikLoan's own rules for accepting an enquiry. Keep in sync with public/api/lead.php. */
+export const enquiryRules = {
+  minAge: 21,
+  maxAge: 58,
+  minMonthlyIncome: 15000,
 };

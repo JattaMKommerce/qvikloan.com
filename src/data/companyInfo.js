@@ -44,9 +44,14 @@ export const companyInfo = {
 
   // PENDING (business confirmation): service commitments shown on the Grievance page.
   grievanceTimelines: {
-    acknowledgement: 'within 48 hours',
-    resolution: 'within 14 working days',
+    support: 'within 7 working days',
+    officer: 'within 15 days',
   },
+
+  // How the site describes QvikLoan's legal role in short disclaimers.
+  // PENDING (legal review): change to e.g. 'a Direct Selling Agent (DSA)' only once the lender
+  // agreements confirm that status.
+  platformRole: 'a loan facilitation platform',
 
   // PENDING (legal review): courts named in the Terms and Conditions.
   jurisdiction: 'Mumbai, Maharashtra',

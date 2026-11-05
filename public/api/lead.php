@@ -69,46 +69,9 @@ if (trim((string) ($in['website'] ?? '')) !== '') {
 }
 
 // ---------------------------------------------------------------- validation
-$labels = [
-    'employmentType' => [
-        'salaried' => 'Salaried (Private / Govt)',
-        'self-employed-professional' => 'Self-Employed Professional',
-        'self-employed-business' => 'Self-Employed Business Owner',
-        'sole-proprietorship' => 'Sole Proprietorship',
-        'partnership-llp' => 'Partnership / LLP',
-        'private-limited' => 'Private Limited Company',
-    ],
-    'incomeBand' => [
-        'below-25k' => 'Monthly income below ₹25,000',
-        '25k-50k' => 'Monthly income ₹25,000 – ₹50,000',
-        '50k-1l' => 'Monthly income ₹50,000 – ₹1,00,000',
-        'above-1l' => 'Monthly income above ₹1,00,000',
-        'below-10l' => 'Annual turnover below ₹10 lakh',
-        '10l-50l' => 'Annual turnover ₹10 – ₹50 lakh',
-        '50l-2cr' => 'Annual turnover ₹50 lakh – ₹2 crore',
-        'above-2cr' => 'Annual turnover above ₹2 crore',
-    ],
-    'existingLoans' => [
-        'none' => 'No existing loans',
-        'yes-under-5k' => 'Yes, total EMI below ₹5,000',
-        'yes-5k-plus' => 'Yes, total EMI ₹5,000 or more',
-    ],
-    'vintage' => [
-        'under-1y' => 'Less than 1 year',
-        '1-3y' => '1 – 3 years',
-        '3y-plus' => 'More than 3 years',
-    ],
-    'tenure' => [
-        '6-12m' => '6 – 12 months',
-        '12-24m' => '12 – 24 months',
-        '24-36m' => '24 – 36 months',
-        '36m-plus' => 'More than 36 months',
-    ],
-    'contactTime' => [
-        'morning' => 'Morning (9:30 AM – 12:00 PM)',
-        'afternoon' => 'Afternoon (12:00 PM – 3:00 PM)',
-        'evening' => 'Evening (3:00 PM – 6:30 PM)',
-    ],
+$employmentLabels = [
+    'salaried' => 'Salaried',
+    'self-employed' => 'Self-Employed',
 ];
 
 /** Trimmed text with control characters removed; rejects values longer than $max bytes. */
@@ -121,19 +84,6 @@ function text(array $in, string $key, int $max): string
     return $value;
 }
 
-/** Human-readable label for an optional dropdown value ('' when not chosen). */
-function choice(array $in, string $key, array $labels, string $fallback = ''): string
-{
-    $value = (string) ($in[$key] ?? '');
-    if ($value === '') {
-        return $fallback;
-    }
-    if (!isset($labels[$key][$value])) {
-        fail(422, 'Please choose a valid option and try again.');
-    }
-    return $labels[$key][$value];
-}
-
 $name = text($in, 'fullName', 300);
 if (strlen($name) < 2) {
     fail(422, 'Please enter your full name as per official records.');
@@ -144,12 +94,13 @@ if (strlen($mobile) === 12 && str_starts_with($mobile, '91')) {
     $mobile = substr($mobile, 2);
 }
 if (!preg_match('/^[6-9]\d{9}$/', $mobile)) {
-    fail(422, 'Please enter a valid 10-digit mobile number.');
+    fail(422, 'Please enter a valid 10-digit Indian mobile number.');
 }
 
-$email = text($in, 'email', 254);
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    fail(422, 'Please enter a valid email address.');
+// Enquiry rules: keep in sync with enquiryRules in src/data/loanProducts.js.
+$age = filter_var($in['age'] ?? null, FILTER_VALIDATE_INT);
+if ($age === false || $age < 21 || $age > 58) {
+    fail(422, 'QvikLoan currently accepts enquiries from people aged 21 to 58.');
 }
 
 $city = text($in, 'city', 300);
@@ -157,9 +108,14 @@ if ($city === '') {
     fail(422, 'Please enter your city.');
 }
 
-$pincode = (string) ($in['pincode'] ?? '');
-if (!preg_match('/^[1-9]\d{5}$/', $pincode)) {
-    fail(422, 'Please enter a valid 6-digit PIN code.');
+$employment = (string) ($in['employmentType'] ?? '');
+if (!isset($employmentLabels[$employment])) {
+    fail(422, 'Please choose your employment type.');
+}
+
+$monthlyIncome = filter_var($in['monthlyIncome'] ?? null, FILTER_VALIDATE_INT);
+if ($monthlyIncome === false || $monthlyIncome < 15000) {
+    fail(422, 'QvikLoan currently accepts enquiries with a monthly income of ₹15,000 or more.');
 }
 
 $loanType = (string) ($in['loanType'] ?? '');
@@ -183,19 +139,14 @@ $lead = [
     'submitted_at' => date('c'),
     'name' => $name,
     'phone' => '+91' . $mobile,
-    'email' => $email,
+    'age' => $age,
     'city' => $city,
-    'pincode' => $pincode,
     'loan_type' => $loanType === 'personal' ? 'Personal loan' : 'Business loan',
     'loan_amount' => $amount,
     'loan_amount_display' => inr($amount),
-    'employment_type' => choice($in, 'employmentType', $labels),
-    'income_band' => choice($in, 'incomeBand', $labels),
-    'existing_loans' => choice($in, 'existingLoans', $labels),
-    'business_vintage' => $loanType === 'business' ? choice($in, 'vintage', $labels) : '',
-    'preferred_tenure' => choice($in, 'tenure', $labels, 'Not sure'),
-    'best_time_to_call' => choice($in, 'contactTime', $labels, 'Any time (Mon–Sat, 9:30 AM – 6:30 PM)'),
-    'purpose' => text($in, 'purpose', 600),
+    'employment_type' => $employmentLabels[$employment],
+    'monthly_income' => $monthlyIncome,
+    'monthly_income_display' => inr($monthlyIncome),
     'consent_given' => true,
     'consent_text' => text($in, 'consentText', 3000),
     'consent_version' => text($in, 'consentVersion', 40),
@@ -352,7 +303,6 @@ function emailLead(string $to, string $from, array $lead, string $note): bool
 
     $headers = implode("\r\n", [
         'From: QvikLoan Website <' . $from . '>',
-        'Reply-To: ' . $lead['email'],
         'Content-Type: text/plain; charset=UTF-8',
     ]);
     return @mail($to, $encodedSubject, $body, $headers);

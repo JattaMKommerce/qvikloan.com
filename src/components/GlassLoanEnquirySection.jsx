@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, CheckCircle2, ArrowRight, Lock, AlertCircle, Building2, User, Sparkles } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import CtaDisclaimer from './CtaDisclaimer';
 import { companyInfo } from '../data/companyInfo';
-import { loanProducts } from '../data/loanProducts';
+import { loanProducts, enquiryRules } from '../data/loanProducts';
+import { formatINR } from '../lib/emi';
 import { submitLead } from '../lib/lead';
+
+const { minAge, maxAge, minMonthlyIncome } = enquiryRules;
 
 // The consent wording shown next to each checkbox. The exact text and its version are stored with
 // every lead as the consent record, so change CONSENT_VERSION whenever the wording changes.
-const CONSENT_VERSION = '2026-11-04';
-const CONSENT_TEXT = `I am 18 years of age or older. I consent to ${companyInfo.name} (QvikLoan) using the details in this form to assess my loan enquiry, contacting me about it by phone call, SMS, WhatsApp or email, and sharing these details with the lending institution(s) listed on QvikLoan's Lending Partners page so that they can assess my eligibility. I understand that this is an enquiry, not a loan application or approval, and that a lender that makes me an offer must give me its Key Facts Statement (KFS) before I accept.`;
+const CONSENT_VERSION = '2026-11-05';
+const TERMS_CONSENT = 'I have read and agree to the Privacy Policy and Terms & Conditions.';
+const SHARING_CONSENT = "I consent to QvikLoan sharing my details with the banks and RBI-registered NBFCs listed on its Lending Partners page, so that they can assess my eligibility. They may check my credit report with credit bureaus as part of their credit assessment.";
+const CONTACT_CONSENT = 'I consent to receive calls, SMS, and WhatsApp updates regarding my enquiry.';
 const MARKETING_TEXT = 'Optional: send me information about other loan products from QvikLoan by SMS, WhatsApp or email. I can withdraw this at any time.';
 
-// Employment options differ by loan type; switching type must not keep the other type's value.
-const DEFAULT_EMPLOYMENT = { personal: 'salaried', business: 'sole-proprietorship' };
+const EMPTY_FORM = { fullName: '', mobileNumber: '', age: '', city: '', employmentType: 'salaried', monthlyIncome: '' };
+const NO_CONSENTS = { terms: false, sharing: false, contact: false };
 
 const inputClass =
   'w-full px-4 py-2.5 rounded-xl border border-neutral-border bg-white/90 text-navy text-sm focus:border-royal focus:ring-2 focus:ring-royal/20 outline-none transition';
 const labelClass = 'block text-xs font-bold text-navy mb-1.5';
-const optional = <span className="font-normal text-neutral-muted">(optional)</span>;
+const checkboxClass = 'mt-1 h-4 w-4 rounded border-neutral-border text-royal focus:ring-royal cursor-pointer flex-shrink-0';
 
 // Why each detail is asked for (shown in the "Why we ask" panel under the form fields).
 const FIELD_PURPOSES = [
-  ['Name, mobile number, email', 'To identify you and contact you about this enquiry.'],
-  ['City and PIN code', 'Lenders lend only in certain locations.'],
-  ['Loan type, amount, purpose, repayment period', 'To understand what you are looking for.'],
-  ['Employment or business type, income or turnover band, existing EMIs, business age', 'To see which listed lenders’ basic criteria may fit. All except employment or business type are optional.'],
-  ['Best time to call', 'To call you when it suits you.'],
+  ['Full name and mobile number', 'To identify you and call you about this enquiry.'],
+  ['Age', `QvikLoan accepts enquiries from people aged ${minAge} to ${maxAge}.`],
+  ['City', 'Lenders lend only in certain locations.'],
+  ['Loan type and amount', 'To understand what you are looking for.'],
+  ['Employment type and monthly income', 'To see which listed lenders’ basic criteria may fit.'],
 ];
 
 export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
@@ -33,21 +39,8 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
   const [loanType, setLoanType] = useState(location.state?.loanType || initialType);
   const range = loanProducts[loanType].enquiryRange;
   const [amount, setAmount] = useState(range.default);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    mobileNumber: '',
-    email: '',
-    city: '',
-    purpose: '',
-    employmentType: DEFAULT_EMPLOYMENT[loanType] || 'salaried',
-    pincode: '',
-    incomeBand: '',
-    existingLoans: '',
-    vintage: '',
-    tenure: '',
-    contactTime: '',
-  });
-  const [consentGiven, setConsentGiven] = useState(false);
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [consents, setConsents] = useState(NO_CONSENTS);
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -59,11 +52,6 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
   const switchLoanType = (type) => {
     setLoanType(type);
     setAmount(loanProducts[type].enquiryRange.default);
-    setFormData(prev => ({
-      ...prev,
-      employmentType: DEFAULT_EMPLOYMENT[type],
-      vintage: type === 'business' ? prev.vintage : '',
-    }));
   };
 
   // The hero buttons ("Explore personal / business loans") link here with a loan type;
@@ -85,28 +73,31 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
     if (submitting) return;
     setErrorMessage('');
 
+    const age = Number(formData.age);
+    const monthlyIncome = Number(formData.monthlyIncome.replace(/[^\d]/g, ''));
+
     if (formData.fullName.trim().length < 2) {
-      setErrorMessage('Please enter your full legal name as per official records.');
+      setErrorMessage('Please enter your full name as per official records.');
       return;
     }
     if (!/^[6-9]\d{9}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
-      setErrorMessage('Please enter a valid 10-digit mobile number.');
+      setErrorMessage('Please enter a valid 10-digit Indian mobile number.');
       return;
     }
-    if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
-      setErrorMessage('Please enter a valid email address.');
+    if (!Number.isInteger(age) || age < minAge || age > maxAge) {
+      setErrorMessage(`QvikLoan currently accepts enquiries from people aged ${minAge} to ${maxAge}.`);
       return;
     }
     if (!formData.city.trim()) {
       setErrorMessage('Please enter your city.');
       return;
     }
-    if (!/^[1-9]\d{5}$/.test(formData.pincode)) {
-      setErrorMessage('Please enter a valid 6-digit PIN code.');
+    if (monthlyIncome < minMonthlyIncome) {
+      setErrorMessage(`QvikLoan currently accepts enquiries with a monthly income of ${formatINR(minMonthlyIncome)} or more.`);
       return;
     }
-    if (!consentGiven) {
-      setErrorMessage('Please tick the consent box so we can process your enquiry. Without it we cannot assess your enquiry or share it with a lender.');
+    if (!consents.terms || !consents.sharing || !consents.contact) {
+      setErrorMessage('Please tick all three required boxes so we can process your enquiry.');
       return;
     }
 
@@ -114,12 +105,16 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
     try {
       // Sent to /api/lead.php, which forwards the lead to iamkratu.ai.
       const reference = await submitLead({
-        ...formData,
+        fullName: formData.fullName,
         mobileNumber: formData.mobileNumber.replace(/\D/g, ''),
+        age,
+        city: formData.city,
+        employmentType: formData.employmentType,
+        monthlyIncome,
         loanType,
         amount,
         consent: true,
-        consentText: marketingConsent ? `${CONSENT_TEXT}\n${MARKETING_TEXT}` : CONSENT_TEXT,
+        consentText: [TERMS_CONSENT, SHARING_CONSENT, CONTACT_CONSENT, ...(marketingConsent ? [MARKETING_TEXT] : [])].join('\n'),
         consentVersion: CONSENT_VERSION,
         marketingConsent,
         website: honeypot,
@@ -140,21 +135,8 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
   const handleReset = () => {
     setSubmitted(false);
     setEnquiryRef('');
-    setFormData({
-      fullName: '',
-      mobileNumber: '',
-      email: '',
-      city: '',
-      purpose: '',
-      employmentType: DEFAULT_EMPLOYMENT[loanType],
-      pincode: '',
-      incomeBand: '',
-      existingLoans: '',
-      vintage: '',
-      tenure: '',
-      contactTime: '',
-    });
-    setConsentGiven(false);
+    setFormData(EMPTY_FORM);
+    setConsents(NO_CONSENTS);
     setMarketingConsent(false);
   };
 
@@ -293,11 +275,11 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 <CheckCircle2 className="w-10 h-10" aria-hidden="true" />
               </div>
               <h3 className="text-2xl font-heading font-bold text-navy">
-                Enquiry received
+                Thank you!
               </h3>
               <p className="text-sm text-slate-blue max-w-md mx-auto">
-                Your enquiry reference is <strong className="text-navy font-semibold">{enquiryRef}</strong>.
-                Please keep it for any follow-up.
+                Our team will contact you within 24 working hours. Your Reference ID is{' '}
+                <strong className="text-navy font-semibold">{enquiryRef}</strong>. Do not share your OTP with anyone.
               </p>
 
               <div className="backdrop-blur-md bg-white/80 rounded-2xl p-5 text-left border border-white text-sm text-neutral-text space-y-2 max-w-lg mx-auto shadow-sm">
@@ -306,7 +288,6 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                   What happens next?
                 </div>
                 <ul className="list-disc pl-5 space-y-1 text-slate-blue">
-                  <li>Our team will contact you during business hours ({companyInfo.operatingHours}).</li>
                   <li>If a listed lender reviews your enquiry, it runs its own checks and decides whether to make an offer.</li>
                   <li>Any offer must come with the lender's Key Facts Statement (KFS). You can accept or decline it.</li>
                   <li>QvikLoan will never ask you for an upfront fee, an OTP or your banking password.</li>
@@ -345,7 +326,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
               {/* Loan Category Selector Tabs */}
               <fieldset>
                 <legend className="block text-xs font-bold text-neutral-muted uppercase tracking-wider mb-2.5">
-                  Select Loan Category
+                  Loan Type
                 </legend>
                 <div className="grid grid-cols-2 gap-3">
                   {[['personal', 'Personal Loan', User], ['business', 'Business Loan', Building2]].map(([type, text, Icon]) => (
@@ -371,7 +352,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
               <div className="space-y-3 bg-white/70 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-white">
                 <div className="flex justify-between items-center">
                   <label htmlFor="enq-amount" className="text-xs font-bold text-neutral-muted uppercase tracking-wider">
-                    Amount you are looking for
+                    Loan Amount Needed
                   </label>
                   <span className="text-xl sm:text-2xl font-heading font-extrabold text-navy" aria-hidden="true">
                     ₹{amount.toLocaleString('en-IN')}
@@ -403,7 +384,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                 <div>
-                  <label htmlFor="enq-fullName" className={labelClass}>Full Name (as per official ID) *</label>
+                  <label htmlFor="enq-fullName" className={labelClass}>Full Name *</label>
                   <input id="enq-fullName" type="text" name="fullName" autoComplete="name" required value={formData.fullName} onChange={handleInputChange} placeholder="e.g. Rahul Sharma" className={inputClass} />
                 </div>
 
@@ -416,117 +397,26 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 </div>
 
                 <div>
-                  <label htmlFor="enq-email" className={labelClass}>Email Address *</label>
-                  <input id="enq-email" type="email" name="email" autoComplete="email" required value={formData.email} onChange={handleInputChange} placeholder="name@example.com" className={inputClass} />
+                  <label htmlFor="enq-age" className={labelClass}>Age *</label>
+                  <input id="enq-age" type="text" name="age" inputMode="numeric" required maxLength="2" value={formData.age} onChange={handleInputChange} placeholder={`${minAge} to ${maxAge}`} className={inputClass} />
                 </div>
 
                 <div>
-                  <label htmlFor="enq-city" className={labelClass}>City / State *</label>
-                  <input id="enq-city" type="text" name="city" autoComplete="address-level2" required value={formData.city} onChange={handleInputChange} placeholder="e.g. Mumbai, Maharashtra" className={inputClass} />
+                  <label htmlFor="enq-city" className={labelClass}>City *</label>
+                  <input id="enq-city" type="text" name="city" autoComplete="address-level2" required value={formData.city} onChange={handleInputChange} placeholder="e.g. Mumbai" className={inputClass} />
                 </div>
 
                 <div>
-                  <label htmlFor="enq-employment" className={labelClass}>
-                    {loanType === 'personal' ? 'Employment Type' : 'Business Entity Type'}
-                  </label>
+                  <label htmlFor="enq-employment" className={labelClass}>Employment Type *</label>
                   <select id="enq-employment" name="employmentType" value={formData.employmentType} onChange={handleInputChange} className={inputClass}>
-                    {loanType === 'personal' ? (
-                      <>
-                        <option value="salaried">Salaried (Private / Govt)</option>
-                        <option value="self-employed-professional">Self-Employed Professional (Doctor, CA, etc.)</option>
-                        <option value="self-employed-business">Self-Employed Business Owner</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="sole-proprietorship">Sole Proprietorship</option>
-                        <option value="partnership-llp">Partnership / LLP</option>
-                        <option value="private-limited">Private Limited Company</option>
-                      </>
-                    )}
+                    <option value="salaried">Salaried</option>
+                    <option value="self-employed">Self-Employed</option>
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="enq-purpose" className={labelClass}>Planned Purpose {optional}</label>
-                  <input id="enq-purpose" type="text" name="purpose" maxLength={200} value={formData.purpose} onChange={handleInputChange} placeholder={loanType === 'personal' ? 'e.g. Home Renovation, Education' : 'e.g. Working Capital, Inventory'} className={inputClass} />
-                </div>
-
-                {/* PIN Code (lenders check serviceability by PIN) */}
-                <div>
-                  <label htmlFor="enq-pincode" className={labelClass}>PIN Code *</label>
-                  <input id="enq-pincode" type="text" name="pincode" inputMode="numeric" autoComplete="postal-code" required maxLength="6" value={formData.pincode} onChange={handleInputChange} placeholder="400053" className={inputClass} />
-                </div>
-
-                {/* Monthly income for personal loans, annual turnover for business loans */}
-                <div>
-                  <label htmlFor="enq-income" className={labelClass}>
-                    {loanType === 'personal' ? 'Monthly Net Income' : 'Annual Business Turnover'} {optional}
-                  </label>
-                  <select id="enq-income" name="incomeBand" value={formData.incomeBand} onChange={handleInputChange} className={inputClass}>
-                    <option value="">Prefer not to say</option>
-                    {loanType === 'personal' ? (
-                      <>
-                        <option value="below-25k">Below ₹25,000</option>
-                        <option value="25k-50k">₹25,000 – ₹50,000</option>
-                        <option value="50k-1l">₹50,000 – ₹1,00,000</option>
-                        <option value="above-1l">Above ₹1,00,000</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="below-10l">Below ₹10 lakh</option>
-                        <option value="10l-50l">₹10 – ₹50 lakh</option>
-                        <option value="50l-2cr">₹50 lakh – ₹2 crore</option>
-                        <option value="above-2cr">Above ₹2 crore</option>
-                      </>
-                    )}
-                  </select>
-                </div>
-
-                {/* Existing EMIs (personal) or existing business loans (business) */}
-                <div>
-                  <label htmlFor="enq-existing" className={labelClass}>
-                    {loanType === 'personal' ? 'Existing Loan EMIs?' : 'Existing Business Loans?'} {optional}
-                  </label>
-                  <select id="enq-existing" name="existingLoans" value={formData.existingLoans} onChange={handleInputChange} className={inputClass}>
-                    <option value="">Prefer not to say</option>
-                    <option value="none">No</option>
-                    <option value="yes-under-5k">Yes, total EMI below ₹5,000</option>
-                    <option value="yes-5k-plus">Yes, total EMI ₹5,000 or more</option>
-                  </select>
-                </div>
-
-                {loanType === 'business' && (
-                  <div>
-                    <label htmlFor="enq-vintage" className={labelClass}>Business Vintage {optional}</label>
-                    <select id="enq-vintage" name="vintage" value={formData.vintage} onChange={handleInputChange} className={inputClass}>
-                      <option value="">Prefer not to say</option>
-                      <option value="under-1y">Less than 1 year</option>
-                      <option value="1-3y">1 – 3 years</option>
-                      <option value="3y-plus">More than 3 years</option>
-                    </select>
-                  </div>
-                )}
-
-                <div>
-                  <label htmlFor="enq-tenure" className={labelClass}>Preferred Repayment Period {optional}</label>
-                  <select id="enq-tenure" name="tenure" value={formData.tenure} onChange={handleInputChange} className={inputClass}>
-                    <option value="">Not sure</option>
-                    <option value="6-12m">6 – 12 months</option>
-                    <option value="12-24m">12 – 24 months</option>
-                    <option value="24-36m">24 – 36 months</option>
-                    <option value="36m-plus">More than 36 months</option>
-                  </select>
-                </div>
-
-                {/* Best time to call, matches support hours */}
-                <div>
-                  <label htmlFor="enq-contactTime" className={labelClass}>Best Time to Call {optional}</label>
-                  <select id="enq-contactTime" name="contactTime" value={formData.contactTime} onChange={handleInputChange} className={inputClass}>
-                    <option value="">Any time (Mon–Sat, 9:30 AM – 6:30 PM)</option>
-                    <option value="morning">Morning (9:30 AM – 12:00 PM)</option>
-                    <option value="afternoon">Afternoon (12:00 PM – 3:00 PM)</option>
-                    <option value="evening">Evening (3:00 PM – 6:30 PM)</option>
-                  </select>
+                  <label htmlFor="enq-income" className={labelClass}>Monthly Income (₹) *</label>
+                  <input id="enq-income" type="text" name="monthlyIncome" inputMode="numeric" required maxLength="12" value={formData.monthlyIncome} onChange={handleInputChange} placeholder="e.g. 40000" className={inputClass} />
                 </div>
               </div>
 
@@ -535,7 +425,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 <p className="font-semibold text-navy">How we use these details</p>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>{companyInfo.name} (QvikLoan) uses them to understand your requirement and contact you about it.</li>
-                  <li>We share them with a lender only if you tick the first box below, and only with lenders listed on our <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.</li>
+                  <li>We share them only with lenders listed on our <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page, and only with your consent.</li>
                   <li>We do not ask for PAN, Aadhaar, bank details or documents here, and we do not send the contents of this form to advertising or analytics platforms.</li>
                   <li>We keep enquiry records {companyInfo.dataRetention}. You can ask us to delete them or withdraw consent at any time: email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>.</li>
                 </ul>
@@ -552,27 +442,29 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 </details>
               </div>
 
-              {/* Consent: required for the service, optional for marketing. Neither is pre-ticked. */}
+              {/* Consent: three required for the service, one optional for marketing. None is pre-ticked. */}
               <div className="space-y-3">
                 <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={consentGiven}
-                    onChange={(e) => setConsentGiven(e.target.checked)}
-                    className="mt-1 h-4 w-4 rounded border-neutral-border text-royal focus:ring-royal cursor-pointer flex-shrink-0"
-                  />
+                  <input type="checkbox" checked={consents.terms} onChange={(e) => setConsents(prev => ({ ...prev, terms: e.target.checked }))} className={checkboxClass} />
                   <span className="text-sm text-slate-blue leading-relaxed">
-                    <strong className="text-navy">Required:</strong> {CONSENT_TEXT}
+                    I have read and agree to the{' '}
+                    <Link to="/privacy-policy" className="text-royal font-semibold underline">Privacy Policy</Link> and{' '}
+                    <Link to="/terms-and-conditions" className="text-royal font-semibold underline">Terms &amp; Conditions</Link>. *
                   </span>
                 </label>
 
                 <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={marketingConsent}
-                    onChange={(e) => setMarketingConsent(e.target.checked)}
-                    className="mt-1 h-4 w-4 rounded border-neutral-border text-royal focus:ring-royal cursor-pointer flex-shrink-0"
-                  />
+                  <input type="checkbox" checked={consents.sharing} onChange={(e) => setConsents(prev => ({ ...prev, sharing: e.target.checked }))} className={checkboxClass} />
+                  <span className="text-sm text-slate-blue leading-relaxed">{SHARING_CONSENT} *</span>
+                </label>
+
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" checked={consents.contact} onChange={(e) => setConsents(prev => ({ ...prev, contact: e.target.checked }))} className={checkboxClass} />
+                  <span className="text-sm text-slate-blue leading-relaxed">{CONTACT_CONSENT} *</span>
+                </label>
+
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" checked={marketingConsent} onChange={(e) => setMarketingConsent(e.target.checked)} className={checkboxClass} />
                   <span className="text-sm text-slate-blue leading-relaxed">{MARKETING_TEXT}</span>
                 </label>
               </div>
@@ -599,11 +491,11 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                     </>
                   )}
                 </button>
-                <p className="text-xs text-neutral-muted text-center">
-                  By submitting, you confirm you have read our{' '}
-                  <Link to="/privacy-policy" className="text-royal underline">Privacy Policy</Link> and{' '}
-                  <Link to="/terms-and-conditions" className="text-royal underline">Terms and Conditions</Link>.
+                <p className="text-[13px] text-slate-blue text-center leading-relaxed">
+                  By submitting, you confirm you are aged {minAge} to {maxAge} and an Indian resident. QvikLoan does not
+                  fetch your credit report; a lender that reviews your enquiry may do so. Loans are subject to lender approval.
                 </p>
+                <CtaDisclaimer className="text-center" />
               </div>
 
               <div className="pt-4 border-t border-neutral-border/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-muted">
@@ -620,15 +512,6 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
           )}
 
         </div>
-
-        {/* Platform role disclosure */}
-        <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-white/85 backdrop-blur-md border border-neutral-border text-sm text-slate-blue leading-relaxed">
-          <p>
-            <strong className="text-navy">Important:</strong> {companyInfo.roleDisclosure} QvikLoan does not charge
-            borrowers for submitting an enquiry. Check the lender's Key Facts Statement before accepting any offer.
-          </p>
-        </div>
-
       </div>
     </section>
   );

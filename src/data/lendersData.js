@@ -21,6 +21,7 @@
  *     website: 'https://www.abcfinance.example',
  *     role: 'Assesses, approves and disburses loans for enquiries shared by QvikLoan',
  *     products: ['Personal loans'],
+ *     interestRange: '00% to 00% p.a.',          // only as confirmed by the lender in writing
  *     loanTermsUrl: 'https://...',               // lender's published rates & charges page
  *     grievance: { name: 'Officer name', email: 'grievance@...', phone: '...' },
  *     lspListingUrl: 'https://...',              // lender page listing QvikLoan as its LSP

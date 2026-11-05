@@ -17,7 +17,7 @@ function ExternalA({ href, children }) {
 export default function GrievanceRedressalPage() {
   usePageMeta('Grievance Redressal', 'How to raise a complaint about QvikLoan or about a loan from a lender, our Grievance Redressal Officer, response times and how to escalate to the RBI.');
   const officer = companyInfo.grievanceOfficer;
-  const { acknowledgement, resolution } = companyInfo.grievanceTimelines;
+  const { support, officer: officerTimeline } = companyInfo.grievanceTimelines;
 
   return (
     <div className="pb-16">
@@ -83,11 +83,10 @@ export default function GrievanceRedressalPage() {
           <h2 id="process" className="text-2xl font-heading font-bold text-navy">How it works and how to escalate</h2>
           <ol className="space-y-4">
             {[
-              ['Tell us', <>Use the form below, email <a href={`mailto:${officer.email}`} className="text-royal font-semibold underline">{officer.email}</a>, call {officer.phone}, or write to the address above. Include your enquiry reference if you have one. You will get a complaint reference number.</>],
-              ['We respond', <>We aim to acknowledge your complaint {acknowledgement} and send you a resolution {resolution}. If we need more time, we will tell you why.</>],
-              ['If it is about a loan', <>Contact the lender’s grievance officer. Lenders are also responsible for the platforms they work with, so you can raise a complaint about how QvikLoan handled an enquiry for a lender with that lender too.</>],
-              ['Escalate to the RBI', <>If the lender rejects your complaint, does not reply within 30 days, or you are not satisfied with its reply, you can complain under the RBI’s Integrated Ombudsman Scheme at <ExternalA href="https://cms.rbi.org.in">cms.rbi.org.in</ExternalA>, or by post to the RBI’s Centralised Receipt and Processing Centre in Chandigarh.</>],
-              ['Other options', <>For complaints about our own service you can also contact the National Consumer Helpline (<ExternalA href="https://consumerhelpline.gov.in">consumerhelpline.gov.in</ExternalA>, 1915). Report fraud at <ExternalA href="https://cybercrime.gov.in">cybercrime.gov.in</ExternalA> or 1930, and unauthorised lenders on the RBI’s <ExternalA href="https://sachet.rbi.org.in">Sachet portal</ExternalA>.</>],
+              ['Level 1: Customer Support', <>Email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>, call {companyInfo.phone}, or use the form below. Include your enquiry reference if you have one. You will get a complaint reference number. We aim to resolve complaints {support}.</>],
+              ['Level 2: Grievance Redressal Officer', <>If your complaint is not resolved in 7 working days, or you are not satisfied, write to the Grievance Redressal Officer at <a href={`mailto:${officer.email}`} className="text-royal font-semibold underline">{officer.email}</a> with your complaint reference, or by post to the address above. The officer aims to resolve it {officerTimeline}. If we need more time, we will tell you why.</>],
+              ['Level 3: RBI Ombudsman (complaints about a loan or lender)', <>Raise it with the lender’s grievance officer first. If the lender rejects your complaint, does not reply within 30 days, or you are not satisfied with its reply, you can complain under the RBI’s Integrated Ombudsman Scheme at <ExternalA href="https://cms.rbi.org.in">cms.rbi.org.in</ExternalA>, or by post to the RBI’s Centralised Receipt and Processing Centre in Chandigarh. The scheme covers RBI-regulated lenders. Lenders are also responsible for the platforms they work with, so you can raise how QvikLoan handled an enquiry for a lender with that lender too.</>],
+              ['Other options', <>For complaints about QvikLoan’s own service you can also contact the National Consumer Helpline (<ExternalA href="https://consumerhelpline.gov.in">consumerhelpline.gov.in</ExternalA>, 1915). Report fraud at <ExternalA href="https://cybercrime.gov.in">cybercrime.gov.in</ExternalA> or 1930, and unauthorised lenders on the RBI’s <ExternalA href="https://sachet.rbi.org.in">Sachet portal</ExternalA>.</>],
             ].map(([title, body], i) => (
               <li key={title} className="flex gap-4 rounded-2xl border border-neutral-border bg-white p-5">
                 <span className="w-9 h-9 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-heading shrink-0">{i + 1}</span>

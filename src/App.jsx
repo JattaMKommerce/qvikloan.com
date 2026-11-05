@@ -16,6 +16,11 @@ import DisclaimerPage from './pages/DisclaimerPage';
 import GrievanceRedressalPage from './pages/GrievanceRedressalPage';
 import ContactUsPage from './pages/ContactUsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import RefundPolicyPage from './pages/RefundPolicyPage';
+import MetaPersonalLoanPage from './pages/MetaPersonalLoanPage';
+
+// Ad landing page: keeps the footer, but has its own minimal header and no chat pop-up.
+const AD_LANDING_PATH = '/meta-personal-loan';
 
 // On route change: scroll to top, or to the section named in the URL hash
 // (e.g. /#enquiry-section from the navbar on any page).
@@ -41,11 +46,13 @@ function ScrollManager() {
 }
 
 export default function App() {
+  const isAdLanding = useLocation().pathname === AD_LANDING_PATH;
+
   return (
     <div className="min-h-screen flex flex-col text-neutral-text antialiased">
       <ScrollManager />
 
-      <Navbar />
+      {!isAdLanding && <Navbar />}
 
       <main className="flex-grow">
         <Routes>
@@ -60,10 +67,17 @@ export default function App() {
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/grievance-redressal" element={<GrievanceRedressalPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/refund-policy" element={<RefundPolicyPage />} />
+          <Route path={AD_LANDING_PATH} element={<MetaPersonalLoanPage />} />
           {/* Alternative and old-site addresses */}
           <Route path="/lending-partners" element={<Navigate to="/participating-lenders" replace />} />
           <Route path="/financial-disclaimer" element={<Navigate to="/disclaimer" replace />} />
           <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
+          <Route path="/personal-loan" element={<Navigate to="/personal-loans" replace />} />
+          <Route path="/business-loan" element={<Navigate to="/business-loans" replace />} />
+          <Route path="/terms" element={<Navigate to="/terms-and-conditions" replace />} />
+          <Route path="/grievance" element={<Navigate to="/grievance-redressal" replace />} />
+          <Route path="/partners" element={<Navigate to="/participating-lenders" replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
@@ -71,7 +85,7 @@ export default function App() {
       <Footer />
 
       {/* iamkratu.ai chatbot, on every page */}
-      <ChatWidget />
+      {!isAdLanding && <ChatWidget />}
     </div>
   );
 }

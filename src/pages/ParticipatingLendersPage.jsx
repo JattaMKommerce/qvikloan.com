@@ -26,7 +26,8 @@ function LenderCard({ lender }) {
     ['Official website', lender.website && <ExternalA href={lender.website}>{lender.website.replace(/^https?:\/\//, '')}</ExternalA>],
     ['Role in your loan', lender.role],
     ['Loan products', lender.products?.length ? lender.products.join(', ') : null],
-    ['Rates and charges', lender.loanTermsUrl && <ExternalA href={lender.loanTermsUrl}>Lender’s published terms</ExternalA>],
+    ['Interest range', lender.interestRange],
+    ['Rates and charges', lender.loanTermsUrl &&<ExternalA href={lender.loanTermsUrl}>Lender’s published terms</ExternalA>],
     ['Grievance officer', lender.grievance?.email && (
       <span>
         {lender.grievance.name && <span className="block">{lender.grievance.name}</span>}
@@ -87,7 +88,8 @@ export default function ParticipatingLendersPage() {
           <h2 id="lender-list" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Our lending partners</h2>
           <p className="text-sm sm:text-base text-slate-blue">
             Your enquiry is shared only with lenders listed on this page, and only after you give consent on the enquiry
-            form. Each lender sets its own eligibility rules, rates and charges.
+            form. Each lender sets its own eligibility rules, rates and charges. This list is updated as per active
+            partnerships.
           </p>
         </div>
 
