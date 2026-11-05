@@ -153,7 +153,7 @@ export default function PrivacyPolicyPage() {
             They may use your information only to provide these services to us.
           </li>
           <li><strong>Authorities:</strong> when the law requires it, for example in response to a court order or a lawful request from a regulator or law enforcement agency.</li>
-          <li><strong>Advertising and analytics platforms:</strong> If we run advertisements, we may use Meta Pixel and Google Analytics with your consent to understand which ads bring enquiries. We never send them the contents of your enquiry (such as name, mobile, income, loan amount). You can withdraw consent anytime via {mail}. If we add pixels, we will update this policy first.</li>
+          <li><strong>Advertising and analytics platforms:</strong> If we run advertisements, we may use Meta Pixel and Google Analytics with your consent to understand which ads bring enquiries. We never send them the contents of your enquiry (such as name, mobile, income, loan amount). You can withdraw consent anytime via {mail}.</li>
         </ul>
         <p>We do not sell or rent your personal information.</p>
       </LegalSection>

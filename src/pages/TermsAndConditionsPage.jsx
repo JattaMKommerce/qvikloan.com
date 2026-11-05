@@ -126,8 +126,8 @@ export default function TermsAndConditionsPage() {
           cooling-off period.
         </p>
         <p>
-          QvikLoan does not charge you any fee for submitting an enquiry. Never pay anyone an upfront fee, including
-          someone claiming to be from QvikLoan. Pay loan-related amounts only to the lender, through its official
+          QvikLoan does not charge you any fee for submitting an enquiry. Never pay anyone an upfront fee. This includes
+          anyone claiming to be from QvikLoan. Pay loan-related amounts only to the lender, through its official
           channels.
         </p>
       </LegalSection>

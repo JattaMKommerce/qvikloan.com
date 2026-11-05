@@ -103,11 +103,8 @@ export default function ParticipatingLendersPage() {
                 Certificate of Registration number, website and grievance contact of each lender BEFORE we start sharing
                 any enquiry with that lender.
               </p>
-              <p>
-                Your enquiry stays with QvikLoan and the service providers named in our{' '}
-                <Link to="/privacy-policy" className="font-semibold underline">Privacy Policy</Link>, and is not sent to any
-                lender until then.
-              </p>
+              {/* True while enquiries only go to QvikLoan's own inbox. Change this if iamkratu.ai is connected for leads. */}
+              <p>Your enquiry is stored only with QvikLoan and is not sent to any lender until then.</p>
               <p>
                 Do not pay anyone who claims to be a QvikLoan partner lender. If you are contacted in our name asking for
                 money, OTP or documents, report it to{' '}

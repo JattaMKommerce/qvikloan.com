@@ -134,7 +134,7 @@ export default function Footer() {
           <p>
             Grievance Officer: {officer.name} | Email:{' '}
             <a href={`mailto:${officer.email}`} className="hover:text-white underline-offset-2 hover:underline">{officer.email}</a>{' '}
-            | Phone: {officer.phone} | Address: {officer.address} | Working Hours: {companyInfo.operatingHours}
+            | Phone: {officer.phone} | Address: {officer.address} | Working Hours: Monday to Saturday, 9:30 AM – 6:30 PM IST
           </p>
           {/* Filled from data/lendersData.js: only verified lenders ever appear here */}
           {participatingLenders.length > 0 ? (

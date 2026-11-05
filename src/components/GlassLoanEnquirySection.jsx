@@ -11,11 +11,11 @@ const { minAge, maxAge, minMonthlyIncome } = enquiryRules;
 
 // The consent wording shown next to each checkbox. The exact text and its version are stored with
 // every lead as the consent record, so change CONSENT_VERSION whenever the wording changes.
-const CONSENT_VERSION = '2026-11-05.2';
+const CONSENT_VERSION = '2026-11-05.3';
 const TERMS_CONSENT = 'I have read and agree to the Privacy Policy and Terms & Conditions.';
 const CONTACT_CONSENT = 'I consent to QvikLoan contacting me about my enquiry by call, SMS and WhatsApp. I understand QvikLoan is not a lender and does not currently share my enquiry with any lender.';
 const FUTURE_SHARING_CONSENT = 'I understand that if a lender partnership is confirmed in future, QvikLoan will only share my details with a lender listed on its Lending Partners page and only after taking my fresh consent.';
-const MARKETING_TEXT = 'Optional: send me information about other loan products from QvikLoan by SMS, WhatsApp or email. I can withdraw this at any time.';
+const MARKETING_TEXT = 'Optional: Send me information about other loan products from QvikLoan by SMS, WhatsApp or email. I can withdraw this at any time.';
 
 const EMPTY_FORM = { fullName: '', mobileNumber: '', age: '', city: '', employmentType: 'salaried', monthlyIncome: '' };
 const NO_CONSENTS = { terms: false, contact: false, futureSharing: false };
