@@ -183,14 +183,14 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           
           {/* CARD 1: Personal loans */}
-          <div className="glass rounded-2xl hover-lift overflow-hidden flex flex-col justify-between transition-all">
-            {/* Top Illustration Container */}
+          <div className="glass rounded-2xl hover-lift overflow-hidden flex flex-col justify-between transition-all group">
+            {/* Top Image Container */}
             <div className="p-4 sm:p-5 pb-0">
-              <div className="rounded-xl overflow-hidden bg-white/50 border border-white/70 flex items-center justify-center">
+              <div className="rounded-xl overflow-hidden bg-slate-100/60 border border-white/80 shadow-sm flex items-center justify-center">
                 <img
-                  src="/images/qvikloan-personal-loan-illustration.png"
+                  src="/images/personal-loan.jpg"
                   alt="Personal Loans"
-                  className="w-full h-44 sm:h-48 object-contain object-center"
+                  className="w-full h-48 sm:h-56 object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
@@ -218,14 +218,14 @@ export default function HomePage() {
           </div>
 
           {/* CARD 2: Business loans */}
-          <div className="glass rounded-2xl hover-lift overflow-hidden flex flex-col justify-between transition-all">
-            {/* Top Illustration Container */}
+          <div className="glass rounded-2xl hover-lift overflow-hidden flex flex-col justify-between transition-all group">
+            {/* Top Image Container */}
             <div className="p-4 sm:p-5 pb-0">
-              <div className="rounded-xl overflow-hidden bg-white/50 border border-white/70 flex items-center justify-center">
+              <div className="rounded-xl overflow-hidden bg-slate-100/60 border border-white/80 shadow-sm flex items-center justify-center">
                 <img
-                  src="/images/qvikloan-business-loan-illustration.png"
+                  src="/images/business-loan.jpg"
                   alt="Business Loans"
-                  className="w-full h-44 sm:h-48 object-contain object-center"
+                  className="w-full h-48 sm:h-56 object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>

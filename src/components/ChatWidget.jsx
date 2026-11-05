@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { X, MessageCircle } from 'lucide-react';
+import { X, MessageCircle, Sparkles, ShieldCheck } from 'lucide-react';
 import { companyInfo, phoneDigits } from '../data/companyInfo';
 
 export default function ChatWidget() {
@@ -46,11 +46,11 @@ export default function ChatWidget() {
       {/* 2. Floating AI Assistant (Bottom-Right, waving video/avatar, +4% scale) */}
       <div className="fixed bottom-0 right-2 sm:right-6 z-50 pointer-events-none">
         
-        {/* Speech Bubble / Callout Prompt - Positioned to the left of her head */}
+        {/* Glassmorphic Speech Bubble / Callout Prompt */}
         {!isOpen && !bubbleDismissed && (
           <div
             aria-label="Loan enquiry prompt"
-            className="pointer-events-auto absolute right-[125px] sm:right-[165px] bottom-[34px] sm:bottom-[44px] w-[220px] sm:w-[260px] bg-white rounded-2xl rounded-tr-sm p-3.5 pr-7 shadow-premium border border-neutral-border animate-in fade-in slide-in-from-right-2 duration-300"
+            className="pointer-events-auto absolute right-[125px] sm:right-[165px] bottom-[34px] sm:bottom-[44px] w-[220px] sm:w-[260px] backdrop-blur-2xl bg-white/95 rounded-2xl rounded-tr-sm p-3.5 pr-7 shadow-[0_16px_40px_rgba(15,74,168,0.18)] border border-white/80 ring-1 ring-royal/15 animate-in fade-in slide-in-from-right-2 duration-300"
           >
             <p
               onClick={handleOpenChat}
@@ -61,7 +61,7 @@ export default function ChatWidget() {
 
             {/* Bubble Tail Pointing RIGHT towards Assistant's head */}
             <div
-              className="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[8px] border-l-white filter drop-shadow-[1px_0_1px_rgba(0,0,0,0.06)]"
+              className="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[8px] border-l-white/95 filter drop-shadow-[1px_0_1px_rgba(0,0,0,0.06)]"
               aria-hidden="true"
             />
 
@@ -71,7 +71,7 @@ export default function ChatWidget() {
                 e.stopPropagation();
                 setBubbleDismissed(true);
               }}
-              className="absolute top-2 right-2 p-1 text-slate-400 hover:text-navy hover:bg-neutral-bg rounded-md transition-colors"
+              className="absolute top-2 right-2 p-1 text-slate-400 hover:text-navy hover:bg-royal-soft/50 rounded-md transition-colors"
               aria-label="Dismiss greeting"
             >
               <X className="w-3.5 h-3.5" />
@@ -106,43 +106,50 @@ export default function ChatWidget() {
           </button>
         )}
 
-        {/* 3. Open Chat Window (Embedded Kratu AI Chatbot with new key: b37315e4a118f16484c57c6c2871ba8c) */}
+        {/* 3. Open Chat Window — Redesigned with True Site Glassmorphism */}
         {isOpen && (
-          <div className="pointer-events-auto fixed sm:absolute bottom-0 sm:bottom-2 right-0 sm:right-0 w-full sm:w-[390px] h-[85vh] sm:h-[min(590px,calc(100vh-100px))] bg-white rounded-t-2xl sm:rounded-2xl shadow-premium border border-neutral-border flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+          <div className="pointer-events-auto fixed sm:absolute bottom-0 sm:bottom-3 right-0 sm:right-0 w-full sm:w-[410px] h-[88vh] sm:h-[min(620px,calc(100vh-90px))] backdrop-blur-2xl bg-white/95 rounded-t-3xl sm:rounded-3xl shadow-[0_25px_70px_-10px_rgba(15,74,168,0.35),0_0_0_1px_rgba(53,106,230,0.18)] border border-white/80 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200 z-50">
             
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#0F172A] text-white border-b border-slate-800">
-              <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-full overflow-hidden bg-slate-800 border border-slate-700">
+            {/* Glassmorphic Fintech Header Matching Site Theme */}
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 bg-gradient-to-r from-navy via-navy to-[#1e3a8a] text-white border-b border-white/10 shadow-sm shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden bg-white/10 border-2 border-white/40 shadow-sm shrink-0">
                   <img
                     src="/images/assistant.png"
-                    alt=""
+                    alt="QvikLoan Assistant"
                     className="w-full h-full object-cover object-top scale-125"
                   />
-                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 border border-slate-900" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-navy" />
                 </div>
                 <div>
-                  <h4 className="font-heading font-bold text-xs sm:text-sm text-white leading-tight">
-                    QvikLoan Assistant
-                  </h4>
-                  <p className="text-[10px] text-slate-300 flex items-center gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <h4 className="font-heading font-extrabold text-sm text-white tracking-tight">
+                      QvikLoan Assistant
+                    </h4>
+                    <span className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded-full bg-royal-soft/20 text-[#93c5fd] text-[9px] font-bold border border-white/20">
+                      <Sparkles className="w-2.5 h-2.5" />
+                      AI
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 flex items-center gap-1.5 mt-0.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Automated AI assistant</span>
+                    <span>Automated AI Assistant • Instant Help</span>
                   </p>
                 </div>
               </div>
 
+              {/* Minimalist Close Button */}
               <button
                 onClick={handleCloseChat}
-                className="p-1 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/15 transition-all"
                 aria-label="Close chat"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Chat Body (iframe converted from script data-key="b37315e4a118f16484c57c6c2871ba8c") */}
-            <div className="flex-1 w-full bg-[#0F172A] relative">
+            {/* Chat Body (iframe) with smooth container */}
+            <div className="flex-1 w-full bg-[#0a0a0f] relative overflow-hidden">
               {hasOpened && (
                 <iframe
                   src="https://iamkratu.ai/customer-chat/?key=b37315e4a118f16484c57c6c2871ba8c"
@@ -154,11 +161,14 @@ export default function ChatWidget() {
             </div>
 
             {/* Notice: automated replies, and what not to type into the chat */}
-            <div className="py-2 px-3 bg-[#0B132B] border-t border-slate-800 text-center text-[11px] leading-snug text-slate-300">
+            <div className="py-2.5 px-4 backdrop-blur-xl bg-white/95 border-t border-neutral-border/70 text-center text-[11px] leading-snug text-slate-600 shrink-0">
               Automated replies are general information, not a lending decision. Don’t share PAN, Aadhaar, bank details
               or OTPs here.{' '}
-              <Link to="/privacy-policy" onClick={handleCloseChat} className="underline hover:text-white">Privacy</Link>
-              <span className="block text-slate-400">Operated by {companyInfo.name}</span>
+              <Link to="/privacy-policy" onClick={handleCloseChat} className="text-royal font-semibold underline hover:text-royal-hover">Privacy</Link>
+              <span className="block text-slate-500 font-medium mt-0.5 flex items-center justify-center gap-1">
+                <ShieldCheck className="w-3 h-3 text-royal inline shrink-0" />
+                <span>Operated by <strong>{companyInfo.name}</strong></span>
+              </span>
             </div>
 
           </div>

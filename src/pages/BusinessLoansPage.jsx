@@ -63,18 +63,15 @@ export default function BusinessLoansPage() {
               <CtaDisclaimer className="max-w-xl" />
             </div>
 
-            {/* Right Visual Graphic with Side Blending */}
+            {/* Right Visual Graphic Matching HandLoan.ai Style */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md">
+              <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md shadow-premium border border-white/80">
                 <img
-                  src="/images/qvikloan-business-loan-illustration.png"
-                  alt=""
-                  className="w-full h-auto object-cover"
+                  src="/images/hero-2.jpg"
+                  alt="Business Loans Capital Facilities"
+                  className="w-full h-72 sm:h-80 object-cover object-center"
                   loading="eager"
                 />
-                {/* Side blending feather overlays */}
-                <div className="absolute inset-y-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none" />
               </div>
             </div>
 

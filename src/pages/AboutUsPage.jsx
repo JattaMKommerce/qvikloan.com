@@ -80,11 +80,15 @@ export default function AboutUsPage() {
               </a>
             </div>
 
+            {/* Right Visual Graphic Matching HandLoan.ai Style */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-neutral-border shadow-subtle overflow-hidden relative w-full max-w-md">
-                <img src="/images/about-us-hero.png" alt="" className="w-full h-auto object-cover" loading="eager" />
-                <div className="absolute inset-y-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none" />
+              <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-white/80 shadow-premium overflow-hidden relative w-full max-w-md">
+                <img
+                  src="/images/about.jpg"
+                  alt="Corporate Identity and Governance"
+                  className="w-full h-72 sm:h-80 object-cover object-center"
+                  loading="eager"
+                />
               </div>
             </div>
           </div>
