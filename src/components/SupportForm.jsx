@@ -76,7 +76,7 @@ export default function SupportForm({ kind }) {
         <p className="text-sm text-slate-blue">
           Your reference number is <strong className="font-mono text-navy">{reference}</strong>. Please quote it in any follow-up.{' '}
           {isGrievance
-            ? `Our support team aims to resolve complaints ${companyInfo.grievanceTimelines.support}. If it does not, the Grievance Officer aims to resolve them ${companyInfo.grievanceTimelines.officer}.`
+            ? `Our support team aims to resolve complaints ${companyInfo.grievanceTimelines.support}. If it does not, Grievance Officer ${companyInfo.grievanceOfficer.name} aims to resolve them ${companyInfo.grievanceTimelines.officer}.`
             : `We reply during business hours (${companyInfo.operatingHours}).`}
         </p>
         <button

@@ -17,7 +17,7 @@ export default function ChatWidget() {
     setIsOpen(false);
   };
 
-  const waUrl = `https://wa.me/${phoneDigits(companyInfo.whatsapp)}?text=Hi%20QvikLoan%2C%20I%20would%20like%20to%20know%20more%20about%20your%20loans.`;
+  const waUrl = `https://wa.me/${phoneDigits(companyInfo.whatsapp)}?text=Hi%20QvikLoan%2C%20I%20have%20a%20question%20about%20loan%20options.`;
 
   return (
     <div role="region" aria-label="Chat and WhatsApp support">
@@ -56,7 +56,7 @@ export default function ChatWidget() {
               onClick={handleOpenChat}
               className="text-xs sm:text-[13px] font-semibold text-navy leading-snug cursor-pointer hover:text-royal transition-colors"
             >
-              Looking for a personal or business loan? Let's find the right option for you.
+              Questions about personal or business loans? Ask our assistant.
             </p>
 
             {/* Bubble Tail Pointing RIGHT towards Assistant's head */}

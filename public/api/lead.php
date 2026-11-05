@@ -196,6 +196,8 @@ if ($backupEmail !== '' && ($mode === 'always' || !$delivered)) {
 }
 
 if ($delivered || $emailed) {
+    // Log the reference and outcome only: personal details never go in logs (see the Privacy Policy).
+    error_log("QvikLoan lead {$reference}: " . ($delivered ? 'delivered to iamkratu.ai' : 'handed to the mail server'));
     respond(200, ['ok' => true, 'reference' => $reference]);
 }
 

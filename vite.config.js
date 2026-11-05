@@ -35,7 +35,8 @@ function chatStatusDevCheck() {
 }
 
 export default defineConfig({
-  base: './',
+  // Absolute paths, so the page-not-found screen also works on deeper addresses like /a/b.
+  base: '/',
   plugins: [react(), chatStatusDevCheck()],
   server: {
     port: 5173,

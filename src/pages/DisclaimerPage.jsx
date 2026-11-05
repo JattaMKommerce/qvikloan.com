@@ -4,7 +4,7 @@ import LegalPage, { LegalSection, Callout } from '../components/LegalPage';
 import { companyInfo } from '../data/companyInfo';
 import { usePageMeta } from '../lib/usePageMeta';
 
-const LAST_UPDATED = '4 November 2026';
+const LAST_UPDATED = '5 November 2026';
 
 const SECTIONS = [
   { id: 'platform', title: 'What QvikLoan is' },
@@ -29,8 +29,8 @@ export default function DisclaimerPage() {
     >
       <Callout title="Please read before you enquire">
         <p className="text-sm">
-          QvikLoan provides a digital platform for exploring loan-related information and facilitating connections
-          with participating financial institutions. QvikLoan does not independently guarantee loan approval or
+          QvikLoan provides a digital platform for exploring loan-related information and facilitating loan enquiries.
+          QvikLoan currently has no active lending partner and does not independently guarantee loan approval or
           disbursement.
         </p>
       </Callout>

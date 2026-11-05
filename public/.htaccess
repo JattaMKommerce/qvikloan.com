@@ -1,5 +1,5 @@
-# The site is a single-page app: every page (e.g. /personal-loans) is served by
-# index.html. Real files such as images and /api/lead.php are served as they are.
+# The site is a single-page app: its pages (e.g. /personal-loans) are all served by index.html.
+# Real files such as images and /api/lead.php are served as they are.
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
@@ -18,11 +18,20 @@
     RewriteRule ^personal-loans?\.html$ /personal-loans [R=301,L,NC]
     RewriteRule ^business-loans?\.html$ /business-loans [R=301,L,NC]
 
+    # Real files and folders are served as they are.
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
-    RewriteRule ^ index.html [L]
+
+    # The site's pages and short addresses. KEEP IN SYNC with the routes in src/App.jsx:
+    # a page missing from this list answers with HTTP 404.
+    RewriteRule ^(personal-loans|business-loans|how-it-works|about-us|participating-lenders|contact-us|grievance-redressal|privacy-policy|terms-and-conditions|disclaimer|refund-policy|meta-personal-loan|lending-partners|financial-disclaimer|contact|personal-loan|business-loan|terms|grievance|partners)/?$ index.html [L]
+
+    # Anything else really is not found: answer 404, showing the site's own "page not found" screen.
+    RewriteRule ^ - [R=404,L]
 </IfModule>
+
+ErrorDocument 404 /index.html
 
 # Basic browser security headers.
 <IfModule mod_headers.c>

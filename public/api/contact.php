@@ -171,11 +171,13 @@ $headers = implode("\r\n", [
 ]);
 
 if (@mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $headers)) {
+    // Log the reference and outcome only: personal details never go in logs (see the Privacy Policy).
+    error_log("QvikLoan {$kind} {$reference}: handed to the mail server");
     respond(200, ['ok' => true, 'reference' => $reference]);
 }
 
 error_log("QvikLoan {$kind} {$reference}: email to the {$kind} inbox failed");
-fail(502, "We couldn't send your message right now. Please email {$to} directly.");
+fail(502, "We couldn't send your message right now. Please email {$supportEmail} directly.");
 
 // ---------------------------------------------------------------- helpers
 

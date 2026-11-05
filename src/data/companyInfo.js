@@ -1,11 +1,6 @@
 /**
- * Company facts shown across the website.
- *
- * RULE: only fill in a value after checking it against the company's own records
- * (Certificate of Incorporation, GST certificate, board resolution / appointment letter, etc.).
- * A field set to null is simply left off the website; nothing is guessed or shown as a placeholder.
- *
- * Fields still waiting for confirmation are marked PENDING. Search for "PENDING" to find them.
+ * Company facts shown across the website. A field set to null is simply left off the website.
+ * Details supplied by the company on 5 November 2026.
  */
 export const companyInfo = {
   name: 'Jatta M Kommerce Private Limited',
@@ -13,11 +8,7 @@ export const companyInfo = {
   website: 'https://qvikloan.com',
   companyWebsite: 'https://jattamkommerce.com/',
 
-  // PENDING: copy from the Certificate of Incorporation or the MCA company master data.
-  // The previous value (U72900DL2021PTC384912) could not be verified, and its state code (DL = Delhi)
-  // does not match the Mumbai registered office, so it is no longer shown.
-  cin: null,
-  // PENDING: GSTIN, if the company wants it shown.
+  cin: 'U58200MH2024PTC428411',
   gstin: null,
 
   email: 'help@qvikloan.com',
@@ -27,19 +18,15 @@ export const companyInfo = {
 
   address: {
     registeredOffice: '220, 1st Floor, Citi Mall, New Link Road, Andheri (W), Mumbai - 400053, Maharashtra, India',
-    // PENDING: the building name looks cut short ("Park, 2nd Floor ..."). Confirm the full address.
-    corporateOffice: 'Park, 2nd Floor, E Block, Above Passport Office, Hubli, Karnataka - 580029, India',
+    corporateOffice: 'Jatta M Kommerce Pvt Ltd, REGUS, Unit No 2201A, 22nd Floor, World Trade Center, Brigade Gateway Campus, Malleswaram (W), Bangalore - 560055, Karnataka, India',
   },
 
-  // Grievance Redressal Officer (RBI Digital Lending Directions require a named nodal officer for
-  // digital lending complaints, published on the website).
   grievanceOfficer: {
-    // PENDING: full name of the person formally appointed by the company. Until it is set,
-    // the website shows the role, email and phone only.
-    name: null,
-    designation: 'Grievance Redressal Officer',
-    email: 'help@qvikloan.com',
+    name: 'Amit',
+    designation: 'Grievance Redressal Officer, Jatta M Kommerce Private Limited',
+    email: 'amit.qvikloan@gmail.com',
     phone: '+91 9403891692',
+    address: 'Jatta M Kommerce Pvt Ltd, REGUS, Unit No 2201A, 22nd Floor, World Trade Center, Brigade Gateway Campus, Malleswaram (W), Bangalore - 560055, Karnataka, India',
   },
 
   // PENDING (business confirmation): service commitments shown on the Grievance page.

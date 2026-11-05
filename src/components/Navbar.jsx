@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-3.5 h-3.5 text-teal-accent" />
             <span className="opacity-90">
-              Operated by Jatta M Kommerce Private Limited • Connecting borrowers with participating lenders
+              Operated by Jatta M Kommerce Private Limited • Loan Enquiry Facilitation Platform
             </span>
           </div>
           <div className="flex items-center gap-4 text-xs opacity-90">

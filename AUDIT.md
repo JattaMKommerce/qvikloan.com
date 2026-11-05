@@ -47,18 +47,6 @@ Searched case-insensitively across all source files, and again in the rendered t
 | Dedicated ad landing page | Added at `/meta-personal-loan` |
 | Short URLs `/terms`, `/grievance`, `/partners`, `/personal-loan`, `/business-loan` | Added as redirects |
 
-## Still missing (only the company can supply these)
+## Update, 5 November 2026
 
-- CIN and, optionally, GSTIN
-- Grievance Redressal Officer's name
-- Full Hubli office address (it reads "Park, 2nd Floor, E Block ...")
-- Lending partners, with RBI registration numbers
-- Lender-confirmed interest rates, tenures and charges
-- Confirmed legal role: DSA, Lending Service Provider or referrer
-
-## Blockers outside the code
-
-- **The live enquiry form rejects every submission.** `api/config.php` is missing on Hostinger (rechecked 5 Nov 2026).
-- **The Facebook Page name** makes a speed claim.
-- **Company name mismatch:** the "Qvik Loan" app is listed under WebTalk E-commerce Pvt Ltd, while the site says Jatta M Kommerce Private Limited.
-- **Domain not verified:** qvikloan.com has no Meta verification record.
+The company supplied its CIN, operating office and Grievance Officer, and confirmed it has no lender agreement. These are now on the site in the latest build. The current status of every item is in `COMPLIANCE_REPORT.md`.

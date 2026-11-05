@@ -56,7 +56,8 @@ export default function TermsAndConditionsPage() {
       <LegalSection id="acceptance" number={1} title="About these terms">
         <p>
           These terms apply when you use qvikloan.com (“QvikLoan”), which is operated by <strong>{companyInfo.name}</strong>{' '}
-          (“we”, “us”), {companyInfo.address.registeredOffice}. By using the website or submitting a form, you agree to
+          (“we”, “us”), CIN: {companyInfo.cin}, Registered address: {companyInfo.address.registeredOffice}. Operating
+          office: {companyInfo.address.corporateOffice}. By using the website or submitting a form, you agree to
           these terms. If you do not agree, please do not use the website.
         </p>
       </LegalSection>
@@ -64,14 +65,14 @@ export default function TermsAndConditionsPage() {
       <LegalSection id="platform" number={2} title="What QvikLoan is">
         <p>
           QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable loan
-          options through participating financial institutions. QvikLoan facilitates the loan discovery and
-          application process. Final loan eligibility, approval, applicable interest rates, repayment terms and
-          disbursement are determined by the respective lending institution.
+          options through a loan enquiry facilitation process. QvikLoan currently has no active lending partner. Final
+          loan eligibility, approval, applicable interest rates, repayment terms and disbursement are determined by the
+          lending institution.
         </p>
       </LegalSection>
 
       <LegalSection id="role" number={3} title="Our role and what we do not do">
-        <p>We provide information about loan options, take your enquiry, contact you about it and, with your consent, share it with a lender listed on our {link('/participating-lenders', 'Lending Partners')} page.</p>
+        <p>We provide information about loan options, take your enquiry, and contact you about it. We do not share your enquiry with any lender today. If a lender partnership is confirmed, we will list that lender on our {link('/participating-lenders', 'Lending Partners')} page and take your fresh consent before sharing.</p>
         <p>We are not a bank or a Non-Banking Financial Company (NBFC). We do not:</p>
         <ul className="list-disc pl-5 space-y-1">
           <li>lend money, accept deposits, or hold, receive or pay out loan funds;</li>
@@ -83,8 +84,8 @@ export default function TermsAndConditionsPage() {
 
       <LegalSection id="lenders" number={4} title="Relationship with lending partners">
         <p>
-          Lending partners are independent banks and NBFCs, named on our {link('/participating-lenders', 'Lending Partners')} page.
-          Any loan is a contract between you and the lender only; we are not a party to it. The lender’s own loan
+          Lending partners, when confirmed, will be independent banks and NBFCs, named on our {link('/participating-lenders', 'Lending Partners')} page.
+          Currently there are none. Any loan, when offered, will be a contract between you and the lender only; we are not a party to it. The lender’s own loan
           agreement, KFS, terms and privacy policy govern the loan.
         </p>
       </LegalSection>
@@ -93,9 +94,9 @@ export default function TermsAndConditionsPage() {
         <ol className="list-decimal pl-5 space-y-1">
           <li>You submit an enquiry on our website and give consent.</li>
           <li>Our team contacts you about your requirement.</li>
-          <li>With your consent, we share your enquiry with a listed lender.</li>
-          <li>If the lender can consider it, the lender asks you for the information and documents it needs and carries out its checks.</li>
-          <li>If the lender decides to make an offer, it gives you its KFS and loan agreement. You choose whether to accept.</li>
+          <li>We do not share your enquiry with any lender today. If a lender partnership is confirmed, we will list that lender and take your fresh consent first.</li>
+          <li>A lender that can consider your enquiry then asks you for the information and documents it needs and carries out its checks.</li>
+          <li>If that lender decides to make an offer, it gives you its KFS and loan agreement. You choose whether to accept.</li>
         </ol>
         <p>An enquiry is not a loan application or a commitment to borrow. You can stop at any point.</p>
       </LegalSection>
@@ -103,8 +104,8 @@ export default function TermsAndConditionsPage() {
       <LegalSection id="eligibility" number={6} title="Eligibility">
         <p>
           To submit an enquiry you must be {enquiryRules.minAge} to {enquiryRules.maxAge} years old, an Indian citizen
-          or resident, able to enter into a contract, and have a monthly income of at least ₹
-          {enquiryRules.minMonthlyIncome.toLocaleString('en-IN')}. If you enquire for a business, you must be authorised
+          or resident, able to enter into a contract, and have a monthly income of at least
+          ₹{enquiryRules.minMonthlyIncome.toLocaleString('en-IN')}. If you enquire for a business, you must be authorised
           to act for it. Each lender sets its own eligibility criteria, such as age, income, credit history and location,
           and may apply stricter requirements.
         </p>
@@ -125,9 +126,9 @@ export default function TermsAndConditionsPage() {
           cooling-off period.
         </p>
         <p>
-          QvikLoan does not charge you any fee for submitting an enquiry. Never pay anyone, including someone claiming
-          to be from QvikLoan, an upfront fee to get a loan approved. Pay loan-related amounts only to the lender,
-          through its official channels.
+          QvikLoan does not charge you any fee for submitting an enquiry. Never pay anyone an upfront fee, including
+          someone claiming to be from QvikLoan. Pay loan-related amounts only to the lender, through its official
+          channels.
         </p>
       </LegalSection>
 
@@ -181,7 +182,8 @@ export default function TermsAndConditionsPage() {
 
       <LegalSection id="grievances" number={16} title="Grievance redressal">
         <p>
-          If you have a complaint about QvikLoan, contact our Grievance Redressal Officer. Complaints about a loan go to
+          If you have a complaint about QvikLoan, contact our Grievance Redressal Officer, {companyInfo.grievanceOfficer.name},
+          at <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold underline">{companyInfo.grievanceOfficer.email}</a>. Complaints about a loan go to
           the lender, and can be escalated to the Reserve Bank of India if not resolved. Full details are on our{' '}
           {link('/grievance-redressal', 'Grievance Redressal')} page.
         </p>
@@ -201,9 +203,12 @@ export default function TermsAndConditionsPage() {
 
       <LegalSection id="contact" number={19} title="Contact">
         <p>
-          {companyInfo.name}{companyInfo.cin ? ` (CIN: ${companyInfo.cin})` : ''}, {companyInfo.address.registeredOffice}.
-          Email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>,
-          phone {companyInfo.phone}, {companyInfo.operatingHours}.
+          {companyInfo.name}, CIN: {companyInfo.cin}. Registered address: {companyInfo.address.registeredOffice}. Operating
+          office: {companyInfo.address.corporateOffice}. Email{' '}
+          <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>,
+          phone {companyInfo.phone}, {companyInfo.operatingHours}. Grievance Officer: {companyInfo.grievanceOfficer.name},{' '}
+          <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold underline">{companyInfo.grievanceOfficer.email}</a>,{' '}
+          {companyInfo.grievanceOfficer.phone}.
         </p>
       </LegalSection>
     </LegalPage>

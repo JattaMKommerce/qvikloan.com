@@ -7,7 +7,6 @@ import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
 import LoanDisclosure from '../components/LoanDisclosure';
 import RoleTable from '../components/RoleTable';
 import { companyInfo } from '../data/companyInfo';
-import { participatingLenders } from '../data/lendersData';
 import { usePageMeta } from '../lib/usePageMeta';
 
 function TypewriterText() {
@@ -91,15 +90,8 @@ export default function HomePage() {
 
             {/* Exact CEO Approved Description */}
             <p className="text-base sm:text-[17px] text-[#4b5563] font-normal leading-relaxed max-w-lg">
-              Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
+              Start with an online enquiry. QvikLoan collects your enquiry and explains loan options in plain language. If a lender partnership is active, we share your enquiry with a listed lender only with your consent. We are not a lender.
             </p>
-
-            {/* Appears only once a verified lender is listed in data/lendersData.js */}
-            {participatingLenders.length > 0 && (
-              <p className="text-base sm:text-[17px] text-[#4b5563] font-normal leading-relaxed max-w-lg">
-                Explore personal and business loan options from our RBI-registered partner lenders.
-              </p>
-            )}
 
             {/* CTA Buttons: each opens the enquiry form below with its loan type already selected */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
@@ -140,12 +132,11 @@ export default function HomePage() {
           </h2>
           <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
             QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable
-            loan options through participating financial institutions.
+            loan options through a loan enquiry facilitation process. QvikLoan currently has no active lending partner.
           </p>
           <p className="text-base text-slate-blue leading-relaxed mt-3">
-            QvikLoan facilitates the loan discovery and application process. Final loan eligibility, approval,
-            applicable interest rates, repayment terms and disbursement are determined by the respective lending
-            institution.
+            QvikLoan is not a lender. Final loan eligibility, approval, applicable interest rates, repayment terms and
+            disbursement are always determined by the lending institution.
           </p>
         </div>
 
@@ -154,12 +145,12 @@ export default function HomePage() {
             {
               icon: Monitor,
               title: 'QvikLoan, the platform',
-              body: `Operated by ${companyInfo.name}. Takes your enquiry, explains your options and, with your consent, passes your enquiry to a listed lender. QvikLoan is not a bank or NBFC and does not lend.`,
+              body: 'Takes your enquiry, explains your options and contacts you about it. We do not currently share enquiries with any lender. When a lender partnership is confirmed, that lender will be listed on our Lending Partners page before any sharing begins.',
             },
             {
               icon: Landmark,
               title: 'The lending institution',
-              body: 'A bank or RBI-registered NBFC. It checks your eligibility, decides whether to lend, sets the interest rate and charges, gives you the Key Facts Statement, disburses the loan and collects repayments.',
+              body: 'If and when a lender partnership is confirmed, that bank or RBI-registered NBFC will be named on our Lending Partners page. That lender alone will check eligibility, decide, set rates, give KFS, disburse and collect repayment.',
             },
             {
               icon: Cpu,

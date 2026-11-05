@@ -1,7 +1,7 @@
 /**
  * Loan product facts shown on the Personal Loans and Business Loans pages.
  *
- * `terms` must only hold values taken from a participating lender's published terms or signed
+ * `terms` must only hold values taken from a confirmed lender's published terms or signed
  * agreement (see lendersData.js). null = not confirmed yet: the page then says that the lender
  * sets it and shows it in its offer and Key Facts Statement (KFS). Never fill these with
  * "typical market" numbers.

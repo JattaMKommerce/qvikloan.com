@@ -67,13 +67,11 @@ export default function GrievanceRedressalPage() {
         <section className="rounded-2xl border-2 border-royal/30 bg-white p-6 sm:p-8 space-y-5" aria-labelledby="gro">
           <h2 id="gro" className="text-xl font-heading font-bold text-navy">QvikLoan Grievance Redressal Officer</h2>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            {officer.name && (
-              <div><dt className="text-neutral-muted">Name</dt><dd className="font-bold text-navy">{officer.name}</dd></div>
-            )}
-            <div><dt className="text-neutral-muted">Designation</dt><dd className="font-bold text-navy">{officer.designation}, {companyInfo.name}</dd></div>
+            <div><dt className="text-neutral-muted">Name</dt><dd className="font-bold text-navy">{officer.name}</dd></div>
+            <div><dt className="text-neutral-muted">Designation</dt><dd className="font-bold text-navy">{officer.designation}</dd></div>
             <div><dt className="text-neutral-muted">Email</dt><dd><a href={`mailto:${officer.email}`} className="text-royal font-semibold hover:underline">{officer.email}</a></dd></div>
             <div><dt className="text-neutral-muted">Phone</dt><dd className="font-bold text-navy">{officer.phone}</dd></div>
-            <div className="sm:col-span-2"><dt className="text-neutral-muted">Postal address</dt><dd className="text-navy">{companyInfo.address.registeredOffice}</dd></div>
+            <div className="sm:col-span-2"><dt className="text-neutral-muted">Postal address</dt><dd className="text-navy">{officer.address}</dd></div>
             <div className="sm:col-span-2"><dt className="text-neutral-muted">Hours</dt><dd className="text-navy">{companyInfo.operatingHours}</dd></div>
           </dl>
         </section>
@@ -83,10 +81,10 @@ export default function GrievanceRedressalPage() {
           <h2 id="process" className="text-2xl font-heading font-bold text-navy">How it works and how to escalate</h2>
           <ol className="space-y-4">
             {[
-              ['Level 1: Customer Support', <>Email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>, call {companyInfo.phone}, or use the form below. Include your enquiry reference if you have one. You will get a complaint reference number. We aim to resolve complaints {support}.</>],
-              ['Level 2: Grievance Redressal Officer', <>If your complaint is not resolved in 7 working days, or you are not satisfied, write to the Grievance Redressal Officer at <a href={`mailto:${officer.email}`} className="text-royal font-semibold underline">{officer.email}</a> with your complaint reference, or by post to the address above. The officer aims to resolve it {officerTimeline}. If we need more time, we will tell you why.</>],
-              ['Level 3: RBI Ombudsman (complaints about a loan or lender)', <>Raise it with the lender’s grievance officer first. If the lender rejects your complaint, does not reply within 30 days, or you are not satisfied with its reply, you can complain under the RBI’s Integrated Ombudsman Scheme at <ExternalA href="https://cms.rbi.org.in">cms.rbi.org.in</ExternalA>, or by post to the RBI’s Centralised Receipt and Processing Centre in Chandigarh. The scheme covers RBI-regulated lenders. Lenders are also responsible for the platforms they work with, so you can raise how QvikLoan handled an enquiry for a lender with that lender too.</>],
-              ['Other options', <>For complaints about QvikLoan’s own service you can also contact the National Consumer Helpline (<ExternalA href="https://consumerhelpline.gov.in">consumerhelpline.gov.in</ExternalA>, 1915). Report fraud at <ExternalA href="https://cybercrime.gov.in">cybercrime.gov.in</ExternalA> or 1930, and unauthorised lenders on the RBI’s <ExternalA href="https://sachet.rbi.org.in">Sachet portal</ExternalA>.</>],
+              ['Level 1: Customer Support', <>Email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>, call {companyInfo.phone}, or use the form below. Include your enquiry reference. You will get a complaint reference number. We aim to resolve {support}.</>],
+              [`Level 2: Grievance Redressal Officer ${officer.name}`, <>If not resolved in 7 working days, or you are not satisfied, write to <a href={`mailto:${officer.email}`} className="text-royal font-semibold underline">{officer.email}</a> with your complaint reference, or by post to the address above. The officer aims to resolve {officerTimeline}.</>],
+              ['Level 3: RBI Ombudsman (complaints about a loan or lender)', <>Raise it with the lender first. If the lender rejects it or does not reply in 30 days, complain under the RBI Integrated Ombudsman Scheme at <ExternalA href="https://cms.rbi.org.in">cms.rbi.org.in</ExternalA>.</>],
+              ['Other options', <>National Consumer Helpline (<ExternalA href="https://consumerhelpline.gov.in">consumerhelpline.gov.in</ExternalA>, 1915). Report fraud at <ExternalA href="https://cybercrime.gov.in">cybercrime.gov.in</ExternalA> or 1930, and unauthorised lenders on the RBI <ExternalA href="https://sachet.rbi.org.in">Sachet portal</ExternalA>.</>],
             ].map(([title, body], i) => (
               <li key={title} className="flex gap-4 rounded-2xl border border-neutral-border bg-white p-5">
                 <span className="w-9 h-9 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-heading shrink-0">{i + 1}</span>

@@ -5,18 +5,16 @@ import CtaDisclaimer from '../components/CtaDisclaimer';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
 import LoanDisclosure from '../components/LoanDisclosure';
 import { companyInfo } from '../data/companyInfo';
-import { participatingLenders } from '../data/lendersData';
-import { enquiryRules, loanProducts } from '../data/loanProducts';
+import { enquiryRules } from '../data/loanProducts';
 import { formatINR } from '../lib/emi';
 import { usePageMeta } from '../lib/usePageMeta';
 
-const { interestRate, tenure } = loanProducts.personal.terms;
 const { minAge, maxAge, minMonthlyIncome } = enquiryRules;
 
 const BENEFITS = [
-  { icon: ClipboardList, title: 'One simple enquiry', body: 'Tell us what you need once. With your consent, we share it with a lender listed on our Lending Partners page.' },
-  { icon: FileSearch, title: 'Clear terms before you decide', body: 'A lender that makes an offer must show the APR, EMI and all charges in its Key Facts Statement before you sign.' },
-  { icon: BadgeIndianRupee, title: 'No upfront fee by QvikLoan', body: 'QvikLoan does not charge you for submitting an enquiry. Any lender fees are shown in the lender’s KFS.' },
+  { icon: ClipboardList, title: 'One simple enquiry', body: 'Tell us what you need once. We contact you about it. No lender receives it today.' },
+  { icon: FileSearch, title: 'Clear terms before you decide', body: 'A lender that makes an offer in future must show the APR, EMI and all charges in its Key Facts Statement before you sign.' },
+  { icon: BadgeIndianRupee, title: 'No upfront fee by QvikLoan', body: 'QvikLoan does not charge you for submitting an enquiry. Any lender fees are shown in the lender\'s KFS.' },
 ];
 
 const ELIGIBILITY = [
@@ -33,6 +31,7 @@ const FAQS = [
   { q: 'How long does approval take?', a: 'It depends on the lender’s credit assessment and how quickly its checks are completed. We cannot promise a timeline or an approval.' },
   { q: 'Will checking eligibility affect my CIBIL score?', a: 'Submitting this enquiry does not make QvikLoan check your credit report. A lender may check it during its assessment, and some checks can appear on your credit report. Ask the lender what kind of check it runs before you agree.' },
   { q: 'Is there a fee?', a: 'QvikLoan charges no fee for an enquiry. Never pay anyone an upfront fee to get a loan approved.' },
+  { q: 'Do you have any lender partners?', a: 'No, as of 5 November 2026 we have no active lending partner.' },
 ];
 
 export default function MetaPersonalLoanPage() {
@@ -47,10 +46,9 @@ export default function MetaPersonalLoanPage() {
           <Link to="/" className="rounded-lg p-0.5 focus:outline-none focus:ring-2 focus:ring-royal">
             <img src="/logos/QvikLoan_Web.webp" alt="QvikLoan home" className="h-9 w-auto object-contain" />
           </Link>
-          {/* The partner badge appears only once a verified lender is listed in data/lendersData.js */}
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
             <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
-            {participatingLenders.length > 0 ? 'Partner Lenders: RBI Registered' : 'QvikLoan is not a lender'}
+            QvikLoan is not a lender
           </span>
         </div>
       </header>
@@ -58,12 +56,12 @@ export default function MetaPersonalLoanPage() {
       {/* Headline */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
         <h1 className="text-3xl sm:text-5xl font-heading font-extrabold text-navy tracking-tight leading-tight">
-          Personal Loan: Start Your Eligibility Enquiry
+          Personal Loan Enquiry — Learn Your Options
         </h1>
         <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-          {interestRate && tenure
-            ? `Interest rates ${interestRate}* | Tenure ${tenure} | Charges shown in the lender's Key Facts Statement`
-            : 'The lender sets the interest rate, tenure and charges, and shows them in its Key Facts Statement before you decide.'}
+          QvikLoan is not a lender. We collect your enquiry and explain loan options. We do not promise any offer, rate or
+          approval. If a lender partnership becomes active, the lender will set the rate, tenure and charges and show them
+          in its Key Facts Statement before you decide.
         </p>
         <div>
           <Link
@@ -103,7 +101,7 @@ export default function MetaPersonalLoanPage() {
             {ELIGIBILITY.map((item) => <li key={item}>{item}</li>)}
           </ul>
           <p className="text-sm text-neutral-muted">
-            These are QvikLoan’s rules for accepting an enquiry. Each lender applies its own eligibility criteria, and meeting these does not guarantee a loan.
+            These are QvikLoan's rules for accepting an enquiry. Each lender applies its own criteria, and meeting these does not guarantee a loan.
           </p>
         </div>
         <div className="rounded-2xl border border-neutral-border bg-white p-6 sm:p-8 space-y-4">

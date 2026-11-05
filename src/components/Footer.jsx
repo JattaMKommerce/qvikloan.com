@@ -131,20 +131,25 @@ export default function Footer() {
             QvikLoan is {companyInfo.platformRole}, not a lender. Loans are provided by lending institutions (banks and
             RBI-registered NBFCs).
           </p>
+          <p>
+            Grievance Officer: {officer.name} | Email:{' '}
+            <a href={`mailto:${officer.email}`} className="hover:text-white underline-offset-2 hover:underline">{officer.email}</a>{' '}
+            | Phone: {officer.phone} | Address: {officer.address} | Working Hours: {companyInfo.operatingHours}
+          </p>
           {/* Filled from data/lendersData.js: only verified lenders ever appear here */}
-          {participatingLenders.length > 0 && (
+          {participatingLenders.length > 0 ? (
             <p>
               Partner Lenders:{' '}
               {participatingLenders
                 .map((l) => `${l.legalName}${l.rbiRegistration ? ` - RBI Reg No: ${l.rbiRegistration}` : ''}`)
                 .join(' | ')}
             </p>
+          ) : (
+            <p>
+              QvikLoan currently has no active lending partner. No enquiry is shared with any lender until a lender is
+              listed on our Lending Partners page and you give fresh consent.
+            </p>
           )}
-          <p>
-            Grievance Officer{officer.name ? `: ${officer.name}` : ''} | Email:{' '}
-            <a href={`mailto:${officer.email}`} className="hover:text-white underline-offset-2 hover:underline">{officer.email}</a>{' '}
-            | Phone: {officer.phone} | Working Hours: {companyInfo.operatingHours}
-          </p>
         </div>
       </div>
     </footer>

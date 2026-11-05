@@ -55,7 +55,7 @@ export default function PersonalLoansPage() {
                 Personal Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Enquire online and review any offer from a participating lender — including its Key Facts Statement (KFS) — before you decide.
+                Enquire online to understand personal loan options. QvikLoan is not a lender and currently has no active lending partner. If a lender partnership becomes active, you will review its offer and Key Facts Statement (KFS) before you decide.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link to="/#enquiry-section"
@@ -160,7 +160,7 @@ export default function PersonalLoansPage() {
               <ul className="space-y-3.5 text-xs sm:text-sm text-slate-blue">
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Age:</span>
-                  <span>Within the lender’s age limits. To enquire through QvikLoan you must be {enquiryRules.minAge} to {enquiryRules.maxAge}.</span>
+                  <span>Within the lender’s age limits. To enquire through QvikLoan you must be {enquiryRules.minAge} to {enquiryRules.maxAge}, an Indian resident, with a monthly income of ₹{enquiryRules.minMonthlyIncome.toLocaleString('en-IN')} or more.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Residence:</span>

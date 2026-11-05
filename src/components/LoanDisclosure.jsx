@@ -2,7 +2,7 @@ import React from 'react';
 import { loanProducts, workedExample } from '../data/loanProducts';
 import { calculateEmi, formatINR } from '../lib/emi';
 
-const SET_BY_LENDER = 'Set by the lender and shown in its Key Facts Statement (KFS)';
+const SET_BY_LENDER = 'Set by lender and shown in its KFS';
 
 /**
  * Representative example and lending disclosures. The worked example is calculated, never typed in.

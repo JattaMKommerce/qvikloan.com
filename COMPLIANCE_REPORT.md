@@ -2,128 +2,88 @@
 
 Date: 5 November 2026. For the company's management, its lawyer and whoever runs the ads.
 
-The code changes are built and tested locally, but **nothing is committed or deployed yet**. The site cannot be called "100% ready" or safe from rejection or a ban: Meta reviews each ad, account and landing page on its own, and the items below are still open.
+**Status: pushed to `main` on 5 November 2026.** The site cannot be called "100% ready" or safe from rejection: Meta reviews each ad, account and landing page on its own, and the items under "Still open" need the company.
 
-## Placeholders to fill
+## Part 9 checklist
 
-These stay hidden on the site until filled, so visitors and reviewers never see text like "[YOUR_CIN]". Each one appears automatically once set; this was tested on a throwaway build with fake data.
-
-| Item | File and field | Where it appears |
+| Check | Result | Evidence |
 | --- | --- | --- |
-| CIN | `src/data/companyInfo.js`, `cin` | Footer, About, Contact, Terms, Disclaimer |
-| GSTIN (optional) | `src/data/companyInfo.js`, `gstin` | About |
-| Grievance Officer's name | `src/data/companyInfo.js`, `grievanceOfficer.name` | Footer, Grievance, Privacy |
-| Full Hubli office address | `src/data/companyInfo.js`, `address.corporateOffice` | Footer, About, Contact, Disclaimer |
-| Legal role (DSA, LSP or referrer) | `src/data/companyInfo.js`, `platformRole` | CTA disclaimer, footer, landing page FAQ |
-| Partner lenders and RBI numbers | `src/data/lendersData.js` | Lending Partners, footer, home page line, landing page badge |
-| Interest range, tenure, fees | `src/data/loanProducts.js`, `terms` | Loan pages, disclosure box, landing page sub-headline |
-| support@ and grievance@ mailboxes | `src/data/companyInfo.js`, `email` and `grievanceOfficer.email` | Everywhere; see below |
+| Old office address and city name: 0 matches | Pass | Searched every text file in the project and all rendered pages |
+| Placeholder text for the CIN and officer name: 0 matches | Pass | Same search |
+| CIN U58200MH2024PTC428411 in Footer, About, Privacy, Terms | Pass | Also on Contact and Disclaimer |
+| Grievance Officer Amit and amit.qvikloan@gmail.com in Footer, Grievance, Privacy, Terms | Pass | Also on About |
+| Bangalore REGUS address in Footer, About, Contact, Grievance, Privacy, Terms, Disclaimer | Pass | Checked in each page's main content |
+| Mumbai registered address on the same pages | Pass | On Grievance it appears in the footer only, since your brief sets the officer's postal address to Bangalore |
+| No page says "participating lenders" as if lenders exist | Pass | 0 matches on 14 pages at desktop and phone size |
+| Enquiry form has 4 new checkboxes, none ticked, 3 mandatory | Pass | Submitting with 0 or 2 of the 3 required boxes is refused |
+| `api/config.php` exists | Pass in the project; **not on the server until deployed** | `public/api/config.php` deploys with the site |
+| Test enquiry succeeds | **Local only** | The form and PHP work, and emails reached a local mail catcher with the right recipients. **No real email has been sent or received** |
+| 404 returns 404 status | **Not verified** | Rule is in `public/.htaccess` and all 20 routes match it, but there is no Apache here to run it. Check after deploying |
+| Privacy Policy mentions Meta Pixel | Pass | Your wording is in section 5. No pixel is installed. If one is added, a consent step must be built first, because the policy says "with your consent" |
 
-The company name, registered address and phone were found in the existing code and are in use. Also add the CIN and any lender details to the JSON-LD and `<noscript>` block in `index.html`.
+Also tested, on 14 pages at desktop and phone size: 0 console errors, broken images or sideways scroll; 0 accessibility violations (desktop); none of your banned words; ₹20,000 appears nowhere. The EMI calculator and disclosure box are unchanged.
 
-## Where this differs from the brief, and why
+## Not ready for Meta yet
 
-These items would have put unverified facts on a live loan website, contradicted what the site actually does, or could not be built as written. The earlier briefs also said not to invent rates, lenders or registrations.
+No Meta page we could find lists a "Financial Services Authorization" with set documents for Indian loan advertisers. Meta's policy says advertisers may have to verify their identity and show authorisation from the relevant regulator, and that Meta may review it. Check the Authorizations and Verifications area of Meta Business Suite for what it actually asks.
 
-| The brief asked for | What was done | Why | What changes it |
-| --- | --- | --- | --- |
-| "Interest rates from 11.99% p.a.", "13% p.a.", "up to ₹50 Lakh", "up to 2% + GST" | Not published. Text says the lender sets these | No lender has confirmed any of these numbers | Fill in `loanProducts.js` |
-| "RBI-registered partner lenders" in hero, badge, disclaimers, titles | Shown only when a lender is listed. Otherwise "a bank or RBI-registered NBFC" and "QvikLoan is not a lender" | No lender is listed today | Add a lender to `lendersData.js` |
-| "Compare offers", "100% online", "no hidden charges", "transparent rates" | Replaced with what is true: one enquiry, clear terms in the KFS, no upfront fee | The site shows no offers to compare, and the team calls customers | Build a real offer view (see the RBI note below) |
-| "Loan aggregator / DSA" | "a loan facilitation platform" | The legal status is unconfirmed | Set `platformRole` once confirmed |
-| 3 generic testimonials | **Not created** | Made-up reviews are fake testimonials, whatever the disclaimer says | Supply real ones, with the customer's consent |
-| Disclosure example: ₹4,577 EMI, ₹4,924 interest, ₹54,924 total | ₹4,584, ₹5,008, ₹55,008 | The brief's figures are wrong for ₹50,000 at 18% over 12 months. They are now calculated by code and labelled hypothetical | Nothing needed |
-| "RBI Note" label | "Safety note" | The wording is not from the RBI | Nothing needed |
-| Privacy Policy: collect PAN, bank statements, salary slips; share with credit bureaus; stored in India; 7-year retention; Meta Pixel and Google Analytics | Policy describes what really happens: none of these are collected or installed; lenders may collect documents and check bureaus | A policy must match real practice. Server locations and the 7-year legal basis are unverified | Update the policy when practice changes, with a lawyer |
-| "You authorize QvikLoan and its partner lenders to fetch your credit report" | "QvikLoan does not fetch your credit report; a lender that reviews your enquiry may do so" | QvikLoan does not fetch reports | Lawyer, if this changes |
-| FAQ: "Soft check initially" | Neutral answer; tells people to ask the lender | Depends on the lender | Update when a lender confirms |
-| Mobile OTP verification | **Not built** | Needs an SMS provider, DLT registration, server code and budget | Your decision; see below |
-| /home-loan, /car-loan, Blog | **Not created** | Nothing shows these are offered, and the form and `lead.php` handle personal and business loans only | Tell us if they are real |
-| support@ and grievance@ addresses | help@qvikloan.com kept | It is the only address known to work. A complaint sent to a missing mailbox is lost | Create the mailboxes, then change the two fields |
-| Mon-Sat 10 AM to 6 PM | Mon-Sat 9:30 AM to 6:30 PM kept | That is the existing published schedule | Change `operatingHours` if wrong |
-| Jurisdiction: Delhi or your city | Mumbai | Matches the registered office | Lawyer |
-| "Our partner lender will contact you" on success | "Our team will contact you" | There is no partner lender yet | Nothing needed |
-| Special Ad Category "Credit", age 21-58 | Corrected in the kit | The category was replaced in January 2025 and fixes age at 18-65+ | See `META_ADS_KIT.md` |
+**Documents to have ready, as you listed. We cannot confirm Meta asks for or accepts these:**
 
-Five smaller points:
+1. CIN certificate
+2. Company PAN
+3. Domain verification
+4. This website URL
+5. Declaration that QvikLoan currently has no active lending partner
 
-- **Age field added:** your Step 1 list has no age field, but your rule needs one.
-- **Income rule conflict:** the brief says ₹15,000 in one place and ₹20,000 in others. The form uses ₹15,000, and ₹20,000 is not published. Please confirm which is right.
-- **RBI Ombudsman:** Level 3 is worded for complaints about a loan or lender, because the scheme covers RBI-regulated lenders. Complaints about QvikLoan's own service point to the National Consumer Helpline.
-- **Partners page:** lenders appear as cards with all the requested fields, not a table with dummy rows.
-- **Optional marketing box kept:** your previous brief asked for marketing consent to stay separate.
+**The main risk:** Meta may ask for regulatory authorisation, and QvikLoan has no RBI registration and no lender agreement to show. Paid ads would also collect loan enquiries that cannot lead to a loan today. A lawyer should advise before spending on ads.
 
-## Banned words removed
+## Still open
 
-**None: none of the listed phrases were on the site.** Details are in `AUDIT.md`. The Facebook Page name is the one off-site case. No countdowns, testimonials, user counts or document-collecting WhatsApp button existed, so none were removed. The WhatsApp button still says "Chat on WhatsApp".
+1. **Deploy this work.** Nothing here is live until it is merged to `main`.
+2. **Fix email delivery.** The domain's SPF record is `v=spf1 include:secureserver.net -all`, which tells mail servers to reject mail not sent through GoDaddy. The forms send from Hostinger, so emails may be blocked or go to spam even when the server reports success. In GoDaddy DNS, try changing it to `v=spf1 include:secureserver.net include:_spf.mail.hostinger.com -all`, then test. Hostinger recommends SMTP over PHP `mail()` for regular sending, so if emails still fail, the forms need to send through an authenticated mailbox.
+3. **Test on the live site.** Send one enquiry, one contact message and one complaint. Confirm the enquiry and contact message reach help@qvikloan.com, and the complaint reaches both help@ and amit.qvikloan@gmail.com. Check that /services returns 404 and /api/config.php returns 403.
+4. **Facebook Page name:** still "Qvikloan- Get Loan in 10 Mins" when last checked. Rename it.
+5. **Company name mismatch:** the "Qvik Loan" app is listed under WebTalk E-commerce Pvt Ltd.
+6. **Meta business and domain verification.** No Meta verification record exists on the domain.
+7. **Chatbot:** its name shows "qvickloan.com", and its answers are not controlled by this code. Check it does not imply lenders or approvals.
+8. **Legal review** of the Privacy Policy, Terms, Refund Policy, consent wording and QvikLoan's role.
 
-One image was removed: `public/images/contact-us-hero.png`, for its "Verified Assistance" wording.
+## Where this differs from your brief
 
-## Effect on your team
+| Your brief | What was done | Why |
+| --- | --- | --- |
+| "Your enquiry is stored only with QvikLoan" | "stays with QvikLoan and the service providers named in our Privacy Policy" | Hostinger, the email provider and iamkratu.ai also handle data, so "only" would be untrue |
+| Create `api/config.php` on the server | Added to the project so it deploys with the site | No server access. The GitHub repository is public, so any key must go in a separate `config.local.php`, created by hand on the server |
+| Log all submissions | Logs the reference number and outcome only | The Privacy Policy says personal details are not written to logs |
+| "Test end-to-end" and "must receive email" | Tested locally | Needs deploying first, and only you can see the inboxes |
 
-- **Enquiry form:** it now collects name, mobile, age, city, employment type, monthly income, loan type and amount. **Email, PIN code, purpose, tenure, existing EMIs, business age and call time are no longer collected**, as your Step 1 list requires, so leads have no email address and staff must call.
-- **New promises on the site, please confirm you can keep them:** contact within 24 working hours; support resolution within 7 working days; Grievance Officer resolution within 15 days.
-- **Who can enquire:** ages 21-58 and income of ₹15,000 or more. Others are now refused by both the form and the server.
-- **Ad landing page:** no main menu and no chat or WhatsApp pop-ups, since the chatbot's answers have not been reviewed.
+**Changes you did not list:**
+- Chat bubble and WhatsApp message reworded so they do not imply QvikLoan has loans to offer.
+- Four unused scripts deleted from `scripts/`: they held invented lender names, RBI numbers and old company details, in a public repository.
+- `config.sample.php` deleted; replaced by `config.php`.
+- Asset paths made absolute in `vite.config.js`, so the 404 page also works on deeper addresses.
 
-## Files changed
+## Details supplied by the company
 
-**New:**
-- `src/components/CtaDisclaimer.jsx`
-- `src/components/LoanDisclosure.jsx`
-- `src/pages/MetaPersonalLoanPage.jsx`
-- `src/pages/RefundPolicyPage.jsx`
-- `AUDIT.md`
-- `COMPLIANCE_REPORT.md`
-- `META_ADS_KIT.md`
-- `CHECKLIST_BEFORE_ADS.md`
+The CIN, Bangalore address and Grievance Officer are used exactly as you gave them. We did not check them against MCA records. Two suggestions for credibility with reviewers: give the officer's full name, not just "Amit", and use a company mailbox rather than a Gmail address.
+
+These commitments now on the site need the company's confirmation: contact within 24 working hours, complaints resolved in 7 working days (support) and 15 days (officer), records kept for 24 months, and no money taken from borrowers.
+
+**This repository is public,** so anyone can read this report once it is committed. Consider making the repository private.
+
+The DMARC record's report address is a placeholder (`example@easydmarc.com`). Change it to a real address.
+
+## Files changed since the last deploy
+
+**New:** `public/api/config.php`
+
+**Deleted:** `public/api/config.sample.php`, `scripts/generate-all-illustrations.mjs`, `scripts/generate-card-illustrations.mjs`, `scripts/generate-illustrations.mjs`, `scripts/generate-inner-page-visuals.mjs`
 
 **Modified:**
-- `index.html`: JSON-LD and refund link
-- `public/api/lead.php`: Step 1 fields, age and income rules, no Reply-To
-- `public/sitemap.xml`: refund page
-- `src/App.jsx`: routes and landing page layout
-- `src/components/Footer.jsx`: 3-column rebuild
-- `src/components/GlassLoanEnquirySection.jsx`: fields and consents
-- `src/components/SupportForm.jsx`: timelines
-- `src/data/companyInfo.js`, `lendersData.js`, `loanProducts.js`
-- `src/pages/BusinessLoansPage.jsx`, `HomePage.jsx`, `HowItWorksPage.jsx`, `PersonalLoansPage.jsx`: disclaimers and disclosure box
-- `src/pages/GrievanceRedressalPage.jsx`: three levels
-- `src/pages/ParticipatingLendersPage.jsx`: interest range and update note
-- `src/pages/PrivacyPolicyPage.jsx`, `TermsAndConditionsPage.jsx`: matched to the new form and rules
+- Config and server: `.gitignore`, `vite.config.js`, `index.html`, `public/.htaccess`, `public/api/.htaccess`, `public/api/contact.php`, `public/api/lead.php`
+- Data: `src/data/companyInfo.js`, `lendersData.js`, `loanProducts.js`
+- Components: `ChatWidget`, `Footer`, `GlassLoanEnquirySection`, `LoanDisclosure`, `LoanTermsTable`, `Navbar`, `RoleTable`, `SupportForm`
+- Pages: About, Business Loans, Disclaimer, Grievance, Home, How It Works, Ad Landing, Lending Partners, Personal Loans, Privacy, Terms
+- Reports: `AUDIT.md`, `CHECKLIST_BEFORE_ADS.md`, `META_ADS_KIT.md`, this file
 
-**Deleted:** `public/images/contact-us-hero.png`
-
-**Short URLs that now redirect:** `/personal-loan`, `/business-loan`, `/terms`, `/grievance`, `/partners`.
-
-Brand colours and the overall design are unchanged.
-
-## Test results
-
-Tested locally in Chrome against real PHP, with a mock iamkratu.ai and a local mail catcher.
-
-| Check | Result |
-| --- | --- |
-| 13 pages at desktop, tablet and phone sizes (39 page views) | 0 console errors, broken images or sideways scroll; one H1 each |
-| Accessibility (axe-core, desktop) | 0 violations |
-| All internal links (14) and footer links | All open the right page |
-| Redirects (6) | All correct |
-| Consent boxes | All 4 start unticked; submitting with 2 of the 3 required boxes is refused |
-| Form rules in the browser | Bad mobile, age 20, age 59 and income ₹14,999 refused; ₹15,000 accepted |
-| Rules in `lead.php` | Same rules refused by the server; ages 21 and 58 accepted; old fields no longer stored |
-| Backup email | Sent correctly, with no Reply-To |
-| Filling in data (fake test build) | All 13 checks showed the text as intended; source restored afterwards |
-| Clean `dist/` | No test data or `config.php` |
-
-**Not tested:** whether Hostinger sends the form emails, and how the changes behave on the live server. Nothing has been uploaded yet.
-
-## Still open before ads
-
-1. **The live enquiry form is broken.** `api/config.php` is missing on Hostinger (rechecked today).
-2. **Rename the Facebook Page.**
-3. **One legal entity** across the site, the app and Business Manager, then business verification.
-4. **Verify the domain** with Meta.
-5. **Fill in the placeholders above**, at least the CIN and the officer's name.
-6. **Legal review**, including RBI Digital Lending Directions para 6: a multi-lender LSP must show all matching offers digitally, with each lender's APR, EMI and KFS link. Enquiry-and-callback may not meet this, which matters if you want to say "compare offers".
-
-The ordered steps are in `CHECKLIST_BEFORE_ADS.md`.
+The website PDF guide was made before these changes and needs regenerating once they are live.

@@ -6,6 +6,7 @@ import FinancialCalculator from '../components/FinancialCalculator';
 import LoanDisclosure from '../components/LoanDisclosure';
 import LoanTermsTable from '../components/LoanTermsTable';
 import { companyInfo } from '../data/companyInfo';
+import { enquiryRules } from '../data/loanProducts';
 import { usePageMeta } from '../lib/usePageMeta';
 
 export default function BusinessLoansPage() {
@@ -49,7 +50,7 @@ export default function BusinessLoansPage() {
                 Business Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Explore financing for inventory, equipment or working capital. The lending institution decides eligibility, approval, rates and disbursement.
+                Explore business financing options. The lending institution, when a partnership is confirmed, decides eligibility, approval, rates and disbursement. QvikLoan currently has no active lending partner.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link to="/#enquiry-section" state={{ loanType: 'business' }}
@@ -139,7 +140,7 @@ export default function BusinessLoansPage() {
                 General Business Eligibility
               </h3>
               <p className="text-xs text-slate-blue leading-relaxed">
-                Requirements differ by lender. These are the things lenders commonly look at:
+                To enquire through QvikLoan you must be {enquiryRules.minAge} to {enquiryRules.maxAge}, an Indian resident, with a monthly income of ₹{enquiryRules.minMonthlyIncome.toLocaleString('en-IN')} or more. Requirements differ by lender. These are the things lenders commonly look at:
               </p>
               <ul className="space-y-3.5 text-xs sm:text-sm text-slate-blue">
                 <li className="flex items-start gap-2.5">

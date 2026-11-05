@@ -38,12 +38,12 @@ const COLLECTED = [
 ];
 
 const PURPOSES = [
-  ['Assess your enquiry and contact you about it by phone, SMS, WhatsApp or email', 'Your consent on the enquiry form'],
-  ['Share your enquiry with a lender listed on our Lending Partners page so it can assess your eligibility', 'Your consent on the enquiry form'],
+  ['Assess your enquiry and contact you about it by call, SMS or WhatsApp', 'Your consent on the enquiry form'],
+  ['In future only: share your enquiry with a lender listed on our Lending Partners page so it can assess your eligibility. This does not happen today', 'Your fresh consent at that time'],
   ['Send you information about other loan products', 'Your separate, optional marketing consent'],
   ['Answer your questions and investigate complaints, and keep a grievance register', 'Your request, and our legal obligations'],
   ['Keep the website secure and block spam and fraud (for example, limiting repeated submissions from one IP address)', 'Reasonable security practices required by law'],
-  ['Understand which of our advertisements and links bring enquiries, using the campaign tags in the link you used', 'Your consent on the enquiry form'],
+  ['Understand which of our advertisements and links bring enquiries, using the campaign tags in the link you used', 'This policy, which you agree to on the enquiry form'],
   ['Meet legal and regulatory requirements and respond to lawful requests', 'Legal obligation'],
 ];
 
@@ -71,7 +71,8 @@ function Table({ caption, head, rows }) {
   );
 }
 
-const mail = <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold underline">{companyInfo.grievanceOfficer.email}</a>;
+const mail = <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>;
+const officerMail = <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal font-semibold underline">{companyInfo.grievanceOfficer.email}</a>;
 
 export default function PrivacyPolicyPage() {
   usePageMeta('Privacy Policy', 'How QvikLoan collects, uses, shares, protects and deletes personal information, and how to withdraw consent or contact our Grievance Officer.');
@@ -88,7 +89,7 @@ export default function PrivacyPolicyPage() {
       <Callout title="In short">
         <ul className="list-disc pl-5 space-y-1 text-sm">
           <li>We collect only what we need to handle your loan enquiry, and we explain why on the form.</li>
-          <li>We share your enquiry with a lender only with your consent, and only with lenders named on our Lending Partners page.</li>
+          <li>We do not share your enquiry with any lender today. In future, we would share it only with your fresh consent, and only with lenders named on our Lending Partners page.</li>
           <li>We do not collect PAN, Aadhaar, bank details or documents on this website.</li>
           <li>We do not sell your information or send your enquiry details to advertising platforms.</li>
           <li>You can withdraw consent or ask us to delete your details at any time by emailing {mail}.</li>
@@ -98,8 +99,9 @@ export default function PrivacyPolicyPage() {
       <LegalSection id="who-we-are" number={1} title="Who we are">
         <p>
           QvikLoan (<a href={companyInfo.website} className="text-royal underline">qvikloan.com</a>) is operated by{' '}
-          <strong>{companyInfo.name}</strong> (“we”, “us”), {companyInfo.address.registeredOffice}. We decide why and how
-          your personal information is processed on this website, so we are responsible for it.
+          <strong>{companyInfo.name}</strong> (“we”, “us”), CIN: {companyInfo.cin}, Registered address:{' '}
+          {companyInfo.address.registeredOffice}. Operating office: {companyInfo.address.corporateOffice}. We decide why
+          and how your personal information is processed on this website, so we are responsible for it.
         </p>
         <p>
           This policy covers this website, its enquiry, contact and grievance forms, the chat assistant on it, and your
@@ -136,10 +138,10 @@ export default function PrivacyPolicyPage() {
       <LegalSection id="sharing" number={5} title="Who we share it with">
         <ul className="list-disc pl-5 space-y-2">
           <li>
-            <strong>Lending institutions:</strong> only with your consent, and only lenders listed on our{' '}
-            <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page. We share
-            your enquiry details so the lender can assess your eligibility. The lender then handles your information as a
-            separate data fiduciary under its own privacy policy.
+            <strong>Lending institutions:</strong> Currently NONE. We do not share with any lender today. In future, only
+            with your fresh consent, and only lenders listed on our{' '}
+            <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page. A
+            lender would then handle your information as a separate data fiduciary under its own privacy policy.
           </li>
           <li>
             <strong>Service providers that work for us:</strong>
@@ -151,7 +153,7 @@ export default function PrivacyPolicyPage() {
             They may use your information only to provide these services to us.
           </li>
           <li><strong>Authorities:</strong> when the law requires it, for example in response to a court order or a lawful request from a regulator or law enforcement agency.</li>
-          <li><strong>Advertising and analytics platforms:</strong> this website does not currently use advertising pixels or analytics cookies. If we add them, we will update this policy first, ask for consent where the law requires it, and never send them the contents of your enquiry (such as income, loan amount or existing loans).</li>
+          <li><strong>Advertising and analytics platforms:</strong> If we run advertisements, we may use Meta Pixel and Google Analytics with your consent to understand which ads bring enquiries. We never send them the contents of your enquiry (such as name, mobile, income, loan amount). You can withdraw consent anytime via {mail}. If we add pixels, we will update this policy first.</li>
         </ul>
         <p>We do not sell or rent your personal information.</p>
       </LegalSection>
@@ -159,14 +161,15 @@ export default function PrivacyPolicyPage() {
       <LegalSection id="consent" number={6} title="Consent and withdrawing consent">
         <p>
           The enquiry form has four separate checkboxes, and none is ticked in advance. Three are needed to process your
-          enquiry: agreeing to this policy and our Terms, sharing your details with a listed lender, and being contacted
-          about your enquiry. The fourth, for marketing, is optional and does not affect your enquiry. We keep a record
-          of the exact wording you agreed to and when.
+          enquiry: agreeing to this policy and our Terms, being contacted about your enquiry, and understanding that we
+          would share your details only with a listed lender and only after taking your fresh consent. The fourth, for
+          marketing, is optional and does not affect your enquiry. We keep a record of the exact wording you agreed to
+          and when.
         </p>
         <p>
           You can withdraw consent at any time by emailing {mail} or using our{' '}
           <Link to="/grievance-redressal" className="text-royal font-semibold underline">grievance form</Link>. We will then
-          stop using your information for that purpose, and tell any listed lender we shared it with that you have
+          stop using your information for that purpose, and tell any lender we shared it with that you have
           withdrawn consent. Withdrawal does not affect processing that already happened, and we may keep a record of
           your consent and its withdrawal where the law requires. A lender may also need to keep some records under its
           own legal obligations, for example if you took a loan.
@@ -252,12 +255,12 @@ export default function PrivacyPolicyPage() {
       <LegalSection id="contact" number={14} title="Grievance Officer and contact">
         <dl className="rounded-xl border border-neutral-border bg-neutral-bg p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-[34%_1fr] gap-x-4 gap-y-2 text-sm">
           {companyInfo.grievanceOfficer.name && (<><dt className="font-semibold text-navy">Name</dt><dd>{companyInfo.grievanceOfficer.name}</dd></>)}
-          <dt className="font-semibold text-navy">Role</dt><dd>{companyInfo.grievanceOfficer.designation}, {companyInfo.name}</dd>
-          <dt className="font-semibold text-navy">Email</dt><dd>{mail}</dd>
+          <dt className="font-semibold text-navy">Designation</dt><dd>{companyInfo.grievanceOfficer.designation}</dd>
+          <dt className="font-semibold text-navy">Email</dt><dd>{officerMail}</dd>
           <dt className="font-semibold text-navy">Phone</dt><dd>{companyInfo.grievanceOfficer.phone} ({companyInfo.operatingHours})</dd>
-          <dt className="font-semibold text-navy">Address</dt><dd>{companyInfo.address.registeredOffice}</dd>
+          <dt className="font-semibold text-navy">Postal address</dt><dd>{companyInfo.grievanceOfficer.address}</dd>
           <dt className="font-semibold text-navy">Response times</dt>
-          <dd>Our support team aims to resolve requests {companyInfo.grievanceTimelines.support}; if it does not, the Grievance Officer aims to resolve them {companyInfo.grievanceTimelines.officer}.</dd>
+          <dd>Support: {companyInfo.grievanceTimelines.support}. Officer: {companyInfo.grievanceTimelines.officer}.</dd>
         </dl>
         <p>
           You can also use the form on our <Link to="/grievance-redressal" className="text-royal font-semibold underline">Grievance Redressal</Link> page.

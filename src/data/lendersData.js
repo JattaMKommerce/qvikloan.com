@@ -1,7 +1,9 @@
 /**
  * Lending institutions that receive enquiries through QvikLoan.
- * Shown on the Lending Partners page (/participating-lenders), and the enquiry consent refers to
- * "the lenders listed on our Lending Partners page", so this list must always match reality.
+ * Shown on the Lending Partners page (/participating-lenders). There are none today, so the site says
+ * "no active lending partner" in many places. When adding the first lender, also change that wording
+ * (search the code for "no active lending partner" and "fresh consent"), the enquiry form's consent,
+ * and collect fresh consent before sharing any earlier enquiry.
  *
  * Add a lender ONLY when all of these are true:
  *   1. A signed agreement (LSP / DSA / referral) between Jatta M Kommerce and the lender exists.
@@ -26,9 +28,5 @@
  *     grievance: { name: 'Officer name', email: 'grievance@...', phone: '...' },
  *     lspListingUrl: 'https://...',              // lender page listing QvikLoan as its LSP
  *   }
- *
- * The four lenders previously shown (Northern Arc Capital, InCred Financial Services,
- * Lendingkart Finance, Protium Finance) were removed on 4 Nov 2026: no agreement or lender-side
- * listing for them was found. Add any of them back only after the checks above.
  */
 export const participatingLenders = [];

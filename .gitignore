@@ -9,5 +9,5 @@ yarn-debug.log*
 yarn-error.log*
 
 
-# Lead relay settings hold the iamkratu.ai key: never commit them
-public/api/config.php
+# Secrets for the form scripts (the iamkratu.ai key): never commit them. The repository is public.
+public/api/config.local.php

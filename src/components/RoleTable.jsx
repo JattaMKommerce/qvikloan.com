@@ -5,7 +5,7 @@ import { companyInfo } from '../data/companyInfo';
 // Terms and Conditions (section 3) and the Financial Disclaimer.
 const ROWS = [
   ['Taking your loan enquiry', 'Collects your enquiry and contacts you about it', 'Not involved'],
-  ['Sharing your details', 'Shares your enquiry with a listed lender only after you consent', 'Receives your details and handles them under its own privacy policy'],
+  ['Sharing your details', 'Does not share your enquiry with any lender today. A future lender must be listed first, and needs your fresh consent', 'Would receive your details only after that, under its own privacy policy'],
   ['KYC and documents', 'Does not ask for PAN, Aadhaar, bank statements or documents on this website', 'Collects the identity, income and other documents it needs'],
   ['Credit assessment (underwriting)', 'Does not assess your creditworthiness', 'Checks eligibility, credit history and repayment capacity'],
   ['Approval or rejection', 'Cannot approve, reject or guarantee a loan', 'Decides whether to make you an offer'],

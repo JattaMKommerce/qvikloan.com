@@ -7,8 +7,7 @@ import { usePageMeta } from '../lib/usePageMeta';
 const WE_DO = [
   'Help you understand personal and business loan options in plain language',
   'Take your loan enquiry and contact you about it',
-  'With your consent, share your enquiry with a lender listed on our Lending Partners page',
-  'Help you through the steps the lender asks you to complete',
+  'We do not share your enquiry with any lender today. When a partnership is confirmed, we will list that lender first and take your fresh consent before sharing.',
   'Handle complaints about our own service',
 ];
 
@@ -61,13 +60,13 @@ export default function AboutUsPage() {
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-2xl">
                 QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable
-                loan options through participating financial institutions. It is owned and operated by{' '}
+                loan options through a loan enquiry facilitation process. QvikLoan currently has no active lending
+                partner. It is owned and operated by{' '}
                 <strong>{companyInfo.name}</strong>.
               </p>
               <p className="text-base text-slate-blue leading-relaxed max-w-2xl">
-                QvikLoan facilitates the loan discovery and application process. Final loan eligibility, approval,
-                applicable interest rates, repayment terms and disbursement are determined by the respective lending
-                institution.
+                QvikLoan is not a lender. Final loan eligibility, approval, applicable interest rates, repayment terms
+                and disbursement are always determined by the lending institution.
               </p>
               <a
                 href={companyInfo.companyWebsite}
@@ -126,7 +125,7 @@ export default function AboutUsPage() {
           </div>
         </div>
         <p className="text-sm text-slate-blue">
-          Lenders are named, with their registration and grievance details, on our{' '}
+          Any lender we work with in future will be named, with its registration and grievance details, on our{' '}
           <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
           Technology providers that run parts of this website are named in our{' '}
           <Link to="/privacy-policy" className="text-royal font-semibold underline">Privacy Policy</Link>.
@@ -143,8 +142,8 @@ export default function AboutUsPage() {
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <Detail label="Registered company name">{companyInfo.name}</Detail>
+            <Detail label="CIN"><span className="font-mono">{companyInfo.cin}</span></Detail>
             <Detail label="Brand name">{companyInfo.brandName}</Detail>
-            {companyInfo.cin && <Detail label="Corporate Identity Number (CIN)"><span className="font-mono">{companyInfo.cin}</span></Detail>}
             {companyInfo.gstin && <Detail label="GSTIN"><span className="font-mono">{companyInfo.gstin}</span></Detail>}
             <Detail label="Nature of business">Digital loan facilitation platform. Not a bank or NBFC.</Detail>
             <Detail label="Company website">
@@ -159,6 +158,9 @@ export default function AboutUsPage() {
             </Detail>
             <Detail label="Customer support phone">
               <a href={`tel:${companyInfo.phone.replace(/\s/g, '')}`} className="text-royal hover:underline">{companyInfo.phone}</a>
+            </Detail>
+            <Detail label="Grievance Officer">
+              {companyInfo.grievanceOfficer.name}, <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="text-royal hover:underline break-all">{companyInfo.grievanceOfficer.email}</a>, {companyInfo.grievanceOfficer.phone}
             </Detail>
             <Detail label="Business hours">{companyInfo.operatingHours}</Detail>
           </dl>
@@ -177,7 +179,7 @@ export default function AboutUsPage() {
             <span>Laws and guidelines relevant to our work</span>
           </h2>
           <p className="text-sm text-slate-blue leading-relaxed">
-            These are the main Indian rules that shape how a loan facilitation platform and its lending partners must
+            These are the main Indian rules that shape how a loan platform and lenders must
             work. We list them so you know your rights; the list is not a claim of certification by any regulator.
           </p>
           <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">

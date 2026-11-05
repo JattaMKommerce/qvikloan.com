@@ -16,13 +16,13 @@ const STEPS = [
   {
     num: '02',
     title: 'Submit your enquiry with consent',
-    desc: 'Share your basic contact details. You see how they are used, and which lenders may receive them, before you submit.',
+    desc: 'Share your basic contact details. You see how they are used before you submit. No lender receives them today.',
     image: '/images/step-02-consent.png',
   },
   {
     num: '03',
     title: 'Complete the lender’s checks',
-    desc: 'If a lender can consider your enquiry, it may ask you for identity, income, credit or business documents.',
+    desc: 'IF a lender partnership is active and you give fresh consent, that lender may ask you for identity, income, credit or business documents.',
     image: '/images/step-03-evaluation.png',
   },
   {
@@ -52,7 +52,7 @@ const FAQS = [
   },
   {
     q: 'Who will see my details?',
-    a: 'Our team, the service providers that run our systems, and, only if you consent, the lenders listed on our Lending Partners page. We never ask for OTPs, banking passwords or upfront payments.',
+    a: 'Our team and the service providers that run our systems. No lender receives your details today. If a lender partnership is confirmed, only a lender listed on our Lending Partners page could receive them, and only with your fresh consent. We never ask for OTPs, banking passwords or upfront payments.',
   },
   {
     q: 'Can I ask you to delete my details?',
@@ -83,7 +83,7 @@ export default function HowItWorksPage() {
                 How QvikLoan Works
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                From your enquiry to the lender’s decision. No pressure, and you stay in control of whether to borrow.
+                How an enquiry works, and what would happen if a lender partnership becomes active. QvikLoan currently has no active lending partner.
               </p>
               <Link
                 to="/#enquiry-section"

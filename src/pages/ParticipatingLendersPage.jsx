@@ -61,7 +61,7 @@ function LenderCard({ lender }) {
 }
 
 export default function ParticipatingLendersPage() {
-  usePageMeta('Lending Partners', 'The banks and NBFCs that may review loan enquiries made through QvikLoan, their RBI registration and grievance contacts, and what each party does.');
+  usePageMeta('Lending Partners', 'QvikLoan currently has no active lending partner. Any bank or NBFC it works with in future will be listed here before any enquiry is shared.');
 
   return (
     <div className="space-y-14 sm:space-y-20 pb-16">
@@ -76,7 +76,7 @@ export default function ParticipatingLendersPage() {
             Lending Partners
           </h1>
           <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-3xl">
-            The lending institutions that may review enquiries made through QvikLoan, and exactly what each party does.
+            Any bank or NBFC that QvikLoan works with in future will be listed here. This page also explains exactly what each party would do.
             QvikLoan, operated by {companyInfo.name}, is not a bank or NBFC and does not lend.
           </p>
         </div>
@@ -87,9 +87,8 @@ export default function ParticipatingLendersPage() {
         <div className="max-w-3xl space-y-2">
           <h2 id="lender-list" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Our lending partners</h2>
           <p className="text-sm sm:text-base text-slate-blue">
-            Your enquiry is shared only with lenders listed on this page, and only after you give consent on the enquiry
-            form. Each lender sets its own eligibility rules, rates and charges. This list is updated as per active
-            partnerships.
+            We do not share your enquiry with any lender today. Each lender we work with in future will set its own
+            eligibility rules, rates and charges. This list is updated as per active partnerships.
           </p>
         </div>
 
@@ -97,14 +96,23 @@ export default function ParticipatingLendersPage() {
           <div className="flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:p-6 text-sm sm:text-base text-amber-950">
             <Info className="w-5 h-5 shrink-0 mt-0.5 text-amber-700" aria-hidden="true" />
             <div className="space-y-2">
-              <p className="font-semibold">Our lender list is being updated.</p>
+              <p className="font-semibold">No Active Lending Partner At Present</p>
+              <p>As of 5 November 2026, QvikLoan has no active partnership with any bank or NBFC.</p>
               <p>
-                We publish each lending partner here, with its full registered name, RBI registration, website and
-                grievance contact, once its partnership details are confirmed. We do not share your enquiry with any
-                lender that is not listed on this page.
+                We do not share your enquiry with any lender today. We will publish here the full registered name, RBI
+                Certificate of Registration number, website and grievance contact of each lender BEFORE we start sharing
+                any enquiry with that lender.
               </p>
               <p>
-                Questions? Email <a href={`mailto:${companyInfo.email}`} className="font-semibold underline">{companyInfo.email}</a>.
+                Your enquiry stays with QvikLoan and the service providers named in our{' '}
+                <Link to="/privacy-policy" className="font-semibold underline">Privacy Policy</Link>, and is not sent to any
+                lender until then.
+              </p>
+              <p>
+                Do not pay anyone who claims to be a QvikLoan partner lender. If you are contacted in our name asking for
+                money, OTP or documents, report it to{' '}
+                <a href={`mailto:${companyInfo.grievanceOfficer.email}`} className="font-semibold underline break-all">{companyInfo.grievanceOfficer.email}</a> /{' '}
+                <a href={`mailto:${companyInfo.email}`} className="font-semibold underline">{companyInfo.email}</a> and cybercrime.gov.in (1930).
               </p>
             </div>
           </div>
@@ -120,8 +128,8 @@ export default function ParticipatingLendersPage() {
         <div className="max-w-3xl space-y-2">
           <h2 id="roles" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Who evaluates, approves and disburses your loan</h2>
           <p className="text-sm sm:text-base text-slate-blue">
-            The lender evaluates your application, carries out credit underwriting, approves or rejects the loan,
-            disburses the money and manages repayment. QvikLoan does none of these.
+            When a lender partnership is active, the lender evaluates your application, carries out credit underwriting,
+            approves or rejects the loan, disburses the money and manages repayment. QvikLoan does none of these.
           </p>
         </div>
         <RoleTable />

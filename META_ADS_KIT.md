@@ -6,7 +6,7 @@ Date: 5 November 2026. For whoever runs the Meta ad account.
 
 ## Before you use this
 
-- **Fix the blockers first.** See `CHECKLIST_BEFORE_ADS.md`.
+- **Take legal advice before running these ads.** The company has no lender agreement today, the site says so, and enquiries cannot lead to a loan yet. See `CHECKLIST_BEFORE_ADS.md`.
 - **Only use a number in square brackets after a lender confirms it in writing.** If you have no confirmed number, use the "no rates" version. Do not fill these in with "typical market" rates.
 - **The rate must also be on the landing page.** Add it to `src/data/loanProducts.js` first, so the ad and the page match.
 
@@ -14,7 +14,7 @@ Date: 5 November 2026. For whoever runs the Meta ad account.
 
 **No rates (use this today):**
 
-- **Primary text:** Planning for medical, education or home expenses? Start a personal loan enquiry with QvikLoan. The lender decides eligibility, interest rate and tenure, and shows all charges in its Key Facts Statement before you sign. QvikLoan is not a lender. Loans subject to credit approval. T&C apply.
+- **Primary text:** Planning for medical, education or home expenses? Start a personal loan enquiry with QvikLoan. QvikLoan is not a lender and currently has no active lending partner. We collect your enquiry and explain loan options. T&C apply.
 - **Headline:** Start a Personal Loan Enquiry
 - **Description:** Clear Charges | No Upfront Fee by QvikLoan
 - **CTA:** Learn More, linking to `https://qvikloan.com/meta-personal-loan`
@@ -25,7 +25,7 @@ Date: 5 November 2026. For whoever runs the Meta ad account.
 
 **No rates (use this today):**
 
-- **Primary text:** Running a business? Explore business loan options for working capital, inventory or equipment. Eligibility depends on your business turnover and credit profile, and the lender sets the rate and charges. QvikLoan is not a lender. T&C apply.
+- **Primary text:** Running a business? Explore business loan options for working capital, inventory or equipment. QvikLoan is not a lender and currently has no active lending partner. We collect your enquiry and explain loan options. T&C apply.
 - **Headline:** Start a Business Loan Enquiry
 - **Description:** Working Capital | Inventory | Equipment
 - **CTA:** Learn More, linking to `https://qvikloan.com/business-loans`
