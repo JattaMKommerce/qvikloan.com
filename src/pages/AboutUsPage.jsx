@@ -7,7 +7,7 @@ import { usePageMeta } from '../lib/usePageMeta';
 const WE_DO = [
   'Help you understand personal and business loan options in plain language',
   'Take your loan enquiry and contact you about it',
-  'We do not share your enquiry with any lender today. When a partnership is confirmed, we will list that lender first and take your fresh consent before sharing.',
+  'Share your enquiry only with a lender listed on our Lending Partners page, and only with your fresh consent',
   'Handle complaints about our own service',
 ];
 
@@ -51,7 +51,7 @@ export default function AboutUsPage() {
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-2xl">
                 QvikLoan helps people and businesses explore loan options. We take your enquiry and explain your options
-                in simple words. We are not a lender, and we currently have no active lending partner.
+                in simple words. We are not a lender; the banks and NBFCs we work with are listed on our Lending Partners page.
               </p>
               <a
                 href={companyInfo.companyWebsite}
@@ -69,8 +69,8 @@ export default function AboutUsPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="backdrop-blur-md bg-white/95 rounded-2xl border border-white/80 shadow-premium overflow-hidden relative w-full max-w-md">
                 <img
-                  src="/images/about.jpg"
-                  alt="Corporate Identity and Governance"
+                  src="/images/about-team.jpg"
+                  alt="People working together in an office"
                   className="w-full aspect-[3/2] object-cover object-center"
                   loading="eager"
                 />
@@ -114,7 +114,7 @@ export default function AboutUsPage() {
           </div>
         </div>
         <p className="text-sm text-slate-blue">
-          Any lender we work with in future will be named, with its registration and grievance details, on our{' '}
+          The lenders we work with are named on our{' '}
           <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
           Technology providers that run parts of this website are named in our{' '}
           <Link to="/privacy-policy" className="text-royal font-semibold underline">Privacy Policy</Link>.

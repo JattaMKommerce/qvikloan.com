@@ -21,8 +21,7 @@ export default function LoanTermsTable({ product }) {
           <Info className="w-5 h-5 shrink-0 mt-0.5 text-amber-700" aria-hidden="true" />
           <p>
             <strong>Lender-specific terms are subject to confirmation.</strong> We publish a lender’s exact rates and
-            charges here only once that lender has confirmed them. QvikLoan currently has no active lending partner. A
-            lender that makes an offer in future must give you these details in its Key Facts Statement (KFS) before you
+            charges here only once that lender has confirmed them. A lender that makes an offer must give you these details in its Key Facts Statement (KFS) before you
             agree to anything.
           </p>
         </div>

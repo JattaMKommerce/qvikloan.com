@@ -40,9 +40,15 @@ function LenderCard({ lender }) {
   return (
     <article className="rounded-2xl border border-neutral-border bg-white p-6 sm:p-8 space-y-4">
       <div className="flex items-start gap-3">
-        <div className="w-10 h-10 rounded-xl bg-teal-soft text-teal-dark flex items-center justify-center shrink-0">
-          <Landmark className="w-5 h-5" aria-hidden="true" />
-        </div>
+        {lender.logo ? (
+          <div className="h-12 w-28 rounded-xl bg-white border border-neutral-border flex items-center justify-center px-2 shrink-0">
+            <img src={lender.logo} alt="" className="max-h-8 max-w-full object-contain" loading="lazy" />
+          </div>
+        ) : (
+          <div className="w-10 h-10 rounded-xl bg-teal-soft text-teal-dark flex items-center justify-center shrink-0">
+            <Landmark className="w-5 h-5" aria-hidden="true" />
+          </div>
+        )}
         <div>
           <h3 className="text-xl font-heading font-bold text-navy">{lender.brandName || lender.legalName}</h3>
           {lender.classification && <p className="text-sm text-teal-dark font-semibold">{lender.classification}</p>}
@@ -61,7 +67,7 @@ function LenderCard({ lender }) {
 }
 
 export default function ParticipatingLendersPage() {
-  usePageMeta('Lending Partners', 'QvikLoan currently has no active lending partner. Any bank or NBFC it works with in future will be listed here before any enquiry is shared.');
+  usePageMeta('Lending Partners', 'The banks and NBFCs QvikLoan works with, and what each party does. QvikLoan shares an enquiry with a listed lender only with your consent.');
 
   return (
     <div className="space-y-14 sm:space-y-20 pb-16">
@@ -76,7 +82,7 @@ export default function ParticipatingLendersPage() {
             Lending Partners
           </h1>
           <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-3xl">
-            Any bank or NBFC that QvikLoan works with in future will be listed here. This page also explains exactly what each party would do.
+            The banks and NBFCs that QvikLoan works with are listed here. This page also explains exactly what each party does.
             QvikLoan, operated by {companyInfo.name}, is not a bank or NBFC and does not lend.
           </p>
         </div>
@@ -87,7 +93,7 @@ export default function ParticipatingLendersPage() {
         <div className="max-w-3xl space-y-2">
           <h2 id="lender-list" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Our lending partners</h2>
           <p className="text-sm sm:text-base text-slate-blue">
-            We do not share your enquiry with any lender today. Each lender we work with in future will set its own
+            We share your enquiry only with a lender listed below, and only after you give fresh consent. Each lender sets its own
             eligibility rules, rates and charges. This list is updated as per active partnerships.
           </p>
         </div>
@@ -125,7 +131,7 @@ export default function ParticipatingLendersPage() {
         <div className="max-w-3xl space-y-2">
           <h2 id="roles" className="text-2xl sm:text-3xl font-heading font-bold text-navy">Who evaluates, approves and disburses your loan</h2>
           <p className="text-sm sm:text-base text-slate-blue">
-            When a lender partnership is active, the lender evaluates your application, carries out credit underwriting,
+            The lender evaluates your application, carries out credit underwriting,
             approves or rejects the loan, disburses the money and manages repayment. QvikLoan does none of these.
           </p>
         </div>

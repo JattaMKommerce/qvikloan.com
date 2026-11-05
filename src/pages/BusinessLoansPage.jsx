@@ -34,12 +34,12 @@ export default function BusinessLoansPage() {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
-      
+
       {/* Hero Header with Matching Visual Graphic & Feathering */}
       <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
+
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
@@ -50,7 +50,7 @@ export default function BusinessLoansPage() {
                 Business Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Explore business financing options. The lending institution, when a partnership is confirmed, decides eligibility, approval, rates and disbursement. QvikLoan currently has no active lending partner.
+                Explore business financing options. The lending institution decides eligibility, approval, rates and disbursement. QvikLoan is not a lender.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link to="/#enquiry-section" state={{ loanType: 'business' }}
@@ -67,8 +67,8 @@ export default function BusinessLoansPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md shadow-premium border border-white/80">
                 <img
-                  src="/images/hero-2.jpg"
-                  alt="Business Loans Capital Facilities"
+                  src="/images/business-hero.jpg"
+                  alt="Boutique owner checking her phone in her clothing store"
                   className="w-full h-72 sm:h-80 object-cover object-center"
                   loading="eager"
                 />
@@ -127,7 +127,7 @@ export default function BusinessLoansPage() {
       <section className="bg-neutral-bg/70 py-14 sm:py-20 border-y border-neutral-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            
+
             {/* Eligibility */}
             <div className="backdrop-blur-md bg-white/95 p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
@@ -201,7 +201,7 @@ export default function BusinessLoansPage() {
             <Info className="w-5 h-5 text-royal" />
             <span>Pricing and responsibilities</span>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-blue leading-relaxed">
             <div>
               <h4 className="font-heading font-bold text-navy mb-2">How Commercial Rates are Determined</h4>

@@ -45,7 +45,7 @@ export default function LenderLogoLoop() {
                   <img
                     src={lender.logo}
                     alt={duplicate ? '' : lender.legalName}
-                    className="h-8 sm:h-10 w-auto max-w-[160px] object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition"
+                    className="h-9 sm:h-11 w-auto max-w-[180px] sm:max-w-[230px] object-contain"
                     loading="lazy"
                   />
                 ) : (

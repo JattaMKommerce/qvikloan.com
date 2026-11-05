@@ -30,8 +30,7 @@ export default function DisclaimerPage() {
       <Callout title="Please read before you enquire">
         <p className="text-sm">
           QvikLoan provides a digital platform for exploring loan-related information and facilitating loan enquiries.
-          QvikLoan currently has no active lending partner and does not independently guarantee loan approval or
-          disbursement.
+          QvikLoan does not lend and does not guarantee loan approval or disbursement.
         </p>
       </Callout>
 

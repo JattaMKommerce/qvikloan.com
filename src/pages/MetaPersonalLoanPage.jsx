@@ -12,8 +12,8 @@ import { usePageMeta } from '../lib/usePageMeta';
 const { minAge, maxAge, minMonthlyIncome } = enquiryRules;
 
 const BENEFITS = [
-  { icon: ClipboardList, title: 'One simple enquiry', body: 'Tell us what you need once. We contact you about it. No lender receives it today.' },
-  { icon: FileSearch, title: 'Clear terms before you decide', body: 'A lender that makes an offer in future must show the APR, EMI and all charges in its Key Facts Statement before you sign.' },
+  { icon: ClipboardList, title: 'One simple enquiry', body: 'Tell us what you need once. We contact you about it, and share it with a lender only if you agree.' },
+  { icon: FileSearch, title: 'Clear terms before you decide', body: 'A lender that makes an offer must show the APR, EMI and all charges in its Key Facts Statement before you sign.' },
   { icon: BadgeIndianRupee, title: 'No upfront fee by QvikLoan', body: 'QvikLoan does not charge you for submitting an enquiry. Any lender fees are shown in the lender\'s KFS.' },
 ];
 
@@ -31,7 +31,7 @@ const FAQS = [
   { q: 'How long does approval take?', a: 'It depends on the lender’s credit assessment and how quickly its checks are completed. We cannot promise a timeline or an approval.' },
   { q: 'Will checking eligibility affect my CIBIL score?', a: 'Submitting this enquiry does not make QvikLoan check your credit report. A lender may check it during its assessment, and some checks can appear on your credit report. Ask the lender what kind of check it runs before you agree.' },
   { q: 'Is there a fee?', a: 'QvikLoan charges no fee for an enquiry. Never pay anyone an upfront fee to get a loan approved.' },
-  { q: 'Do you have any lender partners?', a: 'No, as of 5 November 2026 we have no active lending partner.' },
+  { q: 'Do you have any lender partners?', a: 'Yes. The banks and NBFCs we work with are listed on our Lending Partners page.' },
 ];
 
 export default function MetaPersonalLoanPage() {

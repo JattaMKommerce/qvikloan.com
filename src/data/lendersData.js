@@ -1,9 +1,8 @@
 /**
  * Lending institutions that receive enquiries through QvikLoan.
- * Shown on the Lending Partners page (/participating-lenders). There are none today, so the site says
- * "no active lending partner" in many places. When adding the first lender, also change that wording
- * (search the code for "no active lending partner" and "fresh consent"), the enquiry form's consent,
- * and collect fresh consent before sharing any earlier enquiry.
+ * Shown on the Lending Partners page (/participating-lenders), in the footer and in the home page
+ * logo strip. If this list ever becomes empty again, the site wording that says QvikLoan works with
+ * the listed lenders must change back (search for "Lending Partners page" and "fresh consent").
  *
  * Add a lender ONLY when all of these are true:
  *   1. A signed agreement (LSP / DSA / referral) between Jatta M Kommerce and the lender exists.
@@ -32,4 +31,70 @@
  *     lspListingUrl: 'https://...',              // lender page listing QvikLoan as its LSP
  *   }
  */
-export const participatingLenders = [];
+// Added on 5 November 2026 on the company's instruction: Jatta M Kommerce confirms tie-ups with these
+// lenders. Still to fill in from each agreement: RBI registration number, products, published rates
+// page, grievance contact and the lender's page listing QvikLoan. Logos: the lenders' official logos.
+const LENDER_ROLE = 'Checks your eligibility, decides on any loan, sets its rates and charges, and pays out the loan';
+
+export const participatingLenders = [
+  {
+    id: 'aditya-birla-capital',
+    legalName: 'Aditya Birla Capital Limited',   // Aditya Birla Finance Limited merged into it on 1 April 2025
+    brandName: 'Aditya Birla Capital',
+    classification: 'NBFC',
+    rbiRegistration: null,
+    website: 'https://www.adityabirlacapital.com',
+    logo: '/logos/lenders/aditya-birla-capital.svg',
+    role: LENDER_ROLE,
+    products: null,
+    interestRange: null,
+    loanTermsUrl: null,
+    grievance: null,
+    lspListingUrl: null,
+  },
+  {
+    id: 'dmi-finance',
+    legalName: 'DMI Finance Private Limited',
+    brandName: 'DMI Finance',
+    classification: 'NBFC',
+    rbiRegistration: null,
+    website: 'https://www.dmifinance.in',
+    logo: '/logos/lenders/dmi-finance.svg',
+    role: LENDER_ROLE,
+    products: null,
+    interestRange: null,
+    loanTermsUrl: null,
+    grievance: null,
+    lspListingUrl: null,
+  },
+  {
+    id: 'bajaj-finance',
+    legalName: 'Bajaj Finance Limited',
+    brandName: 'Bajaj Finserv',
+    classification: 'NBFC',
+    rbiRegistration: null,
+    website: 'https://www.bajajfinserv.in',
+    logo: '/logos/lenders/bajaj-finserv.svg',
+    role: LENDER_ROLE,
+    products: null,
+    interestRange: null,
+    loanTermsUrl: null,
+    grievance: null,
+    lspListingUrl: null,
+  },
+  {
+    id: 'karnataka-bank',
+    legalName: 'Karnataka Bank Limited',
+    brandName: 'Karnataka Bank',
+    classification: 'Bank',
+    rbiRegistration: null,
+    website: 'https://karnatakabank.com',
+    logo: '/logos/lenders/karnataka-bank.svg',
+    role: LENDER_ROLE,
+    products: null,
+    interestRange: null,
+    loanTermsUrl: null,
+    grievance: null,
+    lspListingUrl: null,
+  },
+];

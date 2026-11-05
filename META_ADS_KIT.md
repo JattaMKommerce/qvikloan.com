@@ -14,7 +14,7 @@ Date: 5 November 2026. For whoever runs the Meta ad account.
 
 **No rates (use this today):**
 
-- **Primary text:** Planning for medical, education or home expenses? Start a personal loan enquiry with QvikLoan. QvikLoan is not a lender and currently has no active lending partner. We collect your enquiry and explain loan options. T&C apply.
+- **Primary text:** Planning for medical, education or home expenses? Start a personal loan enquiry with QvikLoan. QvikLoan is not a lender. We collect your enquiry and explain loan options. T&C apply.
 - **Headline:** Start a Personal Loan Enquiry
 - **Description:** Clear Charges | No Upfront Fee by QvikLoan
 - **CTA:** Learn More, linking to `https://qvikloan.com/meta-personal-loan`
@@ -25,7 +25,7 @@ Date: 5 November 2026. For whoever runs the Meta ad account.
 
 **No rates (use this today):**
 
-- **Primary text:** Running a business? Explore business loan options for working capital, inventory or equipment. QvikLoan is not a lender and currently has no active lending partner. We collect your enquiry and explain loan options. T&C apply.
+- **Primary text:** Running a business? Explore business loan options for working capital, inventory or equipment. QvikLoan is not a lender. We collect your enquiry and explain loan options. T&C apply.
 - **Headline:** Start a Business Loan Enquiry
 - **Description:** Working Capital | Inventory | Equipment
 - **CTA:** Learn More, linking to `https://qvikloan.com/business-loans`

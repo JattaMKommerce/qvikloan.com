@@ -55,7 +55,7 @@ const LOAN_TYPES = [
   {
     title: 'Personal loan',
     body: 'For planned expenses like medical bills, education, a wedding or home repairs.',
-    image: '/images/personal-loan.jpg',
+    image: '/images/personal-card.jpg',
     to: '/personal-loans',
     link: 'See personal loans',
     linkClass: 'text-royal',
@@ -63,7 +63,7 @@ const LOAN_TYPES = [
   {
     title: 'Business loan',
     body: 'For working capital, stock or new equipment for your business.',
-    image: '/images/business-loan.jpg',
+    image: '/images/business-card.jpg',
     to: '/business-loans',
     link: 'See business loans',
     linkClass: 'text-teal-dark',
@@ -92,7 +92,7 @@ const FAQS = [
   },
   {
     q: 'Who sees my details?',
-    a: 'Our team, and the service providers that run our systems. No lender receives your details today.',
+    a: 'Our team, and the service providers that run our systems. A lender sees them only if you agree to share them.',
   },
   {
     q: 'Can I ask you to delete my details?',
@@ -251,8 +251,8 @@ export default function HomePage() {
         </ol>
 
         <p className="mt-6 text-center text-sm text-slate-blue max-w-2xl mx-auto">
-          QvikLoan has no active lending partner today, so steps 3 and 4 start only once a lender is listed on our{' '}
-          <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page and you agree.
+          Steps 3 and 4 happen only if you agree to share your enquiry with a lender listed on our{' '}
+          <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
         </p>
       </section>
 

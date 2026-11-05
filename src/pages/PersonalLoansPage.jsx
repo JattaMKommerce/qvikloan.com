@@ -39,12 +39,12 @@ export default function PersonalLoansPage() {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
-      
+
       {/* Hero Header with Visual Card Graphic */}
       <section className="bg-gradient-to-b from-white via-royal-soft/10 to-neutral-bg border-b border-neutral-border py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
+
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royal-soft text-royal-dark text-xs font-semibold">
@@ -55,7 +55,7 @@ export default function PersonalLoansPage() {
                 Personal Loan Options
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed">
-                Enquire online to understand personal loan options. QvikLoan is not a lender and currently has no active lending partner. If a lender partnership becomes active, you will review its offer and Key Facts Statement (KFS) before you decide.
+                Enquire online to understand personal loan options. QvikLoan is not a lender. If a lender makes you an offer, you will review it and its Key Facts Statement (KFS) before you decide.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link to="/#enquiry-section"
@@ -75,8 +75,8 @@ export default function PersonalLoansPage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md shadow-premium border border-white/80">
                 <img
-                  src="/images/hero-1.jpg"
-                  alt="Personal Loans Evaluation Summary"
+                  src="/images/personal-hero.jpg"
+                  alt="Couple looking at loan options on a laptop at home"
                   className="w-full h-72 sm:h-80 object-cover object-center"
                   loading="eager"
                 />
@@ -147,7 +147,7 @@ export default function PersonalLoansPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
+
             {/* Eligibility Block */}
             <div className="backdrop-blur-md bg-neutral-bg/70 p-7 sm:p-8 rounded-2xl border border-neutral-border shadow-subtle space-y-5">
               <h3 className="text-lg font-heading font-bold text-navy flex items-center gap-2.5">
