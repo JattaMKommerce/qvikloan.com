@@ -5,7 +5,7 @@ import LegalPage, { LegalSection, Callout } from '../components/LegalPage';
 import { companyInfo } from '../data/companyInfo';
 import { usePageMeta } from '../lib/usePageMeta';
 
-const LAST_UPDATED = '4 November 2026';
+const LAST_UPDATED = '5 November 2026';
 
 const SECTIONS = [
   { id: 'who-we-are', title: 'Who we are' },
@@ -26,12 +26,12 @@ const SECTIONS = [
 
 // What the website collects. Keep in sync with the enquiry form, api/lead.php and api/contact.php.
 const COLLECTED = [
-  ['Identity and contact', 'Full name, mobile number, email address', 'Enquiry, contact and grievance forms', 'Required'],
-  ['Location', 'City or state, PIN code', 'Enquiry form', 'Required'],
-  ['Loan requirement', 'Personal or business loan, amount, purpose, preferred repayment period', 'Enquiry form', 'Type and amount required; purpose and period optional'],
-  ['Broad employment and financial profile', 'Employment or business type; monthly income or annual turnover band; whether you have existing EMIs (in bands); business age', 'Enquiry form', 'Employment or business type required; the rest optional'],
-  ['Preferences and consent', 'Best time to call, your marketing choice, the consent wording you agreed to, its version and the time you agreed', 'Enquiry form', 'Recorded automatically'],
-  ['Messages', 'Your message, its category and any enquiry reference you give', 'Contact and grievance forms', 'Required for those forms'],
+  ['Identity and contact', 'Full name, mobile number, age', 'Enquiry form', 'Required'],
+  ['Location', 'City', 'Enquiry form', 'Required'],
+  ['Loan requirement', 'Personal or business loan, amount', 'Enquiry form', 'Required'],
+  ['Employment and income', 'Employment type (salaried or self-employed), monthly income', 'Enquiry form', 'Required'],
+  ['Consent record', 'Your marketing choice, the consent wording you agreed to, its version and the time you agreed', 'Enquiry form', 'Recorded automatically'],
+  ['Messages', 'Name, email address, mobile number, your message, its category and any enquiry reference you give', 'Contact and grievance forms', 'Required for those forms (mobile optional on Contact)'],
   ['Chat conversations', 'What you type into the AI chat assistant', 'Chat assistant (only if you open it)', 'Optional'],
   ['Calls and messages with our team', 'What you tell us by phone, WhatsApp or email', 'You', 'Optional'],
   ['Technical and campaign information', 'IP address, browser type, time of submission, the page you arrived on, the website that referred you, and advertising campaign tags in the link you used (utm_*, fbclid, gclid)', 'Your browser, sent with a form', 'Recorded automatically'],
@@ -111,8 +111,8 @@ export default function PrivacyPolicyPage() {
       <LegalSection id="what-we-collect" number={2} title="Information we collect">
         <Table caption="Information we collect" head={['Category', 'What', 'Where from', 'Required?']} rows={COLLECTED} />
         <p>
-          We ask for income, turnover and existing EMIs only in broad bands, and you can leave them blank. Please do
-          not type sensitive details (such as PAN, Aadhaar or account numbers) into free-text fields or the chat.
+          Please do not type sensitive details (such as PAN, Aadhaar or account numbers) into free-text fields or the
+          chat.
         </p>
       </LegalSection>
 
@@ -121,7 +121,8 @@ export default function PrivacyPolicyPage() {
           <li><strong>PAN:</strong> not collected on this website. If a lender needs your PAN for KYC or a credit check, the lender collects it directly.</li>
           <li><strong>Aadhaar:</strong> not collected on this website. Any Aadhaar-based verification is done by the lender, with your consent and under the Aadhaar Act.</li>
           <li><strong>Bank account details and statements:</strong> not collected on this website. The lender collects them to assess your loan and to disburse it.</li>
-          <li><strong>Employment and income:</strong> we collect only your employment or business type and, if you choose, an income or turnover band. Salary slips, tax returns and financial statements are collected by the lender, not by us.</li>
+          <li><strong>Employment and income:</strong> we collect only your employment type and monthly income figure. Salary slips, tax returns and financial statements are collected by the lender, not by us.</li>
+          <li><strong>Credit reports:</strong> QvikLoan does not fetch your credit report. A lender may, with your consent, check it with credit bureaus (such as CIBIL, Experian, Equifax or CRIF High Mark) under its own privacy policy.</li>
           <li>We never ask for card numbers, PINs, CVVs, banking passwords or OTPs, and we do not collect biometrics.</li>
           <li>This website does not access your phone contacts, call logs, SMS, photos or location.</li>
         </ul>
@@ -157,9 +158,10 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection id="consent" number={6} title="Consent and withdrawing consent">
         <p>
-          The enquiry form has two separate checkboxes, and neither is ticked in advance. The first is needed to process
-          your enquiry and share it with a listed lender. The second, for marketing, is optional and does not affect your
-          enquiry. We keep a record of the exact wording you agreed to and when.
+          The enquiry form has four separate checkboxes, and none is ticked in advance. Three are needed to process your
+          enquiry: agreeing to this policy and our Terms, sharing your details with a listed lender, and being contacted
+          about your enquiry. The fourth, for marketing, is optional and does not affect your enquiry. We keep a record
+          of the exact wording you agreed to and when.
         </p>
         <p>
           You can withdraw consent at any time by emailing {mail} or using our{' '}
@@ -217,15 +219,15 @@ export default function PrivacyPolicyPage() {
           <li>nominate someone to exercise these rights for you if you die or become incapacitated.</li>
         </ul>
         <p>
-          Email {mail}. We may need to confirm your identity first, usually by contacting you on the mobile number or
-          email address in your enquiry. If you are not satisfied with our response, you may take the matter further
+          Email {mail}. We may need to confirm your identity first, usually by contacting you on the mobile number in
+          your enquiry. If you are not satisfied with our response, you may take the matter further
           under applicable law, including to the Data Protection Board of India for matters under the Digital Personal
           Data Protection Act, 2023 once the relevant provisions are in force.
         </p>
       </LegalSection>
 
       <LegalSection id="children" number={11} title="Children">
-        <p>QvikLoan is only for people aged 18 or over. We do not knowingly collect information about children. If you believe a child has sent us their details, email {mail} and we will delete them.</p>
+        <p>QvikLoan accepts enquiries only from adults aged 21 to 58. We do not knowingly collect information about children. If you believe a child has sent us their details, email {mail} and we will delete them.</p>
       </LegalSection>
 
       <LegalSection id="law" number={12} title="Laws that apply">
@@ -255,7 +257,7 @@ export default function PrivacyPolicyPage() {
           <dt className="font-semibold text-navy">Phone</dt><dd>{companyInfo.grievanceOfficer.phone} ({companyInfo.operatingHours})</dd>
           <dt className="font-semibold text-navy">Address</dt><dd>{companyInfo.address.registeredOffice}</dd>
           <dt className="font-semibold text-navy">Response times</dt>
-          <dd>We aim to acknowledge requests {companyInfo.grievanceTimelines.acknowledgement} and resolve them {companyInfo.grievanceTimelines.resolution}.</dd>
+          <dd>Our support team aims to resolve requests {companyInfo.grievanceTimelines.support}; if it does not, the Grievance Officer aims to resolve them {companyInfo.grievanceTimelines.officer}.</dd>
         </dl>
         <p>
           You can also use the form on our <Link to="/grievance-redressal" className="text-royal font-semibold underline">Grievance Redressal</Link> page.

@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { ArrowRight, ShieldCheck, CheckCircle2, FileText, Info, Home, Stethoscope, GraduationCap, RefreshCw } from 'lucide-react';
+import { ArrowRight, ShieldCheck, CheckCircle2, FileText, Home, Stethoscope, GraduationCap, RefreshCw } from 'lucide-react';
+import CtaDisclaimer from '../components/CtaDisclaimer';
 import FinancialCalculator from '../components/FinancialCalculator';
+import LoanDisclosure from '../components/LoanDisclosure';
 import LoanTermsTable from '../components/LoanTermsTable';
-import { workedExample } from '../data/loanProducts';
-import { calculateEmi, formatINR } from '../lib/emi';
+import { enquiryRules } from '../data/loanProducts';
 import { usePageMeta } from '../lib/usePageMeta';
-
-const example = { ...workedExample, ...calculateEmi(workedExample.amount, workedExample.annualRate, workedExample.tenureMonths) };
 
 export default function PersonalLoansPage() {
   usePageMeta('Personal Loans', 'Explore personal loan options through QvikLoan. Loan terms, eligibility, an EMI calculator and what to check in the lender’s Key Facts Statement. QvikLoan is not a lender.');
@@ -69,6 +68,7 @@ export default function PersonalLoansPage() {
                   No fee to enquire · No obligation to accept an offer
                 </div>
               </div>
+              <CtaDisclaimer className="max-w-xl" />
             </div>
 
             {/* Right Visual Graphic with Side Blending */}
@@ -160,7 +160,7 @@ export default function PersonalLoansPage() {
               <ul className="space-y-3.5 text-xs sm:text-sm text-slate-blue">
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Age:</span>
-                  <span>Within the lender’s age limits. You must be at least 18 to enquire through QvikLoan.</span>
+                  <span>Within the lender’s age limits. To enquire through QvikLoan you must be {enquiryRules.minAge} to {enquiryRules.maxAge}.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-bold text-navy shrink-0">• Residence:</span>
@@ -230,34 +230,10 @@ export default function PersonalLoansPage() {
 
         <LoanTermsTable product="personal" />
 
-        <div className="glass p-6 sm:p-8 rounded-2xl">
-          <div className="flex items-center gap-2 text-navy font-heading font-bold text-base mb-4 pb-3 border-b border-neutral-border">
-            <Info className="w-4 h-4 text-royal" aria-hidden="true" />
-            <span>Worked example (hypothetical)</span>
-          </div>
-          <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 text-sm">
-            {[
-              ['Loan amount', formatINR(example.amount)],
-              ['Interest rate', `${example.annualRate}% p.a. (reducing balance)`],
-              ['Tenure', `${example.tenureMonths} months`],
-              ['Monthly EMI', formatINR(example.emi)],
-              ['Total repayment', formatINR(example.totalRepayment)],
-            ].map(([label, value]) => (
-              <div key={label} className="bg-neutral-bg p-3.5 rounded-xl border border-neutral-border">
-                <dt className="text-neutral-muted mb-1">{label}</dt>
-                <dd className="text-navy font-bold font-heading text-base">{value}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-4 text-sm text-slate-blue leading-relaxed">
-            Total interest in this example: {formatINR(example.totalInterest)}. Processing fees and other charges would
-            add to the cost. This example only shows how the calculation works; the figures are not any lender's rates
-            and are not an offer.
-          </p>
-        </div>
-
         <FinancialCalculator product="personal" />
       </section>
+
+      <LoanDisclosure product="personal" />
     </div>
   );
 }

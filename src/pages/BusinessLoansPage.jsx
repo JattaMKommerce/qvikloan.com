@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowRight, Building2, Package, Layers, Info, Briefcase } from 'lucide-react';
+import CtaDisclaimer from '../components/CtaDisclaimer';
 import FinancialCalculator from '../components/FinancialCalculator';
+import LoanDisclosure from '../components/LoanDisclosure';
 import LoanTermsTable from '../components/LoanTermsTable';
 import { companyInfo } from '../data/companyInfo';
 import { usePageMeta } from '../lib/usePageMeta';
@@ -50,13 +52,14 @@ export default function BusinessLoansPage() {
                 Explore financing for inventory, equipment or working capital. The lending institution decides eligibility, approval, rates and disbursement.
               </p>
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <Link to="/#enquiry-section"
+                <Link to="/#enquiry-section" state={{ loanType: 'business' }}
                   className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-royal hover:bg-royal-hover text-white font-bold text-sm shadow-subtle hover:shadow-premium transition-all"
                 >
                   <span>Enquire for Business Loan</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </div>
+              <CtaDisclaimer className="max-w-xl" />
             </div>
 
             {/* Right Visual Graphic with Side Blending */}
@@ -236,6 +239,8 @@ export default function BusinessLoansPage() {
         <LoanTermsTable product="business" />
         <FinancialCalculator product="business" />
       </section>
+
+      <LoanDisclosure product="business" />
     </div>
   );
 }

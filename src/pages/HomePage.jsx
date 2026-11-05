@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, ChevronRight, Monitor, Landmark, Cpu } from 'lucide-react';
+import CtaDisclaimer from '../components/CtaDisclaimer';
 import FinancialCalculator from '../components/FinancialCalculator';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
+import LoanDisclosure from '../components/LoanDisclosure';
 import RoleTable from '../components/RoleTable';
 import { companyInfo } from '../data/companyInfo';
+import { participatingLenders } from '../data/lendersData';
 import { usePageMeta } from '../lib/usePageMeta';
 
 function TypewriterText() {
@@ -91,6 +94,13 @@ export default function HomePage() {
               Start with an online enquiry. QvikLoan helps connect you with participating lenders so you can review any offer you receive and decide whether it suits your needs.
             </p>
 
+            {/* Appears only once a verified lender is listed in data/lendersData.js */}
+            {participatingLenders.length > 0 && (
+              <p className="text-base sm:text-[17px] text-[#4b5563] font-normal leading-relaxed max-w-lg">
+                Explore personal and business loan options from our RBI-registered partner lenders.
+              </p>
+            )}
+
             {/* CTA Buttons: each opens the enquiry form below with its loan type already selected */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
               <Link
@@ -114,9 +124,7 @@ export default function HomePage() {
 
             {/* Important Disclosure */}
             <div className="pt-5 border-t border-[#f3f4f6] max-w-lg">
-              <p className="text-sm text-[#4b5563] leading-relaxed">
-                <strong className="text-[#1f2937]">Important:</strong> QvikLoan is not a lender. Loan offers are subject to the lender’s eligibility criteria, verification and approval. The lender determines the loan amount, interest rate, charges, repayment period and disbursement timing.
-              </p>
+              <CtaDisclaimer />
             </div>
 
           </div>
@@ -304,6 +312,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <LoanDisclosure product="personal" />
     </div>
   );
 }

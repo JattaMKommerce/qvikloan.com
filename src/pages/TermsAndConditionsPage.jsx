@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { FileText } from 'lucide-react';
 import LegalPage, { LegalSection, Callout } from '../components/LegalPage';
 import { companyInfo } from '../data/companyInfo';
+import { enquiryRules } from '../data/loanProducts';
 import { usePageMeta } from '../lib/usePageMeta';
 
-const LAST_UPDATED = '4 November 2026';
+const LAST_UPDATED = '5 November 2026';
 
 const SECTIONS = [
   { id: 'acceptance', title: 'About these terms' },
@@ -101,16 +102,18 @@ export default function TermsAndConditionsPage() {
 
       <LegalSection id="eligibility" number={6} title="Eligibility">
         <p>
-          To use QvikLoan you must be at least 18 years old, resident in India and able to enter into a contract, or be
-          authorised to act for the business you are enquiring for. Each lender sets its own eligibility criteria, such
-          as age, income, credit history and location, and may apply stricter requirements.
+          To submit an enquiry you must be {enquiryRules.minAge} to {enquiryRules.maxAge} years old, an Indian citizen
+          or resident, able to enter into a contract, and have a monthly income of at least ₹
+          {enquiryRules.minMonthlyIncome.toLocaleString('en-IN')}. If you enquire for a business, you must be authorised
+          to act for it. Each lender sets its own eligibility criteria, such as age, income, credit history and location,
+          and may apply stricter requirements.
         </p>
       </LegalSection>
 
       <LegalSection id="approval" number={7} title="The lender’s approval authority">
         <p>
           Whether to make an offer, the amount, interest rate, charges, tenure and timing of disbursement are decided by
-          the lender alone, after its own verification and credit assessment. We cannot influence, guarantee or speed up a
+          the lender alone, after its own verification and credit assessment, and the lender’s decision is final. We cannot influence, guarantee or speed up a
           lender’s decision, and we do not promise that you will receive an offer or a loan.
         </p>
       </LegalSection>
@@ -130,7 +133,7 @@ export default function TermsAndConditionsPage() {
 
       <LegalSection id="responsibilities" number={9} title="Your responsibilities">
         <ul className="list-disc pl-5 space-y-1">
-          <li>Give true, accurate and complete information, and only about yourself or a business you are authorised to represent.</li>
+          <li>Give true, accurate and complete information, and only about yourself or a business you are authorised to represent. False information can lead to your enquiry being rejected and to legal action.</li>
           <li>Read the lender’s KFS and loan agreement before you accept an offer, and borrow only what you can repay.</li>
           <li>Keep OTPs, PINs and passwords private. We will never ask for them.</li>
           <li>Do not misuse the website: no false or automated submissions, attempts to break its security, or unlawful use.</li>

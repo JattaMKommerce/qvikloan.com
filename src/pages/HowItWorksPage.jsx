@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
+import CtaDisclaimer from '../components/CtaDisclaimer';
 import RoleTable from '../components/RoleTable';
 import { companyInfo } from '../data/companyInfo';
 import { usePageMeta } from '../lib/usePageMeta';
@@ -91,6 +92,7 @@ export default function HowItWorksPage() {
                 <span>Start an enquiry</span>
                 <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
               </Link>
+              <CtaDisclaimer className="max-w-xl" />
             </div>
             <div className="lg:col-span-5 flex justify-center">
               <div className="glass rounded-2xl overflow-hidden relative w-full max-w-md">
