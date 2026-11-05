@@ -39,7 +39,7 @@ const COLLECTED = [
 
 const PURPOSES = [
   ['Assess your enquiry and contact you about it by call, SMS or WhatsApp', 'Your consent on the enquiry form'],
-  ['Share your enquiry with a lender listed on our Lending Partners page so it can assess your eligibility', 'Your fresh consent at that time'],
+  ['Share your enquiry with a lending partner named on our website so it can assess your eligibility', 'Your fresh consent at that time'],
   ['Send you information about other loan products', 'Your separate, optional marketing consent'],
   ['Answer your questions and investigate complaints, and keep a grievance register', 'Your request, and our legal obligations'],
   ['Keep the website secure and block spam and fraud (for example, limiting repeated submissions from one IP address)', 'Reasonable security practices required by law'],
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
       <Callout title="In short">
         <ul className="list-disc pl-5 space-y-1 text-sm">
           <li>We collect only what we need to handle your loan enquiry, and we explain why on the form.</li>
-          <li>We share your enquiry only with your fresh consent, and only with lenders named on our Lending Partners page.</li>
+          <li>We share your enquiry only with your fresh consent, and only with lending partners named on our website.</li>
           <li>We do not collect PAN, Aadhaar, bank details or documents on this website.</li>
           <li>We do not sell your information or send your enquiry details to advertising platforms.</li>
           <li>You can withdraw consent or ask us to delete your details at any time by emailing {mail}.</li>
@@ -138,8 +138,8 @@ export default function PrivacyPolicyPage() {
       <LegalSection id="sharing" number={5} title="Who we share it with">
         <ul className="list-disc pl-5 space-y-2">
           <li>
-            <strong>Lending institutions:</strong> Only with your fresh consent, and only lenders listed on our{' '}
-            <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page. A
+            <strong>Lending institutions:</strong> Only with your fresh consent, and only lending partners named on our{' '}
+            <Link to="/#lending-partners" className="text-royal font-semibold underline">website</Link>. A
             lender then handles your information as a separate data fiduciary under its own privacy policy.
           </li>
           <li>

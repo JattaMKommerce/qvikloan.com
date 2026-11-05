@@ -8,7 +8,6 @@ import HomePage from './pages/HomePage';
 import PersonalLoansPage from './pages/PersonalLoansPage';
 import BusinessLoansPage from './pages/BusinessLoansPage';
 import AboutUsPage from './pages/AboutUsPage';
-import ParticipatingLendersPage from './pages/ParticipatingLendersPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import DisclaimerPage from './pages/DisclaimerPage';
@@ -59,7 +58,6 @@ export default function App() {
           <Route path="/personal-loans" element={<PersonalLoansPage />} />
           <Route path="/business-loans" element={<BusinessLoansPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
-          <Route path="/participating-lenders" element={<ParticipatingLendersPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
           <Route path="/disclaimer" element={<DisclaimerPage />} />
@@ -70,14 +68,16 @@ export default function App() {
           {/* Alternative and old-site addresses */}
           {/* How It Works is now a section of the home page */}
           <Route path="/how-it-works" element={<Navigate to={{ pathname: '/', hash: '#how-it-works' }} replace />} />
-          <Route path="/lending-partners" element={<Navigate to="/participating-lenders" replace />} />
+          {/* The Lending Partners page was removed: its addresses go to the partner strip on the home page */}
+          <Route path="/participating-lenders" element={<Navigate to={{ pathname: '/', hash: '#lending-partners' }} replace />} />
+          <Route path="/lending-partners" element={<Navigate to={{ pathname: '/', hash: '#lending-partners' }} replace />} />
           <Route path="/financial-disclaimer" element={<Navigate to="/disclaimer" replace />} />
           <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
           <Route path="/personal-loan" element={<Navigate to="/personal-loans" replace />} />
           <Route path="/business-loan" element={<Navigate to="/business-loans" replace />} />
           <Route path="/terms" element={<Navigate to="/terms-and-conditions" replace />} />
           <Route path="/grievance" element={<Navigate to="/grievance-redressal" replace />} />
-          <Route path="/partners" element={<Navigate to="/participating-lenders" replace />} />
+          <Route path="/partners" element={<Navigate to={{ pathname: '/', hash: '#lending-partners' }} replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

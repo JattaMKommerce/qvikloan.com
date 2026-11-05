@@ -7,7 +7,7 @@ import { usePageMeta } from '../lib/usePageMeta';
 const WE_DO = [
   'Help you understand personal and business loan options in plain language',
   'Take your loan enquiry and contact you about it',
-  'Share your enquiry only with a lender listed on our Lending Partners page, and only with your fresh consent',
+  'Share your enquiry only with one of our lending partners, and only with your fresh consent',
   'Handle complaints about our own service',
 ];
 
@@ -51,7 +51,7 @@ export default function AboutUsPage() {
               </h1>
               <p className="text-base sm:text-lg text-slate-blue leading-relaxed max-w-2xl">
                 QvikLoan helps people and businesses explore loan options. We take your enquiry and explain your options
-                in simple words. We are not a lender; the banks and NBFCs we work with are listed on our Lending Partners page.
+                in simple words. We are not a lender; our lending partners are RBI-registered banks and NBFCs.
               </p>
               <a
                 href={companyInfo.companyWebsite}
@@ -114,8 +114,7 @@ export default function AboutUsPage() {
           </div>
         </div>
         <p className="text-sm text-slate-blue">
-          The lenders we work with are named on our{' '}
-          <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
+          Our lending partners are shown on our <Link to="/#lending-partners" className="text-royal font-semibold underline">home page</Link>.
           Technology providers that run parts of this website are named in our{' '}
           <Link to="/privacy-policy" className="text-royal font-semibold underline">Privacy Policy</Link>.
         </p>

@@ -19,7 +19,6 @@ const COLUMNS = [
     links: [
       ['About Us', '/about-us'],
       ['Contact Us', '/contact-us'],
-      ['Lending Partners', '/participating-lenders'],
       ['Grievance Redressal', '/grievance-redressal'],
     ],
   },

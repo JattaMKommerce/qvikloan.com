@@ -65,14 +65,14 @@ export default function TermsAndConditionsPage() {
       <LegalSection id="platform" number={2} title="What QvikLoan is">
         <p>
           QvikLoan is a digital loan facilitation platform that helps individuals and businesses explore suitable loan
-          options through a loan enquiry facilitation process. The lenders QvikLoan works with are listed on its Lending Partners page. Final
+          options through a loan enquiry facilitation process. The lenders QvikLoan works with are named on its website. Final
           loan eligibility, approval, applicable interest rates, repayment terms and disbursement are determined by the
           lending institution.
         </p>
       </LegalSection>
 
       <LegalSection id="role" number={3} title="Our role and what we do not do">
-        <p>We provide information about loan options, take your enquiry, and contact you about it. We share your enquiry only with a lender listed on our {link('/participating-lenders', 'Lending Partners')} page, and only after taking your fresh consent.</p>
+        <p>We provide information about loan options, take your enquiry, and contact you about it. We share your enquiry only with a lending partner named on our {link('/#lending-partners', 'website')}, and only after taking your fresh consent.</p>
         <p>We are not a bank or a Non-Banking Financial Company (NBFC). We do not:</p>
         <ul className="list-disc pl-5 space-y-1">
           <li>lend money, accept deposits, or hold, receive or pay out loan funds;</li>
@@ -84,8 +84,8 @@ export default function TermsAndConditionsPage() {
 
       <LegalSection id="lenders" number={4} title="Relationship with lending partners">
         <p>
-          Lending partners, when confirmed, will be independent banks and NBFCs, named on our {link('/participating-lenders', 'Lending Partners')} page.
-          Currently there are none. Any loan, when offered, will be a contract between you and the lender only; we are not a party to it. The lender’s own loan
+          Our lending partners are independent banks and NBFCs, named on our {link('/#lending-partners', 'website')}.
+          Any loan offered will be a contract between you and the lender only; we are not a party to it. The lender’s own loan
           agreement, KFS, terms and privacy policy govern the loan.
         </p>
       </LegalSection>
@@ -94,7 +94,7 @@ export default function TermsAndConditionsPage() {
         <ol className="list-decimal pl-5 space-y-1">
           <li>You submit an enquiry on our website and give consent.</li>
           <li>Our team contacts you about your requirement.</li>
-          <li>We share your enquiry only with a lender listed on our Lending Partners page, and only after you give fresh consent.</li>
+          <li>We share your enquiry only with a lending partner named on our website, and only after you give fresh consent.</li>
           <li>A lender that can consider your enquiry then asks you for the information and documents it needs and carries out its checks.</li>
           <li>If that lender decides to make an offer, it gives you its KFS and loan agreement. You choose whether to accept.</li>
         </ol>

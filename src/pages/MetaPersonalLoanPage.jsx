@@ -5,6 +5,7 @@ import CtaDisclaimer from '../components/CtaDisclaimer';
 import GlassLoanEnquirySection from '../components/GlassLoanEnquirySection';
 import LoanDisclosure from '../components/LoanDisclosure';
 import { companyInfo } from '../data/companyInfo';
+import { participatingLenders } from '../data/lendersData';
 import { enquiryRules } from '../data/loanProducts';
 import { formatINR } from '../lib/emi';
 import { usePageMeta } from '../lib/usePageMeta';
@@ -31,7 +32,7 @@ const FAQS = [
   { q: 'How long does approval take?', a: 'It depends on the lender’s credit assessment and how quickly its checks are completed. We cannot promise a timeline or an approval.' },
   { q: 'Will checking eligibility affect my CIBIL score?', a: 'Submitting this enquiry does not make QvikLoan check your credit report. A lender may check it during its assessment, and some checks can appear on your credit report. Ask the lender what kind of check it runs before you agree.' },
   { q: 'Is there a fee?', a: 'QvikLoan charges no fee for an enquiry. Never pay anyone an upfront fee to get a loan approved.' },
-  { q: 'Do you have any lender partners?', a: 'Yes. The banks and NBFCs we work with are listed on our Lending Partners page.' },
+  { q: 'Do you have any lender partners?', a: `Yes. We work with ${participatingLenders.map((l) => l.brandName).join(', ')}. The lender decides on your loan.` },
 ];
 
 export default function MetaPersonalLoanPage() {

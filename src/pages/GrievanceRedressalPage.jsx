@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ShieldCheck, ExternalLink, Building2, Landmark } from 'lucide-react';
 import SupportForm from '../components/SupportForm';
 import { companyInfo } from '../data/companyInfo';
@@ -56,8 +55,7 @@ export default function GrievanceRedressalPage() {
             </h2>
             <p className="text-sm text-slate-blue">
               For example: interest, charges, the KFS, disbursement, repayment or recovery. Contact the lender’s
-              grievance officer, whose details are in your KFS, loan agreement and on our{' '}
-              <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
+              grievance officer, whose details are in your KFS and loan agreement.
               You can also tell us, and we will pass it to the lender.
             </p>
           </div>

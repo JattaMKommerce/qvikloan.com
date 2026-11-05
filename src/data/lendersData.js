@@ -1,8 +1,8 @@
 /**
  * Lending institutions that receive enquiries through QvikLoan.
- * Shown on the Lending Partners page (/participating-lenders), in the footer and in the home page
- * logo strip. If this list ever becomes empty again, the site wording that says QvikLoan works with
- * the listed lenders must change back (search for "Lending Partners page" and "fresh consent").
+ * Shown in the home page logo strip (#lending-partners) and in the footer. If this list ever becomes
+ * empty again, the site wording about "lending partners named on our website" must change back
+ * (search for "lending partner" and "fresh consent").
  *
  * Add a lender ONLY when all of these are true:
  *   1. A signed agreement (LSP / DSA / referral) between Jatta M Kommerce and the lender exists.

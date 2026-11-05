@@ -31,7 +31,6 @@ export default function Navbar() {
 
   // Shown in the top strip on desktop and at the bottom of the mobile menu.
   const disclosureLinks = [
-    { name: 'Lending Partners', path: '/participating-lenders' },
     { name: 'Grievance Redressal', path: '/grievance-redressal' },
     { name: 'Privacy Policy', path: '/privacy-policy' },
   ];

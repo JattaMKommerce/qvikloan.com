@@ -11,10 +11,10 @@ const { minAge, maxAge, minMonthlyIncome } = enquiryRules;
 
 // The consent wording shown next to each checkbox. The exact text and its version are stored with
 // every lead as the consent record, so change CONSENT_VERSION whenever the wording changes.
-const CONSENT_VERSION = '2026-11-05.4';
+const CONSENT_VERSION = '2026-11-05.5';
 const TERMS_CONSENT = 'I have read and agree to the Privacy Policy and Terms & Conditions.';
 const CONTACT_CONSENT = 'I consent to QvikLoan contacting me about my enquiry by call, SMS and WhatsApp. I understand QvikLoan is not a lender and does not share my enquiry with any lender without my fresh consent.';
-const FUTURE_SHARING_CONSENT = 'I understand that QvikLoan will only share my details with a lender listed on its Lending Partners page, and only after taking my fresh consent.';
+const FUTURE_SHARING_CONSENT = 'I understand that QvikLoan will only share my details with a lender named on its website as a lending partner, and only after taking my fresh consent.';
 const MARKETING_TEXT = 'Optional: Send me information about other loan products from QvikLoan by SMS, WhatsApp or email. I can withdraw this at any time.';
 
 const EMPTY_FORM = { fullName: '', mobileNumber: '', age: '', city: '', employmentType: 'salaried', monthlyIncome: '' };
@@ -292,7 +292,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                   What happens next?
                 </div>
                 <ul className="list-disc pl-5 space-y-1 text-slate-blue">
-                  <li>We share your enquiry only with a lender listed on our Lending Partners page, and only after you give fresh consent.</li>
+                  <li>We share your enquiry only with a lending partner named on our website, and only after you give fresh consent.</li>
                   <li>Any future offer must come with the lender's Key Facts Statement (KFS). You can accept or decline it.</li>
                   <li>QvikLoan will never ask you for an upfront fee, an OTP or your banking password.</li>
                 </ul>
@@ -429,7 +429,7 @@ export default function GlassLoanEnquirySection({ initialType = 'personal' }) {
                 <p className="font-semibold text-navy">How we use these details</p>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>{companyInfo.name} (QvikLoan) uses them to understand your requirement and contact you about it.</li>
-                  <li>We share them only with a lender listed on our <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page, and only after taking your fresh consent.</li>
+                  <li>We share them only with a lending partner named on our <Link to="/#lending-partners" className="text-royal font-semibold underline">website</Link>, and only after taking your fresh consent.</li>
                   <li>We keep enquiry records {companyInfo.dataRetention}. You can ask us to delete them or withdraw consent at any time: email <a href={`mailto:${companyInfo.email}`} className="text-royal font-semibold underline">{companyInfo.email}</a>.</li>
                 </ul>
                 <details className="group">

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { participatingLenders } from '../data/lendersData';
 
 // Enough logos in each half of the strip to fill a wide screen, so the loop never shows a gap.
@@ -20,14 +19,13 @@ export default function LenderLogoLoop() {
   const half = Array.from({ length: Math.ceil(MIN_PER_HALF / lenders.length) }, () => lenders).flat();
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-labelledby="lending-partners-loop">
+    <section id="lending-partners" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-28" aria-labelledby="lending-partners-loop">
       <div className="text-center mb-5">
         <h2 id="lending-partners-loop" className="text-xs font-bold text-royal uppercase tracking-wider">
           Our lending partners
         </h2>
         <p className="mt-1.5 text-sm text-slate-blue">
-          RBI-registered banks and NBFCs. Details on our{' '}
-          <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
+          RBI-registered banks and NBFCs that decide on and provide the loans.
         </p>
       </div>
 

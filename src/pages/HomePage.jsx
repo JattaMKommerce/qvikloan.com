@@ -251,8 +251,7 @@ export default function HomePage() {
         </ol>
 
         <p className="mt-6 text-center text-sm text-slate-blue max-w-2xl mx-auto">
-          Steps 3 and 4 happen only if you agree to share your enquiry with a lender listed on our{' '}
-          <Link to="/participating-lenders" className="text-royal font-semibold underline">Lending Partners</Link> page.
+          Steps 3 and 4 happen only if you agree to share your enquiry with one of our lending partners.
         </p>
       </section>
 
